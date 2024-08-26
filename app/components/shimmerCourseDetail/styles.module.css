@@ -5,7 +5,7 @@
     row-gap: 20px;
 }
 
-.title, .description,.coverImage, .join, .rating
+.title, .description,.coverImage, .join, .rating, .level
 {
     background-color: var(--primary-border);
     border-radius: 5px;
@@ -28,6 +28,14 @@
 {
     padding: 20px;
     width: 300px;
+}
+
+.level
+{
+    margin: 0;
+    width: 100px;
+    padding: 12px;
+    margin: 0 0 15px;
 }
 
 .description

@@ -36,9 +36,19 @@
     row-gap: 10px;
 }
 
-.title, .description
+.title, .description, .level
 {
     margin: 0;
+}
+
+.level
+{
+    background-color: var(--primary-border);
+    color: white;
+    width: fit-content;
+    font-size: 12px;
+    border-radius: 5px;
+    padding: 5px 10px;
 }
 
 .title

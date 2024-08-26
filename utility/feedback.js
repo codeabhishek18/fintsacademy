@@ -9,7 +9,7 @@ export const Feedback = [
         id: 2,
         name: 'Monica',
         rating: 5,
-        comment: 'I got confidence and strong understanding of concepts, which helped me to score 90%. Fints is my go to trainer for all the certifications.'
+        comment: 'I got confidence and strong understanding of concepts, which helped me to score 90%. He is my go to trainer for all the certifications.'
     },
     {
         id: 3,

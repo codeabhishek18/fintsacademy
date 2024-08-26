@@ -10,6 +10,7 @@ const ShimmerCourseDetail = () =>
             <div className={styles.coverImage}></div>
             <div className={styles.header}>
                 <p className={styles.title}></p>
+                <p className={styles.level}></p>
                 <div className={styles.content}>
                     <p className={styles.description}></p>
                     <p className={styles.description}></p>

@@ -18,6 +18,7 @@ const CourseDetail = ({course}) =>
             
             <div className={styles.header}>
                 <p className={styles.title}>{course.title}</p>
+                <p className={styles.level}>{course.level}</p>
                 <p className={styles.description}>{course.description}</p>
             </div>
 
