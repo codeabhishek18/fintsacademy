@@ -1,0 +1,30 @@
+.container
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    overflow: hidden;
+}
+
+.carousel
+{
+    display: flex;
+    column-gap: 20px;
+}
+
+.controls
+{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    column-gap: 20px;
+}
+
+.navigation
+{
+    height: 40px;
+    width: fit-content;
+    background-color: var(--alert-color);
+    border-radius: 50%;
+    cursor: pointer;
+}

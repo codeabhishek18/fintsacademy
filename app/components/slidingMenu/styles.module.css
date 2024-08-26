@@ -1,0 +1,48 @@
+.container
+{
+    height: fit-content;
+    width: 100%;
+    padding: 80px 40px 40px;
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 15px;
+    border-radius: 10px;
+    font-size: 16px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.link
+{
+    width: 100%;
+    padding: 10px;
+    margin: 0;
+    color: white;
+    border-radius: 5px;
+}
+
+.link:hover
+{
+    cursor: pointer;
+    background: var(--alert-color);
+}
+
+.close
+{
+    height: 40px;
+    width: fit-content;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 480px) 
+{
+    .container
+    {
+        row-gap: 10px;
+        font-size: 14px;
+    }    
+}

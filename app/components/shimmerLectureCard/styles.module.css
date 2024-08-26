@@ -1,0 +1,56 @@
+.container
+{
+    width: calc(50% - 10px);
+    border-radius: 5px;
+    border: 1px solid var(--primary-border);
+    height: 180px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+}
+
+.header
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.title, .duration, .description
+{
+    margin: 0;
+    background-color: var(--primary-border);
+    border-radius: 5px;
+}
+
+.title
+{
+    width: 120px;
+    padding: 14px;
+}
+
+.duration
+{
+    width: 80px;
+}
+
+.footer
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.description
+{
+    width: 100%;
+    padding: 10px;
+}
+
+@media screen and (max-width: 920px)
+{
+    .container
+    {
+        width: 100%;
+    }
+}

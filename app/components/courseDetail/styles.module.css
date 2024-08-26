@@ -1,0 +1,142 @@
+.container
+{
+    border-radius: 8px;
+    margin-bottom: 40px;
+    color: white; 
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    font-size: 16px;
+}
+
+.light
+{
+    color: black;
+}
+
+.coverWrapper
+{
+    width: 100%;
+    height: 45vh;
+    position: relative;
+}
+
+.coverImage
+{
+    width: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
+}
+
+.header
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.title, .description
+{
+    margin: 0;
+}
+
+.title
+{
+    color: var(--alert-color);
+    font-weight: 700;
+    font-size: 32px;
+}
+
+.description
+{
+    line-height: 44px;
+}
+
+.lectures
+{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 20px;
+}
+
+.join
+{
+    margin-top: 20px;
+    border: 1px solid var(--alert-color);
+    padding: 8px 12px;
+    color: var(--alert-color);
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 5px;
+    background-color: black;
+    margin: 0;
+}
+
+.join:hover
+{
+    cursor: pointer;
+    background-color: var(--alert-color);
+    color: black;
+}
+
+.join.light
+{
+    background-color: var(--primary-bg);
+    color: var(--alert-color);
+}
+
+.join.light:hover
+{
+    background-color: var(--alert-color);
+    color: var(--primary-bg);
+}
+
+.footer
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media screen and (max-width:720px)
+{  
+    .title
+    {
+        font-size: 26px;
+    }
+}
+
+@media screen and (max-width:480px)
+{
+    .title
+    {
+        font-size: 20px;
+    }
+
+    .container
+    {
+        font-size: 14px;
+    }
+
+    .join
+    {
+        padding: 5px 8px;
+        font-size: 14px;
+    }
+}
+
+/* @media screen and (max-width: 375px)
+{ 
+    .commonHeader
+    {
+        font-size: 36px;
+    }
+} */
+
+
+
+
+
+

@@ -1,0 +1,55 @@
+.container
+{
+    width: calc(50% - 10px);
+    border: 1px solid var(--primary-border);
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title, .list, .duration
+{
+    margin: 0;
+}
+
+.title
+{
+    color: var(--alert-color);
+    font-weight: 600;
+}
+
+.lecture
+{
+    margin: 0;
+    padding: 20px 20px 0;
+    line-height: 36px;
+}
+
+.duration
+{
+    color: grey;
+}
+
+@media screen and (max-width: 920px)
+{
+    .container
+    {
+        width: 100%;
+    }    
+}
+
+@media screen and (max-width: 480px)
+{
+   
+    .container
+    {
+        font-size: 14px;
+        padding: 15px;
+    }
+}

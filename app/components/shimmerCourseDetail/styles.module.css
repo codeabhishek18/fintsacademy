@@ -1,0 +1,74 @@
+.container
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.title, .description,.coverImage, .join, .rating
+{
+    background-color: var(--primary-border);
+    border-radius: 5px;
+}
+
+.coverImage
+{
+    border-radius: 10px;
+    padding: 22.5vh;
+}
+
+.header, .content
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.title
+{
+    padding: 20px;
+    width: 300px;
+}
+
+.description
+{
+    margin: 0;
+    padding: 10px;
+}
+
+.description:nth-child(3)
+{
+    width: 50%;
+}
+
+.content
+{
+    row-gap: 25px;
+}
+
+.lectures
+{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 20px;
+    row-gap: 20px;
+}
+
+.footer
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.join
+{
+    padding: 15px;
+    width: 90px;
+}
+
+.rating
+{
+    padding: 15px;
+    width: 150px;
+}

@@ -1,0 +1,184 @@
+.container
+{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.heroImage
+{
+    height: 100vh;
+    width: 100%;
+    object-fit: cover;
+    position: relative;
+}
+
+.content
+{
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.75);
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.heading, .subHeading, .activeHeading
+{
+    margin: 0;
+}
+
+.header
+{
+    width: 100%;
+    font-weight: 700;
+    text-align: center;
+    font-size: 60px;
+    color: white;
+    line-height: 90px;
+}
+
+
+.activeHeading
+{
+    width: 100%;
+    color: var(--alert-color);
+    font-size: 90px;
+}
+
+.footer
+{
+    width: 100%;
+    position: absolute;
+    bottom: 10%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+    text-align: center;
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: white;
+}
+
+.enroll
+{
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    font-size: 14px;
+    border: 1px solid var(--secondary-color);
+    padding: 8px 25px;
+    border-radius: 5px;
+    color: white;
+}
+
+.enrollWrapper
+{
+    text-decoration: none;
+}
+
+.enroll:hover
+{
+    background-color: var(--alert-color);
+    border: 1px solid var(--alert-color);
+    color: white;
+    cursor: pointer;
+}
+
+@media screen and (max-width:920px)
+{
+    .header
+    {
+        font-size: 48px;
+        line-height: 72px;
+    }
+
+    .activeHeading
+    {
+        font-size: 72px;
+    }
+
+    .subHeading
+    {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 720px)
+{
+    .header
+    {
+        font-size: 36px;
+        line-height: 54px;
+    }
+
+    .activeHeading
+    {
+        font-size: 54px;
+    }
+
+    .subHeading
+    {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 540px)
+{
+    .header
+    {
+        font-size: 32px;
+        line-height: 50px;
+    }
+
+    .activeHeading
+    {
+        font-size: 48px;
+    }
+
+    .enroll
+    {
+        padding: 5px 8px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 450px)
+{
+    .header
+    {
+        font-size: 24px;
+        line-height: 44px;
+    }
+
+    .activeHeading
+    {
+        font-size: 40px;
+    }
+
+    .subHeading
+    {
+        width: 80%;
+        line-height: 32px;
+    }
+}
+
+@media screen and (max-width: 340px)
+{
+    .header
+    {
+        font-size: 18px;
+        line-height: 40px;
+    }
+
+    .activeHeading
+    {
+        font-size: 36px;
+    }
+}
