@@ -1,0 +1,53 @@
+.container
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.title
+{
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+    color: black;
+}
+
+.header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 30px;
+}
+
+.footer
+{
+    display: flex;
+    column-gap: 8px;
+}
+
+.deleteIcon
+{
+    height: 24px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.author
+{
+    margin: 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(0,0,0,0.5)
+}
+
+.keywords
+{
+    width: 100%;
+    display: flex;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+

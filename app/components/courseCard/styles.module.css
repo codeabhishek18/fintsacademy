@@ -1,17 +1,21 @@
 .container
 {
     width: calc(33.4% - 15px);
-    height: 400px;
     display: flex;
     flex-direction: column;
     align-items: start;
     row-gap: 15px;
     border-radius: 5px;
-    border: 1px solid var(--primary-border);
-    color: white;
     position: relative;
     line-height: 30px;
-    padding: 10px;
+    padding: 20px;
+    background-color: white;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.container:hover
+{
+    transform: scale(1.025);
 }
 
 .light
@@ -21,7 +25,6 @@
 
 .image
 {
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     border-radius: 5px;
 }
 
@@ -77,10 +80,10 @@
 .discount
 {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 30px;
+    right: 30px;
     background-color: var(--primary-border);
-    padding: 05px;
+    padding: 0 5px;
     border-radius: 5px;
     margin: 0;
     font-size: 10px;
@@ -96,7 +99,6 @@
     border-radius: 5px;
     font-size: 14px;
     font-weight: 500;
-    color: white;
 }
 
 .explore.light
@@ -109,7 +111,7 @@
     background-color: var(--alert-color);
     border: 1px solid var(--alert-color);
     cursor: pointer;
-    color: black;
+    color: white;
 }
 
 .explore.light:hover
@@ -147,7 +149,6 @@
 .lecture
 {
     margin: 0;
-    margin-bottom: 10px;
     font-size: 14px;
     color: grey;
     font-weight: 500;
@@ -156,8 +157,17 @@
 .footer
 {
     display: flex;
-    align-items: baseline;
+    align-items: end;
     justify-content: space-between;
+}
+
+
+@media screen and (min-width: 1720px) 
+{
+    .container
+    {
+        width: calc(25% - 15px);
+    }
 }
 
 @media screen and (max-width: 1120px) 

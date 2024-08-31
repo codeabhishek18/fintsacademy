@@ -4,16 +4,21 @@ import fints from '@/assets/fints.png'
 import HamburgerMenu from '../hamburgerMenu/HamburgerMenu'
 import SlidingMenu from '../slidingMenu/SlidingMenu'
 import { useState } from 'react'
-import Switch from '../switch/Switch'
+import { motion } from 'framer-motion'
+import Switch from '../themeSwitch/Switch'
+import { useRouter } from 'next/navigation'
 
 const Navbar = ({handleScroll}) =>
 {
 
     const [ showSlider, setShowSlider ] = useState(false);
+    const router = useRouter();
 
     return(
         <div className={styles.container}>
-            <Image className={styles.fints} src={fints} alt='fints'/>
+            <motion.div className={styles.fints}>
+                <Image className={styles.fints} src={fints} alt='fints'/>
+            </motion.div>
             <div className={styles.navigation}>
                 
                 <div className={styles.links}>
@@ -21,6 +26,10 @@ const Navbar = ({handleScroll}) =>
                     <p className={styles.link} onClick={()=> handleScroll('about')}>About us</p>
                     <p className={styles.link} onClick={()=> handleScroll('faq')}>FAQ</p>      
                 </div>
+                <div className={styles.authWrapper}>
+                    <button className={styles.auth} onClick={()=> router.push('/login')}>Login</button>
+                    <button className={styles.auth} onClick={()=> router.push('/signup')}>Sign up</button>
+                </div>  
                 <HamburgerMenu setShowSlider={setShowSlider}/>
                 {/* <Switch/> */}
             </div>

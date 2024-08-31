@@ -1,0 +1,52 @@
+.container
+{
+    width: 100%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.list
+{
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 10px;
+}
+
+.forumheader
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.post
+{
+    padding: 10px;
+    width: 70px;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    border: 1px solid var(--primary-color);
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-radius: 5px;
+}
+
+.post:hover
+{
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.footer
+{
+    width: 100%;
+    display: flex;
+    column-gap: 50px;
+    justify-content: space-between;
+}

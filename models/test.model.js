@@ -1,0 +1,26 @@
+import mongoose, {Schema} from "mongoose";
+
+const testSchema = new Schema({
+    title:
+    {
+        type: String
+    },
+    quiz:
+    {
+        type: [Schema.Types.Mixed]
+    },
+    answers:
+    {
+        type: [String]
+    },
+    status:
+    {
+        type : String,
+        enum : ['Pending', 'Completed'],
+        default: 'Pending'
+    },
+    score: Number,
+    takes: Number
+},{timestamps: true})
+
+export const Test = mongoose.models?.Test || mongoose.model('Test', testSchema)

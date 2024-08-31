@@ -1,0 +1,128 @@
+.container
+{
+    width: 650px;
+    display: flex;
+    column-gap: 30px;
+    padding: 40px;
+    border-radius: 8px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--secondary-color);
+    border: 1px solid var(--primary-color);
+}
+
+.welcome
+{
+    font-size: 30px;
+    font-weight: 600;
+    width: 100%;
+    margin: 10px 0;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.loginImage
+{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.icon
+{
+    width: 100%;
+    height: fit-content;
+}
+
+.form, .signup
+{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 12px;
+}
+
+.signup
+{
+    width: 100%;
+}
+
+.form>input
+{
+    padding: 10px;
+    border: 1px solid var(--primary-color);
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+}
+
+.text
+{
+    width: 100%;
+    text-align: center;
+    color: rgba(0,0,0,0.3);
+    margin: 0;
+}
+
+.submit
+{
+    padding: 10px 0;
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: var(--primary-color); 
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 2px solid var(--primary-bg);
+}
+
+.submit:hover
+{
+    background-color: var(--primary-color);
+    color: var(--secondary-color); 
+    cursor: pointer;
+}
+
+.forgotpassword
+{
+    margin: 0;
+    font-weight: 500;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.close
+{
+    position: absolute;
+    right: -30px;
+    top: 0;
+    margin: 0;
+    color: var(--secondary-color);
+    font-size: 24px;
+}
+
+.close:hover
+{
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+.link
+{
+    color: var(--primary-color);
+}
+
+.link:hover
+{
+    cursor: pointer;
+}
+
+.errorMessage
+{
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--alert-color);
+    margin: 0;
+}

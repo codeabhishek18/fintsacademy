@@ -1,0 +1,172 @@
+.container
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 15px;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.header, .footer
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 5px;
+}
+
+.certificationDetails
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 15px;
+}
+
+.courseTitle
+{
+    color: var(--alert-color);
+    background-color: var(--primary-bg);
+    font-size: 20px;
+    width: 100%;
+    padding: 8px;
+    font-weight: 600;
+    margin: 10px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.dates, .pendingSessions
+{
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(0,0,0,0.5);
+}
+
+.progress
+{
+    position: relative;
+}
+
+.mentor>span, .group>span
+{
+    font-weight: 600;
+    color: grey;
+}
+
+.progressTitle
+{
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translate(-50%, -50%);
+    font-size: 6rem;
+    color: rgba(0,0,0,0.05);
+    font-weight: 700;
+    display: flex;
+}
+
+.certificate
+{
+    background-color: var(--primary-bg);
+    color: var(--alert-color);
+    font-size: 15px;
+    font-weight: 600;
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.certificate>img
+{
+    height: 20px;
+    width: fit-content;
+}
+
+.batch
+{
+    width: 100%;
+    padding: 20px;
+    background-color: var(--primary-bg);
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.group
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 15px;
+}
+
+.connect
+{
+    border: 1px solid var(--alert-color);
+    border-radius: 5px;
+    color: var(--alert-color);
+    font-size: 12px;
+}
+
+.connect:hover
+{
+    background-color: var(--alert-color);
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.mentor, .batchCode, .groupTitle
+{
+    font-weight: 500;
+    color: black;
+    margin: 0;
+}
+
+.addlink
+{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.button, .link
+{
+    border-radius: 5px;
+    border: 0;
+}
+
+.link
+{
+    width: 100%;
+}
+
+.button
+{
+    border: 1px solid var(--alert-color);
+    color: var(--alert-color);
+    margin: 0;
+}
+
+.button:hover
+{
+    background-color: var(--alert-color);
+    color: var(--secondary-color);
+    cursor: pointer;
+}

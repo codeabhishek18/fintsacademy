@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+
+.wrapper
+{
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
+}
+
+.container
+{
+    height: 600px;
+    width: fit-content;
+    position: relative;
+}
+
+.certificate, .Image
+{
+    height: 100%;
+    width: 100%;
+}
+
+.user, .course
+{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0;
+}
+
+.user
+{
+    top: 270px;
+    font-size: 30px;
+    font-weight: 600;
+    color: rgb(180, 153, 32);   
+    font-family: 'Montserrat', sans-serif;
+}
+
+.course
+{
+    top: 348px;
+    font-size: 10px;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--primary-bg);
+    width: fit-content;
+    padding: 3px 20px;
+}

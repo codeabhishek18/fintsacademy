@@ -1,0 +1,69 @@
+.container
+{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    background-color: var(--primary-bg);
+}
+
+.main
+{
+    width: calc(100% - 100px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.wrapper
+{
+    width: 85%;
+}
+
+.support
+{
+    height:50px;
+    width: fit-content;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    border-radius:50%;
+    cursor: pointer;
+    z-index: 1;
+    background-color: var(--alert-bg);
+    padding: 10px;
+}
+
+.chatWrapper
+{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.75);
+}
+
+.chat
+{
+    width: 325px;
+    height: 400px;
+    position: absolute;
+    right: 20px;
+    bottom: 90px;
+    border: 1px solid var(--primary-color);
+    background-color: var(--primary-bg);
+    border-radius: 5px;
+}
+
+@media screen and (max-width: 450px)
+{
+    .main
+    {
+        width: 100%;
+    }
+
+    .container
+    {
+        flex-direction: column;
+    }
+}

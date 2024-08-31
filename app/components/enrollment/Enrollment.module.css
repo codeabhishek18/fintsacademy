@@ -1,0 +1,48 @@
+.container
+{
+    background-color: var(--secondary-color);
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.contact, .email
+{
+    color: rgba(0,0,0,0.5);
+}
+
+.contact, .email, .name
+{
+    font-size: 14px;
+    font-weight: 500;
+    margin: 5px;
+}
+
+.buttons
+{
+    display: flex;
+    column-gap: 10px;
+}
+
+.button
+{
+    margin: 0;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: 5px;
+    background-color: var(--secondary-color);
+    padding: 5px;
+}
+
+.button:hover
+{
+    cursor: pointer;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+}

@@ -1,0 +1,123 @@
+.wrapper
+{
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+}
+
+.container
+{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 5px;
+}
+
+.header
+{
+    padding: 20px 10px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    background-color: var(--secondary-color);
+    column-gap: 10px;
+}
+
+.admin
+{
+    height: 32px;
+    width: fit-content;
+}
+
+.title
+{
+    font-size: 15px;
+    color: var(--primary-color);
+    margin: 0;
+    font-weight: 500;
+}
+
+.footer
+{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    padding: 10px;
+}
+
+.box
+{
+    width: 100%;
+    border: 0;
+    background-color: var(--primary-bg);
+    border-radius: 5px;
+    padding: 12px;
+    font-size: 12px;
+}
+
+.send
+{
+    padding: 12px;
+    border: 0;
+    width: 60px;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    color: var(--secondary-color);
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.messages
+{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    padding: 10px;
+    overflow-y: scroll;
+}
+
+.message
+{
+    width: 100%;
+    display: flex;
+}
+
+.left
+{
+    justify-content: flex-start;
+}
+
+.right
+{
+    justify-content: flex-end;
+}
+
+@media screen and (max-width: 520px) 
+{
+    .container
+    {
+        bottom: 130px;
+    }    
+}
+
+@media screen and (max-width: 420px) 
+{
+    .wrapper
+    {
+        padding: 0 20px;
+    }
+
+    .container
+    { 
+        right: 5%;
+        height: 60%;
+        width: 90%;
+    }    
+}
+
+

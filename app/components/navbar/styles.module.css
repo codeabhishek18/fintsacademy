@@ -19,6 +19,31 @@
     width: fit-content;
 }
 
+.authWrapper
+{
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.auth
+{
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    padding: 8px 10px;
+    background: none;
+    font-size: 14px;
+    color: var(--secondary-color);
+}
+
+.auth:hover
+{
+    cursor: pointer;
+    border: 1px solid var(--alert-color);
+    background-color: var(--alert-color);
+    color: var(--secondary-color);
+}
+
 .link
 {
     margin: 0;

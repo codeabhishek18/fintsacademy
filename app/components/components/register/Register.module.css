@@ -1,0 +1,54 @@
+.container
+{
+    margin-left: 20px;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    font-size: 14px;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    padding: 30px;
+    height: fit-content;
+}
+
+.TextField, .container>select
+{
+    background-color: var(--secondary-color);
+    padding: 15px;
+    border-radius: 5px;
+    width: 100%;
+    color: var(--primary-color);
+    font-size: 15px;
+}
+
+.container>select
+{
+    padding: 15px 10px;
+}
+
+.dropdown
+{
+    height: 50px;
+}
+
+.register
+{
+    width: 100%;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-weight: 500;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: 0;
+}
+
+.header
+{
+    color: var(--primary-color);
+    font-size: 56px;
+    text-align: center;
+}

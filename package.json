@@ -9,12 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@auth/mongodb-adapter": "^3.4.2",
+    "@date-io/date-fns": "^3.0.0",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^5.16.7",
+    "@mui/x-charts": "^7.15.0",
+    "@mui/x-date-pickers": "^7.15.0",
     "axios": "^1.7.5",
+    "date-fns": "^3.6.0",
+    "dayjs": "^1.11.13",
+    "framer-motion": "^11.3.30",
     "mongoose": "^8.5.4",
     "next": "14.2.6",
+    "next-auth": "^5.0.0-beta.20",
     "react": "^18",
     "react-dom": "^18",
     "sharp": "^0.33.5"

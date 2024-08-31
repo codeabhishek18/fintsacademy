@@ -1,0 +1,49 @@
+.container
+{
+    width: 100%;
+    padding: 30px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    height: fit-content;
+    background-color: var(--secondary-color);
+}
+
+.header
+{
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(0,0,0,0.3);
+    margin: 0 0 10px;
+}
+
+.group, .total
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.total
+{
+    border-top: 1px solid rgba(0,0,0,0.3);
+    padding-top: 16px;
+    font-weight: 600;
+}
+
+.left, .right
+{
+    margin: 0;
+    font-size: 15px;
+}
+
+.success
+{
+    color: var(--success-color);
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0;
+}
+
+

@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const userSchema = new Schema({
+const mentorSchema = new Schema({
     name:
     {
         type: String,
@@ -12,15 +12,13 @@ const userSchema = new Schema({
         required: true
     },
     phone: Number,
-    password:
-    {
-        type: String,
-        required: true
-    },
+    imageURL: String,
+    about: String,
+    experience: String,
     linkedin: String,
 },
 {
     timestamps: true
 })
 
-export const User = mongoose.models?.User || mongoose.model('User', userSchema)
+export const Mentor = mongoose.models?.Mentor || mongoose.model('Mentor', mentorSchema)

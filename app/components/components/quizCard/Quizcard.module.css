@@ -1,0 +1,90 @@
+.container
+{
+    width: 25%;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.title, .course, .quiz
+{
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.success_bg
+{
+    background-color: var(--pending-bg);
+}
+
+.title
+{
+    border-radius: 5px;
+}
+
+.date, .quiz, .header
+{
+    font-weight: 500;
+    font-size: 14px;
+    margin: 0;
+}
+
+.header
+{
+    color: rgba(0,0,0,0.3);
+}
+
+.buttons
+{
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post
+{
+    height: fit-content;
+    margin-top: 10px;
+    padding: 8px;
+    width: 100%;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    border: 1px solid var(--primary-color);
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-radius: 5px;
+}
+
+.post:hover
+{
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.next
+{
+    width: 30px;
+    height: fit-content;
+    cursor: pointer;
+}
+
+.next:hover
+{
+    transform: scale(1.1);
+}
+
+.status
+{
+    color: rgba(0,0,0,0.2);
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0;
+}

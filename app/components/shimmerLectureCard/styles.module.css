@@ -1,7 +1,25 @@
+.skeleton
+{
+    animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading
+{
+    0%
+    {
+        background-color: var(--primary-border);
+    }
+
+    100%
+    {
+        background-color: rgb(75, 75, 75);
+    }
+}
+
+
 .container
 {
     width: calc(50% - 10px);
-    border-radius: 5px;
     border: 1px solid var(--primary-border);
     height: 180px;
     padding: 20px;
@@ -16,10 +34,9 @@
     justify-content: space-between;
 }
 
-.title, .duration, .description
+.container, .title, .duration, .description
 {
     margin: 0;
-    background-color: var(--primary-border);
     border-radius: 5px;
 }
 

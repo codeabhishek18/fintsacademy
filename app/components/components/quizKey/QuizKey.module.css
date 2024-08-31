@@ -1,0 +1,36 @@
+.container
+{
+    height: fit-content;
+    margin: 0;
+    padding: 7px;
+    background-color: var(--primary-bg);
+    border-radius: 5px;
+    font-size: 13px;
+    cursor: pointer;
+    position: relative;
+}
+
+.keyword
+{
+    margin: 0;
+}
+
+.container:hover
+{
+    transform: scale(1.05);
+}
+
+.close
+{
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 12px;
+    background-color: rgb(105, 105, 105);
+    color: var(--secondary-color);
+    border-radius: 50%;
+    width: 14px;
+    text-align: center;
+}

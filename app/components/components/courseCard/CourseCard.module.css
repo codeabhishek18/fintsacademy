@@ -1,0 +1,86 @@
+.container
+{
+    min-height: 150px;
+    width: calc(33.3% - 10px);
+    background-color: var(--secondary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    row-gap: 5px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.header
+{
+    display: flex;
+    align-items: start;
+    column-gap: 15px;
+}
+
+.title
+{
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.footer
+{
+    display: flex;
+    column-gap: 10px;
+    width: 100%;
+}
+
+.buttons
+{
+    border:0;
+    width: 50%;
+    text-align: center;
+    background-color: var(--primary-bg);
+    padding: 8px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.buttons:nth-child(2)
+{
+    background-color: var(--secondary-color);
+    border: 1px solid var(--primary-bg);
+    color: black;
+}
+
+.buttons:hover
+{
+    background: var(--primary-color);
+    color: white;
+}
+
+.deleteIcon
+{
+    height: 20px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.moduleCount
+{
+    color: rgba(0,0,0,0.5);
+    font-weight: 500;
+}
+
+.next
+{
+    height: 30px;
+    width: fit-content;
+}
+
+.next:hover
+{
+    transform: scale(1.1);
+    cursor: pointer;
+}

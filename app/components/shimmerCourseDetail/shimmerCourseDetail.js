@@ -7,14 +7,14 @@ const ShimmerCourseDetail = () =>
 
     return(
         <div className={styles.container}>
-            <div className={styles.coverImage}></div>
+            <div className={`${styles.skeleton} ${styles.coverImage}`}></div>
             <div className={styles.header}>
-                <p className={styles.title}></p>
-                <p className={styles.level}></p>
+                <p className={`${styles.skeleton} ${styles.title}`}></p>
+                <p className={`${styles.skeleton} ${styles.level}`}></p>
                 <div className={styles.content}>
-                    <p className={styles.description}></p>
-                    <p className={styles.description}></p>
-                    <p className={styles.description}></p>
+                    <p className={`${styles.skeleton} ${styles.description}`}></p>
+                    <p className={`${styles.skeleton} ${styles.description}`}></p>
+                    <p className={`${styles.skeleton} ${styles.description}`}></p>
                 </div>
             </div>
             <div className={styles.lectures}>
@@ -24,8 +24,8 @@ const ShimmerCourseDetail = () =>
                 ))}
             </div>
             <div className={styles.footer}>
-                <p className={styles.join}></p>
-                <p className={styles.rating}></p>
+                <p className={`${styles.skeleton} ${styles.join}`}></p>
+                <p className={`${styles.skeleton} ${styles.rating}`}></p>
             </div>
         </div>
     )

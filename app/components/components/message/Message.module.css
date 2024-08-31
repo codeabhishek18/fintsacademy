@@ -1,0 +1,25 @@
+.container
+{
+    width: fit-content;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    padding: 2px 8px;   
+    border-radius: 8px;
+    display: flex;
+    align-items: baseline;
+    column-gap: 15px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.message
+{
+    margin: 0;
+    font-size: 13px;
+}
+
+.time
+{
+    font-size: 10px;
+    font-weight: 500;
+    text-align: right;
+}

@@ -1,0 +1,46 @@
+.container
+{
+    display: flex;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.column
+{
+    padding: 20px;
+    width: 33.34%;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.column:nth-child(1)
+{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.column:nth-child(3)
+{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.column:nth-child(1), .column:nth-child(2)
+{
+    border-right: 0;
+}
+
+.title
+{
+    font-size: 20px;
+    margin: 0;
+}
+
+.count
+{
+    font-size: 48px;
+    margin: 0;
+    font-weight: 600;
+}
+

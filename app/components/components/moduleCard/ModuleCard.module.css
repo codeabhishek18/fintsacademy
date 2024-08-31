@@ -1,0 +1,45 @@
+.container
+{
+    width: 300px;
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    background-color: var(--secondary-color);
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.header
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.title
+{
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.delete
+{
+    height: 24px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.footer
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.agenda
+{
+    color: rgba(0,0,0,0.3);
+    font-weight: 500;
+}

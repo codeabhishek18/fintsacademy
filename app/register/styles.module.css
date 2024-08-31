@@ -1,0 +1,16 @@
+.container
+{
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    background-color: var(--primary-bg);
+    padding: 100px 0;
+}
+
+.register
+{
+    display: flex;
+    column-gap: 20px;
+}

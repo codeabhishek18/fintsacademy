@@ -18,6 +18,7 @@ import Certificate from './components/certificate/Certificate'
 import Carousel from './components/carousel/Carousel'
 import Accordian from './components/accordian/Accordian'
 import Footer from './components/footer/Footer'
+import { motion } from 'framer-motion'
 
 const Home = () =>
 {
@@ -77,7 +78,13 @@ const Home = () =>
 
                 {error && <ErrorDialogue setError={setError}/>}
 
-                <div className={styles.aboutWrapper} ref={aboutRef}>
+                <motion.div 
+                    initial={{opacity: 0}}
+                    whileInView={{opacity:1}}
+                    viewport={{
+                        margin: '-200px',
+                    }}
+                    className={styles.aboutWrapper} ref={aboutRef}>
                     <Stats/>
                     <p className={styles.about}>{about}</p>
                     <div className={styles.features}>
@@ -86,9 +93,14 @@ const Home = () =>
                         <FeatureCard feature={feature} key={feature.id}/>
                     ))}
                     </div>
-                </div>
+                </motion.div>
 
-                <div className={styles.courseWrapper} ref={courseRef}>
+                <motion.div 
+                    initial={{opacity:0}}
+                    whileInView={{opacity:1}}
+                    viewport={{
+                        margin: '-200px'
+                    }} className={styles.courseWrapper} ref={courseRef}>
                     {!error && <p className={styles.commonHeader}>Courses</p>}
                     {courses ? 
                     <div className={styles.courses}>
@@ -104,9 +116,7 @@ const Home = () =>
                             <ShimmerCourseCard key={data.id}/>
                         ))}
                     </div>)}
-                </div>
-
-                <Certificate/>
+                </motion.div>
 
                 <div className={styles.carouselWrapper}>
                     <p className={styles.commonHeader}>Testimonials</p>
@@ -122,6 +132,8 @@ const Home = () =>
                     ))}
                     </div>
                 </div>
+
+                <Certificate/>
     
             </div>
             <Footer/>
