@@ -9,7 +9,7 @@ import { TextField } from '@mui/material';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserDeatils } from '@/store/slices/userReducer';
+import { setUserDeatils } from '@/store/slices/courseReducer';
 
 const Signup = ({setShowSignupForm, isSignUp, setisSignup}) =>
 {

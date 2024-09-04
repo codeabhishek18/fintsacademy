@@ -10,6 +10,7 @@ import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Header from '../components/header/Header';
 import GoogleAuth from '../components/googleAuth/GoogleAuth';
+import { credentialLogin } from '../action';
 
 const Login = () =>
 {   
@@ -46,7 +47,7 @@ const Login = () =>
 
         try 
         {
-            // const response = await credentialLogin(formData);
+            const response = await credentialLogin(formData);
             if(!response)
                 return router.push('/check')
             setError(true);
@@ -70,7 +71,7 @@ const Login = () =>
                 <div className={styles.form}>
                     <form className={styles.form} onSubmit={handleSubmit}>
                         <TextField className={styles.inputs} size='small' color='grey' sx={{backgroundColor:'grey', borderRadius: '5px'}} label="Email" type="text" name="email" variant='filled'/>
-                        <TextField className={styles.inputs} size='small' color='grey' sx={{backgroundColor:'grey', borderRadius: '5px'}}label="Password" type="password" name="password" variant='filled'/>
+                        <TextField className={styles.inputs} size='small' color='grey' sx={{backgroundColor:'grey', borderRadius: '5px'}} label="Password" type="password" name="password" variant='filled'/>
                         {error && 
                         <div className={styles.error}>
                             <Image className={styles.erroricon} src={erroricon} alt='error'/>

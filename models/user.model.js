@@ -19,10 +19,10 @@ const userSchema = new Schema({
     {
         type: Number
     },
-    batch: 
+    enrollments: 
     [{
         type: Schema.Types.ObjectId,
-        ref: 'Batch'
+        ref: 'Enrollment'
     }],
     chat:
     [{
@@ -35,12 +35,15 @@ const userSchema = new Schema({
         enum: ['visitor', 'user', 'mentor', 'admin'],
         default: 'visitor'
     },
-    assessment:
-    [{
-        type: Schema.Types.ObjectId,
-        ref: 'Test'
-    }],
-    googleId: String
+    status:
+    {
+        type: String,
+        enum: ['active', 'inactive'],
+        default: 'inactive'
+    },
+    googleId: String,
+    imageURL: String,
+    linkedin: String,
 },
 {
     timestamps: true

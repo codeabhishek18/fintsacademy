@@ -1,0 +1,18 @@
+.container
+{
+    width: 100%;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    cursor: pointer;
+}
+
+.headers
+{
+    font-weight: 500;
+    margin: 0;
+}

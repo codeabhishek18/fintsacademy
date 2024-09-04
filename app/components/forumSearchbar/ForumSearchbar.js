@@ -32,7 +32,7 @@ const ForumSearchbar = ({searchQuery, getDiscussions, handleChange}) =>
             />
             <FormControl fullWidth>
                 <InputLabel size='small' color='grey'>Discussions</InputLabel>
-                <Select size='small' color='grey'  name="order"value={searchQuery.order} 
+                <Select size='small' color='grey' name="order" value={searchQuery.order} 
                     onChange={(e)=> handleChange('order', e.target.value)}>
                     <MenuItem value="" disabled>Discussions</MenuItem>
                     <MenuItem value="dec">New to old</MenuItem>

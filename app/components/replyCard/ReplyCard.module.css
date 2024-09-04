@@ -24,8 +24,8 @@
 .username
 {
     margin: 0;
-    color: var(--primary-color);
-    font-weight: 500;
+    color: var(--alert-color);
+    font-weight: 600;
 }
 
 .reply

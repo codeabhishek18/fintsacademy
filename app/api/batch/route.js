@@ -40,13 +40,13 @@ export async function GET(req, res)
 {
     try
     {
-        await  dbConnect();
+        await dbConnect();
 
         const batches = await batchInstance.getAllBatches();
-        return NextResponse.json({batches})
+        return NextResponse.json(batches)
     }
     catch(error)
     {
-        console.log(error)
+        return NextResponse.json({error: error.message})
     }
 }

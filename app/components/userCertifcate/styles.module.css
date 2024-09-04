@@ -1,0 +1,33 @@
+.certificate
+{
+    height: 585px;
+    width: 420px;
+}
+
+.name, .course, .date
+{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--gold-color);
+}
+
+.name
+{
+    top: 245px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.course
+{
+    top: 315px;;
+    font-weight: 600;
+}
+
+.date
+{
+    font-size: 12px;
+    top: 450px;
+    left: 100px;
+}

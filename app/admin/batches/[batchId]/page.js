@@ -2,15 +2,17 @@
 
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import batchStyles from './Batch.module.css'
+import styles from './Batch.module.css'
 import { useParams } from 'next/navigation'
 import Progress from '@/app/components/progress/Progress'
 import SessionCard from '@/app/components/sessionCard/SessionCard'
 import Enrollment from '@/app/components/enrollment/Enrollment'
+import { CircularProgress } from '@mui/material'
 
 const Batch = () =>
 {
     const [ batch, setBatch ] = useState(null);
+    const [ activeAgenda, setActiveAgenda ] = useState(-1);
     const { batchId } = useParams();
    
     const getBatch = async () =>
@@ -24,6 +26,8 @@ const Batch = () =>
     {
        getBatch();
     },[])
+
+    console.log(batch)
 
      const updateSessionStatus = async (sessionId, status) =>
     {
@@ -73,35 +77,40 @@ const Batch = () =>
     // console.log(batches)
 
     return(
-        <div className={batchStyles.wrapper}>
-            {batch && 
-            <div className={batchStyles.container}>
+        <div className={styles.wrapper}>
+            {batch ?
+            <div className={styles.container} onClick={()=> setActiveAgenda(-1)}>
                 
-                <div className={batchStyles.dashboard}>
-                    <div className={batchStyles.progress}>
+                <div className={styles.dashboard}>
+                    <div className={styles.progress}>
                         <Progress data={batch}/>
                     </div>
-                    <div className={batchStyles.list}>
+                    <div className={styles.list}>
                         {batch.sessions.map((session, index) =>
                         (
                             <SessionCard 
-                                key={session._id} session={session} index={index} 
-                                updateSessionStatus={updateSessionStatus} type="admin"
+                                key={session._id} level="admin"
+                                session={session} index={index} 
+                                updateSessionStatus={updateSessionStatus} 
+                                setActiveAgenda={setActiveAgenda}
+                                activeAgenda={activeAgenda}
                             />
                         ))}
                     </div>
                 </div>
 
-                <div className={batchStyles.enrollments}>
+                <div className={styles.enrollments}>
                     {batch.enrollments.length ? 
-                    batches.enrollments.map((student)=>
+                    batch.enrollments.map((user)=>
                     (
-                        <Enrollment student={student}/>
+                        <Enrollment user={user}/>
                     )) : 
-                    <p className={batchStyles.noStudents}>No Enrollments</p>
+                    <p className={styles.noStudents}>No Enrollments</p>
                     }
                 </div>
 
+            </div> : <div className={styles.spinner}>
+                <CircularProgress sx={{color: '#D4313D'}} />
             </div>}
         </div>
     )

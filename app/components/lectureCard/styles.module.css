@@ -1,9 +1,10 @@
 .container
 {
     width: calc(50% - 10px);
-    border: 1px solid var(--primary-border);
+    background-color: var(--secondary-color);
     border-radius: 5px;
     padding: 20px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
 .header

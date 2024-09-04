@@ -7,6 +7,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Header from '../components/header/Header'
 import UserPanel from '../components/userPanel/UserPanel'
+import Chat from '../components/chat/Chat'
 // import Chat from '@/components/chat/Chat'
 // import { Provider } from 'react-redux'
 // import { store } from '@/store'
@@ -31,7 +32,7 @@ export default function Layout({ children })
             {showChat && 
             <div className={styles.chatWrapper}>
                 <div className={styles.chat}>
-                    {/* <Chat type="user"/> */}
+                    <Chat type="user"/>
                 </div>
             </div>}
 

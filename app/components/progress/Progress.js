@@ -7,6 +7,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import PieChartWithPaddingAngle from '../piechart/PieChart';
+import UserCertificate from '../userCertifcate/UserCertificate';
 
 const options = { year: 'numeric', month: 'long', day: 'numeric' };
 export const pendingSessions = (sessions) =>
@@ -14,12 +15,13 @@ export const pendingSessions = (sessions) =>
     return sessions.filter((session) => session.status === 'Upcoming').length
 }
 
-const Progress = ({data, type}) =>
+const Progress = ({data, level}) =>
 {
     const [ whatsapplink, setWhatsapplink ] = useState('');
     const [ zoomLink, setZoomLink ] = useState('');
     const [ showwlink, setShowWlink ] = useState(false);
     const [ showzlink, setShowZlink ] = useState(false);
+    const [ showCertificate, setShowCertificate ] = useState(false);
     const router = useRouter();
     
     const addWhatsappLink = async () =>
@@ -37,8 +39,6 @@ const Progress = ({data, type}) =>
         setShowZlink(false)
         setZoomLink('');
     }
-
-    console.log(data)
 
     return(
         <div className={styles.container}>
@@ -65,7 +65,7 @@ const Progress = ({data, type}) =>
                 </div>
                 <div className={styles.group}>
                     <p className={styles.groupTitle}>Whatsapp group</p>
-                    {type === "user" ? <button className={styles.connect}>Connect</button> :
+                    {level === "user" ? <button className={styles.connect}>Connect</button> :
                     <button className={styles.connect} onClick={()=> setShowWlink(true)}>Add link</button>}
                 </div>
                {showwlink && <div className={styles.addlink}>
@@ -74,7 +74,7 @@ const Progress = ({data, type}) =>
                 </div>}
                 <div className={styles.group}>
                     <p className={styles.groupTitle}>Zoom link</p>
-                    {type === "user" ? <button className={styles.connect} onClick={()=> router.push(data.zoomLink)}>Connect</button> :
+                    {level === "user" ? <button className={styles.connect} onClick={()=> router.push(data.zoomLink)}>Connect</button> :
                     <button className={styles.connect} onClick={()=> setShowZlink(true)}>Add link</button>}  
                 </div>
                 {showzlink && <div className={styles.addlink}>
@@ -82,13 +82,16 @@ const Progress = ({data, type}) =>
                     <button className={styles.button} onClick={addZoomLink}>Add</button>
                 </div>}
             </div>
-            <div className={styles.footer}>
-                
-                <div className={styles.certificationDetails}>
+            {level === 'user' && <div className={styles.footer}>
+                <div className={styles.certificationDetails} onClick={()=> setShowCertificate(true)}>
                     <p className={styles.pendingSessions}>{pendingSessions(data.sessions) === 0 ? 'Unlock certification now' : pendingSessions(data.sessions) +' more session(s) to unlock certification'}</p>
-                    <p className={styles.certificate}><Image src={certificate} alt='certificate'/>Download Certificate</p>
+                    <div className={styles.certificate}><Image src={certificate} alt='certificate'/>Download Certificate</div>
                 </div>
-            </div>
+            </div>}
+            {showCertificate &&
+            <div className={styles.userCertificate}>
+                <UserCertificate course={data.course.title} date={data.startDate}/>
+            </div> }
         </div>
     )
 }

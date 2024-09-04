@@ -5,11 +5,12 @@ import axios from 'axios'
 import styles from './styles.module.css'
 import BatchForm from '@/app/components/batchForm/BatchForm'
 import BatchCard from '@/app/components/batchCard/BatchCard'
+import { CircularProgress } from '@mui/material'
 
 const Batches = () =>
 {
-    const [ courses, setCourses ] = useState([]);
-    const [ batches, setBatches ] = useState([]);
+    const [ courses, setCourses ] = useState(null);
+    const [ batches, setBatches ] = useState(null);
     const [ batchForm, setBatchForm ] = useState(false)
 
     const getCourses = async () =>
@@ -23,8 +24,7 @@ const Batches = () =>
     {
         const url = `/api/batch`
         const response = await axios.get(url);
-        console.log(batches)
-        setBatches(response.data.batches);
+        setBatches(response.data);
     }
 
     useEffect(()=>
@@ -48,23 +48,28 @@ const Batches = () =>
     }
 
     return(
+        <div className={styles.wrapper}>
+            {batches ? 
             <div className={styles.container}>
-
                 <div className={styles.header}>
                     <button className={styles.add} onClick={()=> setBatchForm(!batchForm)}>{batchForm ? 'close' : '+ Add Batch'}</button>
                 </div>
 
-                {batchForm && 
-                <BatchForm courses={courses} />}
+                {batchForm && <BatchForm courses={courses} />}
 
                 <div className={styles.list}>
                     {batches?.map((batch) =>
                     (
-                        <BatchCard type="admin" key={batch._id} data={batch} removeBatch={removeBatch}/>
+                        <BatchCard type="batch" level="admin" key={batch._id} data={batch} removeBatch={removeBatch}/>
                     ))}
                 </div>
 
-            </div>
+            </div> :
+            <div className={styles.spinner}>
+                <CircularProgress sx={{color: '#D4313D'}} />
+            </div>}
+        </div>
+            
     )
 }
 

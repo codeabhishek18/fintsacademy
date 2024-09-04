@@ -3,10 +3,10 @@
 import { signIn, signOut } from "@/auth";
 import { AuthError } from "next-auth";
 
-// export async function doLogout() 
-// {
-//   await signOut({ redirectTo: "/" });
-// }
+export async function doLogout() 
+{
+  await signOut({ redirectTo: "/" });
+}
 
 export async function googleLogin()
 {

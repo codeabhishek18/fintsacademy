@@ -6,19 +6,17 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Discussion from '../discussion/Discussion';
 import Comment from '../comment/Comment';
+import { useSession } from 'next-auth/react';
 
 const DiscussionCard = ({discussions, getDiscussions, getTopics}) =>
 {   
     const [ comment, setComment ] = useState(null)
     const [ viewComment, setViewComment ] = useState(null)
-    const [ user, setUser ] = useState(null)
 
-    useEffect(() =>
-    {
-        const user = JSON.parse(localStorage.getItem('user'))
-        if(user)
-            setUser(user.id)
-    },[])
+    const session = useSession();
+    const user = session?.data?.user?.id
+
+    console.log('user', user)
 
     const handleDelete = async (id) =>
     {
@@ -40,10 +38,14 @@ const DiscussionCard = ({discussions, getDiscussions, getTopics}) =>
         try
         {
             const url = `/api/comment/${id}`
-            await axios.post(url, {comment, author: user})
-            getDiscussions('/api/forum');
-            setComment('');
-            setViewComment(id);
+            if(user)
+            {
+                await axios.post(url, {comment, author: user})
+                getDiscussions('/api/forum');
+                setComment('');
+                setViewComment(id);
+            }
+            return
         }
         catch(error)
         {

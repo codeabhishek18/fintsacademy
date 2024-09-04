@@ -1,34 +1,14 @@
-/**
- * Public Routes
- */
-
-export const publicRoutes = 
+export const userRoutes =
 [
-    '/', '/course'
-]
+    '/dashboard', '/forum', '/profile', '/checkout'
+] 
 
-/**
- * Auth Routes
- */
-
-export const authRoutes = 
+export const adminRoutes =
 [
-    '/login', '/register'
-]
+    '/admin'
+] 
 
-/**
- * AuthPrefix Routes
- */
-
-export const protetctedRoutes = 
+export const authRoutes =
 [
-    '/dashbord', '/profile', '/assessment', '/forum'
-]
-
-export const defaultRedirect =
-[
-    '/register'
-]
-
-
-
+    '/login', '/signup'
+] 

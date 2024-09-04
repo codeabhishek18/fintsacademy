@@ -57,7 +57,7 @@ const BatchForm = () =>
     }
 
     return(
-            <div className={styles.container}>
+        <div className={styles.container}>
             <p className={styles.header}>Add Batch</p>
 
             <form onSubmit={handleSubmit} className={styles.form}>
@@ -93,6 +93,7 @@ const BatchForm = () =>
                         
             <button className={styles.createButton} type='submit'>Create</button>
             </form>
+            
         </div>
     )
 }

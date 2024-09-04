@@ -5,10 +5,11 @@ import axios from 'axios'
 import styles from './styles.module.css'
 import MentorForm from '@/app/components/mentorForm/MentorForm'
 import MentorCard from '@/app/components/mentorCard/MentorCard'
+import { CircularProgress } from '@mui/material'
 
 const Mentors = () =>
 {
-    const [ mentors, setMentors ] = useState([]);
+    const [ mentors, setMentors ] = useState(null);
     const [ mentorForm, setMentorForm ] = useState(false)
 
     const getMentors = async () =>
@@ -38,23 +39,23 @@ const Mentors = () =>
     // }
 
     return(
-            <div className={styles.container}>
-
+        <div className={styles.wrapper}>
+            {mentors ? <div className={styles.container}>  
                 <div className={styles.header}>
                     <button className={styles.add} onClick={()=> setMentorForm(!mentorForm)}>{mentorForm ? 'close' : '+ Add Mentor'}</button>
                 </div>
-
-                {mentorForm && 
-                <MentorForm/>}
-
+                {mentorForm && <MentorForm/>}
                 <div className={styles.list}>
                     {mentors?.map((mentor) =>
                     (
                         <MentorCard data={mentor} key={mentor._id}/>
                     ))}
                 </div>
-
-            </div>
+            </div> : 
+            <div className={styles.spinner}>
+                <CircularProgress sx={{color: '#D4313D'}} />
+            </div>}
+        </div>
     )
 }
 

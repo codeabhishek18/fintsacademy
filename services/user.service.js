@@ -1,4 +1,4 @@
-// import bcrypt from 'bcryptjs'
+import bcrypt from 'bcryptjs'
 // import jwt from 'jsonwebtoken'
 // import { Batch } from "@/models/batch.model.js";
 // import { Course } from "@/models/course.model.js";
@@ -9,7 +9,11 @@
 // import { Assessment } from '@/models/assessment.model.js';
 // import { Test } from '@/models/test.model.js';
 
-import { User } from "../models/user.model.js";
+import { User } from "@/models/user.model";
+import { Enrollment } from '@/models/enrollment.model';
+import { Batch } from '@/models/batch.model';
+import { Course } from '@/models/course.model';
+import { Test } from '@/models/test.model';
 
 class userService 
 {
@@ -18,7 +22,7 @@ class userService
         try
         {
             const hashedPassword = await this.hashPassword(password);
-            const newUser = await User.create({name, email, password: hashedPassword});
+            const newUser = await User.create({name, email, password: hashedPassword});  
             return await newUser.save();
         }
         catch(error)
@@ -54,104 +58,77 @@ class userService
         }
     }
 
-    // async enrollUser(user, batch, assessment)
-    // {
-    //     try
-    //     {
-    //         return await User.findByIdAndUpdate(user, {$push: {batch, assessment}, $set: {role: 'user'}})
-    //     }
-    //     catch(error)
-    //     {
-    //         return error;
-    //     }
-    // }
+    async updatEnrollment(userId, enrollmentId)
+    {
+        try
+        {
+            return await User.findByIdAndUpdate(userId, {$push: {enrollments : enrollmentId}, $set: {role: 'user'}})
+        }
+        catch(error)
+        {
+            return error;
+        }
+    }
 
-    // async findAll()
-    // {
-    //     try
-    //     {
-    //         const users = await User.find({});
-    //         return users;
-    //     }
-    //     catch(error)
-    //     {
-    //         return error
-    //     }
-    // }
+    async findAll()
+    {
+        try
+        {
+            const users = await User.find({});
+            return users;
+        }
+        catch(error)
+        {
+            return error
+        }
+    }
 
-    // async findById(id)
-    // {
-    //    try
-    //    {
-    //     const user = await User.findById(id)
-    //     .populate(
-    //     {
-    //         path: 'batch',
-    //         model: Batch,
-    //         populate : 
-    //         [{
-    //             path : 'course', 
-    //             model : Course
-    //         },
-    //         {
-    //             path : 'sessions',
-    //             model : Session
-    //         },
-    //         {
-    //             path : 'mentor',
-    //             model : Mentor
-    //         }]
-    //     })
-    //     .populate(
-    //     {
-    //         path: 'chat',
-    //         model: Chat,
-    //         populate: 
-    //         {
-    //             path: 'message',
-    //             model: Message
-    //         }
-    //     })
-    //     .populate(
-    //     {
-    //         path: 'assessment',
-    //         model: Assessment,
-    //         populate:
-    //         [{
-    //             path: 'batch',
-    //             model: Batch,
-    //             populate:
-    //             {
-    //                 path: 'course',
-    //                 model: Course
-    //             }
-    //         },
-    //         {
-    //             path: 'test',
-    //             model: Test
-    //         }]
-    //     })
-    //     return user;
-    //    } 
-    //    catch(error)
-    //    {
-    //     return error
-    //    }
-    // }
+    async getUserById(id)
+    {
+        try
+        {
+            const user = await User.findById(id)
+            .populate(
+            {
+                path: 'enrollments',
+                model: Enrollment,
+                populate: 
+                [{
+                    path: 'batch', 
+                    model: Batch,
+                    populate:
+                    {
+                        path: 'course',
+                        model: Course
+                    }
+                },
+                {
+                    path: 'assessments',
+                    model: Test
+                }]
+            })
+            
+            return user
+        } 
+        catch(error)
+        {
+            throw error
+        }
+    }
 
     
 
-    // async hashPassword(password)
-    // {
-    //     const salt = await bcrypt.genSalt(10);
-    //     return await bcrypt.hash(password, salt);
-    // }
+    async hashPassword(password)
+    {
+        const salt = await bcrypt.genSalt(10);
+        return await bcrypt.hash(password, salt);
+    }
 
-    // async checkPassword(userPassword, dbPassword)
-    // {
-    //     const response = await bcrypt.compare(userPassword, dbPassword)
-    //     return response
-    // }
+    async checkPassword(userPassword, dbPassword)
+    {
+        const response = await bcrypt.compare(userPassword, dbPassword)
+        return response
+    }
 
     // generateAccessToken(id)
     // {
@@ -207,18 +184,6 @@ class userService
     //     catch(error)
     //     {
     //         throw new Error('Failed to update chat')
-    //     }
-    // }
-
-    // async createTest(userId, quizId)
-    // {
-    //     try
-    //     {
-    //         return await User.findByIdAndUpdate(userId, {$push : {quiz: quizId}})
-    //     }
-    //     catch(error)
-    //     {
-    //         return error
     //     }
     // }
 

@@ -1,10 +1,8 @@
 import NextAuth from "next-auth"
-import authConfig from "./auth.config"
 import dbConnect from "./dbConfig/dbConnect";
 import userService from "./services/user.service";
-const userInstance =  new userService();
-
-// const userInstance = new userService(); 
+import authConfig from "./auth.config";
+const userInstance = new userService(); 
 
 export const { handlers, signIn, signOut, auth } = NextAuth(
 {
@@ -19,7 +17,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
                 {
                     const { name, email, id } = user;
 
-                    const isUserFound = await userInstance.findByEmail(email);
+                    const isUserFound = await userInstance
+                    .findByEmail(email);
 
                     if(!isUserFound)
                         await userInstance.googleAuth(name, email, id);

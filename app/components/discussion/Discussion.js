@@ -13,7 +13,7 @@ const Discussion = ({id, author, title, date, like, keywords, handleDelete}) =>
                 <Image className={styles.deleteIcon} src={deleteIcon} alt='delete' onClick={()=> handleDelete(id)}/>
             </div>
             <div className={styles.footer}>
-                <p className={styles.author}>Posted by {author.firstname}</p>
+                <p className={styles.author}>Posted by {author?.name}</p>
                 <p className={styles.author}>•</p>
                 <p className={styles.author}>{new Date(date).toLocaleDateString('en-US', options)}</p>
             </div>

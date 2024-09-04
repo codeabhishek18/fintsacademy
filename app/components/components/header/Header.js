@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import Signup from '../signup/Signup';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserDeatils } from '@/store/slices/userReducer';
+import { setUserDeatils } from '@/store/slices/courseReducer';
 
 const Header = () =>
 {

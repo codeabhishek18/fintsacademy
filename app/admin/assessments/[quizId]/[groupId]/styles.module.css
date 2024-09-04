@@ -1,0 +1,53 @@
+.wrapper
+{
+    width: 100%;
+}
+
+.container
+{
+    width: 100%;
+    background-color: var(--primary-bg);
+    min-height: 100vh;
+    border-radius: 8px;
+}
+
+.header
+{
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--alert-color);
+    margin: 10px 0 20px;
+}
+
+.assignments
+{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.rowHeader
+{
+    background-color: var(--alert-color); 
+}
+
+.headerCell
+{
+    font-size: 16px;
+    color: white;
+}
+
+.cell
+{
+    font-size: 16px;
+}
+
+.spinner
+{
+    min-height: 75vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

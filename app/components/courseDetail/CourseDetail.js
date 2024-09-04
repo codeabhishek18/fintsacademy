@@ -5,10 +5,18 @@ import styles from './styles.module.css'
 import Lecturecard from '../lectureCard/LectureCard'
 import { Rating } from '@mui/material'
 import { useScheme } from '@/contextapi/SchemeProvider'
+import { useRouter } from 'next/navigation'
 
 const CourseDetail = ({course}) =>
 {
     const { scheme } = useScheme();
+    const router = useRouter();
+
+    const handleClick = () =>
+    {
+        localStorage.setItem('selectedCourse', course.id)
+        router.push('/checkout')
+    }
 
     return (
         <div className={scheme === 'dark' ? styles.container : `${styles.container} ${styles.light}`}>
@@ -30,9 +38,7 @@ const CourseDetail = ({course}) =>
             </div>  
 
             <div className={styles.footer}>
-                <a className={styles.redirect} href='https://wa.me/8431976788' target='_blank'>
-                    <button className={scheme === 'dark' ? styles.join : `${styles.join} ${styles.light}`}>Join Now</button>
-                </a>
+                <button className={scheme === 'dark' ? styles.join : `${styles.join} ${styles.light}`} onClick={handleClick}>Join Now</button>
                 <Rating name="half-rating-read" defaultValue={4.7} precision={0.5} readOnly size='large'/>
             </div>          
         </div>

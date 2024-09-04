@@ -21,15 +21,15 @@
     font-size: 14px;
     font-weight: 500;
     margin: 0;
-    border: 1px solid var(--primary-color);
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
+    border: 1px solid var(--primary-border);
+    background: none;
     border-radius: 5px;
 }
 
 .post:hover
 {
-    background-color: var(--primary-color);
+    border: 1px solid var(--alert-color);
+    background-color: var(--alert-color);
     color: var(--secondary-color);
     cursor: pointer;
 }
@@ -44,6 +44,7 @@
 {
     display: flex;
     flex-direction: column;
+    margin: 5px 45px 0;
     row-gap: 15px;
 }
 
@@ -72,7 +73,7 @@
     padding-bottom: 10px;
 }
 
-.rereply
+.input
 {
-    margin: 0 55px;
+    margin: 0 35px;
 }

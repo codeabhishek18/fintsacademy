@@ -38,6 +38,19 @@ class batchService
         }
     }
 
+    async getById(id)
+    {
+        try
+        {
+            const batch = await Batch.findById(id);
+            return batch
+        }
+        catch(error)
+        {
+            throw error
+        }
+    }
+
     async getAllBatches()
     {
         try
@@ -49,7 +62,7 @@ class batchService
         } 
         catch(error)
         {
-            throw new Error('Failed to fetch batches')
+            throw error
         }
     }
 
@@ -91,11 +104,11 @@ class batchService
         }
     }
 
-    async updateStudent(batchId, studentId)
+    async enrollUser(batchId, userId)
     {
         try
         {
-            return await Batch.findByIdAndUpdate(batchId, {$push :{ enrollments : studentId}})
+            return await Batch.findByIdAndUpdate(batchId, {$push :{ enrollments : userId}})
         }
         catch(error)
         {

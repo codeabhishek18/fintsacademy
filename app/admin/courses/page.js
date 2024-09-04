@@ -6,6 +6,7 @@ import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import CourseForm from '@/app/components/courseForm/CourseForm'
 import CourseCard from '@/app/components/courseCard/CourseCard'
+import { CircularProgress } from '@mui/material'
 
 const Courses = () =>
 {
@@ -63,11 +64,10 @@ const Courses = () =>
 
     return(
         <div className={styles.wrapper}>
-            <div className={styles.container}>
-            
+            {courses ? <div className={styles.container}>
                 <div className={styles.listHeader}>
                     {/* <h1>Courses</h1> */}
-                    <button className={styles.add} onClick={()=> setCourseForm(!courseForm)}>{courseForm ? 'close' : '+ Add courses' }</button>
+                    <button className={styles.add} onClick={()=> setCourseForm(!courseForm)}>{courseForm ? 'close' : '+ Add course' }</button>
                 </div>
 
                 {courseForm && 
@@ -84,7 +84,10 @@ const Courses = () =>
                         <CourseCard type="admin" course={course}/>
                     ))}
                 </div>
-            </div>
+            </div> :
+            <div className={styles.spinner}>
+                <CircularProgress sx={{color: '#D4313D'}} />
+            </div>}
         </div>
     )
 }

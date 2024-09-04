@@ -13,13 +13,14 @@ body
   --primary-color: #4f3680;
   --secondary-color: white;
   --primary-bg: rgb(240, 240, 240);
-  --primary-border: rgb(44, 44, 44);
+  --primary-border: rgb(173, 172, 172);
   --active-bg: #d3c7eb;
   --alert-color: #D4313D;
   --success-color: #3DC296;
   --success-bg: rgb(241, 251, 234);
   --alert-bg: #f7c3ce;
-  --pending-bg: rgb(255, 250, 211);
+  --warning-color: rgb(252, 215, 52);
+  --gold-color: #daa520
 }
 
 ::-webkit-scrollbar 

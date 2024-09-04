@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import styles from './AdminPanel.module.css'
 import { useEffect, useState } from 'react';
 import { adminPanelList } from '@/utility/adminPanelList';
@@ -11,13 +11,16 @@ import Image from 'next/image';
 const AdminPanel = () =>
 {
     const router = useRouter();
-    const [active, setActive ] = useState(0);
-    const [ slide, setSlide ] = useState(false)
+    const [ active, setActive ] = useState(0);
+    const [ slide, setSlide ] = useState(false);
+    const pathname = usePathname();
 
-    // useEffect(()=>
-    // {
-    //     router.push('/admin/dashboard')
-    // },[])
+    useEffect(() =>
+    {
+        const path = pathname.split('/')[2]
+        const route = adminPanelList.find((list)=> list.title.toLowerCase() === path);
+        setActive(route.id);
+    },[])
 
     return(
         <ul className={slide ? `${styles.container} ${styles.left}` : `${styles.container} ${styles.right}` }>

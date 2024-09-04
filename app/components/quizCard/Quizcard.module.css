@@ -1,0 +1,132 @@
+.container
+{
+    width: 33.3%;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.title, .course, .quiz
+{
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.adminData
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+}
+
+.success_bg
+{
+    background-color: var(--pending-bg);
+}
+
+.title
+{
+    border-radius: 5px;
+}
+
+.date, .quiz, .header
+{
+    font-weight: 500;
+    font-size: 14px;
+    margin: 0;
+}
+
+.header
+{
+    color: rgba(0,0,0,0.3);
+}
+
+.footer
+{
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.post
+{
+    height: fit-content;
+    margin-top: 10px;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0;
+    border: 1px solid var(--primary-border);
+    background: none;
+    border-radius: 5px;
+}
+
+.post:hover
+{
+    background-color: var(--alert-color);
+    border: 1px solid var(--alert-color);
+    color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.next
+{
+    width: 30px;
+    height: fit-content;
+    cursor: pointer;
+}
+
+.next:hover
+{
+    transform: scale(1.1);
+}
+
+.status
+{
+    color: rgba(0,0,0,0.2);
+    font-weight: 600;
+    font-size: 16px;
+    margin: 0;
+}
+
+.testWrapper
+{
+    width: 100%;
+    height: 180px;
+    background-color: var(--primary-bg);
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.test
+{
+    height: 64px;
+    width: fit-content;
+}
+
+.content
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.routes
+{
+    display: flex;
+    column-gap: 10px;
+}
+
+.questions
+{
+    font-size: 14px;
+    color: var(--primary-border);
+}

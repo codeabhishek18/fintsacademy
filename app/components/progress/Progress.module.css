@@ -31,8 +31,8 @@
 
 .courseTitle
 {
-    color: var(--alert-color);
-    background-color: var(--primary-bg);
+    color: var(--secondary-color);
+    background-color: var(--alert-color);
     font-size: 20px;
     width: 100%;
     padding: 8px;
@@ -58,7 +58,7 @@
 .mentor>span, .group>span
 {
     font-weight: 600;
-    color: grey;
+    color: black;
 }
 
 .progressTitle
@@ -71,6 +71,16 @@
     color: rgba(0,0,0,0.05);
     font-weight: 700;
     display: flex;
+}
+
+.userCertificate
+{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+
 }
 
 .certificate

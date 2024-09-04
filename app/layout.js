@@ -2,6 +2,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import SchemeWrapper from "./SchemeWrapper";
 import SessionWrapper from "./SessionWrappper";
+import ReduxProvider from "./ReduxProvider";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ['300', '400', '600', '700', '800', '900'] });
 
@@ -22,11 +23,13 @@ export default async function RootLayout({ children })
       <meta property="og:image" content="URL_to_your_image"/>
       <meta property="og:url" content="https://www.fintsacademy.com"/>
       <SessionWrapper>
-        <SchemeWrapper>
-          <body className={poppins.className}>
-            <main>{children}</main>  
-          </body>
-        </SchemeWrapper>
+        <ReduxProvider>
+          <SchemeWrapper>
+            <body className={poppins.className}>
+              <main>{children}</main>  
+            </body>
+          </SchemeWrapper>
+        </ReduxProvider>
       </SessionWrapper>
     </html>
   );

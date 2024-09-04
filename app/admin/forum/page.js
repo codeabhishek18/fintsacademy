@@ -8,6 +8,8 @@ import ForumPost from '@/app/components/forumPost/ForumPost'
 import ForumSearchbar from '@/app/components/forumSearchbar/ForumSearchbar'
 import PopularCard from '@/app/components/popularCard/PopularCard'
 import DiscussionCard from '@/app/components/discussionCard/DiscussionCard'
+import { useSession } from 'next-auth/react'
+import { CircularProgress } from '@mui/material'
 
 const Forum = () =>
 {
@@ -64,20 +66,21 @@ const Forum = () =>
 
     return(
         <div className={styles.wrapper}>
-            <div className={styles.container}>
-
+            {discussions ? <div className={styles.container}>
                 <ForumPost getDiscussions={getDiscussions} getTopics={getTopics}/>
                 <ForumSearchbar handleChange={handleChange} searchQuery={searchQuery} getDiscussions={getDiscussions}/>
                 
                 <div className={styles.discussions}>
-                    <PopularCard handleChange={handleChange} getTopics={getTopics} topics={topics}/>
-                    {discussions ? 
+                     <PopularCard handleChange={handleChange} getTopics={getTopics} topics={topics}/>
+                    
                     <div className={styles.discussionsReply}>
                         <DiscussionCard discussions={discussions} getDiscussions={getDiscussions} getTopics={getTopics}/>
-                    </div> : 
-                    <p>Loading...</p>}
+                    </div>
                 </div>
-            </div>
+            </div> :
+            <div className={styles.spinner}>
+                <CircularProgress sx={{color: '#D4313D'}} />
+            </div>}
         </div>
     )
 }

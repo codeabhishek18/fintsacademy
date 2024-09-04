@@ -2,7 +2,6 @@ import Credentials from "next-auth/providers/credentials"
 import Google from "next-auth/providers/google"
 import userService from "./services/user.service"
 import dbConnect from "./dbConfig/dbConnect";
-
 const userInstance = new userService();
  
 export default { 

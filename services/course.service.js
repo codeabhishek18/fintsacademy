@@ -63,7 +63,7 @@ class courseService
         }
     }
 
-    async addLecture(courseId, lectureId)
+    async addLectureToCourse(courseId, lectureId)
     {
         try
         {

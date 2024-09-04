@@ -5,7 +5,7 @@ import pending from '@/assets/pending.png'
 import Switch from '../switch/Switch'
 import Image from 'next/image'
 
-const SessionCard = ({session, index, updateSessionStatus, activeAgenda, setActiveAgenda, type}) =>
+const SessionCard = ({session, index, updateSessionStatus, activeAgenda, setActiveAgenda, level}) =>
 {
     const handleAgenda = (e) =>
     {
@@ -27,7 +27,7 @@ const SessionCard = ({session, index, updateSessionStatus, activeAgenda, setActi
             {/* <div className={sessionCardStyles.updateStatus}>
                 <button onClick={()=> updateSessionStatus(session._id, session.status)}>Update</button>
             </div> */}
-            {type === "admin" && 
+            {level === "admin" && 
             <Switch 
                 id={session._id} status={session.status} 
                 updateSessionStatus={updateSessionStatus}/>}

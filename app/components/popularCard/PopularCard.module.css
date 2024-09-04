@@ -16,6 +16,7 @@
     font-size: 20px;
     margin-top: 0;
     margin-bottom: 10px;
+    font-weight: 600;
 }
 
 .topic
@@ -33,7 +34,7 @@
 
 .active
 {
-    background-color: var(--active-bg);
+    background-color: var(--alert-bg);
 }
 
 .topic:hover

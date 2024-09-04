@@ -5,7 +5,6 @@ import { TextField } from "@mui/material";
 import axios from 'axios';
 import { useState } from 'react';
 import ReplyCard from '../replyCard/ReplyCard';
-
 const Comment = ({comment, getDiscussions, user}) =>
 {
     const [ reply, setReply ] = useState(null)
@@ -16,11 +15,15 @@ const Comment = ({comment, getDiscussions, user}) =>
     {
         try
         {
-            const url = `/api/reply/${id}`
-            await axios.post(url, {reply, author: user})
-            getDiscussions('/api/forum');
-            setReply('');
-            setViewReply(id)
+            if(user)
+            {
+                const url = `/api/reply/${id}`
+                await axios.post(url, {reply, author: user})
+                getDiscussions('/api/forum');
+                setReply('');
+                setViewReply(id)
+            }
+            
         }
         catch(error)
         {

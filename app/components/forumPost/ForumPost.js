@@ -6,20 +6,15 @@ import ForumKeyword from '../forumKeyword/ForumKeyword'
 import styles from './ForumPost.module.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import { useSession } from 'next-auth/react'
 
 const ForumPost = ({getDiscussions, getTopics}) =>
 {
-    const [ user, setUser ] = useState(null);
     const [ title, setTitle ] = useState('');
     const [ keyList, setKeyList ] = useState([]);
+    const session = useSession();
+    const user = session?.data?.user?.id
     
-    useEffect(() =>
-    {
-        const user = JSON.parse(localStorage.getItem('user'))
-        if(user)
-            setUser(user.id)
-    },[])
-
     const handlePost = async (e) =>
     {
         e.preventDefault();
