@@ -18,6 +18,7 @@ import Certificate from './components/certificate/Certificate'
 import Carousel from './components/carousel/Carousel'
 import Accordian from './components/accordian/Accordian'
 import Footer from './components/footer/Footer'
+import Founder from './components/founder/Founder'
 
 const Home = () =>
 {
@@ -72,7 +73,7 @@ const Home = () =>
             <HeroSection handleScroll={handleScroll}/>
             <div className={scheme === 'dark' ? styles.container : `${styles.container} ${styles.light}`}>
                 <div className={styles.marquee}>
-                    <p className={styles.marqueeContent}>Coming soon | New batches starting from 6th September | Get enrolled via whatsapp</p>
+                    <p className={styles.marqueeContent}>Coming soon | New batches starting from 28th September | Get enrolled via whatsapp</p>
                 </div>
 
                 {error && <ErrorDialogue setError={setError}/>}
@@ -104,6 +105,11 @@ const Home = () =>
                             <ShimmerCourseCard key={data.id}/>
                         ))}
                     </div>)}
+                </div>
+
+                <div className={styles.founder}>
+                    <p className={styles.commonHeader}>Founder</p>
+                    <Founder/>
                 </div>
 
                 <Certificate/>

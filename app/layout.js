@@ -20,7 +20,6 @@ export default function RootLayout({ children }) {
       <SchemeWrapper>
         <body className={poppins.className}>
           <main>{children}</main>  
-          
         </body>
       </SchemeWrapper>
     </html>

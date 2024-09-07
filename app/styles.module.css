@@ -82,6 +82,13 @@
     line-height: 48px;
 }
 
+.founder
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 25px;
+}
+
 .features
 {
     display: flex;
