@@ -47,7 +47,7 @@ const Navbar = () =>
             </div>
             {showSlider && 
             <div className={styles.slider}>
-                <SlidingMenu setShowSlider={setShowSlider} handleScroll={handleScroll}/>
+                <SlidingMenu setShowSlider={setShowSlider} />
             </div>}
         </div>
     )

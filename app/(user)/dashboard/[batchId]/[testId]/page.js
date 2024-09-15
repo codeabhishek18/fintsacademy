@@ -122,7 +122,7 @@ const Assessment = () =>
                         {index !== assessment.quiz.length-1 && 
                         <button className={assessment.status === "Completed" ? 
                         styles.button : (!answersList.list[index] ? `${styles.button} ${styles.disabled}` : 
-                        styles.button)} disabled={!answersList.list[index]}
+                        styles.button)} disabled={!answersList.list[index] && assessment.status === "Pending"}
                         onClick={()=> setIndex((prev)=> prev+1)}>Next</button>}
                         
                         {index === assessment.quiz.length-1 && assessment.status === "Pending" && 
@@ -144,7 +144,8 @@ const Assessment = () =>
                 </div>
             </div>}
 
-            {isCompleted && <div className={styles.testCompleteWrapper}>
+            {isCompleted && 
+            <div className={styles.testCompleteWrapper}>
                 <div className={styles.testComplete}>
                 <Image className={styles.success} src={success} alt='success'/>
                 <div className={styles.routes}>

@@ -1,14 +1,19 @@
 import Image from 'next/image'
 import styles from './styles.module.css'
 import close from '@/assets/close.png'
+import { useRouter } from 'next/navigation'
 
-const SlidingMenu= ({setShowSlider, handleScroll}) =>
+const SlidingMenu= ({setShowSlider}) =>
 {
+    const router = useRouter();
+
     return(
         <div className={styles.container}>
-            <p className={styles.link} onClick={()=> {handleScroll('course'); setShowSlider(false)}}>Courses</p>
-            <p className={styles.link} onClick={()=> {handleScroll('about'); setShowSlider(false)}}>About us</p>
-            <p className={styles.link} onClick={()=> {handleScroll('faq');  setShowSlider(false)}}>FAQ</p>
+            {/* <p className={styles.link}>Courses</p> */}
+            <p className={styles.link} onClick={()=> router.push('/login')}>Login</p>
+            <p className={styles.link} onClick={()=> router.push('/signup')}>Sign up</p>
+            <p className={styles.link} onClick={()=> {router.push('/dashboard'); setShowSlider(false)}}>Dashboard</p>
+            {/* <p className={styles.link} onClick={()=> {handleScroll('faq');  setShowSlider(false)}}>FAQ</p> */}
             <Image className={styles.close} src={close} alt='close' onClick={()=> setShowSlider(false)}/>
         </div>
     )

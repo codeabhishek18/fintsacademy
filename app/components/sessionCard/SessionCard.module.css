@@ -75,3 +75,16 @@
     z-index: 1;
     border: 1px solid var(--primary-border);
 }
+
+@media screen and (max-width: 450px)
+{
+    .sessionName, .status
+    {
+        font-size: 14px;
+    }
+
+    .statusIcon
+    {
+        height: 16px;
+    }
+}

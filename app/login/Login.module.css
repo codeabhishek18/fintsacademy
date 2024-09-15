@@ -162,3 +162,12 @@
 {
     margin: 0;
 }
+
+@media screen and (max-width: 450px) 
+{
+    .container
+    {
+        margin-top: 80px;
+        width: 90%;
+    }    
+}

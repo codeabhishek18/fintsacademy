@@ -38,6 +38,19 @@
     cursor: pointer;
 }
 
+.auth
+{
+    width: fit-content;
+    border-radius: 5px;
+    background: none;
+    color: var(--secondary-color);
+}
+
+.auth:hover
+{
+    cursor: pointer;
+}
+
 @media screen and (max-width: 480px) 
 {
     .container

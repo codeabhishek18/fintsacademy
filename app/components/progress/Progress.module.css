@@ -46,9 +46,7 @@
 .dates, .pendingSessions
 {
     margin: 0;
-    font-size: 15px;
     font-weight: 500;
-    color: grey;
 }
 
 .progress
@@ -123,6 +121,7 @@
     border-radius: 5px;
     background-color: var(--primary-bg);
     box-shadow: var(--box-shadow);
+    font-size: 15px;
 }
 
 .group
@@ -130,7 +129,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 15px;
 }
 
 .connect
@@ -255,5 +253,15 @@
     {
         font-size: 14px;
         padding: 10px;
+    }
+
+    .courseTitle
+    {
+        font-size: 22px;
+    }
+
+    .batch
+    {
+        font-size: 14px;
     }
 }

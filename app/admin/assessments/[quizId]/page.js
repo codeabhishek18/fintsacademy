@@ -25,8 +25,6 @@ const Batches = () =>
         setQuizData(response.data)
     }
 
-    console.log(quizData);
-
     return(
         <div className={styles.wrapper}>
             {quizData ?
