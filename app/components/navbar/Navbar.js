@@ -1,35 +1,47 @@
+'use client'
+
 import Image from 'next/image'
 import styles from './styles.module.css' 
 import fints from '@/assets/fints.png'
 import HamburgerMenu from '../hamburgerMenu/HamburgerMenu'
 import SlidingMenu from '../slidingMenu/SlidingMenu'
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import Switch from '../themeSwitch/Switch'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 
-const Navbar = ({handleScroll}) =>
+const Navbar = () =>
 {
-
     const [ showSlider, setShowSlider ] = useState(false);
+    const [ isUser, setIsUser ] = useState(false);
+    const { data, status } = useSession();
     const router = useRouter();
+
+    useEffect(()=>
+    { 
+        if(data?.user?.role === 'user' || data?.user?.role === 'admin')
+            setIsUser(true);
+    },[status === 'authenticated'])
+
+    console.log(data?.user?.role)
 
     return(
         <div className={styles.container}>
-            <motion.div className={styles.fints}>
-                <Image className={styles.fints} src={fints} alt='fints'/>
-            </motion.div>
+            <div className={styles.fints}>
+                <Image className={styles.fints} src={fints} alt='fints' onClick={()=> router.push('/')}/>
+            </div>
+            
+            
             <div className={styles.navigation}>
-                
                 <div className={styles.links}>
-                    <p className={styles.link} onClick={()=> handleScroll('course')}>Courses</p>
-                    <p className={styles.link} onClick={()=> handleScroll('about')}>About us</p>
-                    <p className={styles.link} onClick={()=> handleScroll('faq')}>FAQ</p>      
+                    {isUser && <p className={styles.link} onClick={()=> router.push('/dashboard')}>Dashboard</p>}
+                    <p className={styles.link} onClick={()=> router.push('/courses')}>Courses</p>
+                    {/* <p className={styles.link} onClick={()=> router.push('/blogs')}>Blogs</p>   */}
+                    <p className={styles.link} onClick={()=> router.push('/about')}>About</p>
                 </div>
-                <div className={styles.authWrapper}>
+                {!data?.user && <div className={styles.authWrapper}>
                     <button className={styles.auth} onClick={()=> router.push('/login')}>Login</button>
                     <button className={styles.auth} onClick={()=> router.push('/signup')}>Sign up</button>
-                </div>  
+                </div>  }
                 <HamburgerMenu setShowSlider={setShowSlider}/>
                 {/* <Switch/> */}
             </div>

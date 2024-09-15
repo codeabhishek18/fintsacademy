@@ -21,22 +21,19 @@ export async function credentialLogin(formData)
         {
             email: formData.get("email"),
             password: formData.get("password"),
-            redirect: false,
-        });
+            redirect: false
+        })
     } 
     catch (error) 
     {
         if (error instanceof AuthError) 
-        {
-            if (error.cause?.err instanceof Error) 
-                return error.cause.err.message;
-          
+        {          
             switch (error.type) 
             {
                 case 'CredentialsSignin':
-                    return 'Invalid credentials';
+                    return {error: 'Invalid credentials'};
                 default:
-                    return 'Something went wrong';
+                    return {error: 'Something went wrong'};
             }
         }
         throw error;

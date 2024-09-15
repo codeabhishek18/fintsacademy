@@ -15,7 +15,7 @@
 {
     font-size: 28px;
     font-weight: 600;
-    color: var(--alert-color);
+    color: white;
     margin: 10px 0 20px;
 }
 
@@ -41,6 +41,8 @@
 .cell
 {
     font-size: 16px;
+    background-color: var(--primary-element);
+    color: white;
 }
 
 .spinner

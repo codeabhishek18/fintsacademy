@@ -1,7 +1,7 @@
 .container
 {
     width: 100%;   
-    border: 2px solid var(--primary-border);
+    background-color: var(--primary-bg);
     border-radius: 5px;
     padding: 5px;
     display: flex;
@@ -13,7 +13,7 @@
 .container:hover
 {
     background-color: var(--alert-color);
-    border: 2px solid var(--alert-color);
+    cursor: pointer;
 }
 
 .googleIcon

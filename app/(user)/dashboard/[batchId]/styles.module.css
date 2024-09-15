@@ -1,8 +1,16 @@
+.wrapper
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    padding-bottom: 50px;
+}
+
 .container
 {
     display: flex;
     column-gap: 20px;
-    margin-bottom: 25px;
 }
 
 .spinner
@@ -24,7 +32,7 @@
     width: 50%;
     display: flex;
     flex-direction: column;
-    row-gap: 30px;
+    row-gap: 10px;
     border-radius: 5px;
 }
 
@@ -35,15 +43,30 @@
     row-gap: 10px;
 }
 
+.assessments
+{
+    margin: 0;
+    flex-direction: row;
+    row-gap: 20px;
+    column-gap: 20px;
+    flex-wrap: wrap;
+}
+
+.assessmentWrapper
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
 .header
 {
-    font-size: 24px;
+    font-size: 36px;
     color: var(--alert-color);
     margin:0 0 8px;
     border-radius: 5px;
     padding: 5px;
     font-weight: 600;
-    text-align: center;
 }
 
 .feedback
@@ -53,7 +76,7 @@
     top: 95px;
     height: 50px;
     width: fit-content;
-    background-color: var(--alert-bg);
+    background-color: var(--primary-element);
     padding: 10px;
     border-radius: 50%;
     cursor: pointer;

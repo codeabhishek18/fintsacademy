@@ -3,11 +3,13 @@
 import { useSession } from 'next-auth/react'
 import styles from './styles.module.css'
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const BillingCard = ({batch}) =>
 {
-    const session = useSession();
-    const user = session?.data?.user?.id;
+    const router = useRouter();
+    const {data} = useSession();
+    const user = data?.user?.id;
 
     const handleBuy = async (e) =>
     {
@@ -15,8 +17,8 @@ const BillingCard = ({batch}) =>
         try
         {
             const url = `/api/enrollments/${user}`
-            const response = await axios.post(url, {batchId: batch._id})
-            console.log(response);
+            await axios.post(url, {batchId: batch._id});
+            router.push('/')
         }
         catch(error)
         {

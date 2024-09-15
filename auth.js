@@ -59,7 +59,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
                 session.user.role = token.role
             }
             return session
-        }
+        },
     },
     session: 
     {

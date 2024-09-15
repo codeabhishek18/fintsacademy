@@ -24,7 +24,7 @@
 {
     height: 40px;
     width: fit-content;
-    background-color: var(--alert-color);
+    background-color: var(--primary-element);
     border-radius: 50%;
     cursor: pointer;
 }

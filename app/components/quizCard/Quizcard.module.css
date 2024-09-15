@@ -1,14 +1,16 @@
 .container
 {
-    width: 33.3%;
-    background-color: var(--secondary-color);
+    width: calc(33.3% - 14px);
+    background-color: var(--primary-element);
     border-radius: 8px;
     padding: 20px;
     display: flex;
     flex-direction: column;
     row-gap: 15px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    box-shadow: var(--box-shadow);
+    color: white;
 }
+
 
 .title, .course, .quiz
 {
@@ -63,6 +65,7 @@
     font-weight: 500;
     margin: 0;
     border: 1px solid var(--primary-border);
+    color: white;
     background: none;
     border-radius: 5px;
 }
@@ -89,7 +92,7 @@
 
 .status
 {
-    color: rgba(0,0,0,0.2);
+    color: var(--primary-border);
     font-weight: 600;
     font-size: 16px;
     margin: 0;
@@ -108,7 +111,7 @@
 
 .test
 {
-    height: 64px;
+    height: 56px;
     width: fit-content;
 }
 

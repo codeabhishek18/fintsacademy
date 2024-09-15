@@ -23,7 +23,7 @@ const CourseCard = ({type, course}) =>
                 <span className={styles.discount}>{Math.floor((course.price - course.offerPrice)*100/course.price)}% off</span>
                 <div className={styles.footer}>
                     <p className={styles.lecture}>4 lectures, 8 hours</p>
-                    {type !== 'admin' ? <button className={scheme === 'dark' ? styles.explore : `${styles.explore} ${styles.light}`} onClick={()=> router.push(`/course/${course.id}`)}>View</button> :
+                    {type !== 'admin' ? <button className={scheme === 'dark' ? styles.explore : `${styles.explore} ${styles.light}`} onClick={()=> router.push(`/courses/${course.id}`)}>View</button> :
                     <button className={scheme === 'dark' ? styles.explore : `${styles.explore} ${styles.light}`} onClick={()=> router.push(`/admin/courses/${course.id}`)}>View lectures</button>}
                 </div>
             </div>

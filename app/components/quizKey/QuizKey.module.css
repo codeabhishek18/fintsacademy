@@ -10,9 +10,14 @@
     position: relative;
 }
 
-.keyword
+.keyword, .selected
 {
     margin: 0;
+}
+
+.selected
+{
+    background-color: var(--alert-color);
 }
 
 .edit:hover

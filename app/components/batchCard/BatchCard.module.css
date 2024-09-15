@@ -7,10 +7,11 @@
     flex-direction: column;
     row-gap: 15px;
     justify-content: space-between;
-    background-color: var(--secondary-color);
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px; 
     font-size: 15px;
     position: relative;
+    color: white;
+    background-color: var(--primary-element);
+    box-shadow: var(--box-shadow);
 }
 
 .imageContainer
@@ -58,7 +59,7 @@
     top: 30px;
     left: 30px;
     color: white;
-    background-color: grey;
+    background-color: var(--primary-border);
     padding: 5px;
     border-radius: 5px;
     font-size: 12px;
@@ -77,27 +78,39 @@
 .status
 {
     font-size: 14px;
-    color: grey;
+    color: var(--primary-border);
     font-weight: 500;
 }
 
 .details
 {
     font-size: 14px;
-    padding: 10px;
+    padding: 5px;
     border-radius: 5px;
     width: 50%;
     text-align: center;
-    background-color: var(--secondary-color);
-    border: 1px solid var(--primary-bg);
-    color: var(--primary-color);
+    border: 1px solid var(--primary-border);
     margin: 0;
 }
 
 .details:hover
 {
+    border: 1px solid var(--alert-color);
     background-color: var(--alert-color);
     color: var(--secondary-color);
+    cursor: pointer;
+}
+
+.deleteBatch
+{
+    height: 40px;
+    width: fit-content;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    background-color: var(--primary-element);
+    padding: 10px;
+    border-radius: 50%;
     cursor: pointer;
 }
 

@@ -9,8 +9,9 @@
     position: relative;
     line-height: 30px;
     padding: 20px;
-    background-color: white;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: var(--primary-element);
+    box-shadow: var(--box-shadow);
+    color: white;
 }
 
 .light
@@ -38,7 +39,6 @@
     padding: 0 10px;
     border-radius: 5px;
     font-size: 12px;
-    color: white;
 }
 
 .courseContent
@@ -90,10 +90,11 @@
     background: none;
     border: 1px solid var(--primary-border);
     width: fit-content;
-    padding: 8px 12px;
+    padding: 2px 10px;
     border-radius: 5px;
     font-size: 14px;
     font-weight: 500;
+    color: white;
 }
 
 .explore.light
@@ -106,7 +107,6 @@
     background-color: var(--alert-color);
     border: 1px solid var(--alert-color);
     cursor: pointer;
-    color: white;
 }
 
 .explore.light:hover
@@ -145,7 +145,7 @@
 {
     margin: 0;
     font-size: 14px;
-    color: grey;
+    color: var(--primary-border);
     font-weight: 500;
 }
 

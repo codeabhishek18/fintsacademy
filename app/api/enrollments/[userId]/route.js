@@ -5,6 +5,7 @@ const userInstance = new userService();
 import batchService from "@/services/batch.service";
 const batchInstance = new batchService();
 import enrollmentService from "@/services/enrollment.service";
+import { signOut } from "@/auth";
 const enrollmentInstance = new enrollmentService(); 
 
 export async function POST(req, {params}) 
@@ -17,7 +18,8 @@ export async function POST(req, {params})
         const { batchId } = await req.json();
         const enrollment = await enrollmentInstance.enroll(userId, batchId)
         await userInstance.updatEnrollment(userId, enrollment._id);
-        await batchInstance.enrollUser(batchId, userId) 
+        await batchInstance.enrollUser(batchId, userId)
+        await signOut({ redirectTo: "/" })
         return NextResponse.json({message : 'Enrollment successfull'});
     }    
     catch(error)

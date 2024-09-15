@@ -31,22 +31,12 @@ export const adminPanelList = [
     },
     {
         id: 6,
-        title: 'Tickets',
-        navigation:'/admin/tickets'
-    },
-    {
-        id: 7,
         title: 'Blogs',
         navigation:'/admin/blogs'
     },
     {
-        id: 8,
+        id: 7,
         title: 'Mentors',
         navigation:'/admin/mentors'
-    },
-    {
-        id: 9,
-        title: 'Announcements',
-        navigation:'/admin/announcements'
     }
 ]

@@ -25,12 +25,12 @@ const fadeInAnimation =
     }
 }
 
-const HeroSection = ({handleScroll}) =>
+const HeroSection = () =>
 {
 
     return(
         <div className={styles.container}>
-            <Navbar handleScroll={handleScroll}/>
+            <Navbar/>
             <Image className={styles.heroImage} src={compliance} alt='FINTS - FinCrime Trusted Source' priority={true} />
 
             <div className={styles.content}>

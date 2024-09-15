@@ -1,102 +1,122 @@
 'use client'
 
-import chat from './styles.module.css'
+import styles from './styles.module.css'
 import userIcon from '@/assets/user.png'
 import fints from '@/assets/fints.png'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import axios from 'axios'
 import Image from 'next/image'
 import Message from '../message/Message'
-import { adminId } from '@/utility/admin'
-import { CircularProgress } from '@mui/material'
+import { CircularProgress, TextField } from '@mui/material'
+import { useSession } from 'next-auth/react'
+import { useSearchParams } from 'next/navigation'
+import { FormatDate } from '@/utility/FormatDate'
 
-const Chat = ({ type, receiver, conversation, chatUsername}) =>
+const Chat = ({type, userChatId, getChatUsers}) =>
 {
-    const [ message, setMessage ] = useState('')
-    const [ currentUser, setCurrentUser ] = useState(null)
-    const [ user, setUser ] = useState(null)
-    const bottomRef = useRef(null);
-    const [ isLoading, setIsLoading ] = useState(false)
-    // const [ userCard, setUserCard ] = useState(false)
+    const [ chat, setChat ] = useState(null);
+    const [ message, setMessage ] = useState('');
+    const { data } = useSession();
+    const [ isLoading, setIsLoading ] = useState(false);
+
+    const searchParams = useSearchParams();
+    const chatId = type === 'user' ? userChatId  : searchParams.get('chatId');
+    const username = searchParams.get('username')
+    const receiverId = searchParams.get('userId');
+
+    const getChat = async () =>
+    {
+        if(!chatId)
+            return
+
+        setIsLoading(true)
+
+        try
+        {
+            const url = `/api/chat/${chatId}`;
+            const response = await axios.get(url); 
+            setChat(response.data);
+            
+            if(type==='admin')
+                getChatUsers()
+            
+            setIsLoading(false);
+        }
+        catch(error)
+        {
+            console.log(error);
+            setIsLoading(false);
+        }
+    }
 
     useEffect(()=>
     {
-        const user = localStorage.getItem('user');
-        if(user)
-        {
-            setCurrentUser(JSON.parse(user));
-            getUser(JSON.parse(user));
-        }
-        scrollToBottom();
+        getChat();
+    },[typeof(chatId) === 'string', chatId])
+
+    useEffect(()=>
+    {
+        chatId && getChat();
     },[])
-
-    const scrollToBottom = () =>
-    {
-        bottomRef?.current?.scrollIntoView({ behavior: 'smooth' })
-    }
-
-    const getUser = async (user) =>
-    {
-        const url = `/api/user/${user.id}`
-        const response = await axios.get(url);
-        setUser(response.data);
-        setIsLoading(false)
-    }
 
     const handleSend = async () =>
     {
-        let url;
+        let url = null;
         if(type === "admin")
-            url = `/api/message/${currentUser.id}/${receiver}/${conversation}`
+            url = `/api/message/${data.user.id}/${receiverId}/${chatId}`
         else
+            url = `/api/message/${data.user.id}/${process.env.NEXT_PUBLIC_adminId}/${chatId}`
+        
+        try
         {
-            const chatId = user.chat[0]?._id === undefined ? null : user.chat[0]._id;
-            url = `/api/message/${currentUser.id}/${adminId}/${chatId}`
+            await axios.post(url, {text : message})
+            setMessage('');
+            getChat();
         }
-        await axios.post(url, {text : message})
-        setMessage('')
-        scrollToBottom();
-        getUser(currentUser);
+        catch(error)
+        {   
+            console.log(error)
+        }
     }
 
-    const chatUserMessages = type === 'admin' && user?.chat.filter((conv) => conv._id === conversation)
-
     return(
-            <div className={chat.container}>
+            <div className={styles.container}>
+                <div className={styles.header}>
+                    <Image className={styles.admin} src={userIcon} alt='user'/>
+                    {type === "admin" ?
+                    (username && <div className={styles.title}>{username}</div>) :
+                    <Image className={styles.fints} src={fints} alt='fints'/>}
+                </div>
+                
                 {!isLoading ? 
-                <div className={chat.header}>
-                    <Image className={chat.admin} src={userIcon} alt='user'/>
-                    <div className={chat.title}>{type === "admin" ? chatUsername : <Image className={chat.fints} src={fints} alt='fints'/>}</div>
-                </div> : 
-                <p></p>}
-
-                {!isLoading ?
-                (type === 'admin' ?     
-                (chatUserMessages.length ? 
-                <div className={chat.messages}>
-                    {chatUserMessages[0].message.map((msg) =>(
-                        <div className={user._id === msg.receiver ? `${chat.message} ${chat.left}` : `${chat.message} ${chat.right}`} key={msg._id}>
-                            <Message message={msg.text} time={msg.createdAt}/>
-                        </div>))
-                    }
-                </div>: 
-                <p></p>) :
-                <div className={chat.messages}>
-                    {user?.chat[0]?.message.map((msg) =>
-                    (
-                        <div className={user._id === msg.receiver ? `${chat.message} ${chat.left}` : `${chat.message} ${chat.right}`} key={msg._id}>
-                            <Message message={msg.text} time={msg.createdAt}/>
-                        </div>
-                    ))}
-                    <div ref={bottomRef}></div>
-                </div>) : 
-                <div className={chat.spinner}>
+                (chat?
+                <div className={styles.messages}>
+                    {chat.message.map((msg,index) =>
+                    {
+                        const prevMessageDate = index > 0 ? new Date(chat.message[index-1].createdAt).getDate() : new Date(msg.createdAt).getDate() - 1 ;
+                        const currentDate = new Date(msg.createdAt).getDate();
+                        const difference = currentDate - prevMessageDate;
+    
+                        return (
+                        <div className={styles.messageWrapper}>
+                            {difference >=1 && 
+                            <div className={styles.dateWrapper}>
+                                <p className={styles.chatDate}>{FormatDate(msg.createdAt).split(',')[0]}</p>
+                            </div>
+                            }
+                            <div className={data.user.id === msg.receiver ? `${styles.message} ${styles.left}` : `${styles.message} ${styles.right}`} key={msg._id}>
+                                <Message message={msg.text} time={msg.createdAt}/>
+                            </div>
+                        </div>)
+                    })}
+                </div> : <></>):
+                <div className={styles.spinner}>
                     <CircularProgress sx={{color: '#D4313D'}} />
                 </div>}
 
-                <div className={chat.footer}>
-                    <input className={chat.box} value={message} onChange={(e)=>setMessage(e.target.value)} placeholder='Type a message'/>
-                    <button className={chat.send} onClick={handleSend}>Send</button>
+                <div className={styles.footer}>
+                    <TextField className={styles.box} size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} value={message} onChange={(e)=>setMessage(e.target.value)} placeholder='Type a message'/>
+                    <button className={styles.send} onClick={handleSend}>Send</button>
                 </div>
             </div>
     )

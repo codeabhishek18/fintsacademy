@@ -6,7 +6,7 @@ import SessionCard from "@/app/components/sessionCard/SessionCard";
 import axios from "axios";
 import { useSession } from "next-auth/react"
 import Image from 'next/image';
-import { useParams, useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import feedback from '@/assets/feedback.png'
 import { CircularProgress } from '@mui/material';
@@ -21,10 +21,13 @@ const Dashboard = () =>
     const [ isLoading, setIsLoading ] = useState(true)
     const [ activeAgenda, setActiveAgenda ] = useState(-1);
     const [ assessments, setAssessments ] = useState(null);
-    const [ feedbackFrom, setFeedbackForm ] = useState(false);
+    const [ feedbackForm, setFeedbackForm ] = useState(false);
     const [ feedbackTooltip, setFeedbackTooltip ] = useState(false);
+    const [ hideFeedback, setHideFeedback ] = useState(true);
+    const pathname = usePathname();
+    const batchTitle = pathname.split('/')[2]
     const router = useRouter();
-
+    
     const getBatchData = async () =>
     {
         try
@@ -32,6 +35,7 @@ const Dashboard = () =>
             const url = `/api/batch/${batchId}`
             const response = await axios.get(url);
             setBatchData(response.data)
+            checkfeedback(response.data)
         }
         catch(error)
         {
@@ -39,13 +43,21 @@ const Dashboard = () =>
         }
     }
 
+    const checkfeedback = (batch) =>
+    { 
+        const response = batch.course.feedbacks.find((feed) => feed.user === data.user.id);
+        if(response)
+            setHideFeedback(false);
+    }
+    
     const getAsssessments = async () =>
     {
         try
         {
             const url = `/api/user/${data.user.id}`
             const response = await axios.get(url);
-            setAssessments(response.data.enrollments);
+            const batchAssessments = response.data.enrollments.find((enrollment) => enrollment.batch.title === batchTitle);
+            setAssessments(batchAssessments);
             setIsLoading(false);
         }
         catch(error)
@@ -65,10 +77,8 @@ const Dashboard = () =>
             router.push('/')
         else
             setIsLoading(true);
-        
             
     }, [status]);
-    
 
     if(status === 'loading' || isLoading)
         return(
@@ -78,38 +88,42 @@ const Dashboard = () =>
         )
 
     return(
-        <div onClick={()=> setActiveAgenda(-1)}>
+        <div onClick={()=> setActiveAgenda(-1)} className={styles.wrapper}>
+        
             {batchData &&
             <div className={styles.container} >
                 <div className={styles.progress}>
-                    <Progress data={batchData} level='user'/>
+                    <Progress batchData={batchData} level='user' assessments={assessments}/>
                 </div>
 
                 <div className={styles.practicals}>
                     <div className={styles.sessions}>
-                        <p className={styles.header}>Lectures</p>
                         {batchData.sessions.map((data, index)=>
                         (
                             <SessionCard session={data} index={index} setActiveAgenda={setActiveAgenda} activeAgenda={activeAgenda} level='user' key={data._id}/>
                         ))}
                     </div>
 
-                    <div className={styles.assessments}>
-                        <p className={styles.header}>Assessments</p>  
-                        {assessments?.map((enrollment)=>
-                        (
-                            enrollment?.assessments?.map((assessment, index)=>
-                            (
-                                <AssessmentCard assessment={assessment} index={index} key={data._id} batchId={batchId}/>
-                            ))
-                        ))}
-                    </div>
+                    
                 </div>
             </div>}
-            <Image className={styles.feedback} src={feedback} alt='feedback' onClick={()=> setFeedbackForm(true)} onMouseEnter={()=> setFeedbackTooltip(true)} onMouseLeave={()=> setFeedbackTooltip(false)}/>
+
+            <div className={styles.assessmentWrapper}>
+                {assessments.assessments.length  >0 && <p className={styles.header}>Assessments</p>}
+                <div className={styles.assessments}>
+                    {assessments?.assessments?.map((assessment, index)=>
+                    (
+                        <AssessmentCard assessment={assessment} index={index} key={data._id} batchId={batchId}/>
+                    )
+                )}
+            </div>
+            </div>
+
+            {hideFeedback && <Image className={styles.feedback} src={feedback} alt='feedback' onClick={()=> setFeedbackForm(true)} onMouseEnter={()=> setFeedbackTooltip(true)} onMouseLeave={()=> setFeedbackTooltip(false)}/>}
             {feedbackTooltip && <p className={styles.toolTip}>Feedback</p>}
-            {feedbackFrom && <div className={styles.feedbackForm}>
-                <Feedback setFeedbackForm={setFeedbackForm}/>
+            {feedbackForm && 
+            <div className={styles.feedbackForm}>
+                <Feedback setFeedbackForm={setFeedbackForm} courseId={batchData.course._id}/>
             </div>}
         </div>
     )

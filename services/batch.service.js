@@ -3,6 +3,7 @@ import { Batch } from "../models/batch.model.js";
 import { User } from "@/models/user.model.js";
 import { Session } from "@/models/session.model.js";
 import { Mentor } from "@/models/mentor.model.js";
+import { Feedback } from "@/models/feedback.model.js";
 
 class batchService
 {
@@ -26,7 +27,7 @@ class batchService
         try
         {
             const batch = await Batch.findOne({title})
-            .populate({path: 'course', model: Course})
+            .populate({path: 'course', model: Course, populate:{path: 'feedbacks', model: Feedback}})
             .populate({path: 'enrollments', model: User})
             .populate({path: 'sessions', model: Session})
             .populate({path: 'mentor', model: Mentor})
@@ -70,12 +71,11 @@ class batchService
     {
         try
         {
-            await Batch.deleteOne({_id:batchId})
-            return this.findAll();
+            return await Batch.deleteOne({_id:batchId})
         }
         catch(error)
         {
-            throw new Error('Failed to delete batch')
+            throw error
         }
     }
 

@@ -4,6 +4,7 @@
     min-height: 100vh;
     display: flex;
     background-color: var(--primary-bg);
+    position: relative;
 }
 
 .main
@@ -30,7 +31,7 @@
     border-radius:50%;
     cursor: pointer;
     z-index: 1;
-    background-color: var(--alert-bg);
+    background-color: var(--primary-element);
     padding: 10px;
 }
 
@@ -47,12 +48,12 @@
 .chat
 {
     width: 375px;
-    height: 480px;
     position: absolute;
     right: 20px;
-    bottom: 90px;
-    border: 1px solid var(--primary-color);
+    bottom: 80px;
     background-color: var(--primary-bg);
+    border: 1px solid rgb(34, 34, 34);
+    box-shadow: var(--box-shadow);
     border-radius: 5px;
 }
 

@@ -74,6 +74,18 @@ class courseService
             throw error
         }
     }
+
+    async addFeedbacktoCourse(courseId, feedback)
+    {
+        try
+        {
+            return await Course.findByIdAndUpdate(courseId, {$push: {feedbacks: feedback}})
+        }
+        catch(error)
+        {
+            throw error
+        }
+    }
 }
 
 export default courseService

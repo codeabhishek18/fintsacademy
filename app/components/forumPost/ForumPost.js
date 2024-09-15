@@ -50,14 +50,8 @@ const ForumPost = ({getDiscussions, getTopics}) =>
     return(
         <div className={styles.container}>
             <div className={styles.forumheader}>
-                <TextField 
-                    multiline size='large' 
-                    label='Post a discusssion' 
-                    color='grey' name="title" 
-                    className={styles.input} 
-                    value={title} 
-                    onChange={(e)=> setTitle(e.target.value)}
-                />
+                <TextField size='large' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D', color: '#D4313D'}, 'aria-label': 'Without label'}}}
+                placeholder='Post a discusssion' name="title" className={styles.input} value={title} onChange={(e)=> setTitle(e.target.value)} />
 
                 <div className={styles.footer}>
                     <div className={styles.list}>

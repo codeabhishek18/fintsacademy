@@ -1,18 +1,14 @@
 .container
 {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-element);
     width: 100%;
     padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 5px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-}
-
-.contact, .email
-{
-    color: rgba(0,0,0,0.5);
+    box-shadow: var(--box-shadow);
+    color: white;
 }
 
 .contact, .email, .name
@@ -32,11 +28,11 @@
 {
     margin: 0;
     border: 1px solid var(--primary-border);
-    color: var(--primary-color);
+    color: white;
     font-size: 14px;
     font-weight: 500;
     border-radius: 5px;
-    background-color: var(--secondary-color);
+    background: none;
     padding: 5px;
 }
 

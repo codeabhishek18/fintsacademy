@@ -1,3 +1,10 @@
+.container
+{
+    position: relative;
+    height: 585px;
+    width: 420px;
+}
+
 .certificate
 {
     height: 585px;
@@ -7,27 +14,30 @@
 .name, .course, .date
 {
     position: absolute;
+    width: 100%;
     left: 50%;
+    text-align: center;
     transform: translateX(-50%);
     color: var(--gold-color);
 }
 
 .name
 {
-    top: 245px;
+    top: 270px;
     font-size: 22px;
     font-weight: 600;
 }
 
 .course
 {
-    top: 315px;;
+    top: 330px;
     font-weight: 600;
 }
 
 .date
 {
     font-size: 12px;
-    top: 450px;
     left: 100px;
+    top: 460px;
 }
+

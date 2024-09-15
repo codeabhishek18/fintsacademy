@@ -1,10 +1,10 @@
 .container
 {
     width: calc(50% - 10px);
-    background-color: var(--secondary-color);
+    background-color: var(--primary-element);
     border-radius: 5px;
     padding: 20px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    box-shadow: var(--box-shadow);
 }
 
 .header
@@ -17,6 +17,11 @@
 .title, .list, .duration
 {
     margin: 0;
+}
+
+.list
+{
+    color: white;
 }
 
 .title
@@ -34,7 +39,7 @@
 
 .duration
 {
-    color: grey;
+    color: var(--primary-border);
 }
 
 @media screen and (max-width: 920px)

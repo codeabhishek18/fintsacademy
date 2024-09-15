@@ -32,7 +32,7 @@ const Batches = () =>
             {quizData ?
             <div className={styles.container}>
             <div className={styles.searchbar}>
-                <TextField color='grey' size='small' label='Search batches' fullWidth/>
+                <TextField color='grey' size='small' className={styles.input} InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} placeholder='Search batches' fullWidth/>
                 <button className={styles.search}>Search</button>
             </div>
 

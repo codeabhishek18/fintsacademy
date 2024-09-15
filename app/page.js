@@ -1,60 +1,35 @@
 'use client'
 
 import styles from './styles.module.css'
-import axios from 'axios'
 import { useEffect, useRef, useState } from 'react'
 import { Features } from '@/utility/features'
 import { about } from '@/utility/about'
 import { faqData } from '@/utility/faqData'
-import { shimmerCourseData } from '@/utility/shimmerData'
 import { useScheme } from '@/contextapi/SchemeProvider'
 import HeroSection from './components/heroSection/HeroSection'
 import ErrorDialogue from './components/errorDialogue/ErrorDialogue'
 import Stats from './components/stats/Stats'
 import FeatureCard from './components/featureCard/FeatureCard'
-import CourseCard from './components/courseCard/CourseCard'
-import ShimmerCourseCard from './components/shimmerCourseCard/ShimmerCourseCard'
 import Certificate from './components/certificate/Certificate'
 import Carousel from './components/carousel/Carousel'
 import Accordian from './components/accordian/Accordian'
 import Footer from './components/footer/Footer'
 import { motion } from 'framer-motion'
+import BoxReveal from "@/components/magicui/box-reveal";
+import Marquee from '@/components/magicui/marquee'
+import { Feedback } from '@/utility/feedback'
+import CarouselCard from './components/carouselCard/CarouselCard'
+import Topics from './components/topics/Topics'
+
 
 const Home = () =>
 {
     const aboutRef = useRef(null);
     const courseRef = useRef(null);
     const faqRef = useRef(null);
-    const [ courses, setCourses ] = useState(null);
     const [ showFaq, setShowFaq ] = useState(0);
     const [ error, setError ] = useState(false);
     const { scheme } = useScheme();
-    
-    useEffect(()=>
-    {
-        getCourses();
-    },[]);
-
-    const getCourses = async () =>
-    {
-        try
-        {
-            const url = '/api/course'
-            const response = await axios.get(url);
-            console.log(response);
-            if(response?.data?.courses)
-            {
-                setCourses(response.data.courses);
-                return 
-            }
-            setError(true);        
-        }
-        catch(error)
-        {
-            console.log('error', error)
-            setError(true);   
-        }
-    }
 
     const handleScroll = (section) =>
     {
@@ -73,7 +48,7 @@ const Home = () =>
             <HeroSection handleScroll={handleScroll}/>
             <div className={scheme === 'dark' ? styles.container : `${styles.container} ${styles.light}`}>
                 <div className={styles.marquee}>
-                    <p className={styles.marqueeContent}>Coming soon | New batches starting from 6th September | Get enrolled via whatsapp</p>
+                    <p className={styles.marqueeContent}>Coming soon | New batches starting from 28th September | Get enrolled via whatsapp</p>
                 </div>
 
                 {error && <ErrorDialogue setError={setError}/>}
@@ -82,58 +57,72 @@ const Home = () =>
                     initial={{opacity: 0}}
                     whileInView={{opacity:1}}
                     viewport={{
-                        margin: '-200px',
+                        margin: '-100px',
                     }}
                     className={styles.aboutWrapper} ref={aboutRef}>
                     <Stats/>
-                    <p className={styles.about}>{about}</p>
+                    
+                    <div className={styles.about}>
+                    <BoxReveal boxColor={"#202227"} duration={0.5}>
+                        {about}
+                    </BoxReveal>
+                    </div>
+
                     <div className={styles.features}>
-                    {Features.map((feature)=>
+                    {Features.map((feature, index)=>
                     (
-                        <FeatureCard feature={feature} key={feature.id}/>
+                        <FeatureCard feature={feature} index={index} key={feature.id}/>
                     ))}
                     </div>
                 </motion.div>
 
-                <motion.div 
-                    initial={{opacity:0}}
+                {/* <motion.div 
+                    initial={{opacity: 0}}
                     whileInView={{opacity:1}}
                     viewport={{
-                        margin: '-200px'
-                    }} className={styles.courseWrapper} ref={courseRef}>
-                    {!error && <p className={styles.commonHeader}>Courses</p>}
-                    {courses ? 
-                    <div className={styles.courses}>
-                        {courses.map((course)=>
-                        (
-                            <CourseCard course={course} key={course._id}/>
-                        ))}
-                    </div> :
-                    (error ? <></> :
-                    <div className={styles.courses}>
-                        {shimmerCourseData.map((data, index)=>
-                        (
-                            <ShimmerCourseCard key={data.id}/>
-                        ))}
-                    </div>)}
-                </motion.div>
+                        margin: '-200px',
+                    }} className={styles.carouselWrapper}>
+                    <BoxReveal boxColor={"rgb(15, 18, 18)"} duration={0.5}>
+                        <p className={styles.commonHeader}>Testimonials</p>
+                    </BoxReveal>
+                    
+                    <Carousel/>
+                </motion.div > */}
+
 
                 <div className={styles.carouselWrapper}>
-                    <p className={styles.commonHeader}>Testimonials</p>
-                    <Carousel/>
-                </div>
+                    <BoxReveal boxColor={"#202227"} duration={0.5}>
+                        <p className={styles.commonHeader}>Testimonials</p>
+                    </BoxReveal>                
+                    <Marquee pauseOnHover className="[--duration:60s]">
+                    {Feedback.map((data)=>
+                    (
+                        <CarouselCard data={data} key={data.id}/>
+                    ))}
+                    </Marquee>
+               </div>
                 
-                <div className={styles.faqWrapper} ref={faqRef}>
-                    <p className={styles.commonHeader}>FAQ</p>
+                <motion.div 
+                    initial={{opacity: 0}}
+                    whileInView={{opacity:1}}
+                    viewport={{
+                        margin: '-100px',
+                    }} className={styles.faqWrapper} ref={faqRef}>  
+                    <BoxReveal boxColor={"rgb(15, 18, 18)"} duration={0.5}>
+                        <p className={styles.commonHeader}>FAQ</p>
+                    </BoxReveal>
+                    
                     <div className={styles.faq}>
                     {faqData.map((data, index)=>
                     (
                         <Accordian data={data} key={data.id} index={index} showFaq={showFaq} setShowFaq={setShowFaq}/>
                     ))}
                     </div>
-                </div>
+                </motion.div >
 
                 <Certificate/>
+
+                <Topics/>
     
             </div>
             <Footer/>

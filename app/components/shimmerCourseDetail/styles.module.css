@@ -7,12 +7,12 @@
 {
     0%
     {
-        background-color: var(--primary-border);
+        background-color: rgb(21, 21, 21);
     }
 
     100%
     {
-        background-color: rgb(75, 75, 75);
+        background-color: rgb(32, 32, 32);
     }
 }
 
@@ -34,6 +34,9 @@
 {
     border-radius: 10px;
     padding: 22.5vh;
+    
+    background-color: var(--primary-element);
+    box-shadow: var(--box-shadow);
 }
 
 .header, .content
@@ -97,4 +100,9 @@
 {
     padding: 15px;
     width: 150px;
+}
+
+.join,.rating
+{
+    background-color: var(--primary-element);
 }

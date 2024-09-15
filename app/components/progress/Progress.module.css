@@ -5,10 +5,11 @@
     flex-direction: column;
     align-items: center;
     row-gap: 15px;
-    background-color: var(--secondary-color);
     border-radius: 5px;
     padding: 20px;
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: var(--primary-element);
+    box-shadow: var(--box-shadow);
+    color: white;
 }
 
 .header, .footer
@@ -31,13 +32,12 @@
 
 .courseTitle
 {
-    color: var(--secondary-color);
-    background-color: var(--alert-color);
-    font-size: 20px;
+    color: var(--alert-color);
+    font-size: 28px;
     width: 100%;
     padding: 8px;
     font-weight: 600;
-    margin: 10px;
+    margin: 0;
     text-align: center;
     border-radius: 5px;
 }
@@ -46,8 +46,8 @@
 {
     margin: 0;
     font-size: 15px;
-    font-weight: 600;
-    color: rgba(0,0,0,0.5);
+    font-weight: 500;
+    color: grey;
 }
 
 .progress
@@ -57,19 +57,18 @@
 
 .mentor>span, .group>span
 {
-    font-weight: 600;
-    color: black;
+    color: white;
 }
 
 .progressTitle
 {
     position: absolute;
     left: 50%;
-    top: 0;
+    top: 45%;
     transform: translate(-50%, -50%);
-    font-size: 6rem;
-    color: rgba(0,0,0,0.05);
-    font-weight: 700;
+    font-size: 90px;
+    color: var(--primary-bg);
+    font-weight: 600;
     display: flex;
 }
 
@@ -86,7 +85,7 @@
 .certificate
 {
     background-color: var(--primary-bg);
-    color: var(--alert-color);
+    color: white;
     font-size: 15px;
     font-weight: 600;
     display: flex;
@@ -101,6 +100,11 @@
     margin: 0;
 }
 
+.certificate:hover
+{
+    background-color: var(--alert-color);
+}
+
 .certificate>img
 {
     height: 20px;
@@ -111,11 +115,13 @@
 {
     width: 100%;
     padding: 20px;
-    background-color: var(--primary-bg);
     border-radius: 5px;
     display: flex;
     flex-direction: column;
     row-gap: 10px;
+    border-radius: 5px;
+    background-color: var(--primary-bg);
+    box-shadow: var(--box-shadow);
 }
 
 .group
@@ -128,15 +134,18 @@
 
 .connect
 {
-    border: 1px solid var(--alert-color);
+    border: 1px solid white;
     border-radius: 5px;
-    color: var(--alert-color);
+    color: white;
+    background: none;
     font-size: 12px;
+    padding: 0 5px;
 }
 
 .connect:hover
 {
     background-color: var(--alert-color);
+    border: 1px solid var(--alert-color);
     color: var(--secondary-color);
     cursor: pointer;
 }
@@ -144,7 +153,6 @@
 .mentor, .batchCode, .groupTitle
 {
     font-weight: 500;
-    color: black;
     margin: 0;
 }
 
@@ -179,4 +187,99 @@
     background-color: var(--alert-color);
     color: var(--secondary-color);
     cursor: pointer;
+}
+
+.certificateWrapper
+{
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    left: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    background-color: rgba(0,0,0,0.7);
+}
+
+.close
+{
+    position: absolute;
+    right: 30px;
+    top: 15px;
+    font-size: 30px;
+    font-weight: 600;
+    color: var(--alert-color);
+    cursor: pointer;
+}
+
+.download
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    width: 420px;
+    background-color: var(--primary-bg);
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 20px;
+    column-gap: 10px;
+}
+
+.downloadIcon
+{
+    height: 24px;
+    width: fit-content;
+}
+
+.download:hover
+{
+    background-color: var(--alert-color);
+}
+
+.userCertifiy
+{
+    position: relative;
+    height: 585px;
+    width: 420px;
+}
+
+.certify
+{
+    height: 585px;
+    width: 420px;
+}
+
+.username, .usercourse, .userdate
+{
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    text-align: center;
+    transform: translateX(-50%);
+    color: var(--gold-color);
+}
+
+.username
+{
+    top: 270px;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.usercourse
+{
+    top: 330px;
+    font-weight: 600;
+}
+
+.userdate
+{
+    font-size: 12px;
+    left: 100px;
+    top: 460px;
 }

@@ -1,4 +1,5 @@
 import { Enrollment } from "@/models/enrollment.model";
+import { User } from "@/models/user.model";
 
 class enrollmentService
 {
@@ -22,6 +23,19 @@ class enrollmentService
         try
         {
             return await Enrollment.findOneAndUpdate({user: userId}, {$push : {assessments: testId}})
+        }
+        catch(error)
+        {
+            throw error
+        }
+    }
+
+    async getEnrollments()
+    {
+        try
+        {
+            const enrollments = await Enrollment.find({}).populate({path: 'user', module: User});
+            return enrollments
         }
         catch(error)
         {

@@ -1,6 +1,6 @@
 .container
 {
-    background-color: var(--secondary-color);
+    background-color: var(--primary-element);
     width: 600px;
     padding: 30px 50px;
     border-radius: 5px;
@@ -9,6 +9,7 @@
     align-items: center;
     row-gap: 10px;
     position: relative;
+    color: white;
 }
 
 .title
@@ -19,11 +20,17 @@
     margin-bottom: 10px;
 }
 
+.feedback
+{
+    margin-top: 10px;
+    background-color: var(--primary-bg);
+    border-radius: 5px;
+}
+
 .description
 {
     font-size: 16px;
     font-weight: 500;
-    color: rgba(0,0,0,0.5);
     text-align: center;
     margin-bottom: 20px;
 }
@@ -37,6 +44,7 @@
     background: none;
     border: 0;
     border-radius: 5px;
+    color: white;
     border: 1px solid var(--primary-border);
     cursor: pointer;
 }
@@ -45,14 +53,13 @@
 {
     background-color: var(--alert-color);
     border: 1px solid var(--alert-color);
-    color: white;
 }
 
 .close
 {
     font-size: 28px;
     font-weight: 600;
-    color: white;
+    color: var(--alert-color);
     position: absolute;
     right: -30px;
     top: -10px;

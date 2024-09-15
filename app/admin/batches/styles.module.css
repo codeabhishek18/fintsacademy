@@ -23,7 +23,7 @@
 .add
 {
     background-color: var(--alert-color);
-    color: var(--primary-bg);
+    color: white;
     border: 0;
     padding: 10px;
     font-size: 14px;

@@ -8,11 +8,20 @@ import styles from './styles.module.css'
 import axios from 'axios'
 import Image from 'next/image'
 import { FormatDate } from '@/utility/FormatDate'
-import { Rating } from '@mui/material'
+import { CircularProgress, Rating } from '@mui/material'
+import { signIn, useSession } from 'next-auth/react'
+import { useRouter } from 'next/navigation'
 
 const Checkout = () =>
 {
     const [ batch, setBatch ] = useState(null);
+    const router = useRouter();
+    const { data } = useSession();
+    
+    if(!data?.user)
+    {
+        router.push('/login')
+    }
 
     useEffect(()=>
     {
@@ -38,8 +47,9 @@ const Checkout = () =>
     return(
         <div className={styles.container}>
             <Header/>
+            {batch  ?
             <div className={styles.register}>
-                {batch && <div className={styles.card}>
+                <div className={styles.card}>
                     <div className={styles.display}>
                         <Image className={styles.displayImage} src={batch.course.imageURL} alt={batch.course.id} layout='fill'/>
                     </div>
@@ -49,9 +59,12 @@ const Checkout = () =>
                         <Rating name="half-rating-read" defaultValue={4.7} precision={0.5} readOnly size='small'/>
                         <p className={styles.date}>Starting from {FormatDate(batch.startDate)}</p>
                     </div>
-                </div>}
-                {batch && <BillingCard batch={batch}/>}
-            </div>
+                </div> 
+                <BillingCard batch={batch}/> 
+            </div> :
+            <div className={styles.spinner}>
+                <CircularProgress sx={{color: '#D4313D'}} />
+            </div> }
             <Footer/>
         </div>
     )

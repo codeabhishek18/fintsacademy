@@ -6,6 +6,7 @@ import Lecturecard from '../lectureCard/LectureCard'
 import { Rating } from '@mui/material'
 import { useScheme } from '@/contextapi/SchemeProvider'
 import { useRouter } from 'next/navigation'
+import BoxReveal from '@/components/magicui/box-reveal'
 
 const CourseDetail = ({course}) =>
 {

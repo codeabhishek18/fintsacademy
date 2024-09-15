@@ -11,7 +11,7 @@ const testSchema = new Schema({
     },
     answers:
     {
-        type: [String]
+        type: [[Number]]
     },
     status:
     {

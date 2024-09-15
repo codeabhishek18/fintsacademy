@@ -1,19 +1,19 @@
 .container
 {
-    min-width: calc(33.34% - 20px);
+    width: 400px;
     min-height: fit-content;
     border-radius: 5px;
-    border: 1px solid var(--primary-border);
     display: flex;
     flex-direction: column;
-    row-gap: 15px;
     padding: 15px;
+    background-color: var(--primary-element);
+    box-shadow: var(--box-shadow);
     transition: opacity 1s ease-in-out;
 }
 
-.user, .feedback
+.user, .feedback, .name
 {   
-    margin: 0;
+    margin: 10px 0;
 }
 
 .feedback
@@ -27,7 +27,7 @@
     font-weight: 600;
 }
 
- @media screen and (max-width: 1120px) 
+ /* @media screen and (max-width: 1120px) 
 {
     .container
     {
@@ -42,7 +42,7 @@
     {
         min-width: calc(100% - 20px);
     }
-}
+} */
 
 
 

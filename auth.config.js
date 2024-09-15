@@ -36,14 +36,14 @@ export default {
                     {
                         const user = await userInstance.findByEmail(email)
                         if(!user)
-                            throw new Error('User not found')
+                            return null
                         
                         const isMatch = await userInstance.checkPassword(password, user.password);
                         if(!isMatch)
-                            throw new Error('Invalid credentials')
+                            return null
                         return user
                     }   
-                    throw new Error('Invalid credentials')
+                    return null
                 }
                 catch(error)
                 {

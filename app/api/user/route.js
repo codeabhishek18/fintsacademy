@@ -1,6 +1,7 @@
 
 import dbConnect from "@/dbConfig/dbConnect";
 import userService from "@/services/user.service";
+import { NextResponse } from "next/server";
 const userInstance = new userService();
 
 
@@ -11,10 +12,10 @@ export async function GET(req, res)
     
     await dbConnect();
     const users = await userInstance.findAll()
-    return new Response(JSON.stringify({users}))
+    return NextResponse.json(users)
   }  
   catch(error)
   { 
-    return new Response(JSON.stringify({error}))
+    return NextResponse.json({error: error.message})
   } 
 }

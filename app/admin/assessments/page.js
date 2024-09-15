@@ -20,10 +20,14 @@ const Assessments = () =>
     const [ page, setPage ] = useState(0);
     const [ question, setQuestion ] = useState('');
     const [ options, setOptions ] = useState({option1 : '', option2: '', option3: '', option4: '', option5: '', option6: ''});
+    const [ multipleAnswers, setMultipleAnswers ] = useState('');
+    const [ answers, setAnswers ] = useState({answer1 : '', answer2: '', answer3: '', answer4: ''});
     const [ answer, setAnswer ] = useState('');
     const [ reason, setReason ] = useState('');
     const [ courses, setCourses ] = useState(null)
     const [ course, setCourse ] = useState('');
+
+    console.log(quizData)
 
     useEffect(()=>
     {
@@ -51,11 +55,15 @@ const Assessments = () =>
         setOptions({...options, [name]: value});
     }
 
+    const handleAnswers = (e) =>
+    {
+        const {name, value} = e.target;
+        setAnswers({...answers, [name]: value});
+    }
+
     const handleUpdate = () =>
     {
         if(!question)   
-            return
-        if(!answer)
             return
         if(!reason)
             return
@@ -65,10 +73,31 @@ const Assessments = () =>
         {
             if(value)
                 optionsList.push(value);
+        }     
+        
+        console.log(multipleAnswers)
+
+        let answersList = [];
+        if(multipleAnswers === 'true')
+        {            
+            for(let [key, value] of Object.entries(answers))
+            {
+                if(value)
+                    answersList.push(Number(value));
+            }
+
+            if(answersList.length < 2)
+                return
         }
-        if(optionsList.length<2)
-            return
-        dispatch(updateQuestion({index, question, options: optionsList, answer, reason}))
+        else
+        {
+            if(!answer)
+                return
+        }
+      
+        const correctAnswer = multipleAnswers === 'true' ?  answersList : [Number(answer)]
+        
+        dispatch(updateQuestion({index, question, options: optionsList, multipleAnswers, answers: correctAnswer, reason}))
     }
 
     const addNewQuestion = () =>
@@ -79,8 +108,10 @@ const Assessments = () =>
         setPage(quizData.length);
         setIndex(quizData.length);
         setQuestion('');
-        setOptions({option1 : '', option2: '', option3: '', option4: '', option5: '', option6: ''});
+        setMultipleAnswers('');
         setAnswer('');
+        setOptions({option1 : '', option2: '', option3: '', option4: '', option5: '', option6: ''});
+        setAnswers({answer1 : '', answer2: '', answer3: '', answer4: ''});
         setReason('');
     }
 
@@ -101,7 +132,9 @@ const Assessments = () =>
         setIndex(data.id);
         setQuestion(data.hasOwnProperty('question') ? data.question : '');
         setOptions(data.hasOwnProperty('options') ? {option1: data.options[0], option2: data.options[1], option3: data.options[2], option4: data.options[3], option5: data.options[4], option6: data.options[5]} : {option1: '', option2: '', option3: '', option4: '', option5: '', option6: ''})
-        setAnswer(data.hasOwnProperty('answer') ? data.answer : '');
+        setMultipleAnswers(data.hasOwnProperty('multipleAnswers') ? data.multipleAnswers : '');
+        setAnswer(data.hasOwnProperty('answers') ? data.answers : '')
+        setAnswers(data.hasOwnProperty('answers') ? {answer1: data.answers[0], answer2: data.answers[1], answer3: data.answers[2], answer4: data.answers[3]} : {answer1: '', answer2: '', answer3: '', answer4: ''});
         setReason(data.hasOwnProperty('reason') ? data.reason : '' );
     }
     
@@ -133,10 +166,10 @@ const Assessments = () =>
                 <div className={styles.quizWrapper}>
                     <div className={styles.quizform}> 
                         <div className={styles.header}>
-                            <TextField color='grey' size='small'  className={styles.headerInput} placeholder='Enter quiz name' name="quizname" value={quizname} onChange={(e)=> setQuizname(e.target.value)}/>
-                            <FormControl className={styles.headerInput} value={course} size='small' color='grey' fullWidth>
-                                <InputLabel size='small' color='grey'>Choose course</InputLabel>
-                                <Select name="course" label="Choose course" onChange={(e)=> setCourse(e.target.value)}>
+                            <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.headerInput} placeholder='Enter quiz name' name="quizname" value={quizname} onChange={(e)=> setQuizname(e.target.value)}/>
+                            <FormControl className={styles.headerInput} value={course} size='small' fullWidth>
+                                <InputLabel size='small' color='grey' sx={{color: 'grey'}} variant='outlined'>Choose course</InputLabel>
+                                <Select name="course" color='error'  sx={{color: 'grey'}} placeholder="Choose course" InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} onChange={(e)=> setCourse(e.target.value)}>
                                     {courses?.map((course) =>
                                     (
                                         <MenuItem value={course._id} key={course._id}>{course.title}</MenuItem>
@@ -149,15 +182,29 @@ const Assessments = () =>
                             <button className={styles.postquiz} onClick={handlePost}>Post quiz</button>
                         </div>
                         <div className={styles.element} key={quizData[index].id}>
-                            <TextField color='grey' size='small' className={styles.input} placeholder='Enter question' name="question" value={question} onChange={(e)=> setQuestion(e.target.value)}/>
-                            <TextField color='grey' size='small'  className={styles.input} placeholder='Enter option 1' name="option1" value={options.option1} onChange={handleOptions}/>
-                            <TextField color='grey' size='small'  className={styles.input} placeholder='Enter option 2' name="option2" value={options.option2} onChange={handleOptions}/>
-                            <TextField color='grey' size='small'  className={styles.input} placeholder='Enter option 3' name="option3" value={options.option3} onChange={handleOptions}/>
-                            <TextField color='grey' size='small'  className={styles.input} placeholder='Enter option 4' name="option4" value={options.option4} onChange={handleOptions}/>
-                            <TextField color='grey' size='small'  className={styles.input} placeholder='Enter option 5' name="option5" value={options.option5} onChange={handleOptions}/>
-                            <TextField color='grey' size='small'  className={styles.input} placeholder='Enter option 6' name="option6" value={options.option6} onChange={handleOptions}/>
-                            <TextField color='grey' size='small'  className={styles.input} placeholder='Enter answer' name="answer" value={answer} onChange={(e)=> setAnswer(e.target.value)}/>
-                            <TextField color='grey' size='small'  className={styles.input} placeholder='Enter reason' name="reason" value={reason} onChange={(e)=> setReason(e.target.value)}/>
+                            <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter question' name="question" value={question}        onChange={(e)=> setQuestion(e.target.value)}/>
+                            <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter option 1' name="option1"  value={options.option1} onChange={handleOptions}/>
+                            <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter option 2' name="option2"  value={options.option2} onChange={handleOptions}/>
+                            <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter option 3' name="option3"  value={options.option3} onChange={handleOptions}/>
+                            <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter option 4' name="option4"  value={options.option4} onChange={handleOptions}/>
+                            <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter option 5' name="option5"  value={options.option5} onChange={handleOptions}/>
+                            <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter option 6' name="option6"  value={options.option6} onChange={handleOptions}/>
+                            <FormControl className={styles.headerInput} value={course} size='small' fullWidth>
+                                <InputLabel size='small' color='grey' sx={{color: 'grey'}} variant='outlined'>Multiple answers</InputLabel>
+                                <Select name="course" color='error' value={multipleAnswers}  sx={{color: 'grey'}} placeholder="Multiple answers" InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} onChange={(e)=> setMultipleAnswers(e.target.value)}>
+                                    <MenuItem value="true">True</MenuItem>
+                                    <MenuItem value="false">False</MenuItem>
+                                </Select>
+                            </FormControl>
+                            {multipleAnswers === 'true' &&
+                            <div className={styles.element}>
+                                <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter answer 1' name="answer1"  value={answers.answer1} onChange={handleAnswers}/>
+                                <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter answer 2' name="answer2"  value={answers.answer2} onChange={handleAnswers}/>
+                                <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter answer 3' name="answer3"  value={answers.answer3} onChange={handleAnswers}/>
+                                <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter answer 4' name="answer4"  value={answers.answer4} onChange={handleAnswers}/>
+                            </div>}
+                            {multipleAnswers  === 'false' && <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter answer' name="answer"  value={answer} onChange={(e)=> setAnswer(e.target.value)}/>}
+                            <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter reason'   name="reason"   value={reason}          onChange={(e)=> setReason(e.target.value)}/>
                         </div>
                         <div className={styles.buttons}>
                             <button className={index === 0 ? `${styles.next} ${styles.disabled}` : styles.next} onClick={handlePrev} disabled={index===0}>Prev</button>

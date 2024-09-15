@@ -7,6 +7,9 @@ import axios from 'axios';
 import Discussion from '../discussion/Discussion';
 import Comment from '../comment/Comment';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
+import upArrow from '@/assets/show.png'
+import downArrow from '@/assets/drop.png'
 
 const DiscussionCard = ({discussions, getDiscussions, getTopics}) =>
 {   
@@ -15,8 +18,6 @@ const DiscussionCard = ({discussions, getDiscussions, getTopics}) =>
 
     const session = useSession();
     const user = session?.data?.user?.id
-
-    console.log('user', user)
 
     const handleDelete = async (id) =>
     {
@@ -67,9 +68,10 @@ const DiscussionCard = ({discussions, getDiscussions, getTopics}) =>
                         like={discussion.like} 
                         keywords={discussion.keywords} 
                         handleDelete={handleDelete}/>
-                    
+                                          
                     <div className={styles.replySection}>
                         <TextField 
+                            InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}}
                             variant='outlined' 
                             size='small' color='grey' 
                             className={styles.reply} 
@@ -84,7 +86,13 @@ const DiscussionCard = ({discussions, getDiscussions, getTopics}) =>
                         </button>
                     </div>
 
-                    {viewComment === discussion._id ? 
+                    { discussion.comments.length > 0 ?
+                    <div className={styles.commentsCount} onClick={()=> setViewComment((prev) => prev  === discussion._id ? null : discussion._id)}>
+                        {discussion.comments?.length}  {discussion.comments?.length > 1 ? 'resposes' : 'response'}
+                       <Image className={styles.arrows} src={viewComment === discussion._id ? downArrow : upArrow} alt='comments'/> 
+                    </div>:<p className={styles.noCount}>Be the first one to comment</p>}
+
+                    {viewComment === discussion._id &&
                     <div className={styles.replies}>
                     {discussion.comments.map((comment) =>
                     (
@@ -95,11 +103,7 @@ const DiscussionCard = ({discussions, getDiscussions, getTopics}) =>
                             getDiscussions={getDiscussions}
                         />
                     ))}
-                    </div> :
-                    discussion.comments.length > 0 &&
-                    <p className={styles.commentsCount} onClick={()=> setViewComment(discussion._id)}>
-                       View {discussion.comments?.length} {discussion.comments?.length > 1 ? 'replies' : 'reply'}
-                    </p>}
+                    </div> }
                 </div>
             ))}
         </div>

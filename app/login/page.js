@@ -49,20 +49,21 @@ const Login = () =>
         {
             const response = await credentialLogin(formData);
             if(!response)
-                return router.push('/check')
+                return router.push('/dashboard')
             setError(true);
-            setErrorMessage(response);
+            setErrorMessage(response.error);
         } 
         catch(error) 
         {
+            console.log(error)
             setError(true);
-            setErrorMessage(error);
+            setErrorMessage(error.error);
         }
     }
 
     return(
         <div className={styles.wrapper}>
-            {/* <Header/> */}
+            <Header/>
            <div className={styles.container}> 
                 <div className={styles.header}>
                     <Image className={styles.logo} src={fints} alt='logo'/>
@@ -70,8 +71,8 @@ const Login = () =>
                 </div>
                 <div className={styles.form}>
                     <form className={styles.form} onSubmit={handleSubmit}>
-                        <TextField className={styles.inputs} size='small' color='grey' sx={{backgroundColor:'grey', borderRadius: '5px'}} label="Email" type="text" name="email" variant='filled'/>
-                        <TextField className={styles.inputs} size='small' color='grey' sx={{backgroundColor:'grey', borderRadius: '5px'}} label="Password" type="password" name="password" variant='filled'/>
+                        <TextField className={styles.inputs} size='small' label="Email" type="text" name="email" variant='filled'/>
+                        <TextField className={styles.inputs} size='small' label="Password" type="password" name="password" variant='filled'/>
                         {error && 
                         <div className={styles.error}>
                             <Image className={styles.erroricon} src={erroricon} alt='error'/>

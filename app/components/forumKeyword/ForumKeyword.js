@@ -11,7 +11,8 @@ const ForumKeyword = ({handleKeywords}) =>
     return(
         <div className={styles.container}>
             <div className={styles.header}>
-                <TextField size='small' variant='outlined' className={styles.keys} label='Add keyword' color='grey' name='keyword' value={keyword} onChange={(e) => setKeyword(e.target.value)}/>
+                <TextField InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}}
+                size='small' className={styles.keys} placeholder='Add keyword' name='keyword' value={keyword} onChange={(e) => setKeyword(e.target.value)}/>
                 <button className={styles.add} onClick={() => {handleKeywords(keyword); setKeyword('')}}>Add</button>
             </div>
 

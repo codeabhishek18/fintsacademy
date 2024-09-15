@@ -83,7 +83,7 @@ const Batch = () =>
                 
                 <div className={styles.dashboard}>
                     <div className={styles.progress}>
-                        <Progress data={batch}/>
+                        <Progress batchData={batch} level='admin'/>
                     </div>
                     <div className={styles.list}>
                         {batch.sessions.map((session, index) =>

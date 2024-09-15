@@ -7,14 +7,15 @@
     flex-direction: column;
     row-gap: 20px;
     height: fit-content;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-element);
+    color: white;
 }
 
 .header
 {
     font-size: 18px;
     font-weight: 600;
-    color: rgba(0,0,0,0.3);
+    color: var(--primary-border);
     margin: 0 0 10px;
 }
 
@@ -27,7 +28,7 @@
 
 .total
 {
-    border-top: 1px solid rgba(0,0,0,0.3);
+    border-top: 1px solid var(--primary-border);
     padding-top: 16px;
     font-weight: 600;
 }
@@ -55,7 +56,8 @@
     font-weight: 500;
     text-align: center;
     cursor: pointer;
-    border: 1px solid grey;
+    border: 1px solid var(--primary-border);
+    color: white;
     font-size: 14px;
 }
 
@@ -63,6 +65,5 @@
 {
     background-color: var(--alert-color);
     border: 1px solid var(--alert-color);
-    color: white;
 }
 

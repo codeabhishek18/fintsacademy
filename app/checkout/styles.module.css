@@ -22,10 +22,11 @@
     height: fit-content;
     display: flex;
     align-items: flex-start;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-element);
     padding: 20px;
     border-radius: 5px;
     column-gap: 20px;
+    color: white;
 }
 
 .display
@@ -70,4 +71,13 @@
 {
     font-size: 14px;
     color: grey;
+}
+
+.spinner
+{
+    min-height: 85vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

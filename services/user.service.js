@@ -14,6 +14,8 @@ import { Enrollment } from '@/models/enrollment.model';
 import { Batch } from '@/models/batch.model';
 import { Course } from '@/models/course.model';
 import { Test } from '@/models/test.model';
+import { Chat } from '@/models/chat.model';
+import { Message } from '@/models/message.model';
 
 class userService 
 {
@@ -89,7 +91,7 @@ class userService
         {
             const user = await User.findById(id)
             .populate(
-            {
+            [{
                 path: 'enrollments',
                 model: Enrollment,
                 populate: 
@@ -106,7 +108,25 @@ class userService
                     path: 'assessments',
                     model: Test
                 }]
-            })
+            },
+            {
+                path: 'chat',
+                model: Chat,
+                populate:
+                [
+                    {
+                        path: 'sender',
+                        model: User
+                    },
+                    {
+                        path: 'receiver',
+                        model: User
+                    },
+                    {
+                    path: 'message',
+                    model:  Message
+                }]
+            }])
             
             return user
         } 
@@ -115,8 +135,6 @@ class userService
             throw error
         }
     }
-
-    
 
     async hashPassword(password)
     {
@@ -128,6 +146,39 @@ class userService
     {
         const response = await bcrypt.compare(userPassword, dbPassword)
         return response
+    }
+
+    async updateChat(userId, chatId)
+    {
+        try
+        {
+            return await User.findByIdAndUpdate(userId, {$push : {chat : chatId}})
+        }
+        catch(error)
+        {
+            throw error
+        }
+    }
+
+    async getMonthlyEnrollments()
+    {
+        try
+        {
+            const monthlyEnrollments = await User.aggregate([
+                {
+                  $group: {
+                    _id: { $month: "$updatedAt" },
+                    count: { $sum: 1 }
+                  }
+                },
+                { $sort: { _id: 1 } } // Sort by month
+              ]);
+              return monthlyEnrollments;
+        }
+        catch(error)
+        {
+            throw error
+        }
     }
 
     // generateAccessToken(id)
@@ -172,18 +223,6 @@ class userService
     //     catch(error)
     //     {
     //         throw new Error('Enrollment to course failed')
-    //     }
-    // }
-
-    // async updateChat(userId, chatId)
-    // {
-    //     try
-    //     {
-    //         return await User.findByIdAndUpdate(userId, {$push : {chat : chatId}})
-    //     }
-    //     catch(error)
-    //     {
-    //         throw new Error('Failed to update chat')
     //     }
     // }
 

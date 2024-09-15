@@ -44,16 +44,16 @@ const BatchForm = () =>
         const endDate = new Date(formData.get('end-date'))
         console.log(startDate, endDate)
 
-        // try
-        // {
-        //     const url = '/api/batch'
-        //     const response = await axios.post(url, {title, courseId, mentor, startDate, endDate})
-        //     console.log(response)
-        // }
-        // catch(error)
-        // {
-        //     console.log(error);
-        // }
+        try
+        {
+            const url = '/api/batch'
+            const response = await axios.post(url, {title, courseId, mentor, startDate, endDate})
+            console.log(response)
+        }
+        catch(error)
+        {
+            console.log(error);
+        }
     }
 
     return(
@@ -61,9 +61,9 @@ const BatchForm = () =>
             <p className={styles.header}>Add Batch</p>
 
             <form onSubmit={handleSubmit} className={styles.form}>
-            <FormControl fullWidth>
-                <InputLabel size='small' color='grey'>Choose course</InputLabel>
-                <Select size='small' color='grey' name="course" label="Choose course">
+            <FormControl className={styles.inputs} fullWidth>
+                <InputLabel size='small' color='grey' sx={{color: 'grey'}} variant='outlined'>Choose course</InputLabel>
+                <Select size='small' color='grey' sx={{color: 'grey'}} placeholder="Multiple answers" InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} name="course" label="Choose course">
                     {courses?.map((course) =>
                     (
                         <MenuItem value={course._id} key={course._id}>{course.title}</MenuItem>
@@ -71,9 +71,9 @@ const BatchForm = () =>
                 </Select>
             </FormControl>
 
-            <FormControl fullWidth>
-                <InputLabel size='small' color='grey'>Choose mentor</InputLabel>
-                <Select size='small' color='grey' name="mentor" label="Choose mentor">
+            <FormControl className={styles.inputs} fullWidth>
+                <InputLabel size='small' color='grey'  sx={{color: 'grey'}} variant='outlined'>Choose mentor</InputLabel>
+                <Select size='small' color='grey' name="mentor" sx={{color: 'grey'}} placeholder="Multiple answers" InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} label="Choose mentor">
                     {mentors?.map((mentor) =>
                     (
                         <MenuItem value={mentor._id} key={mentor._id}>{mentor.name}</MenuItem>
@@ -81,14 +81,14 @@ const BatchForm = () =>
                 </Select>
             </FormControl>
 
-            <TextField className={styles.inputs} color='grey' size='small' label="Batch title" type="text" name="title" fullWidth/>
+            <TextField className={styles.inputs} color='grey' size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} placeholder="Batch title" type="text" name="title" fullWidth/>
 
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateField label="Start date" size='small' color='grey' name='start-date' format="YYYY/MM/DD" fullWidth/>
+                <DateField className={styles.inputs} placeholder="Start date" size='small' color='grey' name='start-date' format="YYYY/MM/DD" InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} fullWidth/>
             </LocalizationProvider>
 
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateField label="End date" size='small' color='grey' name='end-date' format="YYYY/MM/DD" fullWidth/>
+                <DateField className={styles.inputs} placeholder="End date" size='small' color='grey' name='end-date' format="YYYY/MM/DD" InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} fullWidth/>
             </LocalizationProvider>
                         
             <button className={styles.createButton} type='submit'>Create</button>

@@ -8,19 +8,38 @@ const slice = createSlice({
     },
     reducers:
     {
-        addAnswers(state, action)
+        addAnswer(state, action)
         {
-            const {selected, answer} = action.payload
-            state.list.push({selected, answer})
+            const {index, answer} = action.payload
+            if(state.list.length === index)
+                state.list.push([answer])   
+            else
+                state.list[index] = [answer]
         },
 
-        updateAnswer(state, action)
+        addMultipleAnswer(state, action)
         {
-            const {index, selected, answer} = action.payload
-            state.list[index] = {selected, answer};
-        }
+
+            const {index, answer} = action.payload;
+
+            if(state.list.length === index)
+            {
+                state.list.push([answer])
+            }
+            else
+            {
+                if(state.list[index].includes(answer))
+                {
+                    const updateAnswers =  state.list[index].filter((ans)=> ans !== answer)
+                    state.list[index] = updateAnswers;
+                }
+                else
+                    state.list[index].push(answer)
+            }
+            
+        },
     }
 })
 
-export const { addAnswers, updateAnswer } = slice.actions;
+export const { addAnswer, addMultipleAnswer } = slice.actions;
 export default slice.reducer;

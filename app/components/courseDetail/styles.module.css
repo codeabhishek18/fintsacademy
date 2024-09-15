@@ -74,13 +74,13 @@
 .join
 {
     margin-top: 20px;
-    border: 1px solid var(--alert-color);
+    border: 1px solid var(--primary-border);
     padding: 8px 12px;
-    color: var(--alert-color);
+    color: white;
     font-size: 15px;
-    font-weight: 600;
+    font-weight: 500;
     border-radius: 5px;
-    background-color: black;
+    background:none;
     margin: 0;
 }
 
@@ -88,7 +88,7 @@
 {
     cursor: pointer;
     background-color: var(--alert-color);
-    color: black;
+    border: 1px solid var(--alert-color);
 }
 
 .join.light

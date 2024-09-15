@@ -12,6 +12,8 @@ import ShimmerCourseDetail from '@/app/components/shimmerCourseDetail/shimmerCou
 import { useScheme } from '@/contextapi/SchemeProvider';
 import Switch from '@/app/components/themeSwitch/Switch';
 import ErrorDialogue from '@/app/components/errorDialogue/ErrorDialogue';
+import Navbar from '@/app/components/navbar/Navbar';
+import Header from '@/app/components/header/Header';
 
 const Course = () =>
 {
@@ -48,6 +50,7 @@ const Course = () =>
 
     return(
         <div className={scheme === 'dark' ? styles.wrapper : `${styles.wrapper} ${styles.light}`}>
+            <Header/>
             {error && <ErrorDialogue setError={setError} type='away'/>}
             <div className={styles.navbar}>
                 <Image className={styles.fints} src={fints} alt='fints' onClick={()=> router.push('/')}/>

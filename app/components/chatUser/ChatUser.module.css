@@ -1,22 +1,27 @@
 .container
 {
+    width: 100%;
     display: flex;
-    padding: 20px 10px;
+    padding: 15px 10px;
     align-items: center;
     justify-content: space-between;
     border-bottom: 1px solid var(--primary-bg);
     font-weight: 500;
+    border-radius: 
+    5px;
     cursor: pointer;
+    color: white;
 }
 
 .active
 {
-    background-color: var(--active-bg);
+    background-color: var(--alert-color);
+    color: white;
 }
 
 .container:hover
 {
-    background-color: var(--active-bg);
+    background-color: var(--alert-color);
 }
 
 .name
@@ -27,7 +32,39 @@
 
 .time
 {
-    color: rgba(0,0,0,0.3);
     font-size: 14px;
     margin: 5px;
 }
+
+.user
+{
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.delete
+{
+    height: 20px;
+    width: 22px;
+    background-color: var(--primary-bg);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inactiveDelete, .activeDelete
+{
+    height: 10px;
+    width: 11px;
+    box-shadow: var(--box-shadow);
+    border-radius: 50%;
+}
+
+.activeDelete
+{
+    background-color: var(--alert-color);
+}
+

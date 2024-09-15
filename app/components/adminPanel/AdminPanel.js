@@ -4,15 +4,15 @@ import { usePathname, useRouter } from 'next/navigation';
 import styles from './AdminPanel.module.css'
 import { useEffect, useState } from 'react';
 import { adminPanelList } from '@/utility/adminPanelList';
-import right from '@/assets/next-lg.png'
-import left from '@/assets/back-lg.png'
+import right from '@/assets/next.png'
+import left from '@/assets/back.png'
 import Image from 'next/image';
 
 const AdminPanel = () =>
 {
     const router = useRouter();
     const [ active, setActive ] = useState(0);
-    const [ slide, setSlide ] = useState(false);
+    const [ slide, setSlide ] = useState(true);
     const pathname = usePathname();
 
     useEffect(() =>

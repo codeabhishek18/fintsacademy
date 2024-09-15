@@ -28,12 +28,12 @@ const CourseForm = () =>
             <p className={styles.header}>Add Course</p>
 
             <form className={styles.form} onSubmit={handleSubmit}>
-                <TextField size='small' color='grey' className={styles.title} name='title' placeholder='Course Title' />
-                <TextField size='small' color='grey' className={styles.title} name='description' placeholder='Description'/>
-                <TextField size='small' color='grey' className={styles.title} name='price' placeholder='Price' />
-                <TextField size='small' color='grey' className={styles.title} name='offerPrice' placeholder='Offer price' />
-                <TextField size='small' color='grey' className={styles.title} name='imageURL' placeholder='Image url ' />
-                <TextField size='small' color='grey' className={styles.title} name='level' placeholder='Level' />
+                <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} sx={{color:'grey'}} className={styles.title} name='title' placeholder='Course Title' />
+                <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} sx={{color:'grey'}} className={styles.title} name='description' placeholder='Description'/>
+                <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} sx={{color:'grey'}} className={styles.title} name='price' placeholder='Price' />
+                <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} sx={{color:'grey'}} className={styles.title} name='offerPrice' placeholder='Offer price' />
+                <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} sx={{color:'grey'}} className={styles.title} name='imageURL' placeholder='Image url ' />
+                <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} sx={{color:'grey'}} className={styles.title} name='level' placeholder='Level' />
                 <button className={styles.createButton} type="submit">Add Course</button>
             </form>
 

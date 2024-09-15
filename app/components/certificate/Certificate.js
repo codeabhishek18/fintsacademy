@@ -10,12 +10,7 @@ const Certificate = () =>
     return(
         <div className={styles.container}>   
             <Image className={styles.background} src={certificatebg} alt='fints'/>   
-            <motion.div 
-                initial={{opacity: 0}}
-                whileInView={{opacity: 1}}
-                className={styles.certify}>
-                <Image className={styles.certify} src={certificate} alt='fints'/>
-            </motion.div>
+            <Image className={styles.certify} src={certificate} alt='fints'/>
         </div>
     )
 }

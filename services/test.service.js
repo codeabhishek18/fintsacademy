@@ -50,7 +50,8 @@ class testService
         }
         catch(error)
         {
-            return error
+            console.log(error)
+            throw error
         }
     }
 }

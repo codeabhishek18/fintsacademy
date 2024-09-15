@@ -5,11 +5,12 @@ import axios from "axios";
 import { useSession } from "next-auth/react"
 import Image from 'next/image';
 import { useParams, usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import success from '@/assets/success.png'
 import { useDispatch, useSelector } from "react-redux";
-import { addAnswers, updateAnswer } from "@/store/slices/quizReducer";
+import { addAnswer, addMultipleAnswer, updateAnswer } from "@/store/slices/quizReducer";
 import { CircularProgress } from '@mui/material';
+import Webcam from 'react-webcam';
 
 const Assessment = () =>
 {
@@ -49,31 +50,19 @@ const Assessment = () =>
             setIsLoading(true);
     }, [status]);
     
-    const checkAnswer = (option, answer, index, selected) =>
+    const checkAnswer = (index, answer) =>
     {
-        if(answersList.length === index)
-        {
-            if(option === answer)
-                dispatch(addAnswers({selected, answer}))
-            else
-                dispatch(addAnswers({selected, answer: option}))
-        }
-        else
-        {
-            if(option === answer)
-                dispatch(updateAnswer({index, selected, answer}))
-            else
-                dispatch(updateAnswer({index, selected, answer: option}));
-        }
+        dispatch(addAnswer({index, answer}))
+    }
+
+    const checkMultipleAnswer = (index, answer) =>
+    {
+        dispatch(addMultipleAnswer({index, answer}))
     }
 
     const handleSubmit =  async() =>
     {
-        const answers = [];
-        answersList.list.forEach((quiz)=>
-        {
-            answers.push(quiz.answer)
-        })   
+        const answers = answersList.list
 
         const url = `/api/assessment/${testId}`
         await axios.post(url, {answers});
@@ -89,33 +78,71 @@ const Assessment = () =>
 
     return(
         <div className={styles.wrapper}>
+            
             <div className={styles.container}>
-                {assessment && <p>{index+1}/{assessment.quiz.length}</p>}
                 {assessment && 
                 <div className={styles.quiz}>
+                    <p className={styles.activeQuestion}>{index+1}/{assessment?.quiz?.length}</p>
                     <p className={styles.question}>{assessment.quiz[index].question}</p>
-                    {assessment.status==='Completed' && 
-                    <p className={styles.reason}>REASON : {assessment.quiz[index].reason}</p>}
-                    <div className={styles.options}>
-                    {assessment.quiz[index].options.map((option,idx)=>
+                    
+                    {assessment.status === 'Pending' && 
+                    <div className={styles.webcam}>
+                        <Webcam width={200} mirrored={true}/>
+                    </div>}
+                </div>}
+                
+                <div className={styles.options}>
+                    {assessment.quiz[index].multipleAnswers === 'false' ?
+
+                    (assessment.quiz[index].options.map((option,idx)=>
                     (
                         <button className={assessment.status === 'Pending' ? 
-                            (idx+1 === answersList.list[index]?.selected ? `${styles.option} ${styles.selected}` : styles.option) : 
-                            (option === assessment.quiz[index].answer ? `${styles.option} ${styles.correct}` : 
-                                option === assessment.answers[index] ? `${styles.option} ${styles.alert}`: `${styles.option} ${styles.read}`)} 
+                            ((answersList.list[index]?.includes(idx+1)) ? `${styles.option} ${styles.selected}` : styles.option) : 
+                            (assessment.quiz[index].answers.includes(idx+1) ? `${styles.option} ${styles.correct}` : 
+                                (assessment.answers[index]?.includes(idx+1)) ? `${styles.option} ${styles.alert}`: `${styles.option} ${styles.read}`)} 
                             key={idx} disabled={assessment.status==='Completed'} 
-                            onClick={()=> checkAnswer(option, assessment.quiz[index].answer, index, idx+1)}>{option}
+                            onClick={()=> checkAnswer(index, idx+1)}>{option}
+                        </button>
+                    ))) :
+
+                    assessment.quiz[index].options.map((option,idx)=>
+                    (
+                        <button className={assessment.status === 'Pending' ? 
+                            ((answersList.list[index]?.includes(idx+1)) ? `${styles.option} ${styles.selected}` : styles.option) : 
+                            (assessment.quiz[index].answers.includes(idx+1) ? `${styles.option} ${styles.correct}` : 
+                                (assessment.answers[index]?.includes(idx+1)) ? `${styles.option} ${styles.alert}`: `${styles.option} ${styles.read}`)} 
+                            key={idx} disabled={assessment.status==='Completed'} 
+                            onClick={()=> checkMultipleAnswer(index, idx+1)}>{option}
                         </button>
                     ))}
-                    </div>
+
                     <div className={styles.control}>
                         {index>0 && <button className={styles.button} onClick={()=> setIndex((prev)=> prev-1)}>Previous</button>}
-                        {index !== assessment.quiz.length-1 && <button className={assessment.status === "Completed" ? styles.button : (index+1 > answersList.list.length ? `${styles.button} ${styles.disabled}` : styles.button)} disabled={assessment.status === "Pending" && index+1 > answersList.list.length} onClick={()=> setIndex((prev)=> prev+1)}>Next</button>}
-                        {index === assessment.quiz.length-1 && assessment.status === "Pending" && <button className={index+1 > answersList.list.length ? `${styles.button} ${styles.disabled}` : styles.button} disabled={index+1 > assessment.quiz.length} onClick={handleSubmit}>Submit</button>}
+                        
+                        {index !== assessment.quiz.length-1 && 
+                        <button className={assessment.status === "Completed" ? 
+                        styles.button : (!index === answersList.list[index]?.length ? `${styles.button} ${styles.disabled}` : 
+                        styles.button)} 
+                        onClick={()=> setIndex((prev)=> prev+1)}>Next</button>}
+                        
+                        {index === assessment.quiz.length-1 && assessment.status === "Pending" && 
+                        <button className={index+1 > answersList.list?.length ? `${styles.button} ${styles.disabled}` : styles.button} disabled={index+1 > assessment.quiz.length} onClick={handleSubmit}>Submit</button>}
                         {index === assessment.quiz.length-1 && assessment.status === "Completed" &&<button className={index+1 > assessment.quiz.length ? `${styles.button} ${styles.disabled}` : styles.button} disabled={index+1 > assessment.quiz.length} onClick={()=> router.push(`${pathname}/scorecard`)}>Scorecard</button>}
                     </div> 
-                </div>}
+                </div>
             </div>
+
+            {assessment.status === 'Completed' &&
+            <div className={styles.colorInfo}>
+                <div className={styles.group}>
+                    <div className={styles.successColor}></div>
+                    <p className={styles.info}>Correct Answer</p>
+                </div>
+                <div className={styles.group}>
+                    <div className={styles.alertColor}></div>
+                    <p className={styles.info}>Your Answer</p>
+                </div>
+            </div>}
 
             {isCompleted && <div className={styles.testCompleteWrapper}>
                 <div className={styles.testComplete}>

@@ -68,6 +68,7 @@ const Forum = () =>
         <div className={styles.wrapper}>
             {discussions ? 
             <div className={styles.container}>
+                <ForumPost/>
                 <ForumSearchbar handleChange={handleChange} searchQuery={searchQuery} getDiscussions={getDiscussions}/>
                 
                 <div className={styles.discussions}>

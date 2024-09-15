@@ -20,6 +20,12 @@
     column-gap: 15px;
 }
 
+.input
+{
+    border: 1px solid var(--primary-border);
+    border-radius: 5px;
+}
+
 .search
 {
     background-color: var(--alert-color);

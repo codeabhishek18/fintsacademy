@@ -41,7 +41,7 @@
     margin: 0;
     font-size: 13px;
     font-weight: 500;
-    color: rgba(0,0,0,0.5);
+    color: var(--primary-border);
 }
 
 .comment

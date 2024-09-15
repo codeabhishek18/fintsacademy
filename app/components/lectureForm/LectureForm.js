@@ -29,8 +29,8 @@ const LectureForm = ({courseId}) =>
             <p className={styles.header}>Add Lecture</p>
 
             <form onSubmit={handleSubmit} className={styles.form}>
-                <TextField className={styles.inputs} color='grey' size='small' label="Description" type="text" name="description" fullWidth/>
-                <TextField className={styles.inputs} color='grey' size='small' label="Duration" type="text" name="duration" fullWidth/>        
+                <TextField className={styles.inputs} InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} color='grey' size='small' placeholder="Description" type="text" name="description" fullWidth/>
+                <TextField className={styles.inputs} InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} color='grey' size='small' placeholder="Duration" type="text" name="duration" fullWidth/>        
                 <button className={styles.createButton} type='submit'>Create</button>
             </form>
             

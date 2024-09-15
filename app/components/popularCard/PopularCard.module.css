@@ -7,8 +7,9 @@
     display: flex;
     flex-direction: column;
     row-gap: 10px;
-    background-color: var(--secondary-color);
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: var(--primary-element);
+    box-shadow: var(--box-shadow);
+    color: white;
 }
 
 .header
@@ -34,7 +35,7 @@
 
 .active
 {
-    background-color: var(--alert-bg);
+    background-color: var(--alert-color);
 }
 
 .topic:hover
@@ -52,7 +53,7 @@
     margin: 0;
     font-size: 12px;
     font-weight: 400;
-    color: rgba(0,0,0,0.5)
+    color: var(--primary-border);
 }
 
 .clear

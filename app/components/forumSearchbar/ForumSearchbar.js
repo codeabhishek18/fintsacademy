@@ -25,16 +25,15 @@ const ForumSearchbar = ({searchQuery, getDiscussions, handleChange}) =>
     return(
         <div className={styles.container}>
             <TextField
-                size='small' variant='outlined' label="Search"
-                color='grey' className={styles.input} 
+                InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}}
+                size='small' placeholder="Search" className={styles.input} 
                 value={searchQuery.search} name="search" 
                 onChange={(e)=> handleChange('search', e.target.value)}
             />
-            <FormControl fullWidth>
-                <InputLabel size='small' color='grey'>Discussions</InputLabel>
-                <Select size='small' color='grey' name="order" value={searchQuery.order} 
+            <FormControl color='grey' fullWidth>
+                <InputLabel size='small' color='grey' sx={{color: 'grey'}} variant='outlined'>Filter Discussions</InputLabel>
+                <Select size='small' color='error'  sx={{color: 'grey'}} name="order" className={styles.input} value={searchQuery.order} 
                     onChange={(e)=> handleChange('order', e.target.value)}>
-                    <MenuItem value="" disabled>Discussions</MenuItem>
                     <MenuItem value="dec">New to old</MenuItem>
                     <MenuItem value="asc">Old to new</MenuItem>
                 </Select>

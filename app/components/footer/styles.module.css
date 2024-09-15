@@ -7,8 +7,8 @@
     justify-content: space-between;
     row-gap: 20px;
     padding: 10vh 10vw 12vh;
-    background-color: rgb(15, 18, 18);
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    background-color: var(--primary-element);
+    box-shadow: var(--box-shadow);
 }
 
 .container
@@ -30,7 +30,7 @@
 
 .title
 {
-    height: 72px;
+    height: 56px;
     width: fit-content;
 }
 

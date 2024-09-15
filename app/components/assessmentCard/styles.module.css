@@ -1,40 +1,83 @@
 .container
 {
-    width: 100%;
-    background-color: white;
-    padding: 25px 22.5px;
+    width: calc(25% - 15px);
+    padding: 15px;
+    padding-bottom: 20px;
     border-radius: 5px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    background-color: var(--primary-element);
+    box-shadow: var(--box-shadow);
+    color: white;
+    row-gap: 10px;
+    position: relative;
 }
 
-.status
+.testImage
+{
+    width: 100%;
+    background-color: var(--primary-bg);
+    height: 140px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    column-gap: 10px;
+    align-items: center;
+}
+
+.testDetails
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.title
 {
     margin: 0;
-    padding: 5px 10px;
+}
+
+.status, .pending
+{
+    width: fit-content;
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    margin: 0;
+    padding: 2px 5px;
     border-radius: 5px;
-    font-size: 15px;
+    font-size: 12px;
     border: 0;
+    box-shadow: var(--box-shadow);
+}
+
+.pending
+{
+    border: 1px solid var(--primary-element);
+    background-color: var(--primary-element);
+    color: white;
 }
 
 .test
 {
-    height: 20px;
+    height: 40px;
     width: fit-content;
 }
 
-.left
+.footer
 {
+    margin-top: 10px;
     display: flex;
+    justify-content: space-between;
     align-items: center;
 }
 
-.right
+.date
 {
-    display: flex;
-    align-items: center;
-    column-gap: 10px;
+    margin: 0;
+    font-size: 14px;
+    color: var(--primary-border);
 }
 
 .success
@@ -48,6 +91,7 @@
 {
     background-color: var(--warning-color);
     border: 1px solid var(--warning-color);
+    color: black;
 }
 
 .route
@@ -58,7 +102,8 @@
     border-radius: 5px;
     background: none;
     border: 1px solid var(--primary-border);
-    font-size: 15px;
+    color: white;
+    font-size: 14px;
 }
 
 .route:hover
@@ -67,4 +112,18 @@
     color: var(--secondary-color);
     border: 1px solid var(--alert-color);
     cursor: pointer;
+}
+
+.instructions
+{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
 }

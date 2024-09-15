@@ -1,0 +1,17 @@
+.logout
+{
+    margin: 10px;
+    width: fit-content;
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid var(--alert-color);
+    background-color: var(--alert-color);
+    color: var(--secondary-color);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout:hover
+{
+    background-color: rgb(206, 8, 8);
+}

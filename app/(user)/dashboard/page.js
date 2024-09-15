@@ -54,10 +54,10 @@ const Dashboard = () =>
     return(
         <div>
             {userData &&
-            <div>
+            <div className={styles.enrollments}>
                 {userData?.enrollments?.map((data)=>
                 (
-                    <BatchCard data={data.batch}/>
+                    <BatchCard data={data.batch} key={data._id}/>
                 ))}
             </div>}
         </div>

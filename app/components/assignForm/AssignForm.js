@@ -11,7 +11,7 @@ const AssignForm = ({quiz, setAssignForm}) =>
     const [ batch, setBatch ] = useState('');
     const [ batches, setBatches ] = useState([])
     const [ batchType, setBatchType ] = useState('');
-    const [ selectedBatch, setSelectedBatch ] = useState([]);
+    const [ selectedBatch, setSelectedBatch ] = useState(null);
     const [ keyList, setKeyList ] = useState([]);
 
     useEffect(()=>
@@ -38,7 +38,7 @@ const AssignForm = ({quiz, setAssignForm}) =>
         setSelectedBatch(response.data);
     }
 
-     const handleKeywords = (name, id) =>
+    const handleKeywords = (name, id) =>
     {
         let search = keyList.filter((key) => key.id === id);
         if(!search.length)
@@ -92,9 +92,9 @@ const AssignForm = ({quiz, setAssignForm}) =>
                     ))}
                 </div>}
 
-                <FormControl fullWidth>
-                    <InputLabel size='small' color='grey'>Choose batch</InputLabel>
-                    <Select size='small' color='grey' name="batch" label="Choose course" value={batch} onChange={(e)=> setBatch(e.target.value)}>
+                <FormControl className={styles.input} fullWidth>
+                    <InputLabel size='small' color='grey' sx={{color: 'grey'}} variant='outlined'>Choose batch</InputLabel>
+                    <Select size='small' color='grey' sx={{color: 'grey'}} placeholder="Multiple answers" InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} name="batch" label="Choose course" value={batch} onChange={(e)=> setBatch(e.target.value)}>
                     {batches?.map((batch) =>
                     (
                         <MenuItem value={batch.title} key={batch._id}>{batch.title}</MenuItem>
@@ -102,9 +102,9 @@ const AssignForm = ({quiz, setAssignForm}) =>
                     </Select>
                 </FormControl>
 
-                <FormControl fullWidth>
-                    <InputLabel size='small' color='grey'>Assign to</InputLabel>
-                    <Select size='small' color='grey' name="batch" label="Choose course" value={batchType} onChange={(e)=> {setBatchType(e.target.value); e.target.value === 'all' && setKeyList([])}}>
+                <FormControl className={styles.input} fullWidth>
+                    <InputLabel size='small' color='grey' sx={{color: 'grey'}} >Assign to</InputLabel>
+                    <Select size='small' color='grey'  sx={{color: 'grey'}} name="batch" InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} label="Choose course" value={batchType} onChange={(e)=> {setBatchType(e.target.value); e.target.value === 'all' && setKeyList([])}}>
                         <MenuItem value='all'>All</MenuItem>
                         <MenuItem value='selected'>Selected</MenuItem>
                     </Select>

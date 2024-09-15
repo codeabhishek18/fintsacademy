@@ -1,3 +1,4 @@
+import { Message } from "@/models/message.model.js";
 import { Chat } from "../models/chat.model.js";
 
 class chatService
@@ -13,21 +14,9 @@ class chatService
         }
         catch(error)
         {
-            throw new Error('Failed to create chat')
+            throw error
         }
     }
-
-    // async setChatUser(chatId, sender, receiver)
-    // {
-    //     try
-    //     {
-    //         return await Chat.findByIdAndUpdate(chatId, {$set: {sender: sender, }})
-    //     }
-    //     catch(error)
-    //     {
-    //         throw new Error(error);
-    //     }
-    // }
 
     async updateChat(chatId, message)
     {
@@ -37,22 +26,27 @@ class chatService
         }
         catch(error)
         {
-            throw new Error('Message failed')
+            throw error
         }
     }
 
-    // async findChat(id)
-    // {
-    //     try
-    //     {
-    //        const sender = await Chat.some((fi))
-    //        return sender
-    //     }
-    //     catch(error)
-    //     {
-    //         throw new Error('Message failed')
-    //     }
-    // }
+    async getChatById(id)
+    {
+        try
+        {
+           const chat = await Chat.findById(id)
+           .populate(
+            {
+                path: 'message',
+                model: Message
+            })
+           return chat
+        }
+        catch(error)
+        {
+            throw error
+        }
+    }
 }
 
 export default chatService
