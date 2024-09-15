@@ -41,3 +41,30 @@
     top: 460px;
 }
 
+@media screen and (max-width: 450px) 
+{
+    .container, .certificate
+    {
+        height: 520px;
+        width: 350px;
+    }
+
+    .name
+    {
+        top: 240px;
+        font-size: 18px;
+    }
+
+    .course
+    {
+        top: 292px;
+        font-size: 14px;
+    }
+
+    .date
+    {
+        top: 410px;
+        left: 90px;
+        font-size: 10px;
+    }
+}

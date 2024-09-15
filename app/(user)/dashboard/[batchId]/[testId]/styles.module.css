@@ -341,3 +341,23 @@
 {
     background-color: var(--warning-color);
 }
+
+@media screen and (max-width: 450px)
+{
+    .container
+    {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .quiz, .options
+    {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    .question, .option
+    {
+        font-size: 14px;
+    }
+}

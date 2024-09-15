@@ -27,6 +27,8 @@
 
 .head
 {
+    font-size: 36px;
+    font-weight: 700;
     margin: 10px 0;
     color: var(--alert-color);
 }

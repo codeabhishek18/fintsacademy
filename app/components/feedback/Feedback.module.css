@@ -16,6 +16,7 @@
 {
     color: var(--alert-color);
     font-size: 48px;
+    font-weight: 600;
     margin: 0;
     margin-bottom: 10px;
 }
@@ -65,4 +66,35 @@
     top: -10px;
     margin: 0;
     cursor: pointer;
+}
+
+@media screen and (max-width: 450px)
+{
+    .container
+    {
+        margin-top: 40px;
+        width: 350px;
+    }
+
+    .title
+    {
+        font-size: 36px;
+    }
+
+    .description
+    {
+        font-size: 14px;
+        line-height: 24px;
+    }
+
+    .close
+    {
+        top: 10px;
+        right: 15px;
+    }
+
+    .submit
+    {
+        padding: 5px;
+    }
 }

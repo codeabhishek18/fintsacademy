@@ -127,3 +127,11 @@
     justify-content: center;
     z-index: 1;
 }
+
+@media screen and (max-width: 420px) 
+{
+    .container
+    {
+        width: 100%;
+    }    
+}

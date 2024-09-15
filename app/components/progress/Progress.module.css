@@ -10,6 +10,7 @@
     background-color: var(--primary-element);
     box-shadow: var(--box-shadow);
     color: white;
+    font-size: 16px;
 }
 
 .header, .footer
@@ -241,45 +242,18 @@
     background-color: var(--alert-color);
 }
 
-.userCertifiy
-{
-    position: relative;
-    height: 585px;
-    width: 420px;
-}
-
-.certify
-{
-    height: 585px;
-    width: 420px;
-}
-
-.username, .usercourse, .userdate
-{
-    position: absolute;
-    width: 100%;
-    left: 50%;
-    text-align: center;
-    transform: translateX(-50%);
-    color: var(--gold-color);
-}
-
-.username
-{
-    top: 270px;
-    font-size: 22px;
-    font-weight: 600;
-}
-
-.usercourse
-{
-    top: 330px;
-    font-weight: 600;
-}
-
 .userdate
 {
     font-size: 12px;
     left: 100px;
     top: 460px;
+}
+
+@media screen and (max-width: 450px)
+{
+    .container
+    {
+        font-size: 14px;
+        padding: 10px;
+    }
 }

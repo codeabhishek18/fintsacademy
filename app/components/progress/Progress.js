@@ -49,24 +49,23 @@ const Progress = ({batchData, level, assessments}) =>
 
     const checkProgressStatus = () =>
     {
-        if(!assessments.assessments.length)
-            return alert('Certification be unlocked only after successful completion of sprint and assessment')
+        // if(!assessments.assessments.length)
+        //     return alert('Certification be unlocked only after successful completion of sprint and assessment')
 
-        const isSprintCompleted = pendingSessions(batchData.sessions) === 0 ? 'Completed' : 'Pending'
-        const isAssessmentCompleted = assessments.assessments.find((assessment)=> assessment.status === 'Completed');
+        // const isSprintCompleted = pendingSessions(batchData.sessions) === 0 ? 'Completed' : 'Pending'
+        // const isAssessmentCompleted = assessments.assessments.find((assessment)=> assessment.status === 'Completed');
 
-        if(!isAssessmentCompleted)
-            return alert('Certification be unlocked only after successful completion of sprint and assessment')
+        // if(!isAssessmentCompleted)
+        //     return alert('Certification be unlocked only after successful completion of sprint and assessment')
 
-        const isAssessmentCleared = calculateResult(isAssessmentCompleted.score, isAssessmentCompleted.quiz.length)
+        // const isAssessmentCleared = calculateResult(isAssessmentCompleted.score, isAssessmentCompleted.quiz.length)
 
-        if(isSprintCompleted === 'Pending' || isAssessmentCleared !== 'Pass')
-            return alert('Certification be unlocked only after successful completion of sprint and assessment')
+        // if(isSprintCompleted === 'Pending' || isAssessmentCleared !== 'Pass')
+        //     return alert('Certification be unlocked only after successful completion of sprint and assessment')
 
-        
 
-        if(!isAssessmentCleared)
-            return
+        // if(!isAssessmentCleared)
+        //     return
 
         setShowCertificate(true)
         Confetti();
@@ -100,7 +99,7 @@ const Progress = ({batchData, level, assessments}) =>
                 <p className={styles.dates}>{new Date(batchData.startDate).toLocaleDateString('en-US', options)} - {new Date(batchData.endDate).toLocaleDateString('en-US', options)} </p>
             </div>
             <div className={styles.progress}>
-                <p className={styles.progressTitle}>Progress</p>
+                {/* <p className={styles.progressTitle}>Progress</p> */}
                 <PieChartWithPaddingAngle sessionData={batchData}/>
             </div>
             <div className={styles.batch}>
@@ -127,7 +126,7 @@ const Progress = ({batchData, level, assessments}) =>
                 </div>}
                 <div className={styles.group}>
                     <p className={styles.groupTitle}>Zoom link</p>
-                    {level === "user" ? <button className={styles.connect} onClick={()=> router.push(batchData.zoomLink)}>Connect</button> :
+                    {level === "user" ? <button className={styles.connect}>Connect</button> :
                     <button className={styles.connect} onClick={()=> setShowZlink(true)}>Add link</button>}  
                 </div>
                 {showzlink && <div className={styles.addlink}>

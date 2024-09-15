@@ -106,3 +106,18 @@
     color: white;
     padding: 6px;
 }
+
+@media screen and (max-width: 420px) 
+{
+    .container 
+    {
+        flex-direction: column;
+        row-gap: 20px;
+    }   
+    
+    .progress, .practicals
+    {
+        width: 100%;
+    }
+
+}

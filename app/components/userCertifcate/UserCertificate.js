@@ -12,7 +12,7 @@ const UserCertificate = ({course, date, divRef}) =>
     return(
         <div className={styles.container} ref={divRef}>
             <p className={styles.name}>{data.user.name}</p>
-            <p className={styles.course}>{course.title +' ' +course.level}</p>
+            <p className={styles.course}>{course.title}</p>
             <p className={styles.date}>{new Date(date).toLocaleDateString()}</p>
             <Image className={styles.certificate} src={certificate} alt='certificate'/>
         </div>

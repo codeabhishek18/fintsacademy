@@ -12,22 +12,22 @@ import { FormatDate } from '@/utility/FormatDate'
 const AssessmentCard = ({assessment, index, batchId}) =>
 {
     const router = useRouter();
-    const webcamRef = useRef(null);
-    const [ isCamOn, setIsCamOn ] = useState(false);
-    const [ checkCam, setCheckCam ] = useState(false)
+    // const webcamRef = useRef(null);
+    // const [ isCamOn, setIsCamOn ] = useState(false);
+    // const [ checkCam, setCheckCam ] = useState(false)
 
-    const checkWebcam = () => 
-    {
-        if (webcamRef.current?.stream) 
-            setIsCamOn(true);
-        else 
-            setIsCamOn(false);
-    }
+    // const checkWebcam = () => 
+    // {
+    //     if (webcamRef.current?.stream) 
+    //         setIsCamOn(true);
+    //     else 
+    //         setIsCamOn(false);
+    // }
 
-    useEffect(()=>
-    {
-        checkWebcam();
-    }, [webcamRef])
+    // useEffect(()=>
+    // {
+    //     checkWebcam();
+    // }, [webcamRef])
 
     return(
         <div className={styles.container} >
@@ -43,15 +43,17 @@ const AssessmentCard = ({assessment, index, batchId}) =>
                     <p className={styles.date}>{FormatDate(assessment.updatedAt)}</p>
                     {assessment.status === 'Completed' ? 
                     <button className={styles.route} onClick={()=> router.push(`/dashboard/${batchId}/${assessment._id}`)}>Review</button> :
-                    <button className={styles.route} onClick={()=> setCheckCam(true)}>Start</button>}
+                    <button className={styles.route} onClick={()=> router.push(`/dashboard/${batchId}/${assessment._id}`)}>Start</button> 
+                    // <button className={styles.route} onClick={()=> setCheckCam(true)}>Start</button>
+                    }
                 </div>                    
             </div>
             
 
-            {checkCam  && 
+            {/* {checkCam  && 
             <div className={styles.instructions}>
                 <CheckWebcam webcamRef={webcamRef} isCamOn={isCamOn} setIsCamOn={setIsCamOn} checkWebcam={checkWebcam} testId={assessment._id} setCheckCam={setCheckCam}/>
-            </div>}
+            </div>} */}
         </div>
     )
 }

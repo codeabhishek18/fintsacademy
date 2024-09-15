@@ -73,6 +73,7 @@ const AssignForm = ({quiz, setAssignForm}) =>
         {
             const url = `/api/quiz/${quiz._id}`
             await axios.post(url, {users, batch});
+            setAssignForm(false)
         }
         catch(error)
         {
