@@ -2,6 +2,7 @@ import Image from 'next/image'
 import styles from './styles.module.css'
 import close from '@/assets/close.png'
 import { useRouter } from 'next/navigation'
+import Logout from '../logout/Logout'
 
 const SlidingMenu= ({setShowSlider}) =>
 {
@@ -13,6 +14,7 @@ const SlidingMenu= ({setShowSlider}) =>
             <p className={styles.link} onClick={()=> router.push('/login')}>Login</p>
             <p className={styles.link} onClick={()=> router.push('/signup')}>Sign up</p>
             <p className={styles.link} onClick={()=> {router.push('/dashboard'); setShowSlider(false)}}>Dashboard</p>
+            <Logout/>
             {/* <p className={styles.link} onClick={()=> {handleScroll('faq');  setShowSlider(false)}}>FAQ</p> */}
             <Image className={styles.close} src={close} alt='close' onClick={()=> setShowSlider(false)}/>
         </div>
