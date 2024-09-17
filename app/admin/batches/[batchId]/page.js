@@ -74,8 +74,6 @@ const Batch = () =>
     //     }
     // }
 
-    // console.log(batches)
-
     return(
         <div className={styles.wrapper}>
             {batch ?

@@ -55,7 +55,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
 }
 
@@ -79,4 +79,12 @@
     padding: 10px;
     border-radius: 5px;
     color: black;
+}
+
+@media screen and (max-width: 450px) 
+{
+    .group
+    {
+        font-size: 14px;
+    }
 }

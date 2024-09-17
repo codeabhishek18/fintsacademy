@@ -25,6 +25,8 @@ const Batches = () =>
         setQuizData(response.data)
     }
 
+    console.log(quizData)
+
     return(
         <div className={styles.wrapper}>
             {quizData ?
@@ -37,7 +39,7 @@ const Batches = () =>
              <div className={styles.assignments}>
                 {quizData?.group?.map((item)=>
                 (
-                    <BatchCard level='admin' key={item._id} data={item.batch} participants={item.assignments} batchId={item._id}/>
+                    <BatchCard level='admin' key={item._id} data={item.batch} participants={item.assignment.length} batchId={item._id}/>
                 ))}
             </div> 
             </div> :

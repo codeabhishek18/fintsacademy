@@ -26,7 +26,7 @@ const Scorecard = ({data}) =>
                     <p className={styles.left}>Percentile</p>
                     <p className={styles.right}>{calculatePercentile(data.score, data.quiz.length)}%</p>
                 </div>
-                <div className={calculateResult(data.score, data.quiz.length) === "Pass" ? `${styles.group} ${styles.success}` : `${styles.group} ${styles.alert}`}>
+                <div className={calculateResult(data.score, data.quiz.length) === "Qualified" ? `${styles.group} ${styles.success}` : `${styles.group} ${styles.alert}`}>
                     <p className={styles.left}>Result</p>
                     <p className={styles.right}>{calculateResult(data.score, data.quiz.length)} </p>
                 </div>

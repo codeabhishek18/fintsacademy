@@ -27,8 +27,8 @@ export default async function auth(req)
         if(userRoute || adminRoute)
             return NextResponse.redirect(new URL('/login', nextUrl))
 
-    if(user?.role === 'visitor' && authRoute )
-        return NextResponse.redirect(new URL('/', nextUrl))
+    // if(user?.role === 'visitor' && authRoute )
+    //     return NextResponse.redirect(new URL('/', nextUrl))
 
     if(user)
     {

@@ -1,6 +1,8 @@
 import { Assignment } from "@/models/assignment.model";
 import { Batch } from "@/models/batch.model";
+import { Course } from "@/models/course.model";
 import { Group } from "@/models/group.model"
+import { Mentor } from "@/models/mentor.model";
 import { Test } from "@/models/test.model";
 import { User } from "@/models/user.model";
 
@@ -53,7 +55,18 @@ class groupService
         try
         {
             const group = await Group.findById(groupdId)
-            .populate({path: 'batch', model: Batch})
+            .populate({
+                path: 'batch', 
+                model: Batch, 
+                populate:
+                [{ 
+                    path: 'mentor', 
+                    model: Mentor
+                },
+                {
+                    path: 'course', 
+                    model:Course
+                }]})
             .populate({
                 path: 'assignment',
                 model: Assignment,
@@ -67,7 +80,6 @@ class groupService
                     model: Test
                 }]
             })
-            
             return group;
         }
         catch(error)

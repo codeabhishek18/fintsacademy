@@ -5,6 +5,6 @@ export const calculatePercentile = (score, questions) =>
 
 export const calculateResult = (score, questions) =>
 {
-    const result = calculatePercentile(score, questions) > 75 ? 'Pass' : 'Fell short'
+    const result = calculatePercentile(score, questions) >= 75 ? 'Qualified' : 'Fell short'
     return result
 }

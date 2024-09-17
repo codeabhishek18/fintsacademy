@@ -60,7 +60,7 @@ const Progress = ({batchData, level, assessments}) =>
 
         const isAssessmentCleared = calculateResult(isAssessmentCompleted.score, isAssessmentCompleted.quiz.length)
 
-        if(isSprintCompleted === 'Pending' || isAssessmentCleared !== 'Pass')
+        if(isSprintCompleted === 'Pending' || isAssessmentCleared !== 'Qualified')
             return alert('Certification will be unlocked only after successful completion of sprint and assessment')
 
 

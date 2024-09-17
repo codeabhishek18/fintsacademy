@@ -6,25 +6,57 @@
 .container
 {
     width: 100%;
-    background-color: var(--primary-bg);
+    padding: 50px;
+    border-radius: 5px;
     min-height: 100vh;
     border-radius: 8px;
+    background-color: var(--primary-element);
+}
+
+.header, .container
+{
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
 }
 
 .header
 {
-    font-size: 28px;
-    font-weight: 600;
+    background-color: var(--primary-bg);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+    border-radius: 5px;
     color: white;
-    margin: 10px 0 20px;
+    row-gap: 20px;
 }
 
-.assignments
+.container
 {
-    width: 50%;
+    row-gap: 30px;
+    position: relative;
+}
+
+.course
+{
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--alert-color);
+    cursor: pointer;
+}
+
+.details, .group
+{
+    border-radius: 5px;
     display: flex;
-    flex-direction: column;
-    row-gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.date
+{
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
 }
 
 .rowHeader
@@ -41,8 +73,8 @@
 .cell
 {
     font-size: 16px;
-    background-color: var(--primary-element);
-    color: white;
+    background-color: white;
+    color: black;
 }
 
 .spinner
@@ -52,4 +84,33 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+
+.download
+{
+    position: absolute;
+    top: 0;
+    right: -50px;
+    background-color: var(--primary-element);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.download:hover
+{
+    color: var(--alert-color);
+}
+
+.downloadIcon
+{
+    height: 20px;
+    width: fit-content;
+}
+
+.fints
+{
+    height: 40px;
+    width: fit-content;
 }
