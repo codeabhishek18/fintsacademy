@@ -14,7 +14,7 @@ const Footer = () =>
             <div className={styles.container}>
             <Image className={styles.title} src={fints} alt='icon'/>
             <div className={styles.social}>
-                <a href='https://www.linkedin.com/in/lokesh-naik-amltrustedsource/' target='_blank'>
+                <a href='https://www.linkedin.com/company/fintsacademy/' target='_blank'>
                     <Image className={styles.icons} src={linkedin} alt='linkedin'/>
                 </a>
                 <a href='https://www.youtube.com/@camsbuild_lokesh' target='_blank'>
