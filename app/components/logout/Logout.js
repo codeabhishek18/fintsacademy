@@ -1,11 +1,23 @@
+'use client'
+
 import { doLogout } from "@/app/action"
 import styles from './styles.module.css' 
+import { useSession } from "next-auth/react"
 
-const Logout = () => {
+const Logout = () => 
+{
+  const session = useSession();
+
+  const handleLogout = () =>
+  {
+    doLogout();
+    session.update();
+  }
+
   return (
-    <form action={doLogout}>
-        <button className={styles.logout} type="submit">Logout</button>
-    </form>
+    <div>
+        <button className={styles.logout} onClick={handleLogout}>Logout</button>
+    </div>
   )
 }
 

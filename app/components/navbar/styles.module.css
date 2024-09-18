@@ -105,6 +105,63 @@
     display: none;
 }
 
+.name
+{
+    margin: 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.logout
+{
+    margin: 0;
+    font-size: 14px;
+    padding: 10px;
+    border: 1px solid var(--alert-color);
+    background-color: var(--alert-color);
+    color: var(--secondary-color);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout:hover
+{
+    background-color: rgb(206, 8, 8);
+}
+
+.title
+{
+    height: 35px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.close
+{
+    height: 30px;
+    width: fit-content;
+    cursor: pointer;
+}
+
+.links
+{
+    display: flex;
+    align-items: center;
+    column-gap: 30px;
+}
+
+.link
+{
+    margin: 0;
+    color: white;
+    cursor: pointer;
+}
+
+.link:hover
+{
+    transform: scale(1.05);
+}
+
 @media screen and (max-width:720px)
 {
     .slider

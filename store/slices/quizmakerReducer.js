@@ -10,8 +10,8 @@ const slice = createSlice({
     {
         updateQuestion(state, action)
         {
-            const {index, question, options, multipleAnswers, answers, reason } = action.payload;
-            state.list[index] = {id: index, question, options, multipleAnswers, answers, reason};
+            const {index, question, options, multipleAnswers, answers } = action.payload;
+            state.list[index] = {id: index, question, options, multipleAnswers, answers};
         },
 
         addQuestion(state, action)

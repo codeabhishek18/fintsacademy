@@ -100,6 +100,25 @@ class quizService
         }
     }
 
+    async findQuizByBatch(batchId)
+    {
+        try
+        {
+            console.log(batchId)
+            const quiz = await Quiz.find()
+            .populate({path: 'group', model: Group, populate: {
+                path: 'batch', model: Batch, match: {_id: batchId}
+            }});
+
+            return quiz
+        }
+        catch(error)
+        {
+            console.log(error.message)
+            throw error
+        }
+    }
+
     async updateGroup(quizId, group)
     {
         try

@@ -132,32 +132,20 @@
     }
 }
 
-@media screen and (max-width: 480px) 
+@media screen and (max-width: 640px) 
 {
     .container
     {
         font-size: 14px;
         padding: 20px;
     }   
-    
-    .founderImageWrapper
-    {
-        height: 240px;
-    }
 
-    .icon
+    .header
     {
-        top: 195px;
-        right: 50px;
-        width: 20%;
-        height: 40px;
-        width: fit-content;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 20px;
     }
-}
-
-@media screen and (max-width: 390px) 
-{
-    
     
     .founderImageWrapper
     {
@@ -166,10 +154,10 @@
 
     .icon
     {
-        top: 135px;
-        right: 45px;
+        top: 155px;
+        right: 25px;
         width: 20%;
-        height: 35px;
+        height: 30px;
         width: fit-content;
     }
 }

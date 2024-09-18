@@ -33,16 +33,16 @@
     {
         min-width: calc(50% - 20px);
     }
-}
+} */
 
 
-@media screen and (max-width: 720px) 
+@media screen and (max-width: 375px) 
 {
     .container
     {
-        min-width: calc(100% - 20px);
+        width: 300px;
     }
-} */
+} 
 
 
 

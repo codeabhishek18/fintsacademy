@@ -23,11 +23,8 @@ const Assessments = () =>
     const [ multipleAnswers, setMultipleAnswers ] = useState('');
     const [ answers, setAnswers ] = useState({answer1 : '', answer2: '', answer3: '', answer4: ''});
     const [ answer, setAnswer ] = useState('');
-    const [ reason, setReason ] = useState('');
     const [ courses, setCourses ] = useState(null)
     const [ course, setCourse ] = useState('');
-
-    console.log(quizData)
 
     useEffect(()=>
     {
@@ -65,8 +62,6 @@ const Assessments = () =>
     {
         if(!question)   
             return
-        if(!reason)
-            return
 
         let optionsList = [];
         for(let [key, value] of Object.entries(options))
@@ -74,8 +69,6 @@ const Assessments = () =>
             if(value)
                 optionsList.push(value);
         }     
-        
-        console.log(multipleAnswers)
 
         let answersList = [];
         if(multipleAnswers === 'true')
@@ -97,7 +90,7 @@ const Assessments = () =>
       
         const correctAnswer = multipleAnswers === 'true' ?  answersList : [Number(answer)]
         
-        dispatch(updateQuestion({index, question, options: optionsList, multipleAnswers, answers: correctAnswer, reason}))
+        dispatch(updateQuestion({index, question, options: optionsList, multipleAnswers, answers: correctAnswer}))
     }
 
     const addNewQuestion = () =>
@@ -112,7 +105,6 @@ const Assessments = () =>
         setAnswer('');
         setOptions({option1 : '', option2: '', option3: '', option4: '', option5: '', option6: ''});
         setAnswers({answer1 : '', answer2: '', answer3: '', answer4: ''});
-        setReason('');
     }
 
     const handlePrev = () =>
@@ -135,7 +127,6 @@ const Assessments = () =>
         setMultipleAnswers(data.hasOwnProperty('multipleAnswers') ? data.multipleAnswers : '');
         setAnswer(data.hasOwnProperty('answers') ? data.answers : '')
         setAnswers(data.hasOwnProperty('answers') ? {answer1: data.answers[0], answer2: data.answers[1], answer3: data.answers[2], answer4: data.answers[3]} : {answer1: '', answer2: '', answer3: '', answer4: ''});
-        setReason(data.hasOwnProperty('reason') ? data.reason : '' );
     }
     
     const handlePost = async () =>
@@ -204,7 +195,6 @@ const Assessments = () =>
                                 <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter answer 4' name="answer4"  value={answers.answer4} onChange={handleAnswers}/>
                             </div>}
                             {multipleAnswers  === 'false' && <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter answer' name="answer"  value={answer} onChange={(e)=> setAnswer(e.target.value)}/>}
-                            <TextField size='small' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} className={styles.input} placeholder='Enter reason'   name="reason"   value={reason}          onChange={(e)=> setReason(e.target.value)}/>
                         </div>
                         <div className={styles.buttons}>
                             <button className={index === 0 ? `${styles.next} ${styles.disabled}` : styles.next} onClick={handlePrev} disabled={index===0}>Prev</button>

@@ -15,8 +15,9 @@ const CourseDetail = ({course}) =>
 
     const handleClick = () =>
     {
-        localStorage.setItem('selectedCourse', course.id)
-        router.push('/checkout')
+        // localStorage.setItem('selectedCourse', course.id)
+        // router.push('/checkout')
+        router.push('https://wa.me/8431976788')
     }
 
     return (

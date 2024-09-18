@@ -6,6 +6,7 @@ import styles from './styles.module.css'
 import compliance from '@/assets/compliance.jpg'
 import Image from 'next/image'
 import Navbar from '../navbar/Navbar'
+import { useSession } from 'next-auth/react'
 
 const fadeInAnimation = 
 {
@@ -27,6 +28,8 @@ const fadeInAnimation =
 
 const HeroSection = () =>
 {
+
+    const session = useSession();
 
     return(
         <div className={styles.container}>

@@ -109,7 +109,7 @@ const Home = () =>
                         margin: '-100px',
                     }} className={styles.faqWrapper} ref={faqRef}>  
                     <BoxReveal boxColor={"rgb(15, 18, 18)"} duration={0.5}>
-                        <p className={styles.commonHeader}>FAQ</p>
+                        <p className={styles.commonHeader}>FAQs</p>
                     </BoxReveal>
                     
                     <div className={styles.faq}>
