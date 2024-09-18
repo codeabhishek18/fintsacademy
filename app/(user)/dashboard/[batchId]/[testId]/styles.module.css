@@ -294,8 +294,8 @@
     padding: 10px;
     border-radius: 5px;
     border: 1px solid var(--primary-border);
+    color: white;
     font-size: 15px;
-    font-weight: 600;
 }
 
 .route:hover
@@ -357,6 +357,16 @@
     }
 
     .question, .option
+    {
+        font-size: 14px;
+    }
+
+    .testComplete
+    {
+        width: 300px;
+    }
+
+    .route
     {
         font-size: 14px;
     }

@@ -128,7 +128,15 @@
     z-index: 1;
 }
 
-@media screen and (max-width: 420px) 
+@media screen and (max-width: 1050px) 
+{
+    .container
+    {
+        width: calc(50% - 10px);
+    }    
+}
+
+@media screen and (max-width: 640px) 
 {
     .container
     {

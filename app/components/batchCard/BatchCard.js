@@ -40,7 +40,7 @@ const BatchCard = ({type, level, data, participants, removeBatch, batchId}) =>
                 {level === "admin" ? 
                 (type === 'batch' ?
                 <p className={styles.title}> Enrollments : {data.enrollments.length}</p> :
-                <p className={styles.title}> Participants : {data.enrollments.length}</p>) : <p className={styles.status}>{data.status}</p>}
+                <p className={styles.title}> Participants : {participants}</p>) : <p className={styles.status}>{data.status}</p>}
                 
                 {level === "admin" ?
                 (type === 'batch' ? 

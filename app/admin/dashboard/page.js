@@ -86,8 +86,6 @@ const Dashboard = () =>
         getEnrollments();
     },[])
 
-    graphData && console.log(graphData)
-
     return(
         <div className={styles.wrapper}>
             {courses && batches &&

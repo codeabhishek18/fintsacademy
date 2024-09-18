@@ -109,7 +109,7 @@ const Dashboard = () =>
             </div>}
 
             <div className={styles.assessmentWrapper}>
-                {assessments.assessments.length  >0 && <p className={styles.header}>Assessments</p>}
+                {assessments.assessments.length > 0 && <p className={styles.header}>Assessments</p>}
                 <div className={styles.assessments}>
                     {assessments?.assessments?.map((assessment, index)=>
                     (

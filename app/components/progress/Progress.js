@@ -50,18 +50,18 @@ const Progress = ({batchData, level, assessments}) =>
     const checkProgressStatus = () =>
     {
         if(!assessments.assessments.length)
-            return alert('Certification be unlocked only after successful completion of sprint and assessment')
+            return alert('Certificate will be unlocked only after successful completion of sprint and assessment')
 
         const isSprintCompleted = pendingSessions(batchData.sessions) === 0 ? 'Completed' : 'Pending'
         const isAssessmentCompleted = assessments.assessments.find((assessment)=> assessment.status === 'Completed');
 
         if(!isAssessmentCompleted)
-            return alert('Certification be unlocked only after successful completion of sprint and assessment')
+            return alert('Certification will be unlocked only after successful completion of sprint and assessment')
 
         const isAssessmentCleared = calculateResult(isAssessmentCompleted.score, isAssessmentCompleted.quiz.length)
 
-        if(isSprintCompleted === 'Pending' || isAssessmentCleared !== 'Pass')
-            return alert('Certification be unlocked only after successful completion of sprint and assessment')
+        if(isSprintCompleted === 'Pending' || isAssessmentCleared !== 'Qualified')
+            return alert('Certification will be unlocked only after successful completion of sprint and assessment')
 
 
         if(!isAssessmentCleared)

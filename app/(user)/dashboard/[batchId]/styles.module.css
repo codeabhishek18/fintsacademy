@@ -107,7 +107,7 @@
     padding: 6px;
 }
 
-@media screen and (max-width: 420px) 
+@media screen and (max-width: 1050px) 
 {
     .container 
     {
@@ -118,6 +118,29 @@
     .progress, .practicals
     {
         width: 100%;
+    }
+
+    .header
+    {
+        font-size: 32px;
+    }
+
+}
+
+@media screen and (max-width: 1050px) 
+{
+    .header
+    {
+        font-size: 28px;
+    }
+
+    .feedback
+    {
+        top:80px;
+        right: 5px;
+        height: 30px;
+        padding: 5px;
+        width: fit-content;
     }
 
 }
