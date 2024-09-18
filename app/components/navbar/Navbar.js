@@ -40,17 +40,18 @@ const Navbar = () =>
                 <div className={styles.links}>
                     {/* {data?.user && 
                     <div>
-                        <p className={styles.link} onClick={()=> router.push('/dashboard')}>Dashboard</p>
                         <Image className={styles.profile} src={logout} alt='profile' onClick={()=> setShowDetails(true)}/>
                     </div>} */}
+                    {data?.user && 
+                    <p className={styles.link} onClick={()=> router.push('/dashboard')}>Dashboard</p>}
                     <p className={styles.link} onClick={()=> router.push('/courses')}>Courses</p>
                     {/* <p className={styles.link} onClick={()=> router.push('/blogs')}>Blogs</p>   */}
                     <p className={styles.link} onClick={()=> router.push('/about')}>About</p>
                 </div>
-                {/* {!data?.user && <div className={styles.authWrapper}>
+                {!data?.user && <div className={styles.authWrapper}>
                     <button className={styles.auth} onClick={()=> router.push('/login')}>Login</button>
-                    <button className={styles.auth} onClick={()=> router.push('/signup')}>Sign up</button>
-                </div>  } */}
+                    {/* <button className={styles.auth} onClick={()=> router.push('/signup')}>Sign up</button> */}
+                </div>  }
                 <HamburgerMenu setShowSlider={setShowSlider}/>
                 {/* <Switch/> */}
             </div>

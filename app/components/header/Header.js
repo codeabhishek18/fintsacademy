@@ -23,9 +23,9 @@ const Header = () =>
             
             <div className={styles.links}>
                 {(data?.user?.role === 'user' || data?.user?.role === 'admin') && <p className={styles.link} onClick={()=> router.push('/dashboard')}>Dashboard</p>}
-                <p className={styles.link} onClick={()=> router.push('/courses')}>Courses</p>
+                {/* <p className={styles.link} onClick={()=> router.push('/courses')}>Courses</p> */}
                 {/* <p className={styles.link} onClick={()=> router.push('/blogs')}>Blogs</p>   */}
-                <p className={styles.link} onClick={()=> router.push('/about')}>About</p>
+                {/* <p className={styles.link} onClick={()=> router.push('/about')}>About</p> */}
                 {data?.user && <Image className={styles.profile} src={logout} alt='profile' onClick={()=> setShowDetails(true)}/>}
             </div>
           

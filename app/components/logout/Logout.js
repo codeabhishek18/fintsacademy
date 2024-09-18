@@ -6,12 +6,10 @@ import { useSession } from "next-auth/react"
 
 const Logout = () => 
 {
-  const session = useSession();
 
   const handleLogout = () =>
   {
     doLogout();
-    session.update();
   }
 
   return (
