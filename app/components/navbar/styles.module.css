@@ -124,4 +124,9 @@
     {
         width: calc(100% - 20px);
     }
+
+    .container
+    {
+        font-size: 14px;
+    }
 }

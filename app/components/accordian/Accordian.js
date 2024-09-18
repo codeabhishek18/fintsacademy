@@ -16,7 +16,6 @@ const Accordian = ({data, index, showFaq, setShowFaq}) =>
              
             <div className={styles.query}>
                 <BoxReveal boxColor={"rgb(15, 18, 18)"} duration={0.5} className={styles.query}>
-                    
                     <p className={styles.question}>{data.question}</p>
                 </BoxReveal>
                 <Image className={styles.icon} src={showFaq === index+1 ? close : (scheme === 'dark' ? show_lg : show_dr)} alt='icon'/>

@@ -134,6 +134,13 @@
 
 @media screen and (max-width: 480px) 
 {
+    .header
+    {
+        flex-direction: column;
+        align-items: center;
+        row-gap: 20px;
+    }
+
     .container
     {
         font-size: 14px;
@@ -142,32 +149,13 @@
     
     .founderImageWrapper
     {
-        height: 240px;
+        height: 200px;
     }
 
     .icon
     {
-        top: 195px;
-        right: 50px;
-        width: 20%;
-        height: 40px;
-        width: fit-content;
-    }
-}
-
-@media screen and (max-width: 390px) 
-{
-    
-    
-    .founderImageWrapper
-    {
-        height: 170px;
-    }
-
-    .icon
-    {
-        top: 135px;
-        right: 45px;
+        top: 185px;
+        right: 25px;
         width: 20%;
         height: 35px;
         width: fit-content;

@@ -39,7 +39,9 @@ const CourseDetail = ({course}) =>
             </div>  
 
             <div className={styles.footer}>
-                <button className={scheme === 'dark' ? styles.join : `${styles.join} ${styles.light}`} onClick={handleClick}>Join Now</button>
+                <a href='https://wa.me/8431976788' target='_blank' className={styles.enrollWrapper}>
+                    <span className={styles.join}>Join Now</span>
+                </a>
                 <Rating name="half-rating-read" defaultValue={4.7} precision={0.5} readOnly size='large'/>
             </div>          
         </div>

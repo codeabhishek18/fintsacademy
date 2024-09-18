@@ -11,10 +11,12 @@ const SlidingMenu= ({setShowSlider}) =>
     return(
         <div className={styles.container}>
             {/* <p className={styles.link}>Courses</p> */}
-            <p className={styles.link} onClick={()=> router.push('/login')}>Login</p>
+            {/* <p className={styles.link} onClick={()=> router.push('/login')}>Login</p>
             <p className={styles.link} onClick={()=> router.push('/signup')}>Sign up</p>
-            <p className={styles.link} onClick={()=> {router.push('/dashboard'); setShowSlider(false)}}>Dashboard</p>
-            <Logout/>
+            <p className={styles.link} onClick={()=> {router.push('/dashboard'); setShowSlider(false)}}>Dashboard</p> */}
+            <p className={styles.link} onClick={()=> {router.push('/courses'); setShowSlider(false)}}>Courses</p>
+            <p className={styles.link} onClick={()=> {router.push('/about'); setShowSlider(false)}}>About</p>
+            {/* <Logout/> */}
             {/* <p className={styles.link} onClick={()=> {handleScroll('faq');  setShowSlider(false)}}>FAQ</p> */}
             <Image className={styles.close} src={close} alt='close' onClick={()=> setShowSlider(false)}/>
         </div>

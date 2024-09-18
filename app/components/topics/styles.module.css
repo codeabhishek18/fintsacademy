@@ -5,3 +5,11 @@
     font-size: 14px;
     border-radius: 5px;
 }
+
+@media screen and (max-width: 480px)
+{
+    .topic
+    {
+        font-size: 12px;
+    }    
+}
