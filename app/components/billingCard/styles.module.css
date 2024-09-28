@@ -56,14 +56,22 @@
     font-weight: 500;
     text-align: center;
     cursor: pointer;
-    border: 1px solid var(--primary-border);
+    background-color: var(--alert-color);
+    border: 1px solid var(--alert-color);
     color: white;
     font-size: 14px;
 }
 
-.buy:hover
+@media screen and (max-width: 450px) 
 {
-    background-color: var(--alert-color);
-    border: 1px solid var(--alert-color);
+    .header
+    {
+        font-size: 16px;
+    }
+
+    .left, .right, .success
+    {
+        font-size: 14px;
+    }
 }
 

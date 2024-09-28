@@ -7,18 +7,20 @@ import Header from '../components/header/Header'
 import styles from './styles.module.css'
 import axios from 'axios'
 import Image from 'next/image'
-import { FormatDate } from '@/utility/FormatDate'
 import { CircularProgress, FormControl, InputLabel, MenuItem, Rating, Select } from '@mui/material'
 import { signIn, useSession } from 'next-auth/react'
-import { redirect, useRouter } from 'next/navigation'
-import { setDate } from 'date-fns'
+import { toast } from 'sonner'
+import Loading from '../components/loading/Loading'
+import { FormatDate } from '@/utility/FormatDate'
+import deleteIcon from '@/assets/delete.png'
 
 const Checkout = () =>
 {
-    const [ batch, setBatch ] = useState(null);
-    const [ date, setDate ] = useState('');
-    const router = useRouter();
+    const [ course, setCourse ] = useState(null);
+    const [ isLoading, setIsLoading ] = useState(false);
     const { data, status } = useSession();
+    const [ batches, setBatches ] = useState(null);
+    const [ selectedBatch, setSelectedBatch ] = useState(false);
 
     useEffect(()=>
     {
@@ -26,54 +28,49 @@ const Checkout = () =>
         {
             signIn(null, {callbackUrl: '/checkout'})
         }
-        
-        // const course = localStorage.getItem('selectedCourse')
-        // if(course)
-        //     getCourse(course);
     },[status])
 
     useEffect(()=>
     {
-        getBatch();
+        const courseId = localStorage.getItem('selectedCourse')
+        if(courseId)
+            getCourse(courseId);
     },[])
 
-    const getBatch = async () =>
+    const getCourse = async (courseId) =>
     {
         try
         {
-            const url = `/api/batch`
+            setIsLoading(true);
+            const url = `/api/course/${courseId}`
             const response = await axios.get(url);
-            const batch = response.data.find((batch)=>  batch._id === '66f7847fd89d2721884fd23d')
-            setBatch(batch);
+            const batches = response.data.batches.filter((batch) => batch.status !== 'Completed');
+            setBatches(batches);
+            setCourse(response.data);
+            setIsLoading(false);
         }
         catch(error)
         {
-            console.log(error)
+            toast.error(error.message);
+            setIsLoading(false);
         }
     }
 
-    console.log(batch)
+    const clearCart = () =>
+    {
+        localStorage.removeItem('selectedCourse');
+        setCourse(null);
+    }
 
     return(
         <div className={styles.wrapper}>
             <Header/>
+            {status === 'loading' || isLoading ?
+            <Loading/> : 
+            (course ? 
             <div className={styles.container}>
-                <div className={styles.register}>
-                    {batch && 
-                    <div className={styles.card}>
-                        <div className={styles.display}>
-                            <Image className={styles.displayImage} src={batch.course.imageURL} alt={batch.course.id} layout='fill'/>
-                        </div>
-                        <div className={styles.content}>
-                            <p className={styles.title}>{batch.course.title}</p>
-                            <p className={styles.level}>{batch.course.level}</p>
-                            <Rating name="half-rating-read" defaultValue={4.7} precision={0.5} readOnly size='small'/>
-                            <p className={styles.date}>Starting from {FormatDate(batch.startDate)}</p>
-                        </div>
-                    </div> }
-                    {batch && <BillingCard batch={batch}/> }
-                </div> 
-                {data && <div className={styles.details}>
+                {data && 
+                <div className={styles.details}>
                     <div className={styles.group}>
                         <p className={styles.label}>Name</p>
                         <p className={styles.detail}>{data.user.name}</p>    
@@ -82,8 +79,35 @@ const Checkout = () =>
                         <p className={styles.label}>Email</p>
                         <p className={styles.detail}>{data.user.email}</p>    
                     </div>
+                    <div className={styles.group}>
+                        <p className={styles.label}>Select Batch</p>
+                        <FormControl className={styles.input} fullWidth>
+                            <Select color='grey' name="mentor" style= {{ color: '#ffffff'}} onChange={(e)=> {setSelectedBatch(e.target.value)}}>
+                            {batches.map((batch) =>
+                            (
+                                <MenuItem value={batch._id} key={batch._id}>{FormatDate(batch.startDate) +' - '+ FormatDate(batch.endDate)}</MenuItem>
+                            ))}
+                            </Select>
+                        </FormControl>
+                    </div>
                 </div>}
-            </div>
+                <div className={styles.register}>
+                    <div className={styles.card}>
+                        <div className={styles.display}>
+                            <Image className={styles.displayImage} src={course.imageURL} alt={course.id} layout='fill'/>
+                        </div>
+                        <div className={styles.content}>
+                            <p className={styles.title}>{course.title}</p>
+                            <p className={styles.level}>{course.level}</p>
+                            <Rating name="half-rating-read" defaultValue={4.7} precision={0.5} readOnly size='small'/>
+                            {/* <p className={styles.date}>Starting from {FormatDate(selectedBatch.startDate)}</p> */}
+                        </div>
+                        <Image className={styles.delete} src={deleteIcon} alt='icon' onClick={clearCart}/>
+                    </div> 
+                    <BillingCard course={course} selectedBatch={selectedBatch}/> 
+                </div> 
+                
+            </div>: <div className={styles.cartWrapper}>Cart is empty</div>)}
             <Footer/>
         </div>
     )

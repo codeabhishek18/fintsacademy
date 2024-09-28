@@ -8,25 +8,26 @@ import SlidingMenu from '../slidingMenu/SlidingMenu'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-
-import logout from '@/assets/logout.png'
 import close from '@/assets/close.png'
+import logout from '@/assets/logout.png'
+import cart from '@/assets/cart.png'
 import { CircularProgress } from '@mui/material'
 import Logout from '../logout/Logout'
+import Link from 'next/link'
 
 const Navbar = () =>
 {
     const [ showSlider, setShowSlider ] = useState(false);
-    const [ isUser, setIsUser ] = useState(false);
-    const session = useSession();
+    const [ cartItem, setCartItem ] = useState(0);
     const { data, status } = useSession();
     const router = useRouter();
     const [ showDetails, setShowDetails ] = useState(false)
 
     useEffect(()=>
     {
-        console.log('load')
-        session.update();
+        const course = localStorage.getItem('selectedCourse');
+        if(course)
+            setCartItem(1)
     },[])
 
     return(
@@ -38,31 +39,33 @@ const Navbar = () =>
             
             <div className={styles.navigation}>
                 <div className={styles.links}>
-                    {/* {data?.user && 
-                    <div>
-                        <Image className={styles.profile} src={logout} alt='profile' onClick={()=> setShowDetails(true)}/>
-                    </div>} */}
-                    {data?.user && 
-                    <p className={styles.link} onClick={()=> router.push('/dashboard')}>Dashboard</p>}
-                    <p className={styles.link} onClick={()=> router.push('/courses')}>Courses</p>
-                    {/* <p className={styles.link} onClick={()=> router.push('/blogs')}>Blogs</p>   */}
-                    <p className={styles.link} onClick={()=> router.push('/about')}>About</p>
+                    {(data?.user?.role === 'user' || data?.user?.role === 'admin') && status !== 'loading' &&
+                    <Link className={styles.link} href='/dashboard'>Dashboard</Link>}
+                    <Link className={styles.link} href='/courses'>Courses</Link>
+                    <Link className={styles.link} href='/about'>About</Link>
+                    {status === 'authenticated' &&
+                    <div className={styles.cartWrapper}>
+                        <Image className={styles.cart} src={cart} alt='icon' onClick={()=> router.push('/checkout')}/>
+                       <p className={styles.count}>{cartItem}</p>
+                    </div>}
+                    {status === 'authenticated' && <Image className={styles.cart} src={logout} alt='icon' onClick={()=> setShowDetails(true)}/>}
                 </div>
-                {!data?.user && <div className={styles.authWrapper}>
-                    <button className={styles.auth} onClick={()=> router.push('/login')}>Login</button>
-                    {/* <button className={styles.auth} onClick={()=> router.push('/signup')}>Sign up</button> */}
-                </div>  }
+                {!data?.user && status !== 'loading' && 
+                <div className={styles.authWrapper}>
+                    <Link className={styles.auth} href='/login'>Login</Link>
+                    <Link className={styles.auth} href='/signup'>Signup</Link>
+                </div>}
                 <HamburgerMenu setShowSlider={setShowSlider}/>
                 {/* <Switch/> */}
             </div>
 
-            {/* {showDetails && 
+            {showDetails && 
             <div className={styles.user}>
                 <Image className={styles.close} src={close} alt='close' onClick={()=> setShowDetails(false)}/>
                 <p className={styles.name}>{data.user.email}</p>
                 <p className={styles.name}>{data.user.name}</p>
                 <Logout/>
-            </div>} */}
+            </div>}
             {showSlider && 
             <div className={styles.slider}>
                 <SlidingMenu setShowSlider={setShowSlider} />

@@ -6,7 +6,7 @@ import Image from 'next/image';
 import successicon from '../../assets/success-icon.png'
 import erroricon from '../../assets/error-icon.png'
 import { CircularProgress, TextField } from '@mui/material';
-import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
 import Header from '../components/header/Header';
 import GoogleAuth from '../components/googleAuth/GoogleAuth';
@@ -14,7 +14,7 @@ import { signIn } from 'next-auth/react';
 
 export default function Page() {
     return (
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense fallback={null}>
         <Login />
       </Suspense>
     );
@@ -88,10 +88,9 @@ const Login = () =>
 
     return(
         <div className={styles.wrapper}>
-            <Header/>
            <div className={styles.container}> 
                 <div className={styles.header}>
-                    <Image className={styles.logo} src={fints} alt='logo'/>
+                    <Image className={styles.logo} src={fints} alt='logo' onClick={()=> router.push('/')}/>
                     <p className={styles.welcome}>Welcome back!</p>
                 </div>
                 <div className={styles.form}>

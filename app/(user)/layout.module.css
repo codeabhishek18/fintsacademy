@@ -2,7 +2,6 @@
 {
     width: 100%;
     min-height: 100vh;
-    display: flex;
     background-color: var(--primary-bg);
     position: relative;
 }
@@ -11,7 +10,7 @@
 {
     width: 100%;
     /* width: calc(100% - 80px); */
-    padding-top: 100px;
+    padding: 30px 10vw;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -19,7 +18,7 @@
 
 .wrapper
 {
-    width: 85%;
+    width: 100%;
 }
 
 .support
@@ -65,9 +64,8 @@
         width: 100%;
     }
 
-    .container
+    .main
     {
-        flex-direction: column;
-        padding: 20px;
+        padding: 30px;
     }
 }

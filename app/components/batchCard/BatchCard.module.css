@@ -158,11 +158,21 @@
     cursor: pointer;
 }
 
-@media screen and (max-width: 450px)
+@media screen and (max-width: 1120px)
+{
+    .container
+    {
+        width: calc(50% - 10px);
+    }
+}
+
+
+@media screen and (max-width: 750px)
 {
     .container
     {
         width: 100%;
+        font-size: 14px;
     }
 }
 

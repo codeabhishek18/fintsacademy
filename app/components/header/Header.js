@@ -10,6 +10,7 @@ import { doLogout } from '@/app/action';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'
 import Logout from '../logout/Logout'
+import Link from 'next/link'
 
 const Header = () =>
 {
@@ -22,10 +23,10 @@ const Header = () =>
             <Image className={styles.title} src={fints} alt='logo' onClick={()=> router.push('/')}/>
             
             <div className={styles.links}>
-                {(data?.user?.role === 'user' || data?.user?.role === 'admin') && <p className={styles.link} onClick={()=> router.push('/dashboard')}>Dashboard</p>}
-                {/* <p className={styles.link} onClick={()=> router.push('/courses')}>Courses</p> */}
-                {/* <p className={styles.link} onClick={()=> router.push('/blogs')}>Blogs</p>   */}
-                {/* <p className={styles.link} onClick={()=> router.push('/about')}>About</p> */}
+                {(data?.user?.role === 'user' || data?.user?.role === 'admin') && 
+                <Link className={styles.link} href='/dashboard'>Dashboard</Link>}
+                <Link className={styles.link} href='/courses'>Courses</Link>
+                <Link className={styles.link} href='/about'>About</Link>
                 {data?.user && <Image className={styles.profile} src={logout} alt='profile' onClick={()=> setShowDetails(true)}/>}
             </div>
           

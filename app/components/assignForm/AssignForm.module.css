@@ -42,6 +42,13 @@
     border-radius: 5px;
 }
 
+.warning
+{
+    font-size: 14px;
+    padding: 5px 0;
+    color: var(--warning-bg);
+}
+
 .input
 {
     width: 100%;

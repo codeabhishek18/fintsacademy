@@ -2,7 +2,7 @@
 {
     width: 100%;
     height: 75px;
-    position: fixed;
+    position: sticky;
     z-index: 15;
     top: 0;
     left: 0;
@@ -91,6 +91,14 @@
 
 .link:hover
 {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
+
+@media screen and (max-width:480px) 
+{
+    .link
+    {
+        display: none;
+    }    
+}

@@ -16,6 +16,7 @@ export async function POST(req, {params})
         const { title, courseId, mentor, startDate, endDate } = await req.json(); 
 
         const newBatch = await batchInstance.addNewBatch(title, courseId, mentor, startDate, endDate);
+        await courseInstance.addBatchToCourse(courseId, newBatch._id);
         const course = await courseInstance.getByCourseId(courseId);
 
         let id=1;

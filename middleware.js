@@ -4,12 +4,12 @@ import { encode, decode } from 'next-auth/jwt'
 import { NextResponse } from "next/server";
 import { adminRoutes, authRoutes, userRoutes } from "./routes";
 
-export default async function auth(req)
+export default async function middleware(req)
 {
     const { nextUrl } = req
     const cookie = cookies()?.get('__Secure-authjs.session-token');
     
-    let user=null;
+    let user = null;
     if(cookie)
     {
         user = await decode({

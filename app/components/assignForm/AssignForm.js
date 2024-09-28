@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import styles from './AssignForm.module.css'
 import axios from 'axios';
 import QuizKey from '../quizKey/QuizKey';
@@ -9,15 +9,14 @@ import { toast } from 'sonner';
 
 const AssignForm = ({quiz, setAssignForm}) =>
 {
-    const [ batch, setBatch ] = useState(null);
+    const [ batch, setBatch ] = useState('');
     const [ batches, setBatches ] = useState(null)
     const [ batchType, setBatchType ] = useState('');
     const [ selectedBatch, setSelectedBatch ] = useState(null);
     const [ keyList, setKeyList ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(false);
     const [ showAssignees, setShowAssignees ] = useState(true); 
-
-    console.log(batches)
+    const [ warningMessage, setWarningMessage ] = useState(null);
 
     useEffect(()=>
     {
@@ -34,9 +33,9 @@ const AssignForm = ({quiz, setAssignForm}) =>
         try
         {   
             setIsLoading(true);
-            const url = `/api/batch/course/${quiz.course._id}`;
+            const url = `/api/course/${quiz.course.id}`;
             const response = await axios.get(url);
-            setBatches(response.data)
+            setBatches(response.data.batches)
             setIsLoading(false);
         }
         catch(error)
@@ -51,13 +50,23 @@ const AssignForm = ({quiz, setAssignForm}) =>
         if(!batch)
             return
 
+        const isAlreadyAssiggned = quiz.group.find((pack) => pack.batch.title === batch);
+        if(isAlreadyAssiggned)
+        {
+            setShowAssignees(false);
+            setWarningMessage(`This quiz cannot be re-assigned to ${batch}`)
+        }
+
         try
         {
             const url = `/api/batch/${batch}`
             const response = await axios.get(url);
             const enrollmentSize = response.data.enrollments;
             if(!enrollmentSize?.length)
+            {
                 setShowAssignees(false);
+                setWarningMessage(`${batch} has no enrollments as of now`)
+            }
             setSelectedBatch(response.data);
         }
         catch(error)
@@ -116,8 +125,6 @@ const AssignForm = ({quiz, setAssignForm}) =>
         }   
     }
 
-    console.log(batches)
-
     return(
         <div className={styles.wrapper}>
             {isLoading ? 
@@ -154,7 +161,7 @@ const AssignForm = ({quiz, setAssignForm}) =>
                     </Select>
                 </FormControl>}
 
-                {!showAssignees && <p>No Enrollments</p>}
+                {!showAssignees && <p className={styles.warning}>{warningMessage}</p>}
                 
                 {batchType === "selected" && selectedBatch &&
                 <div className={styles.enrollments}>

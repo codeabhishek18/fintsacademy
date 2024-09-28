@@ -12,24 +12,30 @@
 .container
 {
     width: 400px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     padding: 40px;
     border-radius: 8px;
     background-color: var(--primary-element);
     color: white;
 }
 
+.container, .header
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .header
 {
+    row-gap: 10px;
     margin-bottom: 20px;
 }
 
 .logo
 {
-    height: 60px;
+    height: 50px;
     width: fit-content;
+    cursor: pointer;
 }
 
 .welcome
