@@ -7,10 +7,18 @@ import successicon from '../../assets/success-icon.png'
 import erroricon from '../../assets/error-icon.png'
 import { CircularProgress, TextField } from '@mui/material';
 import { redirect, usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import Header from '../components/header/Header';
 import GoogleAuth from '../components/googleAuth/GoogleAuth';
 import { signIn } from 'next-auth/react';
+
+export default function Page() {
+    return (
+      <Suspense fallback={<p>Loading...</p>}>
+        <Login />
+      </Suspense>
+    );
+  }
 
 const Login = () =>
 {   
@@ -23,8 +31,6 @@ const Login = () =>
     const router = useRouter();
     const callbackUrl = searchParams.get('callbackUrl') || '/dashboard'
     const error = searchParams.get('error');
-
-    console.log(callbackUrl)
 
     useEffect(() => 
     {
@@ -116,5 +122,3 @@ const Login = () =>
         </div>
     )
 }
-
-export default Login
