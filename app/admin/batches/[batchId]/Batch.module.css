@@ -59,7 +59,8 @@
 .noStudents
 {
     color: var(--primary-element);
-    font-size: 48px;
+    font-size: 36px;
+    letter-spacing: 1px;
     font-weight: 600;
     display: flex;
     align-items: start;

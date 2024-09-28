@@ -22,31 +22,31 @@ export async function POST(req, {params})
     {
         await dbConnect();
         
-        const {quizId} = params;
-        const {users, batch} = await req.json();
+        // const {quizId} = params;
+        // const {users, batch} = await req.json();
         
-        const batchId = await batchInstance.findById(batch);
-        const quiz = await quizInstance.getQuizById(quizId);
-        let group = null;
-        const groups = quiz.group;
-        if(!groups.length)
-            group = await groupInstance.createGroup(batchId._id)
-        else 
-        {
-            const isOldGroup = groups.find((group)=> group.batch._id.toString() === batchId._id.toString());
-            group = isOldGroup ? isOldGroup : await groupInstance.createGroup(batchId._id)
-        }
+        // const batchId = await batchInstance.findById(batch);
+        // const quiz = await quizInstance.getQuizById(quizId);
+        // let group = null;
+        // const groups = quiz.group;
+        // if(!groups.length)
+        //     group = await groupInstance.createGroup(batchId._id)
+        // else 
+        // {
+        //     const isOldGroup = groups.find((group)=> group.batch._id.toString() === batchId._id.toString());
+        //     group = isOldGroup ? isOldGroup : await groupInstance.createGroup(batchId._id)
+        // }
         
-        for(let user of users)
-        {
-            const test = await testInstance.createNewTest(quiz.title, quiz.quiz)
-            await enrollmentInstance.assignTest(user, test._id)
-            const assignment = await assignmentInstance.assign(user, test._id)
-            await groupInstance.updateAssignment(group, assignment._id)
-        }
-        await quizInstance.updateGroup(quizId, group._id)
+        // for(let user of users)
+        // {
+        //     const test = await testInstance.createNewTest(quiz.title, quiz.quiz)
+        //     await enrollmentInstance.assignTest(user, test._id)
+        //     const assignment = await assignmentInstance.assign(user, test._id)
+        //     await groupInstance.updateAssignment(group, assignment._id)
+        // }
+        // await quizInstance.updateGroup(quizId, group._id)
 
-    return NextResponse.json({message: 'Quizzes added'})
+    return NextResponse.json({message: 'Assessments assigned successfully'})
     }
     catch(error)
     {

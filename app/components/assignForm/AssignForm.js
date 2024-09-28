@@ -4,15 +4,20 @@ import { useEffect, useState } from 'react';
 import styles from './AssignForm.module.css'
 import axios from 'axios';
 import QuizKey from '../quizKey/QuizKey';
-import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { CircularProgress, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { toast } from 'sonner';
 
 const AssignForm = ({quiz, setAssignForm}) =>
 {
-    const [ batch, setBatch ] = useState('');
-    const [ batches, setBatches ] = useState([])
+    const [ batch, setBatch ] = useState(null);
+    const [ batches, setBatches ] = useState(null)
     const [ batchType, setBatchType ] = useState('');
     const [ selectedBatch, setSelectedBatch ] = useState(null);
     const [ keyList, setKeyList ] = useState([]);
+    const [ isLoading, setIsLoading ] = useState(false);
+    const [ showAssignees, setShowAssignees ] = useState(true); 
+
+    console.log(batches)
 
     useEffect(()=>
     {
@@ -26,16 +31,39 @@ const AssignForm = ({quiz, setAssignForm}) =>
 
     const getBatches = async () =>
     {
-        const url = '/api/batch';
-        const response = await axios.get(url);
-        setBatches(response.data)
+        try
+        {   
+            setIsLoading(true);
+            const url = `/api/batch/course/${quiz.course._id}`;
+            const response = await axios.get(url);
+            setBatches(response.data)
+            setIsLoading(false);
+        }
+        catch(error)
+        {
+            toast.error(error.message);
+            setIsLoading(false)
+        }
     }
 
     const getBatch = async () =>
     {
-        const url = `/api/batch/${batch}`
-        const response = await axios.get(url);
-        setSelectedBatch(response.data);
+        if(!batch)
+            return
+
+        try
+        {
+            const url = `/api/batch/${batch}`
+            const response = await axios.get(url);
+            const enrollmentSize = response.data.enrollments;
+            if(!enrollmentSize?.length)
+                setShowAssignees(false);
+            setSelectedBatch(response.data);
+        }
+        catch(error)
+        {
+            toast.error(error.message)
+        }
     }
 
     const handleKeywords = (name, id) =>
@@ -69,22 +97,37 @@ const AssignForm = ({quiz, setAssignForm}) =>
             })
         }
 
+        if(!batch)
+            return toast.error('Batch is required')
+
+        if(!users.length)
+            return toast.error('Assignees are required')
+
         try
         {
             const url = `/api/quiz/${quiz._id}`
-            await axios.post(url, {users, batch});
-            setAssignForm(false)
+            const response = await axios.post(url, {users, batch});
+            toast.success(response.data.message)
+            setAssignForm(false);
         }
         catch(error)
         {
-            console.log(error);
+            toast.error(error.message);
         }   
     }
 
+    console.log(batches)
+
     return(
         <div className={styles.wrapper}>
+            {isLoading ? 
+            <div>
+                <CircularProgress sx={{color: '#D4313D'}}/>
+            </div> :
+            (batches ?
             <div className={styles.container}>
-                <h1 className={styles.head}>{quiz.title}</h1>
+                <h1 className={styles.head}>{quiz.course.title}</h1>
+                <p className={styles.level}>{quiz.course.level}</p>
                 {keyList?.length>0 && 
                 <div className={styles.assigned}>
                     {keyList.map((keyword)=>
@@ -96,20 +139,22 @@ const AssignForm = ({quiz, setAssignForm}) =>
                 <FormControl className={styles.input} fullWidth>
                     <InputLabel size='small' color='grey' sx={{color: 'grey'}} variant='outlined'>Choose batch</InputLabel>
                     <Select size='small' color='grey' sx={{color: 'grey'}} placeholder="Multiple answers" InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} name="batch" label="Choose course" value={batch} onChange={(e)=> setBatch(e.target.value)}>
-                    {batches?.map((batch) =>
+                    {batches.map((batch) =>
                     (
                         <MenuItem value={batch.title} key={batch._id}>{batch.title}</MenuItem>
                     ))}
                     </Select>
                 </FormControl>
-
-                <FormControl className={styles.input} fullWidth>
+                
+                {showAssignees && <FormControl className={styles.input} fullWidth>
                     <InputLabel size='small' color='grey' sx={{color: 'grey'}} >Assign to</InputLabel>
-                    <Select size='small' color='grey'  sx={{color: 'grey'}} name="batch" InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} label="Choose course" value={batchType} onChange={(e)=> {setBatchType(e.target.value); e.target.value === 'all' && setKeyList([])}}>
+                    <Select size='small' color='grey'  sx={{color: 'grey'}} name="batch" InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} label="Assign to" value={batchType} onChange={(e)=> {setBatchType(e.target.value); e.target.value === 'all' && setKeyList([])}}>
                         <MenuItem value='all'>All</MenuItem>
                         <MenuItem value='selected'>Selected</MenuItem>
                     </Select>
-                </FormControl>
+                </FormControl>}
+
+                {!showAssignees && <p>No Enrollments</p>}
                 
                 {batchType === "selected" && selectedBatch &&
                 <div className={styles.enrollments}>
@@ -119,9 +164,13 @@ const AssignForm = ({quiz, setAssignForm}) =>
                     ))}
                 </div>}
 
-                <button className={styles.post} onClick={handleAssign}>Assign</button> 
+                {showAssignees && <button className={styles.post} onClick={handleAssign}>Assign</button> }
                 <p className={styles.close} onClick={()=> setAssignForm(false)}>x</p>
-            </div>
+            </div> : 
+            <div className={styles.container}>
+                <p>No Batches Found</p>
+                <p className={styles.close} onClick={()=> setAssignForm(false)}>x</p>
+            </div>)}
         </div>
     )
 }

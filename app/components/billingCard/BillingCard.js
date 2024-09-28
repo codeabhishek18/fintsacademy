@@ -1,9 +1,10 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import styles from './styles.module.css'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 const BillingCard = ({batch}) =>
 {
@@ -18,7 +19,8 @@ const BillingCard = ({batch}) =>
         {
             const url = `/api/enrollments/${user}`
             await axios.post(url, {batchId: batch._id});
-            router.push('/')
+            toast.success('Enrolled to KYC');
+            signOut({callbackUrl: '/'})
         }
         catch(error)
         {

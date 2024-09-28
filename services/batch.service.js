@@ -1,9 +1,10 @@
-import { Course } from "@/models/course.model.js";
-import { Batch } from "../models/batch.model.js"; 
-import { User } from "@/models/user.model.js";
-import { Session } from "@/models/session.model.js";
-import { Mentor } from "@/models/mentor.model.js";
-import { Feedback } from "@/models/feedback.model.js";
+import { Batch } from "@/models/batch.model"
+import { Course } from "@/models/course.model"
+import { Feedback } from "@/models/feedback.model"
+import { Mentor } from "@/models/mentor.model"
+import { Session } from "@/models/session.model"
+import { User } from "@/models/user.model"
+
 
 class batchService
 {
@@ -17,8 +18,7 @@ class batchService
         }
         catch(error)
         {
-            console.log(error)
-            throw new Error(error.message)
+            throw error
         }
     }
 
@@ -35,7 +35,7 @@ class batchService
         } 
         catch(error)
         {
-            throw new Error('Failed to fetch batches')
+            throw error
         }
     }
 
@@ -56,10 +56,24 @@ class batchService
     {
         try
         {
-            const batches = await Batch.find()
+            const batches = await Batch.find({})
             .populate({path: 'course', model: Course})
             .populate({path: 'mentor', model: Mentor});
             return batches
+        } 
+        catch(error)
+        {
+            throw error
+        }
+    }
+
+    async getBatchesByCourse(courseId)
+    {
+        try
+        {
+            const batches = await Batch.find({course: courseId})
+            .populate({path: 'course', model: Course});
+            return batches.length ? batches : null
         } 
         catch(error)
         {
@@ -87,7 +101,7 @@ class batchService
         }
         catch(error)
         {
-            throw new Error('Failed to create session')
+            throw error
         }
     }
 
@@ -100,7 +114,7 @@ class batchService
         }
         catch(error)
         {
-            throw new Error('Failed to fetch upcoming batches')
+            throw error
         }
     }
 
@@ -112,7 +126,7 @@ class batchService
         }
         catch(error)
         {
-            throw new Error('Failed to update student to batch')
+            throw error
         }
     }
 
@@ -124,7 +138,7 @@ class batchService
         }
         catch(error)
         {
-            throw new Error('Failed to update link')
+            throw error
         }
     }
 
@@ -136,7 +150,7 @@ class batchService
         }
         catch(error)
         {
-            throw new Error('Failed to update link')
+            throw error
         }
     }
 }

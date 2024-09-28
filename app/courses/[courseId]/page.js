@@ -10,9 +10,7 @@ import fints from '@/assets/fints.png'
 import Image from 'next/image';
 import ShimmerCourseDetail from '@/app/components/shimmerCourseDetail/shimmerCourseDetail';
 import { useScheme } from '@/contextapi/SchemeProvider';
-import Switch from '@/app/components/themeSwitch/Switch';
 import ErrorDialogue from '@/app/components/errorDialogue/ErrorDialogue';
-import Navbar from '@/app/components/navbar/Navbar';
 import Header from '@/app/components/header/Header';
 
 const Course = () =>

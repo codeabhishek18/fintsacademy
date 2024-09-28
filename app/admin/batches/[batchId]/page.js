@@ -8,6 +8,7 @@ import Progress from '@/app/components/progress/Progress'
 import SessionCard from '@/app/components/sessionCard/SessionCard'
 import Enrollment from '@/app/components/enrollment/Enrollment'
 import { CircularProgress } from '@mui/material'
+import { toast } from 'sonner'
 
 const Batch = () =>
 {
@@ -27,8 +28,6 @@ const Batch = () =>
        getBatch();
     },[])
 
-    console.log(batch)
-
      const updateSessionStatus = async (sessionId, status) =>
     {
        
@@ -36,6 +35,7 @@ const Batch = () =>
         const url = `/api/session/${sessionId}`
         await axios.put(url, {status : updatedStatus});
         getBatch();
+        toast.success(`Session updated to ${updatedStatus}`)
     }
 
     // const handleChange = (e) =>

@@ -8,14 +8,15 @@ export async function GET(req, {params})
     try
     {
         await dbConnect();
+
         const {courseId} = params;
-        const allBatches = await batchInstance.getAllBatches();
-        const batch = allBatches.filter((batch) => batch.course.id === courseId).find(batch => batch.status === 'Upcoming')
-        return NextResponse.json({batch});
+        const batches = await batchInstance.getBatchesByCourse(courseId);
+        // const batch = allBatches.filter((batch) => batch.course.id === courseId).find(batch => batch.status === 'Upcoming')
+        return NextResponse.json(batches);
     }
     catch(error)
     {
-        return NextResponse.json({error});
+        return NextResponse.json({error: error.message});
     }
 
 }

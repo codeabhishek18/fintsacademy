@@ -4,7 +4,6 @@ import userService from "@/services/user.service";
 import { NextResponse } from "next/server";
 const userInstance = new userService();
 
-
 export async function GET(req, res)
 { 
   try

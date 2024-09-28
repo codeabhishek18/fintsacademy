@@ -7,7 +7,7 @@ import { adminRoutes, authRoutes, userRoutes } from "./routes";
 export default async function auth(req)
 {
     const { nextUrl } = req
-    const cookie = cookies()?.get('__Secure-authjs.session-token');
+    const cookie = cookies()?.get('authjs.session-token');
     
     let user=null;
     if(cookie)
@@ -27,8 +27,8 @@ export default async function auth(req)
         if(userRoute || adminRoute)
             return NextResponse.redirect(new URL('/login', nextUrl))
 
-    // if(user?.role === 'visitor' && authRoute )
-    //     return NextResponse.redirect(new URL('/', nextUrl))
+    if(user?.role === 'visitor' && authRoute )
+        return NextResponse.redirect(new URL('/', nextUrl))
 
     if(user)
     {
@@ -39,6 +39,9 @@ export default async function auth(req)
             return NextResponse.redirect(new URL('/', nextUrl))
     
         if(user.role === 'admin' && nextUrl.pathname.startsWith('/dashboard'))
+            return NextResponse.redirect(new URL('/admin/dashboard', nextUrl))
+
+        if(user.role === 'admin' && authRoute)
             return NextResponse.redirect(new URL('/admin/dashboard', nextUrl))
 
         // if(nextUrl.pathname.startsWith('/admin'))

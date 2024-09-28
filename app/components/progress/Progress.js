@@ -13,6 +13,7 @@ import { useSession } from 'next-auth/react';
 import download from '@/assets/download.png'
 import { Confetti } from '@/utility/confetti';
 import { calculateResult } from '@/utility/calculateScores';
+import { toast } from 'sonner';
 
 const options = { year: 'numeric', month: 'long', day: 'numeric' };
 export const pendingSessions = (sessions) =>
@@ -50,21 +51,21 @@ const Progress = ({batchData, level, assessments}) =>
     const checkProgressStatus = () =>
     {
         if(!assessments.assessments.length)
-            return alert('Certificate will be unlocked only after successful completion of sprint and assessment')
+            return toast.error('Certificate will be unlocked only after successful completion of sprint and assessment')
 
         const isSprintCompleted = pendingSessions(batchData.sessions) === 0 ? 'Completed' : 'Pending'
         const isAssessmentCompleted = assessments.assessments.filter((assessment)=> assessment.status === 'Completed');
 
         if(!isAssessmentCompleted.length)
-            return alert('Certificate will be unlocked only after successful completion of sprint and assessment')
+            return toast.error('Certificate will be unlocked only after successful completion of sprint and assessment')
 
         if(!isAssessmentCompleted)
-            return alert('Certification will be unlocked only after successful completion of sprint and assessment')
+            return toast.error('Certification will be unlocked only after successful completion of sprint and assessment')
 
         const isAssessmentCleared = calculateResult(isAssessmentCompleted[isAssessmentCompleted.length - 1].score, isAssessmentCompleted[isAssessmentCompleted.length - 1].quiz.length)
 
         if(isSprintCompleted === 'Pending' || isAssessmentCleared !== 'Qualified')
-            return alert('Certification will be unlocked only after successful completion of sprint and assessment')
+            return toast.error('Certification will be unlocked only after successful completion of sprint and assessment')
 
         setShowCertificate(true)
         Confetti();

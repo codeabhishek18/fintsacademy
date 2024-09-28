@@ -10,7 +10,7 @@ export default function PieChartWithPaddingAngle({sessionData})
   const data = 
   [
     { label: 'Completed', value: completed, color:'#3DC296'},
-    { label: 'Upcoming', value: pending, color:'#F9E2AF'},
+    { label: 'Upcoming', value: pending, color:'#CCD5AE'},
   ];
 
   return (

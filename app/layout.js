@@ -3,6 +3,7 @@ import "./globals.css";
 import SchemeWrapper from "./SchemeWrapper";
 import SessionWrapper from "./SessionWrappper";
 import ReduxProvider from "./ReduxProvider";
+import { Toaster } from "sonner";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ['300', '400', '600', '700', '800', '900'] });
 
@@ -26,7 +27,8 @@ export default async function RootLayout({ children })
         <ReduxProvider>
           <SchemeWrapper>
             <body className={poppins.className}>
-              <main>{children}</main>  
+              {children}
+              <Toaster toastOptions={{style:{backgroundColor: 'rgb(15, 18, 18)', color: 'white', padding: '20px', fontSize: '16px', border: 0, boxShadow: 'var(--box-shadow)'}}}/>
             </body>
           </SchemeWrapper>
         </ReduxProvider>

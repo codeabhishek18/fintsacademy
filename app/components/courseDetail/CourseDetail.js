@@ -6,7 +6,6 @@ import Lecturecard from '../lectureCard/LectureCard'
 import { Rating } from '@mui/material'
 import { useScheme } from '@/contextapi/SchemeProvider'
 import { useRouter } from 'next/navigation'
-import BoxReveal from '@/components/magicui/box-reveal'
 
 const CourseDetail = ({course}) =>
 {
@@ -15,9 +14,8 @@ const CourseDetail = ({course}) =>
 
     const handleClick = () =>
     {
-        // localStorage.setItem('selectedCourse', course.id)
-        // router.push('/checkout')
-        router.push('https://wa.me/8431976788')
+        localStorage.setItem('selectedCourse', course.id)
+        router.push('/checkout')
     }
 
     return (
