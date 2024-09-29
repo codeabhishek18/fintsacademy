@@ -24,34 +24,15 @@ import Topics from './components/topics/Topics'
 
 const Home = () =>
 {
-    const aboutRef = useRef(null);
-    const courseRef = useRef(null);
-    const faqRef = useRef(null);
     const [ showFaq, setShowFaq ] = useState(0);
-    const [ error, setError ] = useState(false);
-    const { scheme } = useScheme();
-
-    const handleScroll = (section) =>
-    {
-        if(aboutRef.current && section === 'about')
-            aboutRef.current.scrollIntoView({ behavior: 'smooth' })
-
-        if(courseRef.current && section === 'course')
-            courseRef.current.scrollIntoView({ behavior: 'smooth' })
-
-        if(faqRef.current && section === 'faq')
-            faqRef.current.scrollIntoView({ behavior: 'smooth' })
-    }
 
     return(
         <div className={styles.wrapper}>
-            <HeroSection handleScroll={handleScroll}/>
-            <div className={scheme === 'dark' ? styles.container : `${styles.container} ${styles.light}`}>
+            <HeroSection/>
+            <div className={styles.container}>
                 <div className={styles.marquee}>
-                    <p className={styles.marqueeContent}>Coming soon | New batches starting from 28th September | Get enrolled via whatsapp</p>
+                    <p className={styles.marqueeContent}>Sanction Screening and Global Standards | Batches starting soon | Get enrolled via whatsapp</p>
                 </div>
-
-                {error && <ErrorDialogue setError={setError}/>}
 
                 <motion.div 
                     initial={{opacity: 0}}
@@ -59,11 +40,11 @@ const Home = () =>
                     viewport={{
                         margin: '-100px',
                     }}
-                    className={styles.aboutWrapper} ref={aboutRef}>
+                    className={styles.aboutWrapper}>
                     <Stats/>
                     
                     <div className={styles.about}>
-                    <BoxReveal boxColor={"#202227"} duration={0.5}>
+                    <BoxReveal boxColor={"rgba(0,0,0,0.1"} duration={0.5}>
                         {about}
                     </BoxReveal>
                     </div>
@@ -107,8 +88,8 @@ const Home = () =>
                     whileInView={{opacity:1}}
                     viewport={{
                         margin: '-100px',
-                    }} className={styles.faqWrapper} ref={faqRef}>  
-                    <BoxReveal boxColor={"rgb(15, 18, 18)"} duration={0.5}>
+                    }} className={styles.faqWrapper}>  
+                    <BoxReveal boxColor={"#202227"} duration={0.5}>
                         <p className={styles.commonHeader}>FAQs</p>
                     </BoxReveal>
                     

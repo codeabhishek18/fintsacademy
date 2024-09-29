@@ -4,6 +4,7 @@ import axios from 'axios'
 import styles from './styles.module.css'
 import { useEffect, useState } from 'react'
 import EnrollmentBarGraph from '@/app/components/enrollmentBarGraph/EnrollmentBarGraph'
+import Loading from '@/app/components/loading/Loading'
 
 const barGraphData = (data) =>
 {
@@ -31,6 +32,7 @@ const Dashboard = () =>
     const [ prevMonthEnrollments, setPrevMonthEnrollments ] = useState(null);
     const [ enroll, setEnroll ] = useState(null);
     const [ graphData, setGraphData ] = useState(null);
+    const [isLoading, setIsLoading ] = useState(false);
  
     const getCourses = async () =>
     {
@@ -38,7 +40,7 @@ const Dashboard = () =>
         {
             const url = `/api/course`
             const response = await axios.get(url);
-            setCourses(response.data.courses);
+            setCourses(response.data);
         }
         catch(error)
         {
@@ -81,31 +83,35 @@ const Dashboard = () =>
 
     useEffect(()=>
     {   
+        setIsLoading(true)
         getCourses();
         getBatches();
         getEnrollments();
+        setIsLoading(false);
     },[])
 
     return(
         <div className={styles.wrapper}>
-            {courses && batches &&
+            
+            {isLoading ?
+            <Loading/> :
             <div className={styles.container}>
-                <div className={styles.card}>
+                {courses ? <div className={styles.card}>
                     <p className={styles.header}>Active courses</p>
                     <p className={styles.count}>{courses.length}</p>
-                </div>
-                <div className={styles.card}>
+                </div> : <></>}
+                {batches ? <div className={styles.card}>
                     <p className={styles.header}>Active batches</p>
                     <p className={styles.count}>{batches.length}</p>
-                </div>
-                <div className={styles.card}>
+                </div> : <></>}
+                {enroll ? <div className={styles.card}>
                     <p className={styles.header}>Enrollments this month</p>
                     <p className={styles.count}>{currentMonthEnrollments}</p>
-                </div>
-                <div className={styles.card}>
+                </div> : <></>}
+                {enroll ? <div className={styles.card}>
                     <p className={styles.header}>Growth</p>
                     <p className={styles.count}>+{Math.floor((currentMonthEnrollments - prevMonthEnrollments)/(prevMonthEnrollments === 0 ? 1 : prevMonthEnrollments))*100}%</p>
-                </div>
+                </div> : <></>}
             </div>}
             {/* {graphData && 
             <div className={styles.barGraph}>

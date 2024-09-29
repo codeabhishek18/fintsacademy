@@ -24,7 +24,7 @@ const Checkout = () =>
 
     useEffect(()=>
     {
-        if(!data && status !== 'loading')
+        if(status === 'unauthenticated')
         {
             signIn(null, {callbackUrl: '/checkout'})
         }

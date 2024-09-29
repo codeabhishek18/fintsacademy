@@ -31,7 +31,8 @@ const BillingCard = ({course, selectedBatch}) =>
             await update(newSession);
             setIsLoading(false);
             toast.success(response.data.message);
-            router.push('/dashboard')
+            router.push('/dashboard');
+            localStorage.removeItem('seletedCourse')
         }
         catch(error)
         {
