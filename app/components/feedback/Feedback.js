@@ -3,6 +3,7 @@ import styles from './Feedback.module.css'
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
+import { toast } from 'sonner';
 
 const Feedback = ({setFeedbackForm, courseId}) =>
 {
@@ -21,11 +22,12 @@ const Feedback = ({setFeedbackForm, courseId}) =>
         {
             const url = '/api/feedback'
             const response = await axios.post(url, {user: data.user.id, course: courseId, rating: value, comment: feedback }) 
+            toast.success(response.data.message);
             setFeedbackForm(false);
         }
         catch(error)
         {
-            console.log(error)
+            toast.error(error.message);
         }
     }
 
