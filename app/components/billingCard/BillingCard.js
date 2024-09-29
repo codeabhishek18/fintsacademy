@@ -5,6 +5,8 @@ import styles from './styles.module.css'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
+import { useState } from 'react';
+import { CircularProgress } from '@mui/material';
 
 const BillingCard = ({course, selectedBatch}) =>
 {
@@ -12,6 +14,7 @@ const BillingCard = ({course, selectedBatch}) =>
     const {data, update} = useSession();
     const user = data?.user?.id;
     const session = useSession();
+    const [ isLoading, setIsLoading ] = useState(false);
 
     const handleBuy = async (e) =>
     {
@@ -22,15 +25,18 @@ const BillingCard = ({course, selectedBatch}) =>
             if(!selectedBatch)
                 return toast.error('Batch is required')
 
+            setIsLoading(true);
             const url = `/api/enrollments/${user}`
             const response = await axios.post(url, {batchId : selectedBatch});
             await update(newSession);
+            setIsLoading(false);
             toast.success(response.data.message);
             router.push('/dashboard')
         }
         catch(error)
         {
-            console.log(error)
+            setIsLoading(false);
+            toast.error(error.message);
         }
     }
 
@@ -50,7 +56,11 @@ const BillingCard = ({course, selectedBatch}) =>
                 <p className={styles.right}>${course.offerPrice}</p>
             </div>
             <p className={styles.success}>You saved ${course.price - course.offerPrice} on this</p>
-            <button className={styles.buy} onClick={handleBuy}>Register Now</button>
+            {isLoading ? 
+            <div className={styles.spinner}>
+                <CircularProgress sx={{color: '#D4313D'}} />
+            </div> : 
+            <button className={styles.buy} onClick={handleBuy}>Register Now</button>}
         </div>
     )
 }
