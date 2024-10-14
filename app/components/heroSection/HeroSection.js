@@ -29,8 +29,6 @@ const fadeInAnimation =
 const HeroSection = () =>
 {
 
-    const session = useSession();
-
     return(
         <div className={styles.container}>
             <Navbar/>

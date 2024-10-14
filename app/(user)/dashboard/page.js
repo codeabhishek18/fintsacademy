@@ -38,9 +38,7 @@ const Dashboard = () =>
         else if(status === "unauthenticated")
             router.push('/')
         else
-            setIsLoading(true);
-        
-            
+            setIsLoading(true);            
     }, [status]);
     
 

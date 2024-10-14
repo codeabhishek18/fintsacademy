@@ -5,7 +5,7 @@ import fints from '../../assets/fints.png'
 import Image from 'next/image';
 import successicon from '../../assets/success-icon.png'
 import erroricon from '../../assets/error-icon.png'
-import { CircularProgress, TextField } from '@mui/material';
+import { CircularProgress, Input } from '@mui/material';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
 import Header from '../components/header/Header';
@@ -95,8 +95,8 @@ const Login = () =>
                 </div>
                 <div className={styles.form}>
                     <form className={styles.form} onSubmit={handleSubmit}>
-                        <TextField className={styles.inputs} size='small' label="Email" type="text" name="email" variant='filled'/>
-                        <TextField className={styles.inputs} size='small' label="Password" type="password" name="password" variant='filled'/>
+                        <Input className={styles.inputs} sx={{color:'white'}} color='grey' size='small' placeholder="Email" type="text" name="email" variant='filled'/>
+                        <Input className={styles.inputs} sx={{color:'white'}} color='grey' size='small' placeholder="Password" type="password" name="password" variant='filled'/>
                         {isError && 
                         <div className={styles.error}>
                             <Image className={styles.erroricon} src={erroricon} alt='error'/>

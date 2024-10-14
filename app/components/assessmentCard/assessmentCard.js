@@ -36,8 +36,7 @@ const AssessmentCard = ({assessment, index, batchId}) =>
                 <p className={styles.title}>Assessment {index+1}</p>
             </div>
             <div className={styles.testDetails}>
-                {assessment.status === 'Completed' ? <p className={calculateResult(assessment.score, assessment.quiz.length) === 'Qualified' ? `${styles.status} ${styles.success}` : `${styles.status} ${styles.warning}`}>{calculateResult(assessment.score, assessment.quiz.length)}</p> : 
-                <p className={styles.pending}>Pending</p>}
+               
                 
                 <div className={styles.footer}>
                     <p className={styles.date}>{FormatDate(assessment.updatedAt)}</p>

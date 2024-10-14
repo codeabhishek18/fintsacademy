@@ -11,20 +11,15 @@
     row-gap: 20px;
 }
 
-.video
+.YTvideo
 {
-    background-color: var(--primary-element);
-    padding: 60px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    object-fit: contain;
 }
 
 @media screen and (max-width: 450px) 
 {
     .container
     {
-        padding: 100px 20px  20px;
+        padding: 20px;
     }    
 }

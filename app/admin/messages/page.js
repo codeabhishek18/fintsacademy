@@ -7,11 +7,11 @@ import ChatUser from '@/app/components/chatUser/ChatUser';
 import Chat from '@/app/components/chat/Chat';
 import { useSession } from 'next-auth/react';
 import { CircularProgress } from '@mui/material';
-import deleteIcon from '@/assets/delete.png'
-import clearIcon from '@/assets/clear.png'
-import selectIcon from '@/assets/select.png'
-import closeIcon from '@/assets/close.png'
-import Image from 'next/image';
+// import deleteIcon from '@/assets/delete.png'
+// import clearIcon from '@/assets/clear.png'
+// import selectIcon from '@/assets/select.png'
+// import closeIcon from '@/assets/close.png'
+// import Image from 'next/image';
 
 const Messages = () =>
 {
@@ -56,12 +56,12 @@ const Messages = () =>
         <div className={styles.wrapper}>
             <div className={styles.container}>
 
-                <div className={styles.control}>
+                {/* <div className={styles.control}>
                     <Image className={styles.icon} src={selectIcon} alt='icon' onClick={()=> setShowDelete(true)}/>
                     <Image className={styles.icon} src={deleteIcon} alt='icon'/>
                     <Image className={styles.icon} src={clearIcon} alt='icon'/>
                     <Image className={styles.icon} src={closeIcon} alt='icon' onClick={()=> {setShowDelete(false); setDeleteUsers(null)}}/>
-                </div>
+                </div> */}
 
                 {adminData ? 
                 <div className={styles.users}>

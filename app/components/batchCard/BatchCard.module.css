@@ -133,16 +133,8 @@
     border-radius: 5px;
     width: 50%;
     text-align: center;
-    border: 1px solid var(--primary-border);
     margin: 0;
-}
-
-.details:hover
-{
-    border: 1px solid var(--alert-color);
     background-color: var(--alert-color);
-    color: var(--secondary-color);
-    cursor: pointer;
 }
 
 .deleteBatch

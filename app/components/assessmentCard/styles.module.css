@@ -98,20 +98,11 @@
 {
     border: 0;
     margin: 0;
-    padding: 5px 10px;
+    padding: 5px;
     border-radius: 5px;
-    background: none;
-    border: 1px solid var(--primary-border);
+    background: var(--alert-color);
     color: white;
-    font-size: 14px;
-}
-
-.route:hover
-{
-    background-color: var(--alert-color);
-    color: var(--secondary-color);
-    border: 1px solid var(--alert-color);
-    cursor: pointer;
+    font-size: 12px;
 }
 
 .instructions

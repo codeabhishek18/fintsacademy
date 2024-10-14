@@ -38,17 +38,16 @@
     width: 100%;
     font-weight: 700;
     text-align: center;
-    font-size: 60px;
+    font-size: 56px;
     color: white;
     line-height: 90px;
 }
-
 
 .activeHeading
 {
     width: 100%;
     color: var(--alert-color);
-    font-size: 90px;
+    font-size: 84px;
 }
 
 .footer

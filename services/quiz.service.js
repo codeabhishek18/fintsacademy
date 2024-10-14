@@ -26,7 +26,19 @@ class quizService
         {
             const quizzes = await Quiz.find()
             .populate({path: 'course', model: Course})
-            .populate({path: 'group', model: Group, populate:{ path: 'batch', model: Batch}})
+            .populate({
+                path: 'group',
+                model: Group,
+                populate:
+                [{
+                    path: 'batch',
+                    model: Batch,
+                },
+                {
+                    path: 'assignment',
+                    model: Assignment
+                }]
+            })
             
             return quizzes
         }

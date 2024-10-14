@@ -39,7 +39,7 @@ const CourseDetail = ({course}) =>
 
             <div className={styles.footer}>
                 <button className={scheme === 'dark' ? styles.join : `${styles.join} ${styles.light}`} onClick={handleClick}>Join Now</button>
-                <Rating name="half-rating-read" defaultValue={4.7} precision={0.5} readOnly size='large'/>
+                {/* <Rating name="half-rating-read" defaultValue={4.7} precision={0.5} readOnly size='large'/> */}
             </div>          
         </div>
     )

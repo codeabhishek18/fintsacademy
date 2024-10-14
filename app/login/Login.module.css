@@ -48,8 +48,9 @@
 .inputs
 {
     width: 100%;
-    background-color: white;
+    background-color: var(--primary-bg);
     border-radius: 5px;
+    padding: 8px;
 }
 
 .form
@@ -63,25 +64,12 @@
 
 .submit
 {
-    padding: 10px 0;
+    padding: 6px 0;
     width: 100%;
-    background: none;
-    color: var(--secondary-color); 
-    background-color: var(--primary-bg);
+    background-color: var(--alert-color);
     border-radius: 5px;
     font-size: 16px;
     font-weight: 500;
-}
-
-.submit:hover
-{
-    background-color: var(--alert-color);
-    color: var(--secondary-color);
-}
-
-.submit:hover, .google:hover
-{
-    cursor: pointer;
 }
 
 .forgotpassword

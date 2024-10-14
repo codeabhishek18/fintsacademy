@@ -36,7 +36,7 @@ const Assessments = () =>
     {
         const url = '/api/course'
         const response = await axios.get(url) 
-        setCourses(response.data.courses);
+        setCourses(response.data);
     }
 
      const getQuizzes = async () =>
@@ -153,7 +153,7 @@ const Assessments = () =>
                 <div className={styles.listHeader}>
                     <button className={styles.add} onClick={()=> setShowQuizForm(!showQuizForm)}>{showQuizForm ? 'close' : '+ Create quiz'}</button>
                 </div>
-                {showQuizForm && 
+                {showQuizForm && courses &&
                 <div className={styles.quizWrapper}>
                     <div className={styles.quizform}> 
                         <div className={styles.header}>
@@ -161,7 +161,7 @@ const Assessments = () =>
                             <FormControl className={styles.headerInput} value={course} size='small' fullWidth>
                                 <InputLabel size='small' color='grey' sx={{color: 'grey'}} variant='outlined'>Choose course</InputLabel>
                                 <Select name="course" color='error'  sx={{color: 'grey'}} placeholder="Choose course" InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} onChange={(e)=> setCourse(e.target.value)}>
-                                    {courses?.map((course) =>
+                                    {courses.map((course) =>
                                     (
                                         <MenuItem value={course._id} key={course._id}>{course.title}</MenuItem>
                                     ))}

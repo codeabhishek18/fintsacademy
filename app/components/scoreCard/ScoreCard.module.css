@@ -13,21 +13,11 @@
 
 .checkout
 {
-    border: 1px solid var(--primary-border);
-    background: none;
+    background-color: var(--alert-color);
     padding: 10px;
     border-radius: 5px;
     font-size: 14px;
-    font-weight: 600;
     color: white;
-}
-
-.checkout:hover
-{
-    color: var(--secondary-color);
-    border: 1px solid var(--alert-color);
-    background-color: var(--alert-color);
-    cursor: pointer;
 }
 
 .head

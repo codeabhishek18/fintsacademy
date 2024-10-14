@@ -5,7 +5,7 @@ import fints from '../../assets/fints.png'
 import Image from 'next/image';
 import successicon from '../../assets/success-icon.png'
 import erroricon from '../../assets/error-icon.png'
-import { TextField } from '@mui/material';
+import { Input } from '@mui/material';
 // import { credentialLogin, googleLogin } from '@/app/action';
 import { redirect, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -99,9 +99,9 @@ const Signup = () =>
                 </div>
                 <div className={styles.form}>
                     <form className={styles.form} onSubmit={handleSubmit}>
-                        <TextField className={styles.inputs} size='small' color='grey' label="Name" type="text" name="name" variant='filled' />
-                        <TextField className={styles.inputs} size='small' color='grey' label="Email" type="text" name="email" variant='filled' />
-                        <TextField className={styles.inputs} size='small' color='grey' label="Password" type="text" name="password" variant='filled' />
+                        <Input className={styles.inputs} sx={{color:'white'}} color='grey' size='small' placeholder="Name" type="text" name="name" variant='filled' />
+                        <Input className={styles.inputs} sx={{color:'white'}} color='grey' size='small' placeholder="Email" type="text" name="email" variant='filled' />
+                        <Input className={styles.inputs} sx={{color:'white'}} color='grey' size='small' placeholder="Password" type="text" name="password" variant='filled' />
                         {error && 
                         <div className={styles.error}>
                             <Image className={styles.erroricon} src={erroricon} alt='error'/>

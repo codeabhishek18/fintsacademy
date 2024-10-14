@@ -1,25 +1,11 @@
-.container
-{
-    height: 100vh;
-    position: relative;
-    background-color: var(--primary-element);
-}
-
-.background
-{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-}
-
 .certify
 {
-    height: 90%;
+    height: 350px;
     width: fit-content;
-    position: absolute;
+    /* position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
 }
 
 @media screen and (max-width: 720px) 
