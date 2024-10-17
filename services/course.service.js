@@ -1,3 +1,4 @@
+import { Batch } from "@/models/batch.model";
 import { Course } from "@/models/course.model.js";
 import { Lecture } from "@/models/lecture.model";
 
@@ -52,9 +53,7 @@ class courseService
     {
         try
         {
-            const course = await Course.findOne({id}).populate({path: 'lectures', model: Lecture})
-            if(!course)
-                throw new Error('Course not found')
+            const course = await Course.findOne({id}).populate({path: 'lectures', model: Lecture}).populate({path: 'batches', model: Batch})
             return course
         }
         catch(error)
@@ -68,6 +67,18 @@ class courseService
         try
         {
             return await Course.findByIdAndUpdate(courseId, {$push: {lectures: lectureId}})
+        }
+        catch(error)
+        {
+            throw error
+        }
+    }
+
+    async addBatchToCourse(courseId, batchId)
+    {
+        try
+        {
+            return await Course.findByIdAndUpdate(courseId, {$push: {batches: batchId}})
         }
         catch(error)
         {

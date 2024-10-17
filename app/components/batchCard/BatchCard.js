@@ -4,22 +4,30 @@ import Image from 'next/image';
 import { FormatDate } from '@/utility/FormatDate';
 import deleteIcon from '@/assets/delete.png'
 import axios from 'axios';
+import { useState } from 'react';
+import { toast } from 'sonner';
+import Button from '../button/Button';
 
-const BatchCard = ({type, level, data, participants, removeBatch, batchId}) =>
+const BatchCard = ({type, level, data, participants, getBatches, batchId}) =>
 {
     const router = useRouter();
     const pathname = usePathname();
+    const [ showDialogue, setShowDialogue ] = useState(false);
 
     const deleteBatch = async () =>
     {
         try
         {
             const url = `/api/batch/${data._id}`
-            await axios.delete(url)
+            const response = await axios.delete(url);
+            setShowDialogue(false);
+            toast.success(response.data.message);
+            getBatches();
+            
         }
         catch(error)
         {
-            console.log(error)
+            toast.error(error.message);
         }
     }
 
@@ -29,12 +37,22 @@ const BatchCard = ({type, level, data, participants, removeBatch, batchId}) =>
                 <Image className={styles.image} src={data.course.imageURL} alt={data.title} layout='fill'/>
             </div>
 
-            {level === 'admin' && type === 'batch' && <Image className={styles.deleteBatch} src={deleteIcon} alt='delete' onClick={deleteBatch}/>}
+            {showDialogue && 
+            <div className={styles.dialogueWrapper}>
+                <div className={styles.dialogue}>
+                    <p className={styles.dialogueTitle}>Are you sure?</p>
+                    <div className={styles.controls}>
+                        <button className={styles.details} onClick={deleteBatch}>Yes</button>
+                        <button className={styles.details} onClick={()=> setShowDialogue(false)}>No</button>
+                    </div>
+                </div>
+            </div>}
+
+            {level === 'admin' && type === 'batch' && <Image className={styles.deleteBatch} src={deleteIcon} alt='delete' onClick={()=> setShowDialogue(true)}/>}
 
             <div className={styles.content}>
                 <p className={styles.course}>{data.course.title}</p>
                 <p className={styles.title}>{data.sessions.length} lectures</p>
-                {/* {type === "admin" && <Image className={styles.delete} src={deleteIcon} alt='delete' onClick={() => removeBatch(data._id)}/>} */}
             </div>
             <div className={styles.footer}>
                 {level === "admin" ? 
@@ -44,9 +62,10 @@ const BatchCard = ({type, level, data, participants, removeBatch, batchId}) =>
                 
                 {level === "admin" ?
                 (type === 'batch' ? 
+                
                 <button className={styles.details} onClick={()=> router.push(`/admin/batches/${data.title}`)}>Details</button> :
-                <button className={styles.details} onClick={()=> router.push(`${pathname}/${batchId}`)}>View scores</button>) : 
-                <button className={styles.details} onClick={()=> router.push(`/dashboard/${data.title}`)}>View</button>}    
+                <Button label='View scores' action={()=> router.push(`${pathname}/${batchId}`)}/>) : 
+                <Button label='View' action={()=> router.push(`/dashboard/${data.title}`)}/>}    
                 
                 <p className={styles.date}>{FormatDate(data.startDate)}</p>
             </div> 

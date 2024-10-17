@@ -4,19 +4,13 @@
     padding: 0 10vw 50px;
     display: flex;
     flex-direction: column;
-    row-gap: 50px;
+    row-gap: 20vh;
     background-color: var(--primary-bg);
     color: white;
     font-size: 16px;
 }
 
-.light
-{
-    background-color: white;
-    color: black;
-}
-
-.marquee
+.marqueeWrapper
 {
     width: 100%;
     margin: 0;
@@ -33,8 +27,8 @@
     white-space: nowrap;
     box-sizing: border-box;
 }
-  
-.marqueeContent
+
+.marquee
 {
     display: inline-block;
     padding-left: 100%;
@@ -54,20 +48,107 @@
     }
 }
 
-.aboutWrapper
+.query
 {
-    margin-top: 50px;
-    /* background-image: url('../assets/fingerprint.png');
-    background-position: center;
-    object-fit: contain; */
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
 }
 
-.aboutWrapper, .courseWrapper, .faqWrapper, .faq, .carouselWrapper
+.chat
+{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    height: 50px;
+    width: fit-content;
+    background-color: var(--primary-element);
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    z-index: 100;
+}
+
+.quoteWrapper
+{
+    background-color: var(--alert-color);
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 40px;
+    margin-bottom: calc(-20vh + 25px);
+}
+
+.quoteIcon
+{
+    height: 40px;
+    width: fit-content;
+    margin-bottom: 10px;
+}
+
+.statsWrapper
+{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    column-gap: 20px;
+    row-gap: 20px;
+}
+
+.statCard
+{
+    height: 200px;
+    background-color: rgba(0,0,0,0.65);
+    box-shadow: var(--box-shadow);
+    display: flex;
+    align-items: center;
+    position: relative;
+    line-height: 30px;
+}
+
+.newsBg
+{
+    height: 100%;
+    z-index: -1;
+    width: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 5px;
+}
+
+.statValue
+{
+    width: 100%;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    display: inline;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.statHighlight
+{
+    color: var(--alert-color);
+    padding: 0 5px;
+    font-weight: 600;
+}
+
+.sectionWrapper, .faqWrapper
 {
     display: flex;
     flex-direction: column;
     row-gap: 30px;
 }
+<<<<<<< HEAD
 
 .commonHeader
 {
@@ -104,38 +185,60 @@
     column-gap: 20px;
     row-gap: 20px;
 }
+=======
+>>>>>>> dev
   
-.faq
+.faqWrapper
 {
     row-gap: 20px;
 }
 
-@media screen and (max-width:720px)
-{  
-    .commonHeader
-    {
-        font-size: 48px;
-    }
+.aboutHeader
+{
+    font-size: 48px;
+    color: var(--primary-bg);
+    font-weight: 700;
+}
+
+.aboutDescription
+{
+    line-height: 36px;
+    margin-bottom: 10px;
+}
+
+.aboutWrapper
+{
+    background-color: var(--alert-color);
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 40px;
+    border-radius: 5px;
 }
 
 @media screen and (max-width:480px)
 {
-    .commonHeader
+    .statsWrapper
     {
-        font-size: 40px;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        column-gap: 15px;
+        row-gap: 15px;
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .statCard
+    {
+        line-height: 24px;
     }
 
     .container
     {
+<<<<<<< HEAD
         padding: 20px;
+=======
+        padding:  0 20px 20px;
+>>>>>>> dev
         font-size: 14px;
-    }
-}
-
-@media screen and (max-width: 375px)
-{ 
-    .commonHeader
-    {
-        font-size: 36px;
     }
 }

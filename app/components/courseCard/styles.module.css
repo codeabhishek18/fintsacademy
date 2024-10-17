@@ -14,11 +14,6 @@
     color: white;
 }
 
-.light
-{
-    color: black;
-}
-
 .image
 {
     border-radius: 5px;
@@ -87,30 +82,12 @@
 
 .explore
 {
-    background: none;
-    border: 1px solid var(--primary-border);
+    background-color: var(--alert-color);
     width: fit-content;
     padding: 2px 10px;
     border-radius: 5px;
     font-size: 14px;
     font-weight: 500;
-    color: white;
-}
-
-.explore.light
-{
-    color: black;
-}
-
-.explore:hover
-{
-    background-color: var(--alert-color);
-    border: 1px solid var(--alert-color);
-    cursor: pointer;
-}
-
-.explore.light:hover
-{
     color: white;
 }
 

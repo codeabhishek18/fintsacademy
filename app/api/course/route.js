@@ -10,9 +10,7 @@ export async function GET()
         await dbConnect();
 
         const courses = await courseInstance.findAll();
-        if(!courses)
-            throw new Error('Courses not found')
-        return NextResponse.json({courses});
+        return NextResponse.json(courses);
     }    
     catch(error)
     {

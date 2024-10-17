@@ -25,9 +25,18 @@ export async function POST(req, {params})
         const {quizId} = params;
         const {users, batch} = await req.json();
         
-        const batchId = await batchInstance.findById(batch)
+        const batchId = await batchInstance.findById(batch);
         const quiz = await quizInstance.getQuizById(quizId);
-        const group = await groupInstance.createGroup(batchId._id)
+        let group = null;
+        let isOldGroup = [];
+        const groups = quiz.group;
+        if(!groups.length)
+            group = await groupInstance.createGroup(batchId._id)
+        else 
+        {
+            isOldGroup = groups.find((group)=> group.batch._id.toString() === batchId._id.toString());
+            group = isOldGroup ? isOldGroup : await groupInstance.createGroup(batchId._id)
+        }
         
         for(let user of users)
         {
@@ -36,9 +45,11 @@ export async function POST(req, {params})
             const assignment = await assignmentInstance.assign(user, test._id)
             await groupInstance.updateAssignment(group, assignment._id)
         }
-        await quizInstance.updateGroup(quizId, group._id)
+        
+        if(!isOldGroup?.length)
+            await quizInstance.updateGroup(quizId, group._id)
 
-    return NextResponse.json({message: 'Quizzes added'})
+    return NextResponse.json({message: 'Assessments assigned successfully'})
     }
     catch(error)
     {

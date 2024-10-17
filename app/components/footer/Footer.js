@@ -1,7 +1,7 @@
 import styles from './styles.module.css'
 import email from '@/assets/email.png'
 import linkedin from '@/assets/linkedin.png'
-import instagram from '@/assets/instagram.png'
+// import instagram from '@/assets/instagram.png'
 import fints from '@/assets/fints.png'
 import youtube from '@/assets/youtube.png'
 import Image from 'next/image'

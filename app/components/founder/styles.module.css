@@ -43,7 +43,6 @@
 {
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
     margin: 0;
 }
 
@@ -132,7 +131,7 @@
     }
 }
 
-@media screen and (max-width: 480px) 
+@media screen and (max-width: 640px) 
 {
     .header
     {
@@ -146,18 +145,25 @@
         font-size: 14px;
         padding: 20px;
     }   
+
+    .header
+    {
+        flex-direction: column;
+        align-items: center;
+        row-gap: 20px;
+    }
     
     .founderImageWrapper
     {
-        height: 200px;
+        height: 170px;
     }
 
     .icon
     {
-        top: 185px;
+        top: 155px;
         right: 25px;
         width: 20%;
-        height: 35px;
+        height: 30px;
         width: fit-content;
     }
 }

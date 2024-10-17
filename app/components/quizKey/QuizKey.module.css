@@ -25,6 +25,17 @@
     transform: scale(1.05);
 }
 
+.dup
+{
+    color: grey;
+}
+
+.dup:hover
+{
+    cursor:not-allowed;
+    transform: scale(1);
+}
+
 .close
 {
     margin: 0;

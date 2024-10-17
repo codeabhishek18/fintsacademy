@@ -1,28 +1,43 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import styles from './styles.module.css'
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { useState } from 'react';
+import { CircularProgress } from '@mui/material';
 
-const BillingCard = ({batch}) =>
+const BillingCard = ({course, selectedBatch}) =>
 {
     const router = useRouter();
-    const {data} = useSession();
+    const {data, update} = useSession();
     const user = data?.user?.id;
+    const session = useSession();
+    const [ isLoading, setIsLoading ] = useState(false);
 
     const handleBuy = async (e) =>
     {
         e.preventDefault();
         try
         {
+            const newSession = {...session, user: { ...session?.user, role: 'user'}}
+            if(!selectedBatch)
+                return toast.error('Batch is required')
+
+            setIsLoading(true);
             const url = `/api/enrollments/${user}`
-            await axios.post(url, {batchId: batch._id});
-            router.push('/')
+            const response = await axios.post(url, {batchId : selectedBatch});
+            await update(newSession);
+            setIsLoading(false);
+            toast.success(response.data.message);
+            router.push('/dashboard');
+            localStorage.removeItem('seletedCourse')
         }
         catch(error)
         {
-            console.log(error)
+            setIsLoading(false);
+            toast.error(error.message);
         }
     }
 
@@ -31,18 +46,22 @@ const BillingCard = ({batch}) =>
             <p className={styles.header}>PRICE DETAILS</p>
             <div className={styles.group}>
                 <p className={styles.left}>Price (1 Item)</p>
-                <p className={styles.right}>${batch.course.price}</p>
+                <p className={styles.right}>${course.price}</p>
             </div>
             <div className={styles.group}>
                 <p className={styles.left}>Discount</p>
-                <p className={styles.right}>${batch.course.price - batch.course.offerPrice}</p>
+                <p className={styles.right}>${course.price - course.offerPrice}</p>
             </div>
             <div className={styles.total}>
                 <p className={styles.left}>Total Amount</p>
-                <p className={styles.right}>${batch.course.offerPrice}</p>
+                <p className={styles.right}>${course.offerPrice}</p>
             </div>
-            <p className={styles.success}>You saved ${batch.course.price - batch.course.offerPrice} on this</p>
-            <button className={styles.buy} onClick={handleBuy}>Buy Now</button>
+            <p className={styles.success}>You saved ${course.price - course.offerPrice} on this</p>
+            {isLoading ? 
+            <div className={styles.spinner}>
+                <CircularProgress sx={{color: '#D4313D'}} />
+            </div> : 
+            <button className={styles.buy} onClick={handleBuy}>Register Now</button>}
         </div>
     )
 }

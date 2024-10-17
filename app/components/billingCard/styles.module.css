@@ -1,6 +1,6 @@
 .container
 {
-    width: 40%;
+    width: 100%;
     padding: 30px;
     border-radius: 8px;
     display: flex;
@@ -56,14 +56,28 @@
     font-weight: 500;
     text-align: center;
     cursor: pointer;
-    border: 1px solid var(--primary-border);
+    background-color: var(--alert-color);
+    border: 1px solid var(--alert-color);
     color: white;
     font-size: 14px;
 }
 
-.buy:hover
+.spinner
 {
-    background-color: var(--alert-color);
-    border: 1px solid var(--alert-color);
+    display: flex;
+    justify-content: center;
+}
+
+@media screen and (max-width: 450px) 
+{
+    .header
+    {
+        font-size: 16px;
+    }
+
+    .left, .right, .success
+    {
+        font-size: 14px;
+    }
 }
 

@@ -106,3 +106,14 @@
     transform: scale(1.25);
     cursor: pointer;
 }
+
+.noMessages
+{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--primary-element);
+}

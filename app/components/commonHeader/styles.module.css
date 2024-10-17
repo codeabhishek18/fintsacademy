@@ -1,0 +1,30 @@
+.commonHeader
+{
+    font-size: 56px;
+    font-weight: 700;
+    color: var(--alert-color);
+}
+
+@media screen and (max-width: 940px)
+{
+    .commonHeader
+    {
+        font-size: 48px;
+    }
+}
+
+@media screen and (max-width: 720px)
+{
+    .commonHeader
+    {
+        font-size: 36px;
+    }
+}
+
+@media screen and (max-width:420px)
+{
+    .commonHeader
+    {
+        font-size: 30px;
+    }
+}

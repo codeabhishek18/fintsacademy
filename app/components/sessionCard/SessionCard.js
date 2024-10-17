@@ -1,7 +1,7 @@
-import sessionCardStyles from './SessionCard.module.css'
-import agenda from '@/assets/agenda.png'
-import complete from '@/assets/success-icon.png'
-import pending from '@/assets/pending.png'
+import styles from './styles.module.css'
+import agendaIcon from '@/assets/agenda.png'
+import completeIcon from '@/assets/success-icon.png'
+import pendingIcon from '@/assets/pending.png'
 import Switch from '../switch/Switch'
 import Image from 'next/image'
 
@@ -14,23 +14,19 @@ const SessionCard = ({session, index, updateSessionStatus, activeAgenda, setActi
     }
 
     return(
-        <div className={sessionCardStyles.container}>
-            <div className={sessionCardStyles.header}>
-                <Image className={sessionCardStyles.agendaIcon} src={agenda} alt='agenda' onClick={handleAgenda}/>
-                <p className={sessionCardStyles.sessionName}>Session {index+1}</p>
-                {activeAgenda === index && <p className={sessionCardStyles.agenda}>{session.description}</p>}
+        <div className={styles.container}>
+            <div className={styles.header}>
+                <Image className={styles.agendaIcon} src={agendaIcon} alt='agenda' onClick={handleAgenda}/>
+                <p className={styles.sessionName}>Session {index+1}</p>
+                {activeAgenda === index && <p className={styles.agenda}>{session.description}</p>}
             </div>
-            <div className={sessionCardStyles.footer}>
-                <p className={sessionCardStyles.status}>{session.status}</p>
-                <Image className={sessionCardStyles.statusIcon} src={session.status === 'Upcoming' ? pending : complete} alt='img'/>
+            <div className={styles.footer}>
+                <p className={styles.status}>{session.status}</p>
+                <Image className={styles.statusIcon} src={session.status === 'Upcoming' ? pendingIcon : completeIcon} alt='icon'/>
             </div>
-            {/* <div className={sessionCardStyles.updateStatus}>
-                <button onClick={()=> updateSessionStatus(session._id, session.status)}>Update</button>
-            </div> */}
+            
             {level === "admin" && 
-            <Switch 
-                id={session._id} status={session.status} 
-                updateSessionStatus={updateSessionStatus}/>}
+            <Switch id={session._id} status={session.status} updateSessionStatus={updateSessionStatus}/>}
         </div>
     )
 }

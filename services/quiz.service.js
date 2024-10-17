@@ -25,9 +25,19 @@ class quizService
         try
         {
             const quizzes = await Quiz.find()
+            .populate({path: 'course', model: Course})
             .populate({
-                path: 'course',
-                model: Course
+                path: 'group',
+                model: Group,
+                populate:
+                [{
+                    path: 'batch',
+                    model: Batch,
+                },
+                {
+                    path: 'assignment',
+                    model: Assignment
+                }]
             })
             
             return quizzes
@@ -96,6 +106,25 @@ class quizService
         }
         catch(error)
         {
+            throw error
+        }
+    }
+
+    async findQuizByBatch(batchId)
+    {
+        try
+        {
+            console.log(batchId)
+            const quiz = await Quiz.find()
+            .populate({path: 'group', model: Group, populate: {
+                path: 'batch', model: Batch, match: {_id: batchId}
+            }});
+
+            return quiz
+        }
+        catch(error)
+        {
+            console.log(error.message)
             throw error
         }
     }

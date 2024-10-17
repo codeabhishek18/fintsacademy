@@ -35,8 +35,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
 
             return false
         },
-        async jwt({token, user})
+        async jwt({token, user, trigger})
         {
+            if(trigger === 'update')
+            {
+                await dbConnect();
+                const isUserFound = await userInstance.findByEmail(token.email);
+                token.role = isUserFound.role;
+                return token
+            }
+
             if(user)
             {
                 await dbConnect();

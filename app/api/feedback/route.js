@@ -11,10 +11,8 @@ export async function POST(req)
     {
         await dbConnect();
 
-        const { user, course, rating, comment } = await req.json()
-        console.log(user, course, rating, comment )
+        const { user, course, rating, comment } = await req.json();
         const feedback = await feedbackInstance.newFeedback(user, rating, comment);
-        console.log(feedback)
         await courseInstance.addFeedbacktoCourse(course, feedback._id);
         return NextResponse.json({message: 'Feedback recorded'})
     }

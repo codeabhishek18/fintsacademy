@@ -8,10 +8,11 @@ import { useSession } from "next-auth/react"
 import Image from 'next/image';
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import feedback from '@/assets/feedback.png'
-import { CircularProgress } from '@mui/material';
+import feedbackIcon from '@/assets/feedback.png'
 import Feedback from '@/app/components/feedback/Feedback';
 import AssessmentCard from '@/app/components/assessmentCard/assessmentCard';
+import Loading from '@/app/components/loading/Loading';
+import { toast } from 'sonner';
 
 const Dashboard = () =>
 {
@@ -22,7 +23,6 @@ const Dashboard = () =>
     const [ activeAgenda, setActiveAgenda ] = useState(-1);
     const [ assessments, setAssessments ] = useState(null);
     const [ feedbackForm, setFeedbackForm ] = useState(false);
-    const [ feedbackTooltip, setFeedbackTooltip ] = useState(false);
     const [ hideFeedback, setHideFeedback ] = useState(true);
     const pathname = usePathname();
     const batchTitle = pathname.split('/')[2]
@@ -39,7 +39,7 @@ const Dashboard = () =>
         }
         catch(error)
         {
-            console.log(error);
+            toast.error(error.message);
         }
     }
 
@@ -56,13 +56,13 @@ const Dashboard = () =>
         {
             const url = `/api/user/${data.user.id}`
             const response = await axios.get(url);
-            const batchAssessments = response.data.enrollments.find((enrollment) => enrollment.batch.title === batchTitle);
+            const batchAssessments = response.data.enrollments.find((enrollment) => enrollment.batch.title === batchTitle).assessments;
             setAssessments(batchAssessments);
             setIsLoading(false);
         }
         catch(error)
         {
-            console.log(error)
+            toast.error(error.message)
         }
     }
     
@@ -81,11 +81,7 @@ const Dashboard = () =>
     }, [status]);
 
     if(status === 'loading' || isLoading)
-        return(
-            <div className={styles.spinner}>
-                <CircularProgress sx={{color: '#D4313D'}} />
-            </div>    
-        )
+        return <Loading/>
 
     return(
         <div onClick={()=> setActiveAgenda(-1)} className={styles.wrapper}>
@@ -96,31 +92,26 @@ const Dashboard = () =>
                     <Progress batchData={batchData} level='user' assessments={assessments}/>
                 </div>
 
-                <div className={styles.practicals}>
-                    <div className={styles.sessions}>
-                        {batchData.sessions.map((data, index)=>
-                        (
-                            <SessionCard session={data} index={index} setActiveAgenda={setActiveAgenda} activeAgenda={activeAgenda} level='user' key={data._id}/>
-                        ))}
-                    </div>
-
-                    
+                <div className={styles.sessions}>
+                {batchData.sessions.map((data, index)=>
+                (
+                    <SessionCard session={data} index={index} setActiveAgenda={setActiveAgenda} activeAgenda={activeAgenda} level='user' key={data._id}/>
+                ))}
                 </div>
             </div>}
 
             <div className={styles.assessmentWrapper}>
-                {assessments.assessments.length > 0 && <p className={styles.header}>Assessments</p>}
+                {assessments.length > 0 && <p className={styles.header}>Assessments</p>}
                 <div className={styles.assessments}>
-                    {assessments?.assessments?.map((assessment, index)=>
-                    (
-                        <AssessmentCard assessment={assessment} index={index} key={data._id} batchId={batchId}/>
-                    )
-                )}
-            </div>
+                {assessments?.map((assessment, index)=>
+                (
+                    <AssessmentCard assessment={assessment} index={index} key={data._id} batchId={batchId}/>
+                ))}
+                </div>
             </div>
 
-            {hideFeedback && <Image className={styles.feedback} src={feedback} alt='feedback' onClick={()=> setFeedbackForm(true)} onMouseEnter={()=> setFeedbackTooltip(true)} onMouseLeave={()=> setFeedbackTooltip(false)}/>}
-            {feedbackTooltip && <p className={styles.toolTip}>Feedback</p>}
+            {hideFeedback && <Image className={styles.feedbackIcon} src={feedbackIcon} alt='feedback' onClick={()=> setFeedbackForm(true)}/>}
+            
             {feedbackForm && 
             <div className={styles.feedbackForm}>
                 <Feedback setFeedbackForm={setFeedbackForm} courseId={batchData.course._id}/>

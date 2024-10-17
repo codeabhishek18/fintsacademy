@@ -1,19 +1,13 @@
 .container
 {
     width: 100%;   
-    background-color: var(--primary-bg);
+    background-color: var(--alert-color);
     border-radius: 5px;
-    padding: 5px;
+    padding: 4px;
     display: flex;
     justify-content: center;
     align-items: center;
     column-gap: 10px;
-}
-
-.container:hover
-{
-    background-color: var(--alert-color);
-    cursor: pointer;
 }
 
 .googleIcon

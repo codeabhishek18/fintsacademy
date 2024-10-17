@@ -28,10 +28,8 @@ const Stats = () =>
             {numbers.map((data, index) =>
             (
                 <div className={styles.column} key={data.id}>
-                    <BoxReveal boxColor='rgb(15, 18, 18)'>
                     <span className={styles.title}>{data.title}</span>
                     <p className={styles.count}>{data.count}</p>
-                    </BoxReveal> 
                 </div>
             ))}
         </div>

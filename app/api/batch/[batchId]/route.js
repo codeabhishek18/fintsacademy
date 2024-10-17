@@ -27,7 +27,7 @@ export async function DELETE(req, {params})
 
         const {batchId} = params;
         await batchInstance.deleteById(batchId);
-        return NextResponse.json({message: 'deleted'})
+        return NextResponse.json({message: 'Batch deleted'})
     }
     catch(error)
     {

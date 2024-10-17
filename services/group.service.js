@@ -3,6 +3,7 @@ import { Batch } from "@/models/batch.model";
 import { Course } from "@/models/course.model";
 import { Group } from "@/models/group.model"
 import { Mentor } from "@/models/mentor.model";
+import { Quiz } from "@/models/quiz.model";
 import { Test } from "@/models/test.model";
 import { User } from "@/models/user.model";
 
@@ -87,6 +88,19 @@ class groupService
             throw error
         }
     }
+
+    // async findBatch(batchId)
+    // {
+    //     try
+    //     {
+    //         const batch = await Group.findOne({batch: batchId});
+    //         return batch
+    //     }   
+    //     catch(error)
+    //     {
+    //         throw error
+    //     }
+    // }
 
     async updateAssignment(group, assignment)
     {

@@ -4,12 +4,3 @@
     flex-wrap: wrap;
     column-gap: 20px;
 }
-
-.spinner
-{
-    min-height: 75vh;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}

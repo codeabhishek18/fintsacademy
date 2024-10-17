@@ -3,16 +3,17 @@
 import { useEffect, useState } from 'react'
 import styles from './styles.module.css'
 import axios from 'axios'
-import { useRouter } from 'next/navigation'
-import CourseForm from '@/app/components/courseForm/CourseForm'
+import { usePathname, useRouter } from 'next/navigation'
 import CourseCard from '@/app/components/courseCard/CourseCard'
-import { CircularProgress } from '@mui/material'
+import Button from '@/app/components/button/Button'
+import Loading from '@/app/components/loading/Loading'
 
 const Courses = () =>
 {
     const [ courseData, setCourseData ] = useState({title: '', description: ''})
     const [ courses, setCourses ] = useState(null);
-    const [ courseForm, setCourseForm ] = useState(false);
+    const pathname = usePathname();
+    const router = useRouter();
 
     useEffect(()=>
     {
@@ -23,7 +24,7 @@ const Courses = () =>
     {
         const url = `/api/course`
         const response = await axios.get(url);
-        setCourses(response.data.courses);
+        setCourses(response.data);
     }
 
     const handleChange = (e) =>
@@ -40,7 +41,6 @@ const Courses = () =>
             const url = `/api/course`
             await axios.post(url, courseData)
             getCourses();
-            setCourseForm(false)
         }
         catch(error)
         {
@@ -65,19 +65,7 @@ const Courses = () =>
     return(
         <div className={styles.wrapper}>
             {courses ? <div className={styles.container}>
-                <div className={styles.listHeader}>
-                    {/* <h1>Courses</h1> */}
-                    <button className={styles.add} onClick={()=> setCourseForm(!courseForm)}>{courseForm ? 'close' : '+ Add course' }</button>
-                </div>
-
-                {courseForm && 
-                <CourseForm
-                    data={courseData} 
-                    handleChange={handleChange} 
-                    handleSubmit={handleSubmit} 
-                    setCourseForm={setCourseForm}
-                />}
-
+                <Button label='+ Create Course' action={()=> router.push(`${pathname}/create`)}/>
                 <div className={styles.list}>
                     {courses?.map((course) =>
                     (
@@ -85,9 +73,7 @@ const Courses = () =>
                     ))}
                 </div>
             </div> :
-            <div className={styles.spinner}>
-                <CircularProgress sx={{color: '#D4313D'}} />
-            </div>}
+            <Loading/>}
         </div>
     )
 }

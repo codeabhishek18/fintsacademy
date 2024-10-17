@@ -6,6 +6,7 @@ import styles from './styles.module.css'
 import compliance from '@/assets/compliance.jpg'
 import Image from 'next/image'
 import Navbar from '../navbar/Navbar'
+import Link from 'next/link'
 
 const fadeInAnimation = 
 {
@@ -60,9 +61,9 @@ const HeroSection = () =>
                     variants={fadeInAnimation}
                     className={styles.footer}>
                     <p className={styles.subHeading}>{header.subHeading}</p>
-                    <a href='https://wa.me/8431976788' target='_blank' className={styles.enrollWrapper}>
-                        <span className={styles.enroll}>Get enrolled</span>
-                    </a>
+                    <Link href='/courses' className={styles.enrollWrapper}>
+                        <span className={styles.enroll}>Get started</span>
+                    </Link>
                 </motion.div>
             </div>
         </div>

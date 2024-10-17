@@ -1,12 +1,13 @@
-import { doLogout } from "@/app/action"
-import styles from './styles.module.css' 
+'use client'
 
-const Logout = () => {
-  return (
-    <form action={doLogout}>
-        <button className={styles.logout} type="submit">Logout</button>
-    </form>
-  )
+import Button from '../button/Button'
+import { signOut } from "next-auth/react"
+
+const Logout = () => 
+{
+
+  return <Button action={()=> signOut({callbackUrl: '/'})} label='Logout'/>
+    
 }
 
 export default Logout

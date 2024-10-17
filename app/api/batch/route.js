@@ -14,12 +14,10 @@ export async function POST(req, {params})
         await dbConnect();
 
         const { title, courseId, mentor, startDate, endDate } = await req.json(); 
-        console.log(title, courseId, mentor, startDate, endDate)
 
         const newBatch = await batchInstance.addNewBatch(title, courseId, mentor, startDate, endDate);
+        await courseInstance.addBatchToCourse(courseId, newBatch._id);
         const course = await courseInstance.getByCourseId(courseId);
-
-        console.log(course);
 
         let id=1;
         for(let lecture of course.lectures)
@@ -28,7 +26,7 @@ export async function POST(req, {params})
             await batchInstance.updateSessions(newBatch._id, batchSession._id);
             id++;
         }
-        return NextResponse.json({message: 'Batch added'})
+        return NextResponse.json({message: 'Batch created'})
     }
     catch(error)
     {

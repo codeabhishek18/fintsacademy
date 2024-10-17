@@ -7,16 +7,19 @@ import ChatUser from '@/app/components/chatUser/ChatUser';
 import Chat from '@/app/components/chat/Chat';
 import { useSession } from 'next-auth/react';
 import { CircularProgress } from '@mui/material';
-import deleteIcon from '@/assets/delete.png'
-import clearIcon from '@/assets/clear.png'
-import selectIcon from '@/assets/select.png'
-import closeIcon from '@/assets/close.png'
-import Image from 'next/image';
+import { toast } from 'sonner';
+import Loading from '@/app/components/loading/Loading';
+// import deleteIcon from '@/assets/delete.png'
+// import clearIcon from '@/assets/clear.png'
+// import selectIcon from '@/assets/select.png'
+// import closeIcon from '@/assets/close.png'
+// import Image from 'next/image';
 
 const Messages = () =>
 {
     const [ adminData, setAdminData ] = useState(null);
-    const [ showDelete, setShowDelete ] = useState(false)
+    const [ showDelete, setShowDelete ] = useState(false);
+    const [isLoading, setIsLoading ] =  useState(false);
     const [ deleteUsers, setDeleteUsers ] = useState(null);
     const [ active, setActive ] = useState(null)
     const { data, status } = useSession();
@@ -25,13 +28,16 @@ const Messages = () =>
     {
         try
         {
+            setIsLoading(true);    
             const url = `/api/user/${data.user.id}`
             const response = await axios.get(url);
             setAdminData(response.data);
+            setIsLoading(false);  
         }
         catch(error)
         {
-            console.log(error);
+            setIsLoading(false);  
+            toast.error(error.message);
         }
     }
 
@@ -54,31 +60,30 @@ const Messages = () =>
 
     return(
         <div className={styles.wrapper}>
-            <div className={styles.container}>
+            {isLoading ? 
+            <Loading/> :
+            (adminData ? <div className={styles.container}>
 
-                <div className={styles.control}>
+                {/* <div className={styles.control}>
                     <Image className={styles.icon} src={selectIcon} alt='icon' onClick={()=> setShowDelete(true)}/>
                     <Image className={styles.icon} src={deleteIcon} alt='icon'/>
                     <Image className={styles.icon} src={clearIcon} alt='icon'/>
                     <Image className={styles.icon} src={closeIcon} alt='icon' onClick={()=> {setShowDelete(false); setDeleteUsers(null)}}/>
-                </div>
+                </div> */}
 
-                {adminData ? 
+                
                 <div className={styles.users}>
                 {adminData?.chat?.map((conversation) =>
                 (
                     <ChatUser conversation={conversation} active={active} setActive={setActive} handleDelete={handleDelete} deleteUsers={deleteUsers} showDelete={showDelete}/>
                 ))}
-                </div> :
-                <div className={styles.spinner}>
-                    <CircularProgress sx={{color: '#D4313D'}} />
-                </div>}
+                </div>
                 <div className={styles.chat}>
                     {active ? 
                     <Chat type="admin" getChatUsers={getChatUsers}/> : 
                     <p className={styles.message}>Select a chat to view messages</p>}
                 </div>
-            </div>
+            </div>: <div className={styles.noMessages}>No Messages</div>)}
         </div>
     )
 }

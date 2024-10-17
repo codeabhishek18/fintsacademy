@@ -7,64 +7,107 @@ import Header from '../components/header/Header'
 import styles from './styles.module.css'
 import axios from 'axios'
 import Image from 'next/image'
-import { FormatDate } from '@/utility/FormatDate'
-import { CircularProgress, Rating } from '@mui/material'
+import { CircularProgress, FormControl, InputLabel, MenuItem, Rating, Select } from '@mui/material'
 import { signIn, useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+import Loading from '../components/loading/Loading'
+import { FormatDate } from '@/utility/FormatDate'
+import deleteIcon from '@/assets/delete.png'
 
 const Checkout = () =>
 {
-    const [ batch, setBatch ] = useState(null);
-    const router = useRouter();
-    const { data } = useSession();
-    
-    if(!data?.user)
-    {
-        router.push('/login')
-    }
+    const [ course, setCourse ] = useState(null);
+    const [ isLoading, setIsLoading ] = useState(false);
+    const { data, status } = useSession();
+    const [ batches, setBatches ] = useState(null);
+    const [ selectedBatch, setSelectedBatch ] = useState(false);
 
     useEffect(()=>
     {
-        const course = localStorage.getItem('selectedCourse')
-        if(course)
-            getBatch(course);
+        if(status === 'unauthenticated')
+        {
+            signIn(null, {callbackUrl: '/checkout'})
+        }
+    },[status])
+
+    useEffect(()=>
+    {
+        const courseId = localStorage.getItem('selectedCourse')
+        if(courseId)
+            getCourse(courseId);
     },[])
 
-    const getBatch = async (course) =>
+    const getCourse = async (courseId) =>
     {
         try
         {
-            const url = `/api/batch/course/${course}`
+            setIsLoading(true);
+            const url = `/api/course/${courseId}`
             const response = await axios.get(url);
-            setBatch(response.data.batch);
+            const batches = response.data.batches.filter((batch) => batch.status !== 'Completed');
+            setBatches(batches);
+            setCourse(response.data);
+            setIsLoading(false);
         }
         catch(error)
         {
-            console.log(error)
+            toast.error(error.message);
+            setIsLoading(false);
         }
     }
 
+    const clearCart = () =>
+    {
+        localStorage.removeItem('selectedCourse');
+        setCourse(null);
+    }
+
     return(
-        <div className={styles.container}>
+        <div className={styles.wrapper}>
             <Header/>
-            {batch  ?
-            <div className={styles.register}>
-                <div className={styles.card}>
-                    <div className={styles.display}>
-                        <Image className={styles.displayImage} src={batch.course.imageURL} alt={batch.course.id} layout='fill'/>
+            {status === 'loading' || isLoading ?
+            <Loading/> : 
+            (course ? 
+            <div className={styles.container}>
+                {data && 
+                <div className={styles.details}>
+                    <div className={styles.group}>
+                        <p className={styles.label}>Name</p>
+                        <p className={styles.detail}>{data.user.name}</p>    
                     </div>
-                    <div className={styles.content}>
-                        <p className={styles.title}>{batch.course.title}</p>
-                        <p className={styles.level}>{batch.course.level}</p>
-                        <Rating name="half-rating-read" defaultValue={4.7} precision={0.5} readOnly size='small'/>
-                        <p className={styles.date}>Starting from {FormatDate(batch.startDate)}</p>
+                    <div className={styles.group}>
+                        <p className={styles.label}>Email</p>
+                        <p className={styles.detail}>{data.user.email}</p>    
                     </div>
+                    <div className={styles.group}>
+                        <p className={styles.label}>Select Batch</p>
+                        <FormControl className={styles.input} fullWidth>
+                            <Select color='grey' name="mentor" style= {{ color: '#ffffff'}} onChange={(e)=> {setSelectedBatch(e.target.value)}}>
+                            {batches.map((batch) =>
+                            (
+                                <MenuItem value={batch._id} key={batch._id}>{FormatDate(batch.startDate) +' - '+ FormatDate(batch.endDate)}</MenuItem>
+                            ))}
+                            </Select>
+                        </FormControl>
+                    </div>
+                </div>}
+                <div className={styles.register}>
+                    <div className={styles.card}>
+                        <div className={styles.display}>
+                            <Image className={styles.displayImage} src={course.imageURL} alt={course.id} layout='fill'/>
+                        </div>
+                        <div className={styles.content}>
+                            <p className={styles.title}>{course.title}</p>
+                            <p className={styles.level}>{course.level}</p>
+                            <Rating name="half-rating-read" defaultValue={4.7} precision={0.5} readOnly size='small'/>
+                            {/* <p className={styles.date}>Starting from {FormatDate(selectedBatch.startDate)}</p> */}
+                        </div>
+                        <Image className={styles.delete} src={deleteIcon} alt='icon' onClick={clearCart}/>
+                    </div> 
+                    <BillingCard course={course} selectedBatch={selectedBatch}/> 
                 </div> 
-                <BillingCard batch={batch}/> 
-            </div> :
-            <div className={styles.spinner}>
-                <CircularProgress sx={{color: '#D4313D'}} />
-            </div> }
+                
+            </div>: <div className={styles.cartWrapper}>Cart is empty</div>)}
             <Footer/>
         </div>
     )

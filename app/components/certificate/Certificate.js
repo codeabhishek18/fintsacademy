@@ -9,7 +9,7 @@ const Certificate = () =>
 
     return(
         <div className={styles.container}>   
-            <Image className={styles.background} src={certificatebg} alt='fints'/>   
+            {/* <Image className={styles.background} src={certificatebg} alt='fints'/>    */}
             <Image className={styles.certify} src={certificate} alt='fints'/>
         </div>
     )

@@ -9,28 +9,10 @@
     row-gap: 40px;
     padding: 30px 0;
     color: white;
+    box-shadow: var(--box-shadow);
 }
 
-.checkout
-{
-    border: 1px solid var(--primary-border);
-    background: none;
-    padding: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-weight: 600;
-    color: white;
-}
-
-.checkout:hover
-{
-    color: var(--secondary-color);
-    border: 1px solid var(--alert-color);
-    background-color: var(--alert-color);
-    cursor: pointer;
-}
-
-.head
+.header
 {
     margin: 0;
     font-size: 24px;
@@ -42,7 +24,7 @@
     text-align: center;
 }
 
-.card
+.details
 {
     width: 80%;
     display: flex;
@@ -57,11 +39,6 @@
     justify-content: space-between;
     font-size: 16px;
     font-weight: 500;
-}
-
-.left, .right
-{
-    margin: 0;
 }
 
 .success

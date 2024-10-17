@@ -6,7 +6,7 @@ import Lecturecard from '../lectureCard/LectureCard'
 import { Rating } from '@mui/material'
 import { useScheme } from '@/contextapi/SchemeProvider'
 import { useRouter } from 'next/navigation'
-import BoxReveal from '@/components/magicui/box-reveal'
+import Button from '../button/Button'
 
 const CourseDetail = ({course}) =>
 {
@@ -39,10 +39,8 @@ const CourseDetail = ({course}) =>
             </div>  
 
             <div className={styles.footer}>
-                <a href='https://wa.me/8431976788' target='_blank' className={styles.enrollWrapper}>
-                    <span className={styles.join}>Join Now</span>
-                </a>
-                <Rating name="half-rating-read" defaultValue={4.7} precision={0.5} readOnly size='large'/>
+                <Button label='Join Now' action={handleClick}/>
+                {/* <Rating name="half-rating-read" defaultValue={4.7} precision={0.5} readOnly size='large'/> */}
             </div>          
         </div>
     )

@@ -10,17 +10,23 @@ const slice = createSlice({
     {
         updateQuestion(state, action)
         {
-            const {index, question, options, multipleAnswers, answers, reason } = action.payload;
-            state.list[index] = {id: index, question, options, multipleAnswers, answers, reason};
+            const {index, question, options, multipleAnswers, answers } = action.payload;
+            state.list[index] = {id: index, question, options, multipleAnswers, answers};
         },
 
         addQuestion(state, action)
         {
             const {index} = action.payload;
             state.list.push({id: index})
+        },
+
+        editQuiz(state, action)
+        {
+            const quiz = action.payload;
+            state.list = quiz;
         }
     }
 })
 
-export const {addQuestion, updateQuestion} = slice.actions
+export const {addQuestion, updateQuestion, editQuiz} = slice.actions
 export default slice.reducer

@@ -10,6 +10,7 @@
     row-gap: 10px;
     position: relative;
     color: white;
+    border: var(--box-border);
 }
 
 .title
@@ -46,14 +47,7 @@
     border: 0;
     border-radius: 5px;
     color: white;
-    border: 1px solid var(--primary-border);
-    cursor: pointer;
-}
-
-.submit:hover
-{
     background-color: var(--alert-color);
-    border: 1px solid var(--alert-color);
 }
 
 .close

@@ -6,6 +6,8 @@ import axios from "axios"
 import { useParams, usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { CircularProgress } from '@mui/material'
+import Loading from '@/app/components/loading/Loading'
+import { toast } from 'sonner'
 
 const Score = () =>
 {
@@ -21,19 +23,23 @@ const Score = () =>
 
     const getTest = async () =>
     {
-        setIsLoading(true)
-        const url = `/api/assessment/${testId}`
-        const response = await axios.get(url)
-        setTestData(response.data);
-        setIsLoading(false)
+        try
+        {
+            setIsLoading(true)
+            const url = `/api/assessment/${testId}`
+            const response = await axios.get(url)
+            setTestData(response.data);
+            setIsLoading(false)
+        }
+        catch(error)
+        {
+            setIsLoading(false);
+            toast.error(error.message);
+        }
     }
 
     if(isLoading)
-        return(
-            <div className={styles.spinner}>
-                <CircularProgress sx={{color: '#D4313D'}} />
-            </div>    
-        )
+        return <Loading/>
 
     return(
         <div className={styles.container}>

@@ -1,3 +1,8 @@
+export const protectedRoutes =
+[
+    '/api/user'
+]
+
 export const userRoutes =
 [
     '/dashboard', '/forum', '/profile'

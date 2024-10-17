@@ -3,13 +3,12 @@
 import styles from './Header.module.css'
 import logout from '@/assets/logout.png'
 import fints from '@/assets/fints.png'
-import close from '@/assets/close.png'
 import Image from 'next/image';
 import { useSession } from "next-auth/react"
-import { doLogout } from '@/app/action';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'
-import Logout from '../logout/Logout'
+import Link from 'next/link'
+import LoggedUser from '../loggedUser/LoggedUser'
 
 const Header = () =>
 {
@@ -22,20 +21,21 @@ const Header = () =>
             <Image className={styles.title} src={fints} alt='logo' onClick={()=> router.push('/')}/>
             
             <div className={styles.links}>
+<<<<<<< HEAD
                 {(data?.user?.role === 'user' || data?.user?.role === 'admin') && <p className={styles.link} onClick={()=> router.push('/dashboard')}>Dashboard</p>}
                 <p className={styles.link} onClick={()=> router.push('/courses')}>Courses</p>
                 {/* <p className={styles.link} onClick={()=> router.push('/blogs')}>Blogs</p>   */}
                 <p className={styles.link} onClick={()=> router.push('/about')}>About</p>
+=======
+                {(data?.user?.role === 'user' || data?.user?.role === 'admin') && 
+                <Link className={styles.link} href='/dashboard'>Dashboard</Link>}
+                <Link className={styles.link} href='/courses'>Courses</Link>
+                <Link className={styles.link} href='/about'>About</Link>
+>>>>>>> dev
                 {data?.user && <Image className={styles.profile} src={logout} alt='profile' onClick={()=> setShowDetails(true)}/>}
             </div>
           
-            {showDetails && 
-            <div className={styles.user}>
-                <Image className={styles.close} src={close} alt='close' onClick={()=> setShowDetails(false)}/>
-                <p className={styles.name}>{data.user.email}</p>
-                <p className={styles.name}>{data.user.name}</p>
-                <Logout/>
-            </div>}
+            {showDetails &&  <LoggedUser setShowDetails={setShowDetails}/>}
         </div>
     )
 }

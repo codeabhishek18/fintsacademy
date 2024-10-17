@@ -3,6 +3,9 @@ import styles from './Feedback.module.css'
 import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import axios from 'axios';
+import { toast } from 'sonner';
+import CloseDialog from '../closeDialog/CloseDialog';
+import Button from '../button/Button';
 
 const Feedback = ({setFeedbackForm, courseId}) =>
 {
@@ -21,11 +24,12 @@ const Feedback = ({setFeedbackForm, courseId}) =>
         {
             const url = '/api/feedback'
             const response = await axios.post(url, {user: data.user.id, course: courseId, rating: value, comment: feedback }) 
+            toast.success(response.data.message);
             setFeedbackForm(false);
         }
         catch(error)
         {
-            console.log(error)
+            toast.error(error.message);
         }
     }
 
@@ -41,8 +45,8 @@ const Feedback = ({setFeedbackForm, courseId}) =>
             <Rating name="size-large" className={styles.rating} sx={{'& .MuiRating-iconEmpty': { color: 'gold'}}} value={value} onChange={(event, newValue) => {setValue(newValue)}} size="large"  />
             <TextField className={styles.feedback}  value={feedback} onChange={(e)=> setFeedbcak(e.target.value)}
             InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} placeholder='Feedback' color='grey' fullWidth/>
-            <button className={styles.submit} onClick={submitFeedback}>Submit</button>
-            <p className={styles.close} onClick={()=> setFeedbackForm(false)}>X</p>
+            <Button label='Submit' action={submitFeedback}/>
+            <CloseDialog action={()=> setFeedbackForm(false)}/>
         </div>
     )
 }

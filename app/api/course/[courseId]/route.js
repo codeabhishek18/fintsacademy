@@ -11,9 +11,7 @@ export async function GET(req, {params})
 
         const { courseId } = params
         const course = await courseInstance.findById(courseId);
-        if(!course)
-            throw new Error('Course not found');
-        return NextResponse.json({course})
+        return NextResponse.json(course)
     }
     catch(error)
     {

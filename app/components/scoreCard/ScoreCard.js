@@ -1,37 +1,40 @@
 import { useRouter } from 'next/navigation'
 import styles from './ScoreCard.module.css'
 import { calculatePercentile, calculateResult } from '@/utility/calculateScores';
+import Button from '../button/Button';
 
 const Scorecard = ({data}) =>
 {
     const router = useRouter();
 
+    console.log(data)
+
     return(
         <div className={styles.container}>
-            <h1 className={styles.head}>Assessment Result</h1>
-            <div className={styles.card}>
+            <h1 className={styles.header}>Assessment Result</h1>
+            <div className={styles.details}>
                 <div className={styles.group}>
-                    <p className={styles.left}>Total Questions</p>
-                    <p className={styles.right}>{data.quiz.length}</p>
+                    <span>Total Questions</span>
+                    <span>{data.quiz.length}</span>
                 </div>
                 <div className={styles.group}>
-                    <p className={styles.left}>Right Answers</p>
-                    <p className={styles.right}>{data.score}</p>
+                    <span>Right Answers</span>
+                    <span>{data.score}</span>
                 </div>
                 <div className={styles.group}>
-                    <p className={styles.left}>Wrong Answers</p>
-                    <p className={styles.right}>{data.quiz.length - data.score}</p>
+                    <span>Wrong Answers</span>
+                    <span>{data.quiz.length - data.score}</span>
                 </div>
                 <div className={styles.group}>
-                    <p className={styles.left}>Percentile</p>
-                    <p className={styles.right}>{calculatePercentile(data.score, data.quiz.length)}%</p>
+                    <span>Percentile</span>
+                    <span>{calculatePercentile(data.score, data.quiz.length)}%</span>
                 </div>
                 <div className={calculateResult(data.score, data.quiz.length) === "Qualified" ? `${styles.group} ${styles.success}` : `${styles.group} ${styles.alert}`}>
-                    <p className={styles.left}>Result</p>
-                    <p className={styles.right}>{calculateResult(data.score, data.quiz.length)} </p>
+                    <span>Result</span>
+                    <span>{calculateResult(data.score, data.quiz.length)}</span>
                 </div>
             </div>
-            <button className={styles.checkout} onClick={()=> router.push('/dashboard')}>Go to Dashboard</button>
+            <Button label='Dashboard' action={()=> router.push('/dashboard')}/>
         </div> 
     )
 }
