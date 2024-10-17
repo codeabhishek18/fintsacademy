@@ -1,16 +1,13 @@
 'use client'
 
-import styles from './styles.module.css' 
+import Button from '../button/Button'
 import { signOut } from "next-auth/react"
 
 const Logout = () => 
 {
 
-  return (
-    <div>
-        <button className={styles.logout} onClick={()=> signOut({callbackUrl: '/'})}>Logout</button>
-    </div>
-  )
+  return <Button action={()=> signOut({callbackUrl: '/'})} label='Logout'/>
+    
 }
 
 export default Logout

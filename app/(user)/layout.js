@@ -52,13 +52,13 @@ export default function Layout({ children })
                 </div>
             </main>
 
-            {/* <Image className={styles.support} src={showChat ? close : chat} alt="chat" onClick={()=> setShowChat(!showChat)}/>
+            <Image className={styles.support} src={showChat ? close : chat} alt="chat" onClick={()=> setShowChat(!showChat)}/>
             {showChat &&  
             <div className={styles.chatWrapper}>
                 <div className={styles.chat}>
                     <Chat type="user" userChatId={chatId}/>
                 </div>
-            </div>} */}
+            </div>}
 
         </div>
     )

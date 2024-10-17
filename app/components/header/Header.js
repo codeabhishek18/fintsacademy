@@ -3,14 +3,12 @@
 import styles from './Header.module.css'
 import logout from '@/assets/logout.png'
 import fints from '@/assets/fints.png'
-import close from '@/assets/close.png'
 import Image from 'next/image';
 import { useSession } from "next-auth/react"
-import { doLogout } from '@/app/action';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation'
-import Logout from '../logout/Logout'
 import Link from 'next/link'
+import LoggedUser from '../loggedUser/LoggedUser'
 
 const Header = () =>
 {
@@ -30,13 +28,7 @@ const Header = () =>
                 {data?.user && <Image className={styles.profile} src={logout} alt='profile' onClick={()=> setShowDetails(true)}/>}
             </div>
           
-            {showDetails && 
-            <div className={styles.user}>
-                <Image className={styles.close} src={close} alt='close' onClick={()=> setShowDetails(false)}/>
-                <p className={styles.name}>{data.user.email}</p>
-                <p className={styles.name}>{data.user.name}</p>
-                <Logout/>
-            </div>}
+            {showDetails &&  <LoggedUser setShowDetails={setShowDetails}/>}
         </div>
     )
 }

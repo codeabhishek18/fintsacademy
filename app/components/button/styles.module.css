@@ -1,0 +1,24 @@
+.route
+{
+    width: fit-content;
+    background-color: var(--alert-color);
+    padding: 10px;
+    font-weight: 500;
+    border-radius: 5px;
+    color: white;
+}
+
+.small
+{
+    padding: 5px 10px;
+}
+
+.route:hover
+{
+    background-color: rgb(182, 38, 38);
+}
+
+.fullwidth
+{
+    width: 100%;
+}

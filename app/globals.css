@@ -14,6 +14,7 @@
 body
 {
   margin: 0;
+  background-color: var(--primary-bg);
 }
 
 *
@@ -23,15 +24,16 @@ body
 
 :root
 {
-  --secondary-color: white;
-  --primary-bg: #0a0a0a;
-  --primary-element: rgb(15, 18, 18);
+  --secondary-color: rgb(192, 192, 192);
+  --primary-element: #0a0a0a;
+  --primary-bg: rgb(20, 20, 20);
   --box-shadow: 
     2px 2px 5px rgba(0, 0, 0, 0.1),
     4px 4px 10px rgba(0, 0, 0, 0.15), 
     6px 6px 15px rgba(0, 0, 0, 0.2);
   /* --primary-bg: rgb(240, 240, 240); */
   --primary-border: rgb(82, 82, 82);
+  --box-border: 1px solid rgb(41, 41, 41);
   --active-bg: #d3c7eb;
   --alert-color: #D4313D;
   --success-color: #3DC296;

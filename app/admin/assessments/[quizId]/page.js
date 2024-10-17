@@ -7,10 +7,13 @@ import axios from 'axios';
 import GroupCard from '@/app/components/groupCard/GroupCard';
 import { CircularProgress, TextField } from '@mui/material';
 import BatchCard from '@/app/components/batchCard/BatchCard';
+import Loading from '@/app/components/loading/Loading';
+import Button from '@/app/components/button/Button';
 
 const Batches = () =>
 {
     const {quizId} = useParams();
+    const [ searchValue, setSearchValue ] = useState('')
     const [ quizData, setQuizData ] = useState(null);
 
     useEffect(()=>
@@ -32,8 +35,8 @@ const Batches = () =>
             {quizData ?
             <div className={styles.container}>
             <div className={styles.searchbar}>
-                <TextField color='grey' size='medium' className={styles.input} InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} placeholder='Search batches' fullWidth/>
-                <button className={styles.search}>Search</button>
+                <TextField color='grey' className={styles.input} InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} value={searchValue} onChange={(e)=> setSearchValue(e.target.value)} placeholder='Search batches' fullWidth/>
+                <button className={styles.clear} onClick={()=>setSearchValue('')}>x</button>
             </div>
 
              <div className={styles.assignments}>
@@ -43,9 +46,7 @@ const Batches = () =>
                 ))}
             </div> 
             </div> :
-            <div className={styles.spinner}>
-                <CircularProgress sx={{color: '#D4313D'}} />
-            </div>}
+            <Loading/>}
         </div>
     )
 }

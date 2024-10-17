@@ -9,8 +9,10 @@ import { useEffect, useRef, useState } from "react";
 import success from '@/assets/success.png'
 import { useDispatch, useSelector } from "react-redux";
 import { addAnswer, addMultipleAnswer, updateAnswer } from "@/store/slices/quizReducer";
-import { CircularProgress } from '@mui/material';
 import Webcam from 'react-webcam';
+import Loading from '@/app/components/loading/Loading';
+import { toast } from 'sonner';
+import Button from '@/app/components/button/Button';
 
 const Assessment = () =>
 {
@@ -29,6 +31,7 @@ const Assessment = () =>
     {
         try
         {
+
             const url = `/api/assessment/${testId}`
             const response = await axios.get(url);
             setAssessment(response.data);   
@@ -36,7 +39,7 @@ const Assessment = () =>
         }
         catch(error)
         {
-            console.log(error)
+            toast.error(error.message)
         }
     }
     
@@ -70,11 +73,7 @@ const Assessment = () =>
     }
 
     if(status === 'loading' || isLoading)
-        return(
-            <div className={styles.spinner}>
-                <CircularProgress sx={{color: '#D4313D'}} />
-            </div>    
-        )
+        return <Loading/>
 
     return(
         <div className={styles.wrapper}>
@@ -144,16 +143,16 @@ const Assessment = () =>
                 </div>
             </div>}
 
-            {isCompleted && 
+            
             <div className={styles.testCompleteWrapper}>
                 <div className={styles.testComplete}>
                 <Image className={styles.success} src={success} alt='success'/>
                 <div className={styles.routes}>
-                    <button className={styles.route} onClick={()=> router.push(`/dashboard`)}>Go to Dashboard</button>
-                    <button className={styles.route} onClick={()=> router.push(`${pathname}/scorecard`)}>Scorecard</button>
+                    <Button label='Dashboard' action={()=> router.push(`/dashboard`)}/>
+                    <Button label='Scorecard' action={()=> router.push(`${pathname}/scorecard`)}/>
                 </div>
                 </div>
-            </div> } 
+            </div> 
         </div>
     )
 }

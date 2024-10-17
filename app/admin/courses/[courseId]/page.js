@@ -24,7 +24,7 @@ const Course = () =>
     {
         const url = `/api/course/${courseId}`
         const response = await axios.get(url);
-        setCourse(response.data.course);
+        setCourse(response.data);
     }
 
     const removeCourse = async (id) =>

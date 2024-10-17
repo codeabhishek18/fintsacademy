@@ -11,6 +11,7 @@
 {
     width: 100%;
     background-color: var(--primary-element);
+    border: 1px solid rgb(41, 41, 41);
     box-shadow: var(--box-shadow);
     border-radius: 8px;
     padding: 40px;
@@ -62,7 +63,7 @@
 .quiz
 {
     display: flex;
-    width: 40%;
+    width: 50%;
     flex-direction: column;
     row-gap: 20px;
 }
@@ -70,7 +71,7 @@
 .options
 {
     margin-top: 45px;
-    width: 60%;
+    width: 50%;
     display: flex;
     flex-direction: column;
     row-gap: 20px;
@@ -79,12 +80,12 @@
 .option
 {
     background-color: var(--primary-bg);
+    border: var(--box-border);
     min-width: 100px;
     padding: 10px;
     border-radius: 5px;
     cursor: pointer;
     text-align: left;
-    border: 0;
     color: white;
     line-height: 24px;
 }
@@ -235,7 +236,7 @@
 
 .testCompleteWrapper
 {
-    background-color: rgba(0,0,0,0.75);
+    background-color: var(--primary-bg);
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -249,13 +250,14 @@
 .testComplete
 {
     width: 500px;
-    background-color: var(--primary-bg);
+    background-color: var(--primary-element);
     padding: 0 20px 40px;
     border-radius: 5px;
     display: flex;
     align-items: center;
     flex-direction: column;
     row-gap: 30px;
+    box-shadow: var(--box-shadow);
 }
 
 .success

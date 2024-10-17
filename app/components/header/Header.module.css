@@ -17,6 +17,7 @@
 
 .user
 {
+    min-width: 350px;
     display: flex;
     flex-direction: column;
     row-gap: 10px;
@@ -24,10 +25,10 @@
     color: white;
     position: absolute;
     right: 20px;
-    top: 80px;
+    top: 90px;
     background-color: var(--primary-element);
     box-shadow: var(--box-shadow);
-    border-radius: 8px;
+    border-radius: 5px;
 }
 
 .profile
@@ -40,25 +41,7 @@
 .name
 {
     margin: 0;
-    padding: 10px;
     border-radius: 5px;
-}
-
-.logout
-{
-    margin: 0;
-    font-size: 14px;
-    padding: 10px;
-    border: 1px solid var(--alert-color);
-    background-color: var(--alert-color);
-    color: var(--secondary-color);
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.logout:hover
-{
-    background-color: rgb(206, 8, 8);
 }
 
 .title

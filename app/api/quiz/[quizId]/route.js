@@ -28,12 +28,13 @@ export async function POST(req, {params})
         const batchId = await batchInstance.findById(batch);
         const quiz = await quizInstance.getQuizById(quizId);
         let group = null;
+        let isOldGroup = [];
         const groups = quiz.group;
         if(!groups.length)
             group = await groupInstance.createGroup(batchId._id)
         else 
         {
-            const isOldGroup = groups.find((group)=> group.batch._id.toString() === batchId._id.toString());
+            isOldGroup = groups.find((group)=> group.batch._id.toString() === batchId._id.toString());
             group = isOldGroup ? isOldGroup : await groupInstance.createGroup(batchId._id)
         }
         
@@ -44,7 +45,9 @@ export async function POST(req, {params})
             const assignment = await assignmentInstance.assign(user, test._id)
             await groupInstance.updateAssignment(group, assignment._id)
         }
-        await quizInstance.updateGroup(quizId, group._id)
+        
+        if(!isOldGroup?.length)
+            await quizInstance.updateGroup(quizId, group._id)
 
     return NextResponse.json({message: 'Assessments assigned successfully'})
     }

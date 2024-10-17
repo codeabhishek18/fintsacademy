@@ -13,6 +13,8 @@ import logout from '@/assets/logout.png'
 import cart from '@/assets/cart.png'
 import Logout from '../logout/Logout'
 import Link from 'next/link'
+import LoggedUser from '../loggedUser/LoggedUser'
+import Button from '../button/Button'
 
 const Navbar = () =>
 {
@@ -50,20 +52,14 @@ const Navbar = () =>
 
                 {!data?.user && status !== 'loading' && 
                 <div className={styles.authWrapper}>
-                    <Link className={styles.auth} href='/login'>Login</Link>
-                    <Link className={styles.auth} href='/signup'>Signup</Link>
+                    <Button label='Login' size='small' action={()=> router.push('/login')}/>
+                    <Button label='Signup' size='small' action={()=> router.push('/signup')}/>
                 </div>}
 
                 <HamburgerMenu setShowSlider={setShowSlider}/>
             </div>
 
-            {showDetails && 
-            <div className={styles.user}>
-                <Image className={styles.close} src={close} alt='close' onClick={()=> setShowDetails(false)}/>
-                <p>{data.user.email}</p>
-                <p>{data.user.name}</p>
-                <Logout/>
-            </div>}
+            {showDetails && <LoggedUser setShowDetails={setShowDetails}/> }
 
             {showSlider && 
             <div className={styles.slider}>

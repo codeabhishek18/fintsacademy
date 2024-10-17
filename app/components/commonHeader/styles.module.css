@@ -1,7 +1,6 @@
 .commonHeader
 {
-    margin: 0;
-    font-size: 48px;
+    font-size: 56px;
     font-weight: 700;
     color: var(--alert-color);
 }

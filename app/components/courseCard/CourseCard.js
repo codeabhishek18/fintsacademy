@@ -1,15 +1,14 @@
-import { useScheme } from '@/contextapi/SchemeProvider';
 import styles from './styles.module.css'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import Button from '../button/Button';
 
 const CourseCard = ({type, course}) =>
 {
     const router = useRouter();
-    const { scheme } = useScheme();
 
     return(
-        <div className={scheme === 'dark' ? styles.container : `${styles.container} ${styles.light}`}>
+        <div className={styles.container}>
             <div className={styles.courseImage}>
                 <Image className={styles.image} src={course.imageURL} alt={course.id} layout="fill"/>
             </div>
@@ -23,8 +22,9 @@ const CourseCard = ({type, course}) =>
                 <span className={styles.discount}>{Math.floor((course.price - course.offerPrice)*100/course.price)}% off</span>
                 <div className={styles.footer}>
                     <p className={styles.lecture}>4 lectures, 8 hours</p>
-                    {type !== 'admin' ? <button className={scheme === 'dark' ? styles.explore : `${styles.explore} ${styles.light}`} onClick={()=> router.push(`/courses/${course.id}`)}>View</button> :
-                    <button className={scheme === 'dark' ? styles.explore : `${styles.explore} ${styles.light}`} onClick={()=> router.push(`/admin/courses/${course.id}`)}>View lectures</button>}
+                    {type !== 'admin' ? 
+                    <Button size='small' label='View' action={()=> router.push(`/courses/${course.id}`)}/> :
+                    <Button size='small' label='View lectures' action={()=> router.push(`/admin/courses/${course.id}`)}/>}
                 </div>
             </div>
         </div>

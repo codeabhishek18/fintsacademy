@@ -1,24 +1,28 @@
 'use client'
 
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './AssignForm.module.css'
 import axios from 'axios';
 import QuizKey from '../quizKey/QuizKey';
-import { CircularProgress, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { FormControl, MenuItem, Select } from '@mui/material';
 import { toast } from 'sonner';
+import Label from '../label/Label';
+import CloseDialog from '../closeDialog/CloseDialog';
+import Button from '../button/Button';
+import Loading from '../loading/Loading';
 
 const AssignForm = ({quiz, setAssignForm}) =>
 {
     const [ batch, setBatch ] = useState('');
     const [ batches, setBatches ] = useState(null)
     const [ batchType, setBatchType ] = useState('');
+    const [ group, setGroup ] = useState(null);
     const [ selectedBatch, setSelectedBatch ] = useState(null);
     const [ keyList, setKeyList ] = useState([]);
     const [ isLoading, setIsLoading ] = useState(false);
     const [ showAssignees, setShowAssignees ] = useState(true); 
     const [ warningMessage, setWarningMessage ] = useState(null);
-    const [ warningNames, setShowWarningNames ] = useState(null);
-    const [ isDup, setIsDup ] = useState(null);
+    const [ isDup, setIsDup ] = useState([]);
 
     useEffect(()=>
     {
@@ -35,52 +39,10 @@ const AssignForm = ({quiz, setAssignForm}) =>
         if(!batch)
             return
 
-        // const isBatchAlreadyAssigned = quiz.group.find((pack) => pack.batch.title === batch);
-        // const quizAssignees = isBatchAlreadyAssigned?.assignment?.map((assign) => assign.user);
-       
-        // setIsDup(quizAssignees)
-
-        // if(isBatchAlreadyAssigned &&  batchType === 'all')
-        // {
-        //     setShowAssignees(false);
-        //     setWarningMessage(`This quiz cannot be re-assigned to ${batch}`);
-        //     return
-        // }
-
-        // setShowAssignees(true);
-        // setWarningMessage(null);
+        setShowAssignees(true);
+        setWarningMessage(null);
+        checkAssignment(selectedBatch.enrollments)
     },[batchType])
-
-    // useEffect(()=>
-    // {
-    //     if(batchType  === 'all')
-    //         return
-
-        
-    //     const existingGroup = quiz.group.find((pack) => pack.batch.title === batch);
-    //     const existGroupUserId = new Set(existingGroup.assignment.map((obj)=> obj.user));
-    //     setIsDup(existGroupUserId);
-    //     const duplicates = keyList.filter((user) => existGroupUserId.has(user.id));
-
-    //     if(!keyList.length)
-    //     {
-    //         setShowWarningNames(null);
-    //         setShowAssignees(true);
-    //         setWarningMessage(null);
-    //         return
-    //     }
-
-    //     if(duplicates.length)
-    //     {
-    //         setShowAssignees(false);
-    //         setWarningMessage('Cannot re-assign this assessment to ')
-    //         setShowWarningNames(duplicates);
-    //         return
-    //     }
-    //     setShowAssignees(true);
-    //     setWarningMessage(null);
-    //     setShowWarningNames([]);
-    // },[keyList])
 
     const getBatches = async () =>
     {
@@ -99,6 +61,34 @@ const AssignForm = ({quiz, setAssignForm}) =>
         }
     }
 
+    const checkAssignment = (enrollments) =>
+    {
+        if(!enrollments?.length)
+        {
+            setShowAssignees(false);
+            setWarningMessage(`${batch} has no enrollments as of now`)
+            return
+        }
+
+        if(enrollments.length && batchType === 'all')
+        {
+            setShowAssignees(false);
+            setWarningMessage(`This quiz cannot be assigned to everyone in ${batch} `);
+            return
+        } 
+
+        const isBatchAlreadyAssigned = quiz.group.find((pack) => pack.batch.title === batch);
+        if(enrollments.length === isBatchAlreadyAssigned.assignment.length)
+        {
+            setShowAssignees(false);
+            setWarningMessage(`This quiz is already assigned to everyone in ${batch} `);
+            return
+        } 
+        
+        const quizAssignees = isBatchAlreadyAssigned.assignment.map((assign) => assign.user);
+        setIsDup(quizAssignees);
+    }
+
     const getBatch = async () =>
     {
         if(!batch)
@@ -109,24 +99,8 @@ const AssignForm = ({quiz, setAssignForm}) =>
             const url = `/api/batch/${batch}`
             const response = await axios.get(url);
             setSelectedBatch(response.data);  
-            const enrollmentSize = response.data.enrollments;
-            if(!enrollmentSize?.length)
-            {
-                setShowAssignees(false);
-                setWarningMessage(`${batch} has no enrollments as of now`)
-            }
-            
-            const isBatchAlreadyAssigned = quiz.group.find((pack) => pack.batch.title === batch);
-            
-            // const quizAssignees = isBatchAlreadyAssigned.assignment.map((assign) => assign.user);
-            // if(enrollmentSize?.length === quizAssignees.length)
-            // {
-            //     setShowAssignees(false);
-            //     setWarningMessage(`This quiz is already assigned to everyone in ${batch} `);
-            //     return
-            // }
-
-            // setSelectedBatch(response.data);    
+            const enrollments = response.data.enrollments;
+            checkAssignment(enrollments);
         }
         catch(error)
         {
@@ -187,13 +161,13 @@ const AssignForm = ({quiz, setAssignForm}) =>
     return(
         <div className={styles.wrapper}>
             {isLoading ? 
-            <div>
-                <CircularProgress sx={{color: '#D4313D'}}/>
-            </div> :
+            <Loading/> :
             (batches ?
             <div className={styles.container}>
-                <h1 className={styles.head}>{quiz.course.title}</h1>
-                <p className={styles.level}>{quiz.course.level}</p>
+                <div className={styles.header}>
+                    <h1 className={styles.title}>{quiz.course.title}</h1>
+                    <p className={styles.level}>{quiz.course.level}</p>    
+                </div>
                 {keyList?.length>0 && 
                 <div className={styles.assigned}>
                     {keyList.map((keyword)=>
@@ -202,9 +176,9 @@ const AssignForm = ({quiz, setAssignForm}) =>
                     ))}
                 </div>}
 
+                <Label label="Choose batch"/>
                 <FormControl className={styles.input} fullWidth>
-                    <InputLabel size='small' color='grey' sx={{color: 'grey'}} variant='outlined'>Choose batch</InputLabel>
-                    <Select size='small' color='grey' sx={{color: 'grey'}} placeholder="Multiple answers" InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} name="batch" label="Choose course" value={batch} onChange={(e)=> setBatch(e.target.value)}>
+                    <Select size='small' color='grey' sx={{color:'white'}} className={styles.input} name="batch" value={batch} onChange={(e)=> setBatch(e.target.value)}>
                     {batches.map((batch) =>
                     (
                         <MenuItem value={batch.title} key={batch._id}>{batch.title}</MenuItem>
@@ -212,24 +186,17 @@ const AssignForm = ({quiz, setAssignForm}) =>
                     </Select>
                 </FormControl>
                 
-                <FormControl className={styles.input} fullWidth>
-                    <InputLabel size='small' color='grey' sx={{color: 'grey'}} >Assign to</InputLabel>
-                    <Select size='small' color='grey'  sx={{color: 'grey'}} name="batch" InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}} label="Assign to" value={batchType} onChange={(e)=> {setBatchType(e.target.value); e.target.value === 'all' && setKeyList([])}}>
+                <Label label="Assign to"/>
+                <FormControl className={styles.input}  fullWidth>
+                    <Select size='small' color='grey' sx={{color:'white'}} className={styles.input} name="batchType" value={batchType} onChange={(e)=> {setBatchType(e.target.value); e.target.value === 'all' && setKeyList([])}}>
                         <MenuItem value='all'>All</MenuItem>
                         <MenuItem value='selected'>Selected</MenuItem>
                     </Select>
                 </FormControl>
 
                 {!showAssignees && <p className={styles.warning}>{warningMessage}</p>}
-                {!showAssignees && warningNames?.length && 
-                <ul className={styles.warningNames}>
-                {warningNames.map((user)=>
-                (
-                    <li className={styles.warnName}>{user.name}</li>
-                ))}
-                </ul>}
                 
-                {batchType === "selected" && selectedBatch &&
+                {batchType === "selected" && selectedBatch && showAssignees &&
                 <div className={styles.enrollments}>
                     {selectedBatch.enrollments.map((user)=>
                     (
@@ -237,12 +204,11 @@ const AssignForm = ({quiz, setAssignForm}) =>
                     ))}
                 </div>}
 
-                {showAssignees && <button className={styles.post} onClick={handleAssign}>Assign</button> }
-                <p className={styles.close} onClick={()=> setAssignForm(false)}>x</p>
+                {showAssignees  && <Button label='Assign' fullwidth={true} action={()=> handleAssign}/>}
+                <CloseDialog action={()=> setAssignForm(false)}/>
             </div> : 
             <div className={styles.container}>
                 <p>No Batches Found</p>
-                <p className={styles.close} onClick={()=> setAssignForm(false)}>x</p>
             </div>)}
         </div>
     )

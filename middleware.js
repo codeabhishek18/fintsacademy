@@ -2,7 +2,7 @@ import NextAuth from "next-auth"
 import { cookies } from "next/headers"
 import { encode, decode } from 'next-auth/jwt'
 import { NextResponse } from "next/server";
-import { adminRoutes, authRoutes, userRoutes } from "./routes";
+import { adminRoutes, authRoutes, protectedRoutes, userRoutes } from "./routes";
 
 export default async function middleware(req)
 {
@@ -19,10 +19,14 @@ export default async function middleware(req)
         })
     } 
 
+    const protectedRoute = protectedRoutes.some((route)=> nextUrl.pathname === route);
     const userRoute = userRoutes.some((route)=> nextUrl.pathname.startsWith(route));
     const adminRoute = adminRoutes.some((route)=> nextUrl.pathname.startsWith(route));
     const authRoute = authRoutes.some((route)=> nextUrl.pathname.startsWith(route));
        
+    if(protectedRoute)
+        console.log('true');
+
     if(user?.role === 'visitor' || !user )
         if(userRoute || adminRoute)
             return NextResponse.redirect(new URL('/login', nextUrl))

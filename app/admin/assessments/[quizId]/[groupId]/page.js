@@ -18,6 +18,7 @@ import Image from 'next/image';
 import downloadIcon from '@/assets/download.png'
 import fints from '@/assets/fints.png'
 import { toPng } from 'html-to-image';
+import Loading from '@/app/components/loading/Loading';
 
 const Group = () =>
 {
@@ -66,7 +67,8 @@ const Group = () =>
                     <Image className={styles.fints} src={fints} alt='fints'/>
                     <span className={styles.course} onClick={()=> setShowDetails(!showDetails)}>{groupData.batch.course.title}</span>
                 </div>
-                {showDetails && <div className={styles.header}>
+                {showDetails && 
+                <div className={styles.header}>
                     <div className={styles.details}>
                         <span className={styles.heading}>Sprint code</span>
                         <span className={styles.data}>{groupData.batch.title}</span>
@@ -120,9 +122,7 @@ const Group = () =>
                 <Image  className={styles.downloadIcon} src={downloadIcon} alt='download'/>
             </button>
         </div>:
-        <div className={styles.spinner}>
-            <CircularProgress sx={{color: '#D4313D'}} />
-        </div>}
+        <Loading/>}
         </div>
     )
 }

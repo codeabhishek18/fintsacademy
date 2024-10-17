@@ -4,8 +4,8 @@ import BoxReveal from "@/components/magicui/box-reveal"
 const CommonHeader = ({header}) =>
 {
     return(
-        <BoxReveal className={styles.wrapper} boxColor='var(--primary-bg)' duration={0.5} >
-            <p className={styles.commonHeader}>{header}</p>
+        <BoxReveal boxColor='rgba(0,0,0,0)'>
+            <h1 className={styles.commonHeader}>{header}</h1>
         </BoxReveal>  
     )
 }

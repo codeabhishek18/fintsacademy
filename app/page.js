@@ -16,30 +16,37 @@ import FeatureCard from './components/featureCard/FeatureCard'
 import Image from 'next/image'
 import quoteIcon from '@/assets/quote.png'
 import news_bg from '@/assets/news.jpg'
-import paper_bg from '@/assets/paper.png'
+import chat from '@/assets/chat.png'
+import close from '@/assets/close.png'
+import Query from './components/query/Query'
+import BoxReveal from '@/components/magicui/box-reveal'
 
 const Home = () =>
 {
     const [ showFaq, setShowFaq ] = useState(0);
+    const [ showMessage, setShowMessage ] = useState(false);
 
     return(
         <div className={styles.wrapper}>
             <HeroSection/>
             <div className={styles.container}>
                 <div className={styles.marqueeWrapper}>
-                    <p className={styles.marquee}>Sanction Screening and Global Standards | Batches starting soon | Get enrolled via whatsapp</p>
+                    <p className={styles.marquee}>Sanction Screening and Global Standards | Batches starting soon</p>
                 </div>
 
-                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '-200px' }} className={styles.quoteWrapper}>
-                    <Image className={styles.quoteIcon} src={quoteIcon} alt='icon'/>
-                    <p>The greatest weapon against crime is the prevention of crime</p>
-                    <span style={{fontStyle:'italic'}}>— Robert Kennedy</span>
+                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} className={styles.quoteWrapper}>
+                    <BoxReveal boxColor='var(--alert-color)'>
+                        <Image className={styles.quoteIcon} src={quoteIcon} alt='icon'/>
+                        <p>The greatest weapon against crime is the prevention of crime</p>
+                        <span style={{fontStyle:'italic'}}>— Robert Kennedy</span>
+                    </BoxReveal>
                 </motion.div>
 
-                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '-200px' }} className={styles.statsWrapper}>
+                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} className={styles.statsWrapper}>
                     {complianceStats.map((content)=>
                     (
-                        <div className={styles.statCard}>
+                        <BoxReveal boxColor='var(--primary-bg)'>
+                            <div className={styles.statCard}>
                             <Image className={styles.newsBg} src={news_bg} alt='img'/>
                             <p className={styles.statValue}>
                                 {content.value} 
@@ -47,21 +54,16 @@ const Home = () =>
                                 {content.context}
                             </p>
                         </div>
+                        </BoxReveal>
                     ))}
-                </motion.div>
+                </motion.div>                
 
-                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '-200px' }} className={styles.actionWrapper}>
-                    <Image className={styles.actionBg} src={paper_bg} alt='news'/>
-                    <p className={styles.info}><span className={styles.action}>Get ready to Skill Up</span> as the demand for compliance experts is soaring. The market is expected to <span className={styles.action}>grow by 28% in the next five years</span></p>
-                </motion.div>
-                
-                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '-200px' }} className={styles.sectionWrapper}>
-                    <CommonHeader header="Why you should join us!"/> 
+                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} className={styles.sectionWrapper}>
+                    <CommonHeader header='Why Choose Us'/>
                     <FeatureCard/>
                 </motion.div>
                 
-
-                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '-200px' }} className={styles.sectionWrapper}>
+                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} className={styles.sectionWrapper}>
                     <CommonHeader header="Testimonials"/>             
                     <Marquee pauseOnHover className="[--duration:60s]">
                     {Feedback.map((data)=>
@@ -71,7 +73,7 @@ const Home = () =>
                     </Marquee>
                 </motion.div >
                 
-                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '-200px' }} className={styles.sectionWrapper}>
+                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} className={styles.sectionWrapper}>
                     <CommonHeader header="FAQs"/>
                     <div className={styles.faqWrapper}>
                     {faqData.map((data, index)=>
@@ -81,6 +83,13 @@ const Home = () =>
                     </div>
                 </motion.div >
                 
+                <Image className={styles.chat} src={showMessage ? close : chat} alt='chat' onClick={()=> setShowMessage(!showMessage)}/>
+
+                {showMessage && 
+                <div className={styles.query}>
+                    <Query setShowMessage={setShowMessage}/>
+                </div>}
+
             </div>
             <Footer/>
         </div>

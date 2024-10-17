@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 20px;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .fints
@@ -112,29 +112,6 @@
     cursor: pointer;
 }
 
-.close
-{
-    height: 30px;
-    width: fit-content;
-    cursor: pointer;
-}
-
-.user
-{
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    padding: 30px;
-    color: white;
-    position: absolute;
-    right: 20px;
-    top: 80px;
-    min-width: 350px;
-    background-color: var(--primary-element);
-    box-shadow: var(--box-shadow);
-    border-radius: 8px;
-}
-
 @media screen and (max-width:720px)
 {
     .slider
@@ -142,7 +119,7 @@
         display: block;
     }   
 
-    .links, .auth
+    .links, .authWrapper
     {
         display: none;
     }

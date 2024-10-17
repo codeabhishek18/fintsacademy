@@ -6,6 +6,7 @@ import Lecturecard from '../lectureCard/LectureCard'
 import { Rating } from '@mui/material'
 import { useScheme } from '@/contextapi/SchemeProvider'
 import { useRouter } from 'next/navigation'
+import Button from '../button/Button'
 
 const CourseDetail = ({course}) =>
 {
@@ -38,7 +39,7 @@ const CourseDetail = ({course}) =>
             </div>  
 
             <div className={styles.footer}>
-                <button className={scheme === 'dark' ? styles.join : `${styles.join} ${styles.light}`} onClick={handleClick}>Join Now</button>
+                <Button label='Join Now' action={handleClick}/>
                 {/* <Rating name="half-rating-read" defaultValue={4.7} precision={0.5} readOnly size='large'/> */}
             </div>          
         </div>

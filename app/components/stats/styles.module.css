@@ -12,6 +12,7 @@
     padding: 30px;
     width: calc(33.34% - 13.67px);
     background-color: var(--primary-element);
+    border: 1px solid rgb(41,41,41);
     box-shadow: var(--box-shadow);
     display: flex;
     flex-direction: column;
@@ -28,8 +29,8 @@
 
 .count
 {
+    margin-top: 20px;
     font-size: 48px;
-    margin: 0;
     font-weight: 600;
 }
 

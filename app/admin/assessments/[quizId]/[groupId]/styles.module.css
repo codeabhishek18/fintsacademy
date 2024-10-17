@@ -7,9 +7,6 @@
 {
     width: 100%;
     padding: 50px;
-    border-radius: 5px;
-    min-height: 100vh;
-    border-radius: 8px;
     background-color: var(--primary-element);
 }
 
@@ -28,6 +25,7 @@
     border-radius: 5px;
     color: white;
     row-gap: 20px;
+    border: 1px solid rgb(41, 41, 41);
 }
 
 .container
@@ -86,13 +84,12 @@
     justify-content: center;
 }
 
-
 .download
 {
     position: absolute;
     top: 0;
     right: -50px;
-    background-color: var(--primary-element);
+    background-color: rgb(207, 207, 207);
     padding: 10px;
     border-radius: 50%;
     cursor: pointer;

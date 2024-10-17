@@ -27,7 +27,7 @@
     width: 50%;
 }
 
-.practicals
+.sessions
 {
     width: 50%;
     display: flex;
@@ -69,12 +69,12 @@
     font-weight: 600;
 }
 
-.feedback
+.feedbackIcon
 {
     position: fixed;
     right: 20px;
-    top: 95px;
-    height: 50px;
+    top: 105px;
+    height: 40px;
     width: fit-content;
     background-color: var(--primary-element);
     padding: 10px;
@@ -95,18 +95,6 @@
     background-color: rgba(0,0,0,0.75);
 }
 
-.toolTip
-{
-    position: absolute;
-    right: 80px;
-    top: 95px;
-    background-color: var(--primary-border);
-    font-size: 10px;
-    border-radius: 5px;
-    color: white;
-    padding: 6px;
-}
-
 @media screen and (max-width: 1050px) 
 {
     .container 
@@ -115,7 +103,7 @@
         row-gap: 20px;
     }   
     
-    .progress, .practicals
+    .progress, .sessions
     {
         width: 100%;
     }
@@ -124,7 +112,6 @@
     {
         font-size: 32px;
     }
-
 }
 
 @media screen and (max-width: 1050px) 
@@ -134,7 +121,7 @@
         font-size: 28px;
     }
 
-    .feedback
+    .feedbackIcon
     {
         top: 30px;
         right: 10px;

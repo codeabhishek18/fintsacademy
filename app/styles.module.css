@@ -4,7 +4,7 @@
     padding: 0 10vw 50px;
     display: flex;
     flex-direction: column;
-    row-gap: 50px;
+    row-gap: 20vh;
     background-color: var(--primary-bg);
     color: white;
     font-size: 16px;
@@ -48,13 +48,42 @@
     }
 }
 
+.query
+{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.chat
+{
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    height: 50px;
+    width: fit-content;
+    background-color: var(--primary-element);
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    z-index: 100;
+}
+
 .quoteWrapper
 {
     background-color: var(--alert-color);
     padding: 20px;
     border-radius: 5px;
     margin-top: 40px;
-    margin-bottom: -25px;
+    margin-bottom: calc(-20vh + 25px);
 }
 
 .quoteIcon
@@ -76,9 +105,11 @@
 {
     height: 200px;
     background-color: rgba(0,0,0,0.65);
+    box-shadow: var(--box-shadow);
     display: flex;
     align-items: center;
     position: relative;
+    line-height: 30px;
 }
 
 .newsBg
@@ -111,36 +142,6 @@
     font-weight: 600;
 }
 
-.actionBg
-{
-    height: 80vh;
-    width: fit-content;
-    object-fit: cover;
-}
-
-.info
-{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    color: white;
-    font-weight: 700;
-    font-size: 30px;
-    padding: 10px;
-    transform: translate(-50%, -50%);
-    line-height: 56px;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.action
-{
-    padding: 5px 10px;
-    background-color: var(--alert-color);
-    color: white;
-}
-
 .sectionWrapper, .faqWrapper
 {
     display: flex;
@@ -153,34 +154,43 @@
     row-gap: 20px;
 }
 
-@media screen and (max-width: 940px)
-{  
-    .actionBg
-    {
-        height: 100vh;
-        width: fit-content;
-        object-fit: cover;
-    }
+.aboutHeader
+{
+    font-size: 48px;
+    color: var(--primary-bg);
+    font-weight: 700;
+}
 
-    .info
-    {
-        font-size: 24px;
-        line-height: 48px;
-    }
+.aboutDescription
+{
+    line-height: 36px;
+    margin-bottom: 10px;
+}
+
+.aboutWrapper
+{
+    background-color: var(--alert-color);
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    padding: 40px;
+    border-radius: 5px;
 }
 
 @media screen and (max-width:480px)
 {
-    .info
-    {
-        font-size: 20px;
-        font-weight: 600;
-        line-height: 44px;
-    }
-
     .statsWrapper
     {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        column-gap: 15px;
+        row-gap: 15px;
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .statCard
+    {
+        line-height: 24px;
     }
 
     .container

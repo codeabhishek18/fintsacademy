@@ -29,7 +29,7 @@ class userService
         }
         catch(error)
         {
-            return error;
+            throw error;
         }
     }
 
@@ -42,7 +42,6 @@ class userService
         }
         catch(error)
         {
-            console.log('error', error)
             throw error;
         }
     }
@@ -68,7 +67,7 @@ class userService
         }
         catch(error)
         {
-            return error;
+            throw error;
         }
     }
 
@@ -81,7 +80,7 @@ class userService
         }
         catch(error)
         {
-            return error
+            throw error
         }
     }
 

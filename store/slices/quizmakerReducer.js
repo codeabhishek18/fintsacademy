@@ -18,9 +18,15 @@ const slice = createSlice({
         {
             const {index} = action.payload;
             state.list.push({id: index})
+        },
+
+        editQuiz(state, action)
+        {
+            const quiz = action.payload;
+            state.list = quiz;
         }
     }
 })
 
-export const {addQuestion, updateQuestion} = slice.actions
+export const {addQuestion, updateQuestion, editQuiz} = slice.actions
 export default slice.reducer
