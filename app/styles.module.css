@@ -148,45 +148,6 @@
     flex-direction: column;
     row-gap: 30px;
 }
-<<<<<<< HEAD
-
-.commonHeader
-{
-    margin: 0;
-    font-size: 60px;
-    font-weight: 700;
-    color: var(--alert-color);
-}
-
-.about
-{
-    line-height: 48px;
-}
-
-.founder
-{
-    display: flex;
-    flex-direction: column;
-    row-gap: 25px;
-}
-
-.features
-{
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 20px;
-    row-gap: 20px;
-}
-
-.courses
-{
-    display: flex;
-    flex-wrap: wrap;
-    column-gap: 20px;
-    row-gap: 20px;
-}
-=======
->>>>>>> dev
   
 .faqWrapper
 {
@@ -234,11 +195,7 @@
 
     .container
     {
-<<<<<<< HEAD
-        padding: 20px;
-=======
         padding:  0 20px 20px;
->>>>>>> dev
         font-size: 14px;
     }
 }
