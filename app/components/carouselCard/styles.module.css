@@ -55,21 +55,13 @@
 } */
 
 
-<<<<<<< HEAD
-@media screen and (max-width: 480px) 
-=======
 @media screen and (max-width: 375px) 
->>>>>>> dev
 {
     .container
     {
         width: 300px;
     }
-<<<<<<< HEAD
-}
-=======
 } 
 
 
 
->>>>>>> dev

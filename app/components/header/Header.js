@@ -13,7 +13,7 @@ import LoggedUser from '../loggedUser/LoggedUser'
 const Header = () =>
 {
     const router= useRouter();
-    const { data, status } = useSession();
+    const { data } = useSession();
     const [ showDetails, setShowDetails ] = useState(false)
 
     return(
@@ -21,17 +21,10 @@ const Header = () =>
             <Image className={styles.title} src={fints} alt='logo' onClick={()=> router.push('/')}/>
             
             <div className={styles.links}>
-<<<<<<< HEAD
-                {(data?.user?.role === 'user' || data?.user?.role === 'admin') && <p className={styles.link} onClick={()=> router.push('/dashboard')}>Dashboard</p>}
-                <p className={styles.link} onClick={()=> router.push('/courses')}>Courses</p>
-                {/* <p className={styles.link} onClick={()=> router.push('/blogs')}>Blogs</p>   */}
-                <p className={styles.link} onClick={()=> router.push('/about')}>About</p>
-=======
                 {(data?.user?.role === 'user' || data?.user?.role === 'admin') && 
                 <Link className={styles.link} href='/dashboard'>Dashboard</Link>}
                 <Link className={styles.link} href='/courses'>Courses</Link>
                 <Link className={styles.link} href='/about'>About</Link>
->>>>>>> dev
                 {data?.user && <Image className={styles.profile} src={logout} alt='profile' onClick={()=> setShowDetails(true)}/>}
             </div>
           

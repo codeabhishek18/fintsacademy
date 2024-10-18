@@ -13,22 +13,6 @@
 
 .YTvideo
 {
-<<<<<<< HEAD
-    background-color: var(--primary-element);
-    padding: 60px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-@media screen and (max-width:480px)
-{
-    .container
-    {
-        padding: 100px 20px 20px;
-    }
-=======
     object-fit: contain;
 }
 
@@ -38,5 +22,4 @@
     {
         padding: 20px;
     }    
->>>>>>> dev
 }
