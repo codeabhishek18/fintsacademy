@@ -75,7 +75,7 @@ class userService
     {
         try
         {
-            const users = await User.find({});
+            const users = await User.find({}).select('-password -googleId');
             return users;
         }
         catch(error)

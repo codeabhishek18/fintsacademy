@@ -24,9 +24,6 @@ export default async function middleware(req)
     const adminRoute = adminRoutes.some((route)=> nextUrl.pathname.startsWith(route));
     const authRoute = authRoutes.some((route)=> nextUrl.pathname.startsWith(route));
 
-    if(userRoute || adminRoute || authRoute)
-        return NextResponse.redirect(new URL('/', nextUrl))
-
     if(user?.role === 'visitor' || !user )
         if(userRoute || adminRoute)
             return NextResponse.redirect(new URL('/login', nextUrl))
