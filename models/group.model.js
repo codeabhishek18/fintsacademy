@@ -6,7 +6,7 @@ const groupSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Batch'
     },
-    assignment:
+    assignments:
     [{
         type: Schema.Types.ObjectId,
         ref: 'Assignment'

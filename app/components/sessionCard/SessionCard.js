@@ -2,6 +2,7 @@ import styles from './styles.module.css'
 import agendaIcon from '@/assets/agenda.png'
 import completeIcon from '@/assets/success-icon.png'
 import pendingIcon from '@/assets/pending.png'
+import locked from '@/assets/locked.png'
 import Switch from '../switch/Switch'
 import Image from 'next/image'
 
@@ -20,10 +21,11 @@ const SessionCard = ({session, index, updateSessionStatus, activeAgenda, setActi
                 <p className={styles.sessionName}>Session {index+1}</p>
                 {activeAgenda === index && <p className={styles.agenda}>{session.description}</p>}
             </div>
+            {level !== "admin" && 
             <div className={styles.footer}>
-                <p className={styles.status}>{session.status}</p>
-                <Image className={styles.statusIcon} src={session.status === 'Upcoming' ? pendingIcon : completeIcon} alt='icon'/>
-            </div>
+                {/* <p className={styles.status}>{session.status}</p> */}
+                <Image className={styles.statusIcon} src={session.status === 'Upcoming' ? locked : completeIcon} alt='icon'/>
+            </div>}
             
             {level === "admin" && 
             <Switch id={session._id} status={session.status} updateSessionStatus={updateSessionStatus}/>}

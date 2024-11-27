@@ -1,6 +1,7 @@
 import { Batch } from "@/models/batch.model";
 import { Course } from "@/models/course.model.js";
 import { Lecture } from "@/models/lecture.model";
+import { Simulation, Trigger } from "@/models/trigger.model";
 
 class courseService
 {
@@ -23,9 +24,7 @@ class courseService
     {
         try
         {
-            const courses = await Course.find({}).populate({path: 'lectures', model: Lecture});
-            if(!courses)
-                throw new Error('Courses not found')
+            const courses = await Course.find().populate({path: 'lectures', model: Lecture});
             return courses
         }
         catch(error)
@@ -38,9 +37,9 @@ class courseService
     {
         try
         {
-            const course = await Course.findById(id).populate({path: 'lectures', model: Lecture})
-            if(!course)
-                throw new Error('Course not found')
+            const course = await Course.findById(id)
+            .populate({path: 'lectures', model: Lecture})
+            .populate({path: 'simulation', model: Trigger})
             return course
         }
         catch(error)
@@ -53,7 +52,10 @@ class courseService
     {
         try
         {
-            const course = await Course.findOne({id}).populate({path: 'lectures', model: Lecture}).populate({path: 'batches', model: Batch})
+            const course = await Course.findOne({id})
+            .populate({path: 'lectures', model: Lecture})
+            .populate({path: 'batches', model: Batch})
+            .populate({path: 'simulation', model: Trigger})
             return course
         }
         catch(error)
@@ -70,6 +72,20 @@ class courseService
         }
         catch(error)
         {
+            throw error
+        }
+    }
+
+    async addTriggersToCourse(courseId, triggerId)
+    {
+        try
+        {
+            console.log(courseId, triggerId);
+            return await Course.findByIdAndUpdate(courseId, {$push: {simulation: triggerId}})
+        }
+        catch(error)
+        {
+            console.log(error)
             throw error
         }
     }

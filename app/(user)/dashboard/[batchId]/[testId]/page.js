@@ -144,15 +144,16 @@ const Assessment = () =>
             </div>}
 
             
+            {isCompleted && 
             <div className={styles.testCompleteWrapper}>
                 <div className={styles.testComplete}>
-                <Image className={styles.success} src={success} alt='success'/>
-                <div className={styles.routes}>
-                    <Button label='Dashboard' action={()=> router.push(`/dashboard`)}/>
-                    <Button label='Scorecard' action={()=> router.push(`${pathname}/scorecard`)}/>
+                    <Image className={styles.success} src={success} alt='success'/>
+                    <div className={styles.routes}>
+                        <Button label='Dashboard' action={()=> router.push(`/dashboard`)}/>
+                        <Button label='Scorecard' action={()=> router.push(`${pathname}/scorecard`)}/>
+                    </div>
                 </div>
-                </div>
-            </div> 
+            </div> }
         </div>
     )
 }

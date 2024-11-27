@@ -21,7 +21,7 @@ export default async function RootLayout({ children })
       <meta name="keywords" content="financial crime, FinCrime, financial crime prevention, fraud detection, anti-money laundering, financial security, compliance solutions, risk management"/>
       <meta property="og:title" content="Fints - FinCrime Trusted Source"/>  
       <meta property="og:description" content="Fints offers expert solutions for financial crime prevention. Explore our resources and insights to combat financial crime effectively."/>
-      <meta property="og:image" content="fints"/>
+      <meta property="og:image" content="https://res.cloudinary.com/dzuaagm1a/image/upload/v1732331974/imageedit_4_7861718629_qz3ghw.png"/>
       <meta property="og:url" content="https://www.fintsacademy.com"/>
       <SessionWrapper>
         <ReduxProvider>

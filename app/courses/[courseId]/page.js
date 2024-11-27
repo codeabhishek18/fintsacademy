@@ -21,6 +21,8 @@ const Course = () =>
         getCourses();
     },[]);
 
+    console.log(courseData);
+
     const getCourses = async () =>
     {
         try

@@ -46,6 +46,11 @@ const courseSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Lecture'
     }],
+    simulation:
+    [{
+        type: Schema.Types.ObjectId,
+        ref: 'Trigger'
+    }],
     feedbacks:
     [{
         type: Schema.Types.ObjectId,

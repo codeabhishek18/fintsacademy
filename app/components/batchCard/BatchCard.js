@@ -8,7 +8,7 @@ import { useState } from 'react';
 import { toast } from 'sonner';
 import Button from '../button/Button';
 
-const BatchCard = ({type, level, data, participants, getBatches, batchId}) =>
+const BatchCard = ({type, level, data, participants, getBatches, batchId, enrollmentId}) =>
 {
     const router = useRouter();
     const pathname = usePathname();
@@ -65,7 +65,7 @@ const BatchCard = ({type, level, data, participants, getBatches, batchId}) =>
                 
                 <button className={styles.details} onClick={()=> router.push(`/admin/batches/${data.title}`)}>Details</button> :
                 <Button label='View scores' action={()=> router.push(`${pathname}/${batchId}`)}/>) : 
-                <Button label='View' action={()=> router.push(`/dashboard/${data.title}`)}/>}    
+                <Button label='View' action={()=> router.push(`/dashboard/${data.title}?eid=${enrollmentId}`)}/>}    
                 
                 <p className={styles.date}>{FormatDate(data.startDate)}</p>
             </div> 

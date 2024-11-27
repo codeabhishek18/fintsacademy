@@ -42,8 +42,8 @@ export default async function middleware(req)
         if(user.role === 'admin' && nextUrl.pathname.startsWith('/dashboard'))
             return NextResponse.redirect(new URL('/admin/dashboard', nextUrl))
 
-        if(nextUrl.pathname.startsWith('/admin'))
-            return NextResponse.redirect(new URL('/admin/dashboard', nextUrl))
+        // if(nextUrl.pathname.startsWith('/admin'))
+        //     return NextResponse.redirect(new URL('/admin/dashboard', nextUrl))
     }
 
     return null

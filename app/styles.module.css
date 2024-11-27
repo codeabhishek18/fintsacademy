@@ -4,7 +4,7 @@
     padding: 0 10vw 50px;
     display: flex;
     flex-direction: column;
-    row-gap: 20vh;
+    row-gap: 10vh;
     background-color: var(--primary-bg);
     color: white;
     font-size: 16px;
@@ -60,6 +60,7 @@
     justify-content: center;
     align-items: center;
     z-index: 10;
+    box-shadow: var(--box-shadow);
 }
 
 .chat
@@ -82,8 +83,6 @@
     background-color: var(--alert-color);
     padding: 20px;
     border-radius: 5px;
-    margin-top: 40px;
-    margin-bottom: calc(-20vh + 25px);
 }
 
 .quoteIcon
@@ -99,6 +98,63 @@
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     column-gap: 20px;
     row-gap: 20px;
+    margin-top: 40px;
+}
+
+.actionBg
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.actionWrapper
+{
+    height: 80vh;
+    position: relative;
+    box-shadow: var(--box-shadow);
+}
+
+.actionContent
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    font-size: 18px;
+    line-height: 48px;
+    background-color: rgba(0,0,0,0.65);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10vw;
+    row-gap: 30px;
+}
+
+.highlight
+{
+    width: fit-content;
+    background-color: var(--alert-color);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.explore
+{
+    font-size: 14px;
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 10px;
+    line-height: 20px;
+}
+
+.explore:hover
+{
+    background-color: var(--alert-color);
+    border: 1px solid var(--alert-color);
 }
 
 .statCard
@@ -147,6 +203,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 30px;
+    position: relative;
 }
   
 .faqWrapper
@@ -177,15 +234,41 @@
     border-radius: 5px;
 }
 
+@media screen and (max-width:720px)
+{
+
+    .action
+    {
+        font-size: 16px;
+        line-height: 40px;
+    }
+}
+
 @media screen and (max-width:480px)
 {
     .statsWrapper
     {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
         column-gap: 15px;
         row-gap: 15px;
         font-size: 12px;
         line-height: 20px;
+    }
+
+    .action
+    {
+        font-size: 14px;
+    }
+
+    .explore
+    {
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    .actionContent
+    {
+        padding: 20px;
     }
 
     .statCard

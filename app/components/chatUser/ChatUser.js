@@ -1,12 +1,22 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import styles from './ChatUser.module.css'
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { formatChatTime } from '@/utility/formatChatTime';
+import Loading from '../loading/Loading';
 
 const ChatUser = ({conversation, active, setActive, deleteUsers, handleDelete, showDelete}) =>
+{
+    return(
+        <Suspense fallback={<Loading/>}>
+            <SuspenseUser conversation={conversation} active={active} setActive={setActive} deleteUsers={deleteUsers} handleDelete={handleDelete} showDelete={showDelete}/>
+        </Suspense>
+    )
+}
+
+const SuspenseUser = ({conversation, active, setActive, deleteUsers, handleDelete, showDelete}) =>
 {
     const { data } = useSession();
     const router = useRouter();
@@ -15,7 +25,9 @@ const ChatUser = ({conversation, active, setActive, deleteUsers, handleDelete, s
     const receiverId = searchParams.get('userId');
     
     const user = conversation.sender._id === data.user.id ? conversation.receiever : conversation.sender;
-    
+
+    console.log(conversation);
+
     useEffect(()=>
     {   
         setActive(receiverId)
@@ -40,6 +52,7 @@ const ChatUser = ({conversation, active, setActive, deleteUsers, handleDelete, s
             </div>}
         </div>
     )
+
 }
 
 export default ChatUser

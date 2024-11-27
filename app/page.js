@@ -18,8 +18,10 @@ import quoteIcon from '@/assets/quote.png'
 import news_bg from '@/assets/news.jpg'
 import chat from '@/assets/chat.png'
 import close from '@/assets/close.png'
+import growth from '@/assets/hire.webp'
 import Query from './components/query/Query'
 import BoxReveal from '@/components/magicui/box-reveal'
+import Link from 'next/link'
 
 const Home = () =>
 {
@@ -34,15 +36,13 @@ const Home = () =>
                     <p className={styles.marquee}>Sanction Screening and Global Standards | Batches starting soon</p>
                 </div>
 
-                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} className={styles.quoteWrapper}>
-                    <BoxReveal boxColor='var(--alert-color)'>
+                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} className={styles.sectionWrapper}>
+                    {/* <div className={styles.quoteWrapper}>
                         <Image className={styles.quoteIcon} src={quoteIcon} alt='icon'/>
                         <p>The greatest weapon against crime is the prevention of crime</p>
                         <span style={{fontStyle:'italic'}}>— Robert Kennedy</span>
-                    </BoxReveal>
-                </motion.div>
-
-                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} className={styles.statsWrapper}>
+                    </div> */}
+                    <div className={styles.statsWrapper}>
                     {complianceStats.map((content)=>
                     (
                         <BoxReveal boxColor='var(--primary-bg)'>
@@ -56,7 +56,22 @@ const Home = () =>
                         </div>
                         </BoxReveal>
                     ))}
-                </motion.div>                
+                    </div>
+                </motion.div>        
+
+                
+                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} className={styles.actionWrapper}>
+                    <Image className={styles.actionBg} src={growth} alt='Growth'/>
+                    
+                    <div className={styles.actionContent}>
+                        <BoxReveal boxColor='rgba(0,0,0,0)'>
+                            <p className={styles.action}>Get ready to skill up and seize the growing opportunities in <span className={styles.highlight}>Financial Crime Prevention!</span> As the demand for compliance and cybersecurity experts is soaring, <span className={styles.highlight}>the market is expected to grow by 28% in the next five years.</span></p>
+                        </BoxReveal>
+                        <BoxReveal boxColor='rgba(0,0,0,0)'>
+                            <Link className={styles.explore} href='/courses'>Explore Courses</Link>
+                        </BoxReveal>
+                    </div>
+                </motion.div>
 
                 <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} className={styles.sectionWrapper}>
                     <CommonHeader header='Why Choose Us'/>

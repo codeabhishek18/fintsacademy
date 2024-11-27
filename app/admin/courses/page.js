@@ -10,7 +10,6 @@ import Loading from '@/app/components/loading/Loading'
 
 const Courses = () =>
 {
-    const [ courseData, setCourseData ] = useState({title: '', description: ''})
     const [ courses, setCourses ] = useState(null);
     const pathname = usePathname();
     const router = useRouter();
@@ -25,12 +24,6 @@ const Courses = () =>
         const url = `/api/course`
         const response = await axios.get(url);
         setCourses(response.data);
-    }
-
-    const handleChange = (e) =>
-    {
-        const {name, value} = e.target;
-        setCourseData({...courseData, [name] : value})
     }
 
     const handleSubmit = async (e) =>

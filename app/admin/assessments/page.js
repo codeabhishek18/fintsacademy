@@ -22,6 +22,8 @@ const Assessments = () =>
         getQuizzes();
     },[])
 
+    console.log(quizzes);
+
     const getQuizzes = async () =>
     {
         try

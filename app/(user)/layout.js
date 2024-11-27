@@ -32,7 +32,7 @@ export default function Layout({ children })
         {
             const url = `/api/user/${data.user.id}`
             const response = await axios.get(url);
-            const chatId = response.data.chat[0]?._id ? response.data.chat[0]?._id : null
+            const chatId = response.data.chat[0]?._id ?? null
             setChatId(chatId);
         }
         catch(error)
@@ -52,14 +52,13 @@ export default function Layout({ children })
                 </div>
             </main>
 
-            <Image className={styles.support} src={showChat ? close : chat} alt="chat" onClick={()=> setShowChat(!showChat)}/>
+            {/* <Image className={styles.support} src={showChat ? close : chat} alt="chat" onClick={()=> setShowChat(!showChat)}/>
             {showChat &&  
             <div className={styles.chatWrapper}>
                 <div className={styles.chat}>
                     <Chat type="user" userChatId={chatId}/>
                 </div>
-            </div>}
-
+            </div>} */}
         </div>
     )
 }

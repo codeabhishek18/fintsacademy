@@ -61,9 +61,9 @@ const HeroSection = () =>
                     variants={fadeInAnimation}
                     className={styles.footer}>
                     <p className={styles.subHeading}>{header.subHeading}</p>
-                    <Link href='/courses' className={styles.enrollWrapper}>
+                    {/* <Link href='/courses' className={styles.enrollWrapper}>
                         <span className={styles.enroll}>Get started</span>
-                    </Link>
+                    </Link> */}
                 </motion.div>
             </div>
         </div>

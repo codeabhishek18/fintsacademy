@@ -19,6 +19,24 @@
     width: 60%;
 }
 
+.simulations
+{
+    background-color: var(--primary-element);
+    border-radius: 5px;
+    padding: 20px;
+    color: white;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.icon
+{
+    height: 20px;
+    width: 20px;
+}
+
 .enrollments
 {
     width: 50%;

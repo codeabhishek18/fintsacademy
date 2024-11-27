@@ -6,40 +6,51 @@ import SessionCard from "@/app/components/sessionCard/SessionCard";
 import axios from "axios";
 import { useSession } from "next-auth/react"
 import Image from 'next/image';
-import { useParams, usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useParams, usePathname, useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useState } from "react";
 import feedbackIcon from '@/assets/feedback.png'
+import next from '@/assets/next.png'
+import success_next from '@/assets/success-next.png'
 import Feedback from '@/app/components/feedback/Feedback';
 import AssessmentCard from '@/app/components/assessmentCard/assessmentCard';
 import Loading from '@/app/components/loading/Loading';
 import { toast } from 'sonner';
+import Button from '@/app/components/button/Button';
+import locked from '@/assets/locked.png'
+import simulation from '@/assets/simulation.png'
+import Link from 'next/link';
 
 const Dashboard = () =>
 {
     const { batchId } = useParams();
     const { data, status } = useSession();
-    const [ batchData, setBatchData ] = useState(null);
     const [ isLoading, setIsLoading ] = useState(true)
     const [ activeAgenda, setActiveAgenda ] = useState(-1);
-    const [ assessments, setAssessments ] = useState(null);
     const [ feedbackForm, setFeedbackForm ] = useState(false);
     const [ hideFeedback, setHideFeedback ] = useState(true);
-    const pathname = usePathname();
-    const batchTitle = pathname.split('/')[2]
+    const [ enrollmentData, setEnrollmentData ] = useState(null);
     const router = useRouter();
-    
-    const getBatchData = async () =>
+    const pathname = usePathname();
+    const params = useSearchParams();
+    const eid = params.get('eid');
+    const [ active, setActive ] = useState(null);
+
+    const getEnrollmentDetails = async () =>
     {
         try
         {
-            const url = `/api/batch/${batchId}`
+            const url = `/api/enrollment/${eid}`
             const response = await axios.get(url);
-            setBatchData(response.data)
-            checkfeedback(response.data)
+            setEnrollmentData(response.data)
+            // checkfeedback(response.data.batch)
         }
         catch(error)
         {
             toast.error(error.message);
+        }
+        finally
+        {
+            setIsLoading(false);
         }
     }
 
@@ -50,29 +61,10 @@ const Dashboard = () =>
             setHideFeedback(false);
     }
     
-    const getAsssessments = async () =>
-    {
-        try
-        {
-            const url = `/api/user/${data.user.id}`
-            const response = await axios.get(url);
-            const batchAssessments = response.data.enrollments.find((enrollment) => enrollment.batch.title === batchTitle).assessments;
-            setAssessments(batchAssessments);
-            setIsLoading(false);
-        }
-        catch(error)
-        {
-            toast.error(error.message)
-        }
-    }
-    
     useEffect(() => 
     {
-        if(status === "authenticated")
-        {
-            getBatchData();
-            getAsssessments();
-        }
+        if(status === "authenticated" && eid)
+            getEnrollmentDetails();
         else if(status === "unauthenticated")
             router.push('/')
         else
@@ -80,30 +72,58 @@ const Dashboard = () =>
             
     }, [status]);
 
+    console.log(enrollmentData);
+
     if(status === 'loading' || isLoading)
         return <Loading/>
 
     return(
         <div onClick={()=> setActiveAgenda(-1)} className={styles.wrapper}>
         
-            {batchData &&
+            
             <div className={styles.container} >
                 <div className={styles.progress}>
-                    <Progress batchData={batchData} level='user' assessments={assessments}/>
+                    <Progress batchData={enrollmentData.batch} level='user' assessments={enrollmentData.assessments}/>
                 </div>
 
                 <div className={styles.sessions}>
-                {batchData.sessions.map((data, index)=>
-                (
-                    <SessionCard session={data} index={index} setActiveAgenda={setActiveAgenda} activeAgenda={activeAgenda} level='user' key={data._id}/>
-                ))}
+                    {enrollmentData.batch.sessions.map((session, sessionIndex)=>
+                    (
+                        <div className={styles.sessionWrapper} key={session._id} onClick={()=> setActive((prev)=> prev === sessionIndex ? null : sessionIndex)}>
+                            <SessionCard session={session} index={sessionIndex} setActive={setActive} setActiveAgenda={setActiveAgenda} activeAgenda={activeAgenda} level='user' key={session._id}/>
+                     
+                            <div className={styles.simulationWrapper}>
+                            {enrollmentData.simulation.map((trigger, index)=>
+                            {
+                                if(Number(trigger.trigger.session) !== sessionIndex+1)
+                                    return
+                                return(
+                                    <div style={{display:'flex', columnGap: '20px', alignItems: 'center'}} key={trigger._id}>
+                                        {/* <Image style={{height:'25px', width:'25Spx'}} src={next} alt="icon"/> */}
+                                        <div className={styles.simulation}>
+                                            <div className='flex items-center gap-3'>
+                                                <Image className={styles.lockIcon} src={simulation} alt='icon'/>
+                                                <p>Activity {index+1}</p>
+                                            </div>
+                                            {(session.status === 'Upcoming' ? false : index === 0 ? true : enrollmentData.simulation[index-1].status === 'Completed') ? 
+                             
+                                            <Image className={styles.unlockIcon} src={trigger.status === 'Completed' ? success_next : next} alt='icon' onClick={()=> router.push(`${pathname}/simulations?activityId=${trigger._id}`)}/> : 
+                                            <Image className={styles.lockIcon} src={locked} alt='icon'/>}    
+                                        </div>
+                                    </div>)
+                                
+                            })}
+                            </div>
+                        </div>
+                    ))}
                 </div>
-            </div>}
+            </div>
 
             <div className={styles.assessmentWrapper}>
-                {assessments.length > 0 && <p className={styles.header}>Assessments</p>}
+                {enrollmentData.assessments.length > 0 && 
+                <p className={styles.header}>Assessments</p>}
                 <div className={styles.assessments}>
-                {assessments?.map((assessment, index)=>
+                {enrollmentData.assessments.map((assessment, index)=>
                 (
                     <AssessmentCard assessment={assessment} index={index} key={data._id} batchId={batchId}/>
                 ))}
@@ -120,4 +140,13 @@ const Dashboard = () =>
     )
 }
 
-export default Dashboard
+const Loader = () =>
+{
+    return(
+        <Suspense fallback={'loading'}>
+            <Dashboard/>
+        </Suspense>
+    )
+}
+
+export default Loader

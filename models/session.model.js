@@ -17,7 +17,8 @@ const sessionSchema = new Schema({
         type : String,
         enum : ['Upcoming', 'Completed'],
         default: 'Upcoming'
-    }
+    },
+    recording: String
 },
 {
     timestamps : true

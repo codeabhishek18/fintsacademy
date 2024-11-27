@@ -3,7 +3,7 @@
 import styles from './styles.module.css'
 import userIcon from '@/assets/user.png'
 import fints from '@/assets/fints.png'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import axios from 'axios'
 import Image from 'next/image'
 import Message from '../message/Message'
@@ -11,14 +11,23 @@ import { CircularProgress, TextField } from '@mui/material'
 import { useSession } from 'next-auth/react'
 import { useSearchParams } from 'next/navigation'
 import { FormatDate } from '@/utility/FormatDate'
+import Loading from '../loading/Loading'
 
 const Chat = ({type, userChatId, getChatUsers}) =>
+{
+    return(
+    <Suspense fallback={<>Loading...</>}>
+        <SuspenseChat type={type} userChatId={userChatId} getChatUsers={getChatUsers}/>
+    </Suspense>
+    )
+}
+
+const SuspenseChat = ({type, userChatId, getChatUsers}) =>
 {
     const [ chat, setChat ] = useState(null);
     const [ message, setMessage ] = useState('');
     const { data } = useSession();
     const [ isLoading, setIsLoading ] = useState(false);
-
     const searchParams = useSearchParams();
     const chatId = type === 'user' ? userChatId  : searchParams.get('chatId');
     const username = searchParams.get('username')
@@ -26,9 +35,6 @@ const Chat = ({type, userChatId, getChatUsers}) =>
 
     const getChat = async () =>
     {
-        if(!chatId)
-            return
-
         setIsLoading(true)
 
         try
@@ -52,12 +58,7 @@ const Chat = ({type, userChatId, getChatUsers}) =>
     useEffect(()=>
     {
         getChat();
-    },[typeof(chatId) === 'string', chatId])
-
-    useEffect(()=>
-    {
-        chatId && getChat();
-    },[])
+    },[chatId])
 
     const handleSend = async () =>
     {
@@ -91,7 +92,7 @@ const Chat = ({type, userChatId, getChatUsers}) =>
                 {!isLoading ? 
                 (chat?
                 <div className={styles.messages}>
-                    {chat.message.map((msg,index) =>
+                    {chat.messages.map((msg,index) =>
                     {
                         const prevMessageDate = index > 0 ? new Date(chat.message[index-1].createdAt).getDate() : new Date(msg.createdAt).getDate() - 1 ;
                         const currentDate = new Date(msg.createdAt).getDate();

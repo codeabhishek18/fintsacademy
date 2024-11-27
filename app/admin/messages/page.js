@@ -19,7 +19,7 @@ const Messages = () =>
 {
     const [ adminData, setAdminData ] = useState(null);
     const [ showDelete, setShowDelete ] = useState(false);
-    const [isLoading, setIsLoading ] =  useState(false);
+    const [ isLoading, setIsLoading ] =  useState(false);
     const [ deleteUsers, setDeleteUsers ] = useState(null);
     const [ active, setActive ] = useState(null)
     const { data, status } = useSession();

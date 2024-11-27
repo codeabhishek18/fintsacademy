@@ -24,7 +24,7 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Enrollment'
     }],
-    chat:
+    chats:
     [{
         type: Schema.Types.ObjectId,
         ref: 'Chat'    

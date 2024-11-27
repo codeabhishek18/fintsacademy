@@ -31,8 +31,8 @@ export const adminPanelList = [
     },
     {
         id: 6,
-        title: 'Blogs',
-        navigation:'/admin/blogs'
+        title: 'Simulations',
+        navigation:'/admin/simulations'
     },
     {
         id: 7,

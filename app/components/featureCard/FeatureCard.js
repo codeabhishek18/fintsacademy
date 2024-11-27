@@ -1,9 +1,10 @@
 import styles from './styles.module.css'
 import live from '@/assets/liveclass.jpg'
-import dashboard from '@/assets/userdashboard.png'
-import certificate from '@/assets/fingerprint.png'
+import dashboard from '@/assets/track.png'
+import certificate from '@/assets/certificate.webp'
 import record from '@/assets/record.png'
 import community from '@/assets/fintscommunity.jpg'
+import simulation from '@/assets/simulation.jpeg'
 import Image from "next/image";
 import BoxReveal from '@/components/magicui/box-reveal'
 
@@ -22,21 +23,27 @@ const features = [
   },
   {
     id:3,
-    src: certificate,
-    header:'Certification',
-    description: 'Earn industry-recognized certificates upon completing course and assessments, showcasing your expertise to potential employers or for personal growth.'
-  },
-  {
-    id:4,
     src: record,
     header:'Recorded classes',
     description: 'Access pre-recorded sessions anytime, allowing you to learn at your own pace and revisit important topics as needed.'
+  },
+  {
+    id:4,
+    src: simulation,
+    header:'Hands-On Compliance Tools',
+    description: 'Dive into practical simulations and enhance your skills with hands-on tools designed to replicate real-world scenarios.'
   },
   {
     id:5,
     src: community,
     header:'Community',
     description: 'Connect with fellow learners in a vibrant, interactive space. Share insights, ask questions to enhance your learning experience through collective knowledge.'
+  },
+  {
+    id:6,
+    src: certificate,
+    header:'Certification',
+    description: 'Earn industry-recognized certificates upon completing course and assessments, showcasing your expertise to potential employers or for personal growth.'
   },
 ]
 

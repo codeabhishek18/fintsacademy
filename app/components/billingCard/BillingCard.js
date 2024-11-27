@@ -26,8 +26,8 @@ const BillingCard = ({course, selectedBatch}) =>
                 return toast.error('Batch is required')
 
             setIsLoading(true);
-            const url = `/api/enrollments/${user}`
-            const response = await axios.post(url, {batchId : selectedBatch});
+            const url = `/api/enrollment/${user}`
+            const response = await axios.post(url, {batchId : selectedBatch, courseId: course._id});
             await update(newSession);
             setIsLoading(false);
             toast.success(response.data.message);

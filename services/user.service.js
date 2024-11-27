@@ -16,6 +16,7 @@ import { Course } from '@/models/course.model';
 import { Test } from '@/models/test.model';
 import { Chat } from '@/models/chat.model';
 import { Message } from '@/models/message.model';
+import { Trigger } from '@/models/trigger.model';
 
 class userService 
 {
@@ -59,7 +60,7 @@ class userService
         }
     }
 
-    async updatEnrollment(userId, enrollmentId)
+    async updateEnrollment(userId, enrollmentId)
     {
         try
         {
@@ -104,12 +105,16 @@ class userService
                     }
                 },
                 {
+                    path: 'simulation',
+                    model: Trigger,
+                },
+                {
                     path: 'assessments',
                     model: Test
                 }]
             },
             {
-                path: 'chat',
+                path: 'chats',
                 model: Chat,
                 populate:
                 [

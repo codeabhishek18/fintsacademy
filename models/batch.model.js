@@ -14,7 +14,7 @@ const batchSchema = new Schema(
         enrollments:
         [{
             type: Schema.Types.ObjectId,
-            ref: 'User'
+            ref: 'Enrollment'
         }],
         status:
         {

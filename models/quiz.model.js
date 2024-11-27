@@ -14,7 +14,7 @@ const quizSchema = new Schema({
     {
         type: [Schema.Types.Mixed]
     },
-    group:
+    groups:
     [{
         type: Schema.Types.ObjectId,
         ref: 'Group'

@@ -25,6 +25,8 @@ const Batches = () =>
         getBatches();
     },[])
 
+    console.log(batches);
+
     return(
         <div className={styles.wrapper}>
             {batches ? 

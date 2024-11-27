@@ -15,6 +15,11 @@ const enrollmentSchema = new Schema({
     [{
         type: Schema.Types.ObjectId,
         ref: 'Test'
+    }],
+    simulation:
+    [{
+        type: Schema.Types.ObjectId,
+        ref: 'TriggerResponse'
     }]
 })
 
