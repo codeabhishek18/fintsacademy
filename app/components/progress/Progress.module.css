@@ -45,7 +45,7 @@
     border-radius: 5px;
     row-gap: 10px;
     border-radius: 5px;    
-    border: 1px solid rgb(41, 41, 41);
+    background-color: var(--primary-bg);
     font-size: 15px;
 }
 

@@ -69,7 +69,7 @@ class groupService
                     model:Course
                 }]})
             .populate({
-                path: 'assignment',
+                path: 'assignments',
                 model: Assignment,
                 populate:
                 [{

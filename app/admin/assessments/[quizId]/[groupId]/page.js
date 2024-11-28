@@ -59,6 +59,8 @@ const Group = () =>
         })
     }
 
+    console.log(groupData)
+
     return(
         <div className={styles.wrapper}>
             {groupData ? 
@@ -106,7 +108,7 @@ const Group = () =>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {groupData?.assignment?.map((data, index) => (
+                    {groupData?.assignments?.map((data, index) => (
                     <TableRow key={data.user.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell className={styles.cell}>{index+1}</TableCell>
                         <TableCell className={styles.cell}>{data.user.name}</TableCell>

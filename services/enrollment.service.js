@@ -82,11 +82,11 @@ class enrollmentService
         }
     }
 
-    async assignSimulationTriggers(userId, triggerId)
+    async assignSimulationTriggers(enrollmentId, triggerId)
     {
         try
         {
-            return await Enrollment.findOneAndUpdate({user: userId}, {$push : {simulation: triggerId}})
+            return await Enrollment.findByIdAndUpdate(enrollmentId, {$push : {simulation: triggerId}})
         }
         catch(error)
         {

@@ -19,7 +19,7 @@ export default async function middleware(req)
         })
     } 
 
-    // const protectedRoute = protectedRoutes.some((route)=> nextUrl.pathname === route);
+    const protectedRoute = protectedRoutes.some((route)=> nextUrl.pathname === route);
     const userRoute = userRoutes.some((route)=> nextUrl.pathname.startsWith(route));
     const adminRoute = adminRoutes.some((route)=> nextUrl.pathname.startsWith(route));
     const authRoute = authRoutes.some((route)=> nextUrl.pathname.startsWith(route));

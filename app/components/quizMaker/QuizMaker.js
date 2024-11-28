@@ -211,7 +211,7 @@ const QuizMaker = ({type, quiz, quizInfo}) =>
                         ))}
                         </Select>
                     </FormControl> 
-                    <Button fullwidth={true} action={()=> handlePost} label='Post Assessment'/>
+                    <Button fullwidth={true} action={()=> handlePost()} label='Post Assessment'/>
                     <p style={{color: 'grey', textAlign:'center', marginTop: '10px'}}>{quizData?.hasOwnProperty('question') ? quizData.length : 0} assessment questions</p>
                     <CloseDialog action={()=> setShowDialog(false)}/>
                 </div>

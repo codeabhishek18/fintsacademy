@@ -25,7 +25,7 @@ const QuizCard = ({type, data}) =>
             {type === "admin" && 
             <div className={styles.adminData}>
                 <p className={styles.quiz}>{data.title}</p>
-                <p className={styles.quiz}>Assigned batches : {data.group.length}</p>
+                <p className={styles.quiz}>Assigned batches : {data.group?.length ?? 0}</p>
                
             </div>}
             {type === 'admin' ?  

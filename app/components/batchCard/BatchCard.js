@@ -63,7 +63,7 @@ const BatchCard = ({type, level, data, participants, getBatches, batchId, enroll
                 {level === "admin" ?
                 (type === 'batch' ? 
                 
-                <button className={styles.details} onClick={()=> router.push(`/admin/batches/${data.title}`)}>Details</button> :
+                <Button label='Details' action={()=> router.push(`/admin/batches/${data.title}`)}/> :
                 <Button label='View scores' action={()=> router.push(`${pathname}/${batchId}`)}/>) : 
                 <Button label='View' action={()=> router.push(`/dashboard/${data.title}?eid=${enrollmentId}`)}/>}    
                 

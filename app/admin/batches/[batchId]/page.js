@@ -13,6 +13,7 @@ import next from '@/assets/next.png'
 import { toast } from 'sonner'
 import Image from 'next/image'
 import Button from '@/app/components/button/Button'
+import Link from 'next/link'
 
 const Batch = () =>
 {
@@ -117,15 +118,34 @@ const Batch = () =>
                                     <Button label={`Trigger ${index+1}`} action={()=> setActive(index)}/>
                                 ))}
                             </div>
-                            <div className='flex gap-4 w-full text-white mt-8 overflow-y-scroll'>
+                            <div className='flex gap-16 w-full text-white mt-8 overflow-y-scroll'>
                                 <h1 className='absolute top-6 right-4 text-red-600 text-4xl font-bold cursor-pointer' onClick={()=> setShowResponses(false)}>X</h1>
-                                <div className='w-[40%] min-h-72 border p-4 rounded'>
+                                <div className='w-[40%]'>
+                                    <p className='text-red-600 mb-2 font-bold'>Trigger</p>
                                     {batch.course.simulation[active].description}
+                                    <table className='w-full mt-4 flex'>
+                                        <thead className='w-[40%]'>
+                                            <tr className='flex flex-col'>
+                                                <th className='border text-center p-2'>Case</th>
+                                                <th className='border text-center p-2'>TriggerId</th>
+                                                <th className='border text-center p-2'>Type</th>
+                                                <th className='border text-center p-2'>Filter</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className='w-[60%]'>
+                                            <tr className='flex flex-col'>
+                                                <td className='border text-center p-2'>History</td>
+                                                <td className='border text-center p-2'>{batch.course.simulation[active].triggerId.toUpperCase()}</td>
+                                                <td className='border text-center p-2'>{batch.course.simulation[active].type}</td>                            
+                                                <td className='border text-center p-2'><Link href='https://fints360.vercel.app/' legacyBehavior><a target='_blank'  className='text-blue-500 underline'>Fints360</a></Link></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div className='w-[60%] p-4 rounded border flex flex-col gap-4'>
+                                <div className='w-[60%] flex flex-col gap-4 h-[70vh] overflow-y-scroll'>
                                     {batch.enrollments.map((enrollment)=>
                                     (
-                                        <div>
+                                        <div className='pr-3'>
                                             {enrollment.simulation[active].response && 
                                             <div>
                                                 <p className='text-red-600 font-bold mb-2'>{enrollment.user.name}</p>

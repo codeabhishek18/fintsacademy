@@ -9,6 +9,7 @@ import Loading from '@/app/components/loading/Loading';
 import { toast } from 'sonner';
 import Button from '@/app/components/button/Button';
 import Link from 'next/link';
+import TriggerDetails from '@/app/components/triggerDetails/TriggerDetails';
 
 const Simulations = () =>
 {
@@ -68,28 +69,7 @@ const Simulations = () =>
 
     return(
         <div className={styles.wrapper}>
-            <div className={styles.activity}>
-                <p className='text-red-600 mb-2 font-bold'>Trigger</p>
-                {simulation.trigger.description}
-                <table className='w-full mt-4 flex'>
-                    <thead className='w-[40%]'>
-                        <tr className='flex flex-col'>
-                            <th className='border text-center p-2'>Case</th>
-                            <th className='border text-center p-2'>TriggerId</th>
-                            <th className='border text-center p-2'>Type</th>
-                            <th className='border text-center p-2'>Filter</th>
-                        </tr>
-                    </thead>
-                    <tbody className='w-[60%]'>
-                        <tr className='flex flex-col'>
-                            <td className='border text-center p-2'>History</td>
-                            <td className='border text-center p-2'>{simulation.trigger.triggerId.toUpperCase()}</td>
-                            <td className='border text-center p-2'>{simulation.trigger.type}</td>
-                            <td className='border text-center p-2'><Link href='' className='text-blue-500 underline'>Fints360</Link></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+            <TriggerDetails simulation={simulation}/>
            {simulation.status === 'Completed' ? <div className={styles.activity}>
                 <p className='text-red-600 mb-2 font-bold'>Your Response</p>
                 <p>{simulation.response}</p>

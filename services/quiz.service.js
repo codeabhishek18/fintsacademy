@@ -54,7 +54,7 @@ class quizService
         {
             const quiz = await Quiz.findById(id)
             .populate({
-                path: 'group',
+                path: 'groups',
                 model: Group,
                 populate:
                 [{
@@ -67,7 +67,7 @@ class quizService
                     }
                 },
                 {
-                    path: 'assignment',
+                    path: 'assignments',
                     model: Assignment
                 }]
             })
@@ -85,7 +85,7 @@ class quizService
         {
             const quiz = await Quiz.findOne({title: id})
             .populate({
-                path: 'group',
+                path: 'groups',
                 model: Group,
                 populate:
                 [{
@@ -98,7 +98,7 @@ class quizService
                     }
                 },
                 {
-                    path: 'assignment',
+                    path: 'assignments',
                     model: Assignment
                 }]
             })

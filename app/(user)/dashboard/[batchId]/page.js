@@ -72,7 +72,7 @@ const Dashboard = () =>
             
     }, [status]);
 
-    console.log(enrollmentData);
+    console.log(enrollmentData)
 
     if(status === 'loading' || isLoading)
         return <Loading/>
@@ -134,7 +134,7 @@ const Dashboard = () =>
             
             {feedbackForm && 
             <div className={styles.feedbackForm}>
-                <Feedback setFeedbackForm={setFeedbackForm} courseId={batchData.course._id}/>
+                <Feedback setFeedbackForm={setFeedbackForm} courseId={enrollmentData.batch.course_id}/>
             </div>}
         </div>
     )

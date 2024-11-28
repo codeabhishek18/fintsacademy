@@ -33,7 +33,7 @@ export async function POST(req, {params})
         for(let trigger of course.simulation)
         {
             const response = await triggerResponseInstance.createTriggerResponse(trigger._id.toString(), batchId, userId);
-            await enrollmentInstance.assignSimulationTriggers(userId, response._id.toString())
+            await enrollmentInstance.assignSimulationTriggers(enrollment._id.toString(), response._id.toString())
         }
         return NextResponse.json({message : 'Enrolled successfully'});
     }    
