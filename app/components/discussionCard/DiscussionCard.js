@@ -10,6 +10,8 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import upArrow from '@/assets/show.png'
 import downArrow from '@/assets/drop.png'
+import Button from '../button/Button';
+import { toast } from 'sonner';
 
 const DiscussionCard = ({discussions, getDiscussions, getTopics}) =>
 {   
@@ -41,10 +43,14 @@ const DiscussionCard = ({discussions, getDiscussions, getTopics}) =>
             const url = `/api/comment/${id}`
             if(user)
             {
+                if(!comment)
+                    return toast.error('Response cannot be empty')
+
                 await axios.post(url, {comment, author: user})
                 getDiscussions('/api/forum');
                 setComment('');
                 setViewComment(id);
+                toast.success('Sent')
             }
             return
         }
@@ -77,13 +83,10 @@ const DiscussionCard = ({discussions, getDiscussions, getTopics}) =>
                             className={styles.reply} 
                             name="comment" 
                             placeholder="Reply" 
+                            value={comment}
                             onChange={(e)=> setComment(e.target.value)}
                         />
-                        <button 
-                            className={styles.post} 
-                            onClick={()=> handleComment(discussion._id)}>
-                            Send
-                        </button>
+                        <Button label='Send' action={()=> handleComment(discussion._id)}/>
                     </div>
 
                     { discussion.comments.length > 0 ?

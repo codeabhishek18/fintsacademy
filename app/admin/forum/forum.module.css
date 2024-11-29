@@ -1,5 +1,6 @@
 .wrapper
 {
+    width: 100%;
     border-radius: 8px;
     min-height: 100vh;
 }
@@ -14,6 +15,7 @@
 
 .discussions
 {
+    width: 100%;
     display: flex;
     column-gap: 20px;
 }

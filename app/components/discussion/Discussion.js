@@ -10,7 +10,7 @@ const Discussion = ({id, author, title, date, like, keywords, handleDelete}) =>
         <div className={styles.container}>
             <div className={styles.header}>
                 <p className={styles.title}>{title}</p>
-                <Image className={styles.deleteIcon} src={deleteIcon} alt='delete' onClick={()=> handleDelete(id)}/>
+                {/* <Image className={styles.deleteIcon} src={deleteIcon} alt='delete' onClick={()=> handleDelete(id)}/> */}
             </div>
             <div className={styles.footer}>
                 <p className={styles.author}>Posted by {author?.name}</p>

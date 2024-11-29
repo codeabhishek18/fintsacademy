@@ -96,6 +96,7 @@
 .reply
 {
     width: 50%;
+    padding: 2px 0;
     background-color:  var(--primary-bg);
     border-radius: 5px;
 }

@@ -8,6 +8,8 @@ import ReplyCard from '../replyCard/ReplyCard';
 import Image from 'next/image';
 import upArrow from '@/assets/show.png'
 import downArrow from '@/assets/drop.png'
+import Button from '../button/Button';
+import { toast } from 'sonner';
 
 const Comment = ({comment, getDiscussions, user}) =>
 {
@@ -21,9 +23,13 @@ const Comment = ({comment, getDiscussions, user}) =>
         {
             if(user)
             {
+                if(!reply)
+                    return toast.error('Reply cannot be empty')
+                
                 const url = `/api/reply/${id}`
                 await axios.post(url, {reply, author: user})
                 getDiscussions('/api/forum');
+                toast.success('Sent')
                 setReply('');
                 setViewReply(id)
             }
@@ -66,11 +72,12 @@ const Comment = ({comment, getDiscussions, user}) =>
                 <TextField
                     InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}}
                     variant="outlined" size='small' 
+                    value={reply}
                     color='grey' className={styles.reply} 
                     name="reply" placeholder="Reply" 
                     onChange={(e)=> setReply(e.target.value)}
                 />
-                <button className={styles.post} onClick={()=> handleReply(comment._id)}>Send</button>
+                <Button action={()=> handleReply(comment._id)} label='Send'/>
             </div>}
         </div>   
     )

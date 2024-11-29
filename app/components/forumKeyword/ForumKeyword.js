@@ -3,6 +3,7 @@ import styles from './ForumKeyword.module.css'
 import { useState } from 'react'
 import { keywords } from '@/utility/keywords';
 import ForumKey from '../forumKey/ForumKey';
+import Button from '../button/Button';
 
 const ForumKeyword = ({handleKeywords}) =>
 {
@@ -13,15 +14,15 @@ const ForumKeyword = ({handleKeywords}) =>
             <div className={styles.header}>
                 <TextField InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D'}}}}
                 size='small' className={styles.keys} placeholder='Add keyword' name='keyword' value={keyword} onChange={(e) => setKeyword(e.target.value)}/>
-                <button className={styles.add} onClick={() => {handleKeywords(keyword); setKeyword('')}}>Add</button>
+                <Button label='Add' action={() => {handleKeywords(keyword); setKeyword('')}}/>
             </div>
 
-            <div className={styles.keywords}>
+            {/* <div className={styles.keywords}>
             {keywords.map((keyword)=>
             (
                 <ForumKey key={keyword.id} type="read" keyword={keyword.key} handleKeywords={handleKeywords}/>
             ))}
-            </div>
+            </div> */}
         </div>
     )
 }

@@ -18,7 +18,8 @@
 .keys
 {
     width: 100%;
-    background-color: var(--primary-bg);
+    padding: 4px 0;
+    background-color: var(--primary-element);
     border-radius: 5px;
 }
 

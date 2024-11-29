@@ -7,8 +7,10 @@ import styles from './ForumPost.module.css'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useSession } from 'next-auth/react'
+import Button from '../button/Button'
+import { toast } from 'sonner'
 
-const ForumPost = ({getDiscussions, getTopics}) =>
+const ForumPost = ({getDiscussions, getTopics, setShowPost}) =>
 {
     const [ title, setTitle ] = useState('');
     const [ keyList, setKeyList ] = useState([]);
@@ -23,8 +25,9 @@ const ForumPost = ({getDiscussions, getTopics}) =>
         {
             const url = '/api/forum'
             await axios.post(url, {title, author: user, keywords: keyList});
-            getDiscussions('/api/forum');
-            getTopics()
+            getDiscussions();
+            setShowPost(false);
+            // getTopics()
             setTitle('')
             setKeyList([])
         }
@@ -36,6 +39,9 @@ const ForumPost = ({getDiscussions, getTopics}) =>
 
     const handleKeywords = (word) =>
     {
+        if(!word)
+            return toast.error('Keyword cannot be empty')
+
         let search = keyList.filter((key) => key === word);
         if(!search.length)
             setKeyList((prev) => [...prev, word])
@@ -51,7 +57,7 @@ const ForumPost = ({getDiscussions, getTopics}) =>
         <div className={styles.container}>
             <div className={styles.forumheader}>
                 <TextField size='large' InputProps={{style: { color: '#ffffff'}, sx: {'&.Mui-focused .MuiOutlinedInput-notchedOutline': {borderColor: '#D4313D', color: '#D4313D'}, 'aria-label': 'Without label'}}}
-                placeholder='Post a discusssion' name="title" className={styles.input} value={title} onChange={(e)=> setTitle(e.target.value)} />
+                placeholder='Discussion Topic' name="title" className={styles.input} value={title} onChange={(e)=> setTitle(e.target.value)} />
 
                 <div className={styles.footer}>
                     <div className={styles.list}>
@@ -63,10 +69,13 @@ const ForumPost = ({getDiscussions, getTopics}) =>
                         />
                     ))}
                     </div>
-                    <button className={styles.post} onClick={handlePost}>Post</button>
                 </div>
             </div>
             <ForumKeyword handleKeywords={handleKeywords}/>
+            <div className='flex gap-4'>
+                <Button action={()=> setShowPost(false)} label='Cancel' fullwidth={true}/>
+                <Button action={handlePost} label='Post' fullwidth={true}/>
+            </div>
         </div>   
     )
 }

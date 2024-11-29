@@ -10,25 +10,27 @@ import PopularCard from '@/app/components/popularCard/PopularCard'
 import DiscussionCard from '@/app/components/discussionCard/DiscussionCard'
 import { useSession } from 'next-auth/react'
 import { CircularProgress } from '@mui/material'
+import Button from '@/app/components/button/Button'
 
 const Forum = () =>
 {
     const [ discussions, setDiscussions ] = useState(null);
-    const [ topics, setTopics ] = useState(null)
+    const [ topics, setTopics ] = useState(null);
+    const [ showPost, setShowPost ] = useState(false);
     const [ searchQuery, setSearchQuery ] = useState({search: '', order: ''})
     const router = useRouter();
     const pathname = usePathname();
 
     useEffect(() =>
     {        
-        const url = '/api/forum'
-        getDiscussions(url);
+        getDiscussions();
     },[])
     
     const getDiscussions = async (url) =>
     {
         try
         {
+            const url = '/api/forum'
             const response = await axios(url)
             setDiscussions(response.data)
         }
@@ -38,24 +40,24 @@ const Forum = () =>
         }
     }
 
-    const handleChange = (type, value) =>
-    {
-        if(type === "topic" && !value)
-        {
-            router.push(pathname)
-            getDiscussions(`/api/forum`)
-            setSearchQuery({...searchQuery, [type] : ''})
-            return;
-        }
+    // const handleChange = (type, value) =>
+    // {
+    //     if(type === "topic" && !value)
+    //     {
+    //         router.push(pathname)
+    //         getDiscussions(`/api/forum`)
+    //         setSearchQuery({...searchQuery, [type] : ''})
+    //         return;
+    //     }
 
-        if(type==="topic")
-        {
-            const path = `topic=${value}`
-            router.push(`${pathname}?${path}`)
-            getDiscussions(`/api/forum?${path}`)
-        }
-        setSearchQuery({...searchQuery, [type] : value})
-    }
+    //     if(type==="topic")
+    //     {
+    //         const path = `topic=${value}`
+    //         router.push(`${pathname}?${path}`)
+    //         getDiscussions(`/api/forum?${path}`)
+    //     }
+    //     setSearchQuery({...searchQuery, [type] : value})
+    // }
 
     const getTopics = async () =>
     {
@@ -68,11 +70,16 @@ const Forum = () =>
         <div className={styles.wrapper}>
             {discussions ? 
             <div className={styles.container}>
-                <ForumPost/>
-                <ForumSearchbar handleChange={handleChange} searchQuery={searchQuery} getDiscussions={getDiscussions}/>
+                <Button label='Post Discussion' action={()=> setShowPost(true)}/>
+                {showPost && 
+                <div className="h-[100vh] w-full z-10 fixed left-0 top-0 px-[8vw] flex items-center justify-center" style={{backgroundColor:'rgba(0,0,0,0.7'}}>
+                    <ForumPost getDiscussions={getDiscussions} setShowPost={setShowPost}/>
+                </div>}
+                
+                {/* <ForumSearchbar handleChange={handleChange} searchQuery={searchQuery} getDiscussions={getDiscussions}/> */}
                 
                 <div className={styles.discussions}>
-                    <PopularCard handleChange={handleChange} getTopics={getTopics} topics={topics}/>
+                    {/* <PopularCard handleChange={handleChange} getTopics={getTopics} topics={topics}/> */}
                     <div className={styles.discussionsReply}>
                         <DiscussionCard discussions={discussions} getDiscussions={getDiscussions} getTopics={getTopics}/>
                     </div> 
