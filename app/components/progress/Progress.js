@@ -72,7 +72,7 @@ const Progress = ({batchData, level, assessments}) =>
         if(!isAssessmentCompleted)
             return toast.error('Certification will be unlocked only after successful completion of sprint and assessment')
 
-        const isAssessmentCleared = calculateResult(isAssessmentCompleted[isAssessmentCompleted.length - 1].score, isAssessmentCompleted[isAssessmentCompleted.length - 1].quiz.length)
+        const isAssessmentCleared = calculateResult(isAssessmentCompleted[isAssessmentCompleted.length - 1].score, isAssessmentCompleted[isAssessmentCompleted.length - 1].quizDetails.quiz.length)
 
         if(isSprintCompleted === 'Pending' || isAssessmentCleared !== 'Qualified')
             return toast.error('Certification will be unlocked only after successful completion of sprint and assessment')

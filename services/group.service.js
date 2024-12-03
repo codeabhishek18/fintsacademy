@@ -1,6 +1,7 @@
 import { Assignment } from "@/models/assignment.model";
 import { Batch } from "@/models/batch.model";
 import { Course } from "@/models/course.model";
+import { Enrollment } from "@/models/enrollment.model";
 import { Group } from "@/models/group.model"
 import { Mentor } from "@/models/mentor.model";
 import { Quiz } from "@/models/quiz.model";
@@ -30,17 +31,18 @@ class groupService
             const group = await Group.find()
             .populate({path: 'batch', model: Batch})
             .populate({
-                path: 'assignment',
-                model: Assignment,
+                path: 'tests',
+                model: Test,
                 populate:
-                [{
-                    path: 'user',
-                    model: User
-                },
                 {
-                    path: 'test',
-                    model: Test
-                }]
+                    path: 'enrollment',
+                    model: Enrollment,
+                    populate:
+                    {
+                        path: 'user', 
+                        module: User
+                    }
+                }
             })
             
             return group;
@@ -69,16 +71,21 @@ class groupService
                     model:Course
                 }]})
             .populate({
-                path: 'assignments',
-                model: Assignment,
+                path: 'tests',
+                model: Test,
                 populate:
                 [{
-                    path: 'user',
-                    model: User
+                    path: 'enrollment',
+                    model: Enrollment,
+                    populate:
+                    {
+                        path: 'user', 
+                        module: User
+                    }
                 },
                 {
-                    path: 'test',
-                    model: Test
+                    path: 'quizDetails',
+                    model: Quiz
                 }]
             })
             return group;
@@ -102,11 +109,11 @@ class groupService
     //     }
     // }
 
-    async updateAssignment(group, assignment)
+    async updateAssignment(groupId, testId)
     {
         try
         {
-            return await Group.findByIdAndUpdate(group, {$push: {assignment}})
+            return await Group.findByIdAndUpdate(groupId, {$push: {tests: testId}})
         }
         catch(error)
         {

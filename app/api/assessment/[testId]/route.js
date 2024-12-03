@@ -10,12 +10,12 @@ export async function POST(req, {params})
         await dbConnect();
         const {testId} = params;
         const {answers} = await req.json();
-        console.log(typeof(answers))
+
         const test = await testInstance.findById(testId); 
         let score = 0;
         for(let i=0;i<answers.length;i++)
         {
-            const isCorrect = test.quiz[i].answers.every((ans)=> answers[i].includes(ans)) && (test.quiz[i].answers.length === answers[i].length)         
+            const isCorrect = test.quizDetails.quiz[i].answers.every((ans)=> answers[i].includes(ans)) && (test.quizDetails.quiz[i].answers.length === answers[i].length)         
             if(isCorrect)
                 score++
         }

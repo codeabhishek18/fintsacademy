@@ -21,11 +21,11 @@ const QuizCard = ({type, data}) =>
                 <Image className={styles.edit} src={edit} alt='test' onClick={()=> router.push(`${pathname}/edit?id=${data.title}`)}/>
             </div>
             <div className={styles.content}>
-            <p className={styles.title}>{data.course.title +' ' +data.course.level}</p>
+            <p className={styles.title}>{data.course.title}</p>
             {type === "admin" && 
             <div className={styles.adminData}>
                 <p className={styles.quiz}>{data.title}</p>
-                <p className={styles.quiz}>Assigned batches : {data.group?.length ?? 0}</p>
+                <p className={styles.quiz}>Assigned batches : {data.groups?.length ?? 0}</p>
                
             </div>}
             {type === 'admin' ?  

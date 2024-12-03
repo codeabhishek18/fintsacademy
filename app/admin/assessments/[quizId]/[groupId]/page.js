@@ -89,11 +89,11 @@ const Group = () =>
                     </div>
                     <div className={styles.details}>
                         <span className={styles.heading}>Qualifying score</span>
-                        <span className={styles.data}>{groupData.assignment[0].test.quiz.length*.75 +'/'+groupData.assignment[0].test.quiz.length}</span>
+                        <span className={styles.data}>{groupData.tests[0].quizDetails.quiz.length*.75 +'/'+groupData.tests[0].quizDetails.quiz.length}</span>
                     </div>
                     <div className={styles.details}>
                         <span className={styles.heading}>Competency rate</span>
-                        <span className={styles.data}>{Math.ceil(groupData.assignment.filter((user)=> user.test.status === 'Completed' && calculatePercentile(user.test.score, user.test.quiz.length) >=75).length * 100 / groupData.assignment.length)}%</span>
+                        <span className={styles.data}>{Math.ceil(groupData.tests.filter((test)=> test.status === 'Completed' && calculatePercentile(test.score, test.quizDetails.quiz.length) >=75).length * 100 / groupData.tests.length)}%</span>
                     </div>
                 </div>}
             <TableContainer component={Paper}>
@@ -108,13 +108,13 @@ const Group = () =>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {groupData?.assignments?.map((data, index) => (
-                    <TableRow key={data.user.name} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                    {groupData?.tests?.map((test, index) => (
+                    <TableRow key={test._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                         <TableCell className={styles.cell}>{index+1}</TableCell>
-                        <TableCell className={styles.cell}>{data.user.name}</TableCell>
-                        <TableCell className={styles.cell}>{data.test.status === 'Completed' ? data.test.score+'/'+data.test.quiz.length : 'NA'}</TableCell>
-                        <TableCell className={styles.cell}>{data.test.status === 'Completed' ? calculatePercentile(data.test.score, data.test.quiz.length)+'%' : 'NA'}</TableCell>
-                        <TableCell className={styles.cell}>{data.test.status === 'Completed' ? calculateResult(data.test.score, data.test.quiz.length) : 'NA' }</TableCell>
+                        <TableCell className={styles.cell}>{test.enrollment.user.name}</TableCell>
+                        <TableCell className={styles.cell}>{test.status === 'Completed' ? test.score+'/'+test.quizDetails.quiz.length : 'NA'}</TableCell>
+                        <TableCell className={styles.cell}>{test.status === 'Completed' ? calculatePercentile(test.score, test.quizDetails.quiz.length)+'%' : 'NA'}</TableCell>
+                        <TableCell className={styles.cell}>{test.status === 'Completed' ? calculateResult(test.score, test.quizDetails.quiz.length) : 'NA' }</TableCell>
                     </TableRow>
                     ))}
                 </TableBody>

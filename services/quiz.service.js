@@ -4,6 +4,7 @@ import { Batch } from "@/models/batch.model";
 import { Course } from "@/models/course.model";
 import { Group } from "@/models/group.model";
 import { Quiz } from "@/models/quiz.model";
+import { Test } from "@/models/test.model";
 
 class quizService
 {
@@ -35,8 +36,8 @@ class quizService
                     model: Batch,
                 },
                 {
-                    path: 'assignments',
-                    model: Assignment
+                    path: 'tests',
+                    model: Test
                 }]
             })
             
@@ -67,8 +68,8 @@ class quizService
                     }
                 },
                 {
-                    path: 'assignments',
-                    model: Assignment
+                    path: 'tests',
+                    model: Test
                 }]
             })
             return quiz
@@ -98,8 +99,8 @@ class quizService
                     }
                 },
                 {
-                    path: 'assignments',
-                    model: Assignment
+                    path: 'tests',
+                    model: Test
                 }]
             })
             return quiz
@@ -133,7 +134,7 @@ class quizService
     {
         try
         {
-            return await Quiz.findByIdAndUpdate(quizId, {$push: {'group': group}});
+            return await Quiz.findByIdAndUpdate(quizId, {$push: {groups: group}});
         }
         catch(error)
         {

@@ -72,6 +72,8 @@ const Assessment = () =>
         setIsCompleted(true)
     }
 
+    console.log(assessment)
+
     if(status === 'loading' || isLoading)
         return <Loading/>
 
@@ -81,8 +83,8 @@ const Assessment = () =>
             <div className={styles.container}>
                 {assessment && 
                 <div className={styles.quiz}>
-                    <p className={styles.activeQuestion}>{index+1}/{assessment?.quiz?.length}</p>
-                    <p className={styles.question}>{assessment.quiz[index].question}</p>
+                    <p className={styles.activeQuestion}>{index+1}/{assessment?.quizDetails.quiz?.length}</p>
+                    <p className={styles.question}>{assessment.quizDetails.quiz[index].question}</p>
                     
                     {/* {assessment.status === 'Pending' && 
                     <div className={styles.webcam}>
@@ -91,9 +93,9 @@ const Assessment = () =>
                 </div>}
                 
                 <div className={styles.options}>
-                    {assessment.quiz[index].multipleAnswers === 'false' ?
+                    {assessment.quizDetails.quiz[index].multipleAnswers === 'false' ?
 
-                    (assessment.quiz[index].options.map((option,idx)=>
+                    (assessment.quizDetails.quiz[index].options.map((option,idx)=>
                     (
                         <button className={assessment.status === 'Pending' ? 
                             ((answersList.list[index]?.includes(idx+1)) ? `${styles.option} ${styles.selected}` : styles.option) : 
@@ -104,7 +106,7 @@ const Assessment = () =>
                         </button>
                     ))) :
 
-                    assessment.quiz[index].options.map((option,idx)=>
+                    assessment.quizDetails.quiz[index].options.map((option,idx)=>
                     (
                         <button className={assessment.status === 'Pending' ? 
                             ((answersList.list[index]?.includes(idx+1)) ? `${styles.option} ${styles.selected}` : styles.option) : 
@@ -118,15 +120,15 @@ const Assessment = () =>
                     <div className={styles.control}>
                         {index>0 && <button className={styles.button} onClick={()=> setIndex((prev)=> prev-1)}>Previous</button>}
                         
-                        {index !== assessment.quiz.length-1 && 
+                        {index !== assessment.quizDetails.quiz.length-1 && 
                         <button className={assessment.status === "Completed" ? 
                         styles.button : (!answersList.list[index] ? `${styles.button} ${styles.disabled}` : 
                         styles.button)} disabled={!answersList.list[index] && assessment.status === "Pending"}
                         onClick={()=> setIndex((prev)=> prev+1)}>Next</button>}
                         
-                        {index === assessment.quiz.length-1 && assessment.status === "Pending" && 
-                        <button className={!answersList.list[index] ? `${styles.button} ${styles.disabled}` : styles.button} disabled={index+1 > assessment.quiz.length} onClick={handleSubmit}>Submit</button>}
-                        {index === assessment.quiz.length-1 && assessment.status === "Completed" &&<button className={index+1 > assessment.quiz.length ? `${styles.button} ${styles.disabled}` : styles.button} disabled={index+1 > assessment.quiz.length} onClick={()=> router.push(`${pathname}/scorecard`)}>Scorecard</button>}
+                        {index === assessment.quizDetails.quiz.length-1 && assessment.status === "Pending" && 
+                        <button className={!answersList.list[index] ? `${styles.button} ${styles.disabled}` : styles.button} disabled={index+1 > assessment.quizDetails.quiz.length} onClick={handleSubmit}>Submit</button>}
+                        {index === assessment.quizDetails.quiz.length-1 && assessment.status === "Completed" &&<button className={index+1 > assessment.quizDetails.quiz.length ? `${styles.button} ${styles.disabled}` : styles.button} disabled={index+1 > assessment.quizDetails.quiz.length} onClick={()=> router.push(`${pathname}/scorecard`)}>Scorecard</button>}
                     </div> 
                 </div>
             </div>

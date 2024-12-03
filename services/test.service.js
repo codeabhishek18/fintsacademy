@@ -1,12 +1,13 @@
+import { Quiz } from "@/models/quiz.model";
 import { Test } from "@/models/test.model";
 
 class testService
 {
-    async createNewTest(title, quiz)
+    async createNewTest(quiz, enrollment)
     {
         try
         {
-            const test = await Test.create({title, quiz});
+            const test = await Test.create({quizDetails: quiz, enrollment});
             await test.save(); 
             return test            
         }
@@ -33,7 +34,7 @@ class testService
     {
         try
         {
-            const quiz = await Test.findById(id)
+            const quiz = await Test.findById(id).populate({path: 'quizDetails', model: Quiz})
             return quiz
         }
         catch(error)

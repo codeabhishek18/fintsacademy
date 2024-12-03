@@ -40,8 +40,8 @@ const AssessmentCard = ({assessment, index, batchId}) =>
             </div>    
 
             <p className={assessment.status === 'Pending' ? styles.assessmentStatus : 
-                (calculateResult(assessment.score, assessment.quiz.length) === 'Qualified' ? `${styles.assessmentStatus} ${styles.success}` : `${styles.assessmentStatus} ${styles.warning}`)}>
-                {assessment.status === 'Pending' ? 'Pending' : (calculateResult(assessment.score, assessment.quiz.length))}
+                (calculateResult(assessment.score, assessment.quizDetails.quiz.length) === 'Qualified' ? `${styles.assessmentStatus} ${styles.success}` : `${styles.assessmentStatus} ${styles.warning}`)}>
+                {assessment.status === 'Pending' ? 'Pending' : (calculateResult(assessment.score, assessment.quizDetails.quiz.length))}
             </p>
 
             {/* {checkCam  && 

@@ -14,45 +14,57 @@ const enrollmentInstance = new enrollmentService();
 
 import dbConnect from "@/dbConfig/dbConnect";
 import { NextResponse } from "next/server";
+import mongoose from "mongoose";
 
 
 export async function POST(req, {params}) 
 {
+    const session = await mongoose.startSession();
+    session.startTransaction();
+
     try
     {
         await dbConnect();
         
         const {quizId} = params;
-        const {users, batch} = await req.json();
+        const {enrollments, batch} = await req.json();
         
-        const batchId = await batchInstance.findById(batch);
-        const quiz = await quizInstance.getQuizById(quizId);
-        let group = null;
-        let isOldGroup = [];
-        const groups = quiz.group;
-        if(!groups.length)
-            group = await groupInstance.createGroup(batchId._id)
-        else 
-        {
-            isOldGroup = groups.find((group)=> group.batch._id.toString() === batchId._id.toString());
-            group = isOldGroup ? isOldGroup : await groupInstance.createGroup(batchId._id)
-        }
-        
-        for(let user of users)
-        {
-            const test = await testInstance.createNewTest(quiz.title, quiz.quiz)
-            await enrollmentInstance.assignTest(user, test._id)
-            const assignment = await assignmentInstance.assign(user, test._id)
-            await groupInstance.updateAssignment(group, assignment._id)
-        }
-        
-        if(!isOldGroup?.length)
-            await quizInstance.updateGroup(quizId, group._id)
+        // const batchId = await batchInstance.findById(batch);
 
-    return NextResponse.json({message: 'Assessments assigned successfully'})
+        console.log(enrollments, batch, quizId)
+        // const quiz = await quizInstance.getQuizById(quizId);
+        // let group = null;
+        // let isOldGroup = [];
+        // const groups = quiz.group;
+        // if(!groups.length)
+        //     group = await groupInstance.createGroup(batchId._id)
+        // else 
+        // {
+        //     isOldGroup = groups.find((group)=> group.batch._id.toString() === batchId._id.toString());
+        //     group = isOldGroup ? isOldGroup : await groupInstance.createGroup(batchId._id)
+        // }
+
+        const group = await groupInstance.createGroup(batch)
+        console.log(group);
+        
+        for(let enrollment of enrollments)
+        {
+            const test = await testInstance.createNewTest(quizId, enrollment);
+            console.log(test);
+            await enrollmentInstance.assignTest(enrollment, test._id.toString())
+            // const assignment = await assignmentInstance.assign(user, test._id)
+            await groupInstance.updateAssignment(group._id.toString(), test._id.toString())
+        }
+        
+        // if(!isOldGroup?.length)
+        await quizInstance.updateGroup(quizId, group._id.toString())
+
+    return NextResponse.json({message: 'Assigned successfully'})
     }
     catch(error)
     {
+        await session.abortTransaction();
+        session.endSession();
         return NextResponse.json({error: error.message})
     }
 }

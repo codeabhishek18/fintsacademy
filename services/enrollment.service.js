@@ -7,6 +7,7 @@ import { Trigger } from "@/models/trigger.model";
 import { TriggerResponse } from "@/models/triggerResponse.model";
 import { Test } from "@/models/test.model";
 import { User } from "@/models/user.model";
+import { Quiz } from "@/models/quiz.model";
 
 class enrollmentService
 {
@@ -25,11 +26,11 @@ class enrollmentService
         }
     }
 
-    async assignTest(userId, testId)
+    async assignTest(enrollmentId, testId)
     {
         try
         {
-            return await Enrollment.findOneAndUpdate({user: userId}, {$push : {assessments: testId}})
+            return await Enrollment.findByIdAndUpdate(enrollmentId, {$push : {assessments: testId}})
         }
         catch(error)
         {
@@ -71,7 +72,12 @@ class enrollmentService
             },
             {
                 path: 'assessments',
-                model: Test
+                model: Test,
+                populate:
+                {
+                    path: 'quizDetails',
+                    model: Quiz
+                }
             }])
 
             return enrollment

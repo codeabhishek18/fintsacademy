@@ -34,15 +34,15 @@ const AssignForm = ({quiz, setAssignForm}) =>
         getBatch();
     },[batch]);
 
-    useEffect(()=>
-    {   
-        if(!batch)
-            return
+    // useEffect(()=>
+    // {   
+    //     if(!batch)
+    //         return
 
-        setShowAssignees(true);
-        setWarningMessage(null);
-        checkAssignment(selectedBatch.enrollments)
-    },[batchType])
+    //     setShowAssignees(true);
+    //     setWarningMessage(null);
+    //     checkAssignment(selectedBatch.enrollments)
+    // },[batchType])
 
     const getBatches = async () =>
     {
@@ -61,33 +61,33 @@ const AssignForm = ({quiz, setAssignForm}) =>
         }
     }
 
-    const checkAssignment = (enrollments) =>
-    {
-        if(!enrollments?.length)
-        {
-            setShowAssignees(false);
-            setWarningMessage(`${batch} has no enrollments as of now`)
-            return
-        }
+    // const checkAssignment = (enrollments) =>
+    // {
+    //     if(!enrollments?.length)
+    //     {
+    //         setShowAssignees(false);
+    //         setWarningMessage(`${batch} has no enrollments as of now`)
+    //         return
+    //     }
 
-        if(enrollments.length && batchType === 'all')
-        {
-            setShowAssignees(false);
-            setWarningMessage(`This quiz cannot be assigned to everyone in ${batch} `);
-            return
-        } 
+    //     if(enrollments.length && batchType === 'all')
+    //     {
+    //         setShowAssignees(false);
+    //         setWarningMessage(`This quiz cannot be assigned to everyone in ${batch} `);
+    //         return
+    //     } 
 
-        const isBatchAlreadyAssigned = quiz.group.find((pack) => pack.batch.title === batch);
-        if(enrollments.length === isBatchAlreadyAssigned.assignment.length)
-        {
-            setShowAssignees(false);
-            setWarningMessage(`This quiz is already assigned to everyone in ${batch} `);
-            return
-        } 
+    //     const isBatchAlreadyAssigned = quiz.group.find((pack) => pack.batch.title === batch);
+    //     if(enrollments.length === isBatchAlreadyAssigned.assignment.length)
+    //     {
+    //         setShowAssignees(false);
+    //         setWarningMessage(`This quiz is already assigned to everyone in ${batch} `);
+    //         return
+    //     } 
         
-        const quizAssignees = isBatchAlreadyAssigned.assignment.map((assign) => assign.user);
-        setIsDup(quizAssignees);
-    }
+    //     const quizAssignees = isBatchAlreadyAssigned.assignment.map((assign) => assign.user);
+    //     setIsDup(quizAssignees);
+    // }
 
     const getBatch = async () =>
     {
@@ -99,8 +99,8 @@ const AssignForm = ({quiz, setAssignForm}) =>
             const url = `/api/batch/${batch}`
             const response = await axios.get(url);
             setSelectedBatch(response.data);  
-            const enrollments = response.data.enrollments;
-            checkAssignment(enrollments);
+            // const enrollments = response.data.enrollments;
+            // checkAssignment(enrollments);
         }
         catch(error)
         {
@@ -108,47 +108,49 @@ const AssignForm = ({quiz, setAssignForm}) =>
         }
     }
 
-    const handleKeywords = (name, id) =>
-    {
-        let search = keyList.filter((key) => key.id === id);
-        if(!search.length)
-            setKeyList((prev) => [...prev, {id, name}])
-    }
+    console.log(selectedBatch)
 
-    const removeKeyWord = (id) =>
-    {
-        const newList = keyList.filter((key)=> key.id!==id );
-        setKeyList(newList)
-    }
+    // const handleKeywords = (name, id) =>
+    // {
+    //     let search = keyList.filter((key) => key.id === id);
+    //     if(!search.length)
+    //         setKeyList((prev) => [...prev, {id, name}])
+    // }
+
+    // const removeKeyWord = (id) =>
+    // {
+    //     const newList = keyList.filter((key)=> key.id!==id );
+    //     setKeyList(newList)
+    // }
 
     const handleAssign = async () =>
     {
-        const users = [];
+        const enrollments = [];
         if(batchType === "all")
         {
-            {selectedBatch && selectedBatch.enrollments.forEach((user)=>
+            {selectedBatch && selectedBatch.enrollments.forEach((enrollment)=>
             {
-                users.push(user._id);
+                enrollments.push(enrollment._id);
             })}
         }
         else
         {
             keyList.forEach((key)=>
             { 
-                users.push(key.id);
+                enrollments.push(key.id);
             })
         }
 
         if(!batch)
             return toast.error('Batch is required')
 
-        if(!users.length)
+        if(!enrollments.length)
             return toast.error('Assignees are required')
 
         try
         {
             const url = `/api/quiz/${quiz._id}`
-            const response = await axios.post(url, {users, batch});
+            const response = await axios.post(url, {enrollments, batch: selectedBatch._id});
             toast.success(response.data.message)
             setAssignForm(false);
         }
@@ -157,6 +159,8 @@ const AssignForm = ({quiz, setAssignForm}) =>
             toast.error(error.message);
         }   
     }
+
+    
 
     return(
         <div className={styles.wrapper}>
@@ -168,13 +172,13 @@ const AssignForm = ({quiz, setAssignForm}) =>
                     <h1 className={styles.title}>{quiz.course.title}</h1>
                     <p className={styles.level}>{quiz.course.level}</p>    
                 </div>
-                {keyList?.length>0 && 
+                {/* {keyList?.length>0 && 
                 <div className={styles.assigned}>
                     {keyList.map((keyword)=>
                     (
                         <QuizKey type="edit" id={keyword.id} keyword={keyword.name} handleKeywords={handleKeywords} removeKeyWord={removeKeyWord}/>
                     ))}
-                </div>}
+                </div>} */}
 
                 <Label label="Choose batch"/>
                 <FormControl className={styles.input} fullWidth>
@@ -193,18 +197,16 @@ const AssignForm = ({quiz, setAssignForm}) =>
                         <MenuItem value='selected'>Selected</MenuItem>
                     </Select>
                 </FormControl>
-
-                {!showAssignees && <p className={styles.warning}>{warningMessage}</p>}
                 
-                {batchType === "selected" && selectedBatch && showAssignees &&
+                {/* {batchType === "selected" && selectedBatch && showAssignees &&
                 <div className={styles.enrollments}>
                     {selectedBatch.enrollments.map((user)=>
                     (
                         <QuizKey type="read" key={user._id} isDup={isDup} selectedId={user._id} keyword={user.name} handleKeywords={handleKeywords} removeKeyWord={removeKeyWord}/>
                     ))}
-                </div>}
+                </div>} */}
 
-                {showAssignees  && <Button label='Assign' fullwidth={true} action={()=> handleAssign}/>}
+                <Button label='Assign' fullwidth={true} action={handleAssign}/>
                 <CloseDialog action={()=> setAssignForm(false)}/>
             </div> : 
             <div className={styles.container}>

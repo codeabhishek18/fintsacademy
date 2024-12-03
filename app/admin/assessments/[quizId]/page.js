@@ -40,7 +40,7 @@ const Batches = () =>
              <div className={styles.assignments}>
                 {quizData?.groups?.map((item)=>
                 (
-                    <BatchCard level='admin' key={item._id} data={item.batch} participants={item.assignments.length} batchId={item._id}/>
+                    <BatchCard level='admin' key={item._id} data={item.batch} participants={item.tests.length} batchId={item._id}/>
                 ))}
             </div> 
             </div> :

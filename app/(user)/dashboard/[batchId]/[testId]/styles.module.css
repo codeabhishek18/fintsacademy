@@ -11,7 +11,6 @@
 {
     width: 100%;
     background-color: var(--primary-element);
-    border: 1px solid rgb(41, 41, 41);
     box-shadow: var(--box-shadow);
     border-radius: 8px;
     padding: 40px;
