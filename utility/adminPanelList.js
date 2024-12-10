@@ -31,8 +31,8 @@ export const adminPanelList = [
     },
     // {
     //     id: 6,
-    //     title: 'Simulations',
-    //     navigation:'/admin/simulations'
+    //     title: 'Queries',
+    //     navigation:'/admin/query'
     // },
     {
         id: 7,

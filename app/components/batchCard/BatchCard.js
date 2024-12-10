@@ -31,6 +31,8 @@ const BatchCard = ({type, level, data, participants, getBatches, batchId, enroll
         }
     }
 
+    console.log(data)
+
     return(
         <div className={styles.container}>
             <div className={styles.imageContainer}>

@@ -14,7 +14,8 @@ import CarouselCard from './components/carouselCard/CarouselCard'
 import CommonHeader from './components/commonHeader/CommonHeader'
 import FeatureCard from './components/featureCard/FeatureCard'
 import Image from 'next/image'
-import quoteIcon from '@/assets/quote.png'
+import trust from '@/assets/trust.png'
+import lulu from '@/assets/lulu.png'
 import news_bg from '@/assets/news.jpg'
 import chat from '@/assets/chat.png'
 import close from '@/assets/close.png'
@@ -36,12 +37,40 @@ const Home = () =>
                     <p className={styles.marquee}>Sanction Screening and Global Standards | Batches starting soon</p>
                 </div>
 
-                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} className={styles.sectionWrapper}>
-                    {/* <div className={styles.quoteWrapper}>
+                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} >
+                    
+                {/* <h1 className='text-center text-5xl text-gray-600 font-bold mt-24 absolute top-[20%] w-full'>Top Clients</h1> */}
+
+                    <div className='grid w-full lg:grid-cols-2 grid-cols-1 mt-12 items-center'>
+                    
+
+                    <div className='flex items-center'>
+                        <Image src={lulu} alt='client' height={150} width={150}/>
+                        
+                        <div>
+                            <h1 className='text-gray-400'>Lulu Exchange</h1>
+                            <h1 className='text-gray-400 italic'>Qatar</h1>
+                        </div>
+                    </div>
+                    
+                    <div className='flex items-center'>
+                       <Image src={trust} alt='client' height={150} width={150}/>
+                        
+                        <div>
+                        <h1 className='text-gray-400'>Trust Exchange</h1>
+                            <h1 className='text-gray-400 italic'>Qatar</h1>
+                        </div>
+                    </div>
+                    
+                    </div>
+                </motion.div>
+
+                {/* <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} className={styles.sectionWrapper}>
+                    <div className={styles.quoteWrapper}>
                         <Image className={styles.quoteIcon} src={quoteIcon} alt='icon'/>
                         <p>The greatest weapon against crime is the prevention of crime</p>
                         <span style={{fontStyle:'italic'}}>— Robert Kennedy</span>
-                    </div> */}
+                    </div>
                     <div className={styles.statsWrapper}>
                     {complianceStats.map((content)=>
                     (
@@ -57,7 +86,7 @@ const Home = () =>
                         </BoxReveal>
                     ))}
                     </div>
-                </motion.div>        
+                </motion.div>         */}
 
                 
                 <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} className={styles.actionWrapper}>
@@ -72,6 +101,7 @@ const Home = () =>
                         </BoxReveal>
                     </div>
                 </motion.div>
+
 
                 <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} className={styles.sectionWrapper}>
                     <CommonHeader header='Why Choose Us'/>

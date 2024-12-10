@@ -12,4 +12,7 @@ export const shimmerCourseData =
     {
         id: 4
     },
+    {
+        id: 5
+    },
 ]

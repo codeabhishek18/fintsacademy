@@ -14,7 +14,7 @@ const Dashboard = () =>
     
     const { data, status } = useSession();
     const [ userData, setUserData ] = useState(null);
-    const [ isLoading, setIsLoading ] = useState(false);
+    const [ isLoading, setIsLoading ] = useState(true);
     const router = useRouter();
 
     const getUserData = async () =>
@@ -25,16 +25,16 @@ const Dashboard = () =>
             const url = `/api/user/${data.user.id}`
             const response = await axios.get(url);
             setUserData(response.data)
-            setIsLoading(false);
         }
         catch(error)
         {
-            setIsLoading(false);
             toast.error(error.message);
         }
+        finally
+        {
+            setIsLoading(false);
+        }
     }
-
-    console.log(userData);
 
     useEffect(() => 
     {
@@ -44,24 +44,20 @@ const Dashboard = () =>
             setIsLoading(true);
         else
             router.push('/')            
-    }, [status]);
+    }, [status]);    
 
     console.log(userData)
-    
 
     if(status === 'loading' || isLoading)
         return <Loading/>
         
     return(
-        <>
-            {userData &&
             <div className={styles.enrollments}>
-                {userData?.enrollments?.map((data)=>
+                {userData.enrollments.map((data)=>
                 (
                     <BatchCard data={data.batch} enrollmentId={data._id} key={data._id}/>
                 ))}
-            </div>}
-        </>
+            </div>
     )
 }
 

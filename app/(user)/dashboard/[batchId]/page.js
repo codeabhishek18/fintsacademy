@@ -26,8 +26,6 @@ const Dashboard = () =>
     const { data, status } = useSession();
     const [ isLoading, setIsLoading ] = useState(true)
     const [ activeAgenda, setActiveAgenda ] = useState(-1);
-    const [ feedbackForm, setFeedbackForm ] = useState(false);
-    const [ hideFeedback, setHideFeedback ] = useState(true);
     const [ enrollmentData, setEnrollmentData ] = useState(null);
     const router = useRouter();
     const pathname = usePathname();
@@ -42,7 +40,6 @@ const Dashboard = () =>
             const url = `/api/enrollment/${eid}`
             const response = await axios.get(url);
             setEnrollmentData(response.data)
-            // checkfeedback(response.data.batch)
         }
         catch(error)
         {
@@ -52,13 +49,6 @@ const Dashboard = () =>
         {
             setIsLoading(false);
         }
-    }
-
-    const checkfeedback = (batch) =>
-    { 
-        const response = batch.course.feedbacks.find((feed) => feed.user === data.user.id);
-        if(response)
-            setHideFeedback(false);
     }
     
     useEffect(() => 
@@ -71,8 +61,6 @@ const Dashboard = () =>
             setIsLoading(true);
             
     }, [status]);
-
-    console.log(enrollmentData)
 
     if(status === 'loading' || isLoading)
         return <Loading/>
@@ -129,13 +117,6 @@ const Dashboard = () =>
                 ))}
                 </div>
             </div>
-
-            {hideFeedback && <Image className={styles.feedbackIcon} src={feedbackIcon} alt='feedback' onClick={()=> setFeedbackForm(true)}/>}
-            
-            {feedbackForm && 
-            <div className={styles.feedbackForm}>
-                <Feedback setFeedbackForm={setFeedbackForm} courseId={enrollmentData.batch.course_id}/>
-            </div>}
         </div>
     )
 }

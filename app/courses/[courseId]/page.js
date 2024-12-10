@@ -21,8 +21,6 @@ const Course = () =>
         getCourses();
     },[]);
 
-    console.log(courseData);
-
     const getCourses = async () =>
     {
         try
@@ -31,12 +29,14 @@ const Course = () =>
             const url = `/api/course/${courseId}`
             const response = await axios.get(url);
             setCourseData(response.data);
-            setIsLoading(false);
         }
         catch(error)
         {
-            setIsLoading(false);
             toast.error(error.message); 
+        }
+        finally
+        {   
+            setIsLoading(false);
         }
     }
 
