@@ -29,15 +29,17 @@ const BillingCard = ({course, selectedBatch}) =>
             const url = `/api/enrollment/${user}`
             const response = await axios.post(url, {batchId : selectedBatch, courseId: course._id});
             await update(newSession);
-            setIsLoading(false);
             toast.success(response.data.message);
-            router.push('/dashboard');
             localStorage.removeItem('seletedCourse')
+            router.push('/dashboard');
         }
         catch(error)
         {
-            setIsLoading(false);
             toast.error(error.message);
+        }
+        finally
+        {
+            setIsLoading(false);
         }
     }
 

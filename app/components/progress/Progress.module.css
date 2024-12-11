@@ -29,9 +29,8 @@
 .courseTitle
 {
     color: var(--alert-color);
-    font-size: 28px;
+    font-size: 24px;
     width: 100%;
-    padding: 8px;
     font-weight: 600;
     margin: 0;
     text-align: center;

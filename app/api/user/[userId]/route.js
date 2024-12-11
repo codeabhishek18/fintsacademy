@@ -18,3 +18,20 @@ export async function GET(req, {params})
         return NextResponse.json({error: error.message})
     } 
 }
+
+export async function PUT(req, {params})
+{ 
+    try
+    { 
+        await dbConnect();
+         
+        const { userId } = params;
+        const { name } = await req.json()
+        await userInstance.updateUserName(userId, name);
+        return NextResponse.json({message: 'Username updated'})
+    }  
+    catch(error)
+    { 
+        return NextResponse.json({error: error.message})
+    } 
+}

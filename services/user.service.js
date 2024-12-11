@@ -85,6 +85,18 @@ class userService
         }
     }
 
+    async updateUserName(userId, name)
+    {
+        try
+        {
+            return await User.findByIdAndUpdate(userId, {$set : {name}})
+        }
+        catch(error)
+        {
+            throw error
+        }
+    }
+
     async getUserById(id)
     {
         try

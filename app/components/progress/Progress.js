@@ -13,6 +13,7 @@ import { calculateResult } from '@/utility/calculateScores';
 import { toast } from 'sonner';
 import Button from '../button/Button';
 import { FormatDate } from '@/utility/FormatDate';
+import Link from 'next/link';
 
 export const pendingSessions = (sessions) =>
 {
@@ -60,22 +61,29 @@ const Progress = ({batchData, level, assessments}) =>
 
     const checkProgressStatus = () =>
     {
-        if(!assessments.length)
-            return toast.error('Certificate will be unlocked only after successful completion of sprint and assessment')
-
         const isSprintCompleted = pendingSessions(batchData.sessions) === 0 ? 'Completed' : 'Pending'
-        const isAssessmentCompleted = assessments.filter((assessment)=> assessment.status === 'Completed');
 
-        if(!isAssessmentCompleted.length)
-            return toast.error('Certificate will be unlocked only after successful completion of sprint and assessment')
+        if(batchData.isAssessment)
+        {
+            if(!assessments.length)
+                return toast.error('Certificate will be unlocked only after successful completion of sprint and assessment')
+            
+            const isAssessmentCompleted = assessments.filter((assessment)=> assessment.status === 'Completed');
+    
+            if(!isAssessmentCompleted.length)
+                return toast.error('Certificate will be unlocked only after successful completion of sprint and assessment')
+    
+            if(!isAssessmentCompleted)
+                return toast.error('Certification will be unlocked only after successful completion of sprint and assessment')
+    
+            const isAssessmentCleared = calculateResult(isAssessmentCompleted[isAssessmentCompleted.length - 1].score, isAssessmentCompleted[isAssessmentCompleted.length - 1].quizDetails.quiz.length)
+    
+            if(isSprintCompleted === 'Pending' || isAssessmentCleared !== 'Qualified')
+                return toast.error('Certification will be unlocked only after successful completion of sprint and assessment')
+        }
 
-        if(!isAssessmentCompleted)
-            return toast.error('Certification will be unlocked only after successful completion of sprint and assessment')
-
-        const isAssessmentCleared = calculateResult(isAssessmentCompleted[isAssessmentCompleted.length - 1].score, isAssessmentCompleted[isAssessmentCompleted.length - 1].quizDetails.quiz.length)
-
-        if(isSprintCompleted === 'Pending' || isAssessmentCleared !== 'Qualified')
-            return toast.error('Certification will be unlocked only after successful completion of sprint and assessment')
+        if(!batchData.isAssessment && isSprintCompleted === 'Pending')
+            return toast.error('Certification will be unlocked only after successful completion of sprint')
 
         setShowCertificate(true)
         Confetti();
@@ -108,9 +116,12 @@ const Progress = ({batchData, level, assessments}) =>
         <div className={styles.container}>
             <div className={styles.header}>
                 <h1 className={styles.courseTitle}>{batchData.course.title}</h1>
+                
                 <span className={styles.dates}>{FormatDate(batchData.startDate)} - {FormatDate(batchData.endDate)}</span>
             </div>
             <PieChartWithPaddingAngle sessionData={batchData}/>
+            {batchData?.isCorporateTraining && <h1 className='text-xl font-semibold text-gray-400 text-center p-0 italic'>{batchData.clientName}, {batchData.clientLocation}</h1>}
+            
             <div className={styles.batchDetails}>
                 <div className={styles.group}>
                     <span>Sprint code</span>
@@ -126,7 +137,7 @@ const Progress = ({batchData, level, assessments}) =>
                 </div>
                 <div className={styles.group}>
                     <span>Whatsapp group</span>
-                    {level === "user" ? <button className={styles.connect}>Connect</button> :
+                    {level === "user" ? <Link className={styles.connect} href={`${batchData?.whatsappLink}`} target='_blank'>Connect</Link> :
                     <button className={styles.connect} onClick={()=> setShowWlink(true)}>Add link</button>}
                 </div>
                {showwlink && <div className={styles.addlink}>
@@ -135,7 +146,7 @@ const Progress = ({batchData, level, assessments}) =>
                 </div>}
                 <div className={styles.group}>
                     <span>Zoom link</span>
-                    {level === "user" ? <button className={styles.connect}>Connect</button> :
+                    {level === "user" ? <Link className={styles.connect} href={`${batchData?.zoomLink}`} target='_blank'>Connect</Link> :
                     <button className={styles.connect} onClick={()=> setShowZlink(true)}>Add link</button>}  
                 </div>
                 {showzlink && <div className={styles.addlink}>
@@ -148,7 +159,7 @@ const Progress = ({batchData, level, assessments}) =>
 
             {showCertificate && 
             <div className={styles.certificateWrapper}>
-                <UserCertificate course={batchData.course} date={batchData.endDate} divRef={divRef} />
+                <UserCertificate course={batchData.course} batchData={batchData} divRef={divRef} />
                 <div className={styles.download} onClick={downloadCertification}><Image className={styles.downloadIcon} src={download} alt='certificate'/>Download certificate</div>
                 <button className={styles.close} onClick={()=> setShowCertificate(false)}>X</button>
             </div>}

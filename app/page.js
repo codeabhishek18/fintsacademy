@@ -33,36 +33,40 @@ const Home = () =>
         <div className={styles.wrapper}>
             <HeroSection/>
             <div className={styles.container}>
+                
                 <div className={styles.marqueeWrapper}>
-                    <p className={styles.marquee}>Sanction Screening and Global Standards | Batches starting soon</p>
+                    <p className={styles.marquee}>Transaction Monitoring & Simulation | Batch starting from 16th December</p>
                 </div>
 
-                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} >
+                <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }}>
                     
-                {/* <h1 className='text-center text-5xl text-gray-600 font-bold mt-24 absolute top-[20%] w-full'>Top Clients</h1> */}
+                
 
-                    <div className='grid w-full lg:grid-cols-2 grid-cols-1 mt-12 items-center'>
+                <Marquee pauseOnHover className="[--duration:30s] mt-16">
                     
-
-                    <div className='flex items-center'>
+                <h1 className='text-center text-2xl italic text-gray-400 font-bold m-14'>Top Client</h1>
+                    <Link className='flex items-center justify-center' href='https://luluexchange.com/' target='_blank'>
                         <Image src={lulu} alt='client' height={150} width={150}/>
                         
                         <div>
                             <h1 className='text-gray-400'>Lulu Exchange</h1>
                             <h1 className='text-gray-400 italic'>Qatar</h1>
                         </div>
-                    </div>
+                    </Link>
+
                     
-                    <div className='flex items-center'>
+                    <h1 className='text-center text-2xl italic text-gray-400 font-bold m-14'>Our Client</h1>
+                    
+                    <Link className='flex items-center justify-center' href='https://www.trustexchange.qa/' target='_blank'>
                        <Image src={trust} alt='client' height={150} width={150}/>
                         
                         <div>
                         <h1 className='text-gray-400'>Trust Exchange</h1>
                             <h1 className='text-gray-400 italic'>Qatar</h1>
                         </div>
-                    </div>
+                    </Link>
+                </Marquee>
                     
-                    </div>
                 </motion.div>
 
                 {/* <motion.div initial={{opacity: 0}} whileInView={{opacity:1}} viewport={{ margin: '50px' }} className={styles.sectionWrapper}>
@@ -94,11 +98,19 @@ const Home = () =>
                     
                     <div className={styles.actionContent}>
                         <BoxReveal boxColor='rgba(0,0,0,0)'>
-                            <p className={styles.action}>Get ready to skill up and seize the growing opportunities in <span className={styles.highlight}>Financial Crime Prevention!</span> As the demand for compliance and cybersecurity experts is soaring, <span className={styles.highlight}>the market is expected to grow by 28% in the next five years.</span></p>
+                            <p className={styles.action}>We specialize in <span className={styles.highlight}>Anti-Money Laundering (AML) and compliance training</span> tailored for both corporate teams and individual professionals. Our expert-led programs combine industry insights and practical skills to equip participants with the knowledge to navigate today’s complex regulatory landscape confidently.</p>
                         </BoxReveal>
+                        
+                        <BoxReveal boxColor='rgba(0,0,0,0)'>
+                            <p className={styles.action}>
+                                <span className={styles.highlight}>The market is expected to grow by 28% in the next five years.</span>  Seize the growing opportunities in Financial Crime Prevention! <span className={styles.highlight}> Skill up and stand out in the crowd</span>
+                            </p>
+                        </BoxReveal>
+
                         <BoxReveal boxColor='rgba(0,0,0,0)'>
                             <Link className={styles.explore} href='/courses'>Explore Courses</Link>
                         </BoxReveal>
+                        
                     </div>
                 </motion.div>
 

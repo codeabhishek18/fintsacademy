@@ -83,8 +83,6 @@ const Batch = () =>
     //     }
     // }
 
-    console.log(batch)
-
     return(
         <div className={styles.wrapper}>
             {batch ?
@@ -108,7 +106,7 @@ const Batch = () =>
                         ))}
                     </div>
 
-                    <Button label='Simulation Responses' fullwidth={true} action={()=> setShowResponses(true)}/>
+                    {batch?.isAssessment && <Button label='Simulation Responses' fullwidth={true} action={()=> setShowResponses(true)}/>}
                     {showResponses && 
                     <div className="h-[100vh] z-50 w-full fixed left-0 top-0 flex items-center justify-center" style={{backgroundColor:'rgba(0,0,0,1'}} >
                         <div className='h-[80vh] w-[90vw]'>

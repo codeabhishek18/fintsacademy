@@ -42,6 +42,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth(
                 await dbConnect();
                 const isUserFound = await userInstance.findByEmail(token.email);
                 token.role = isUserFound.role;
+                token.name = isUserFound.name;
                 return token
             }
 
