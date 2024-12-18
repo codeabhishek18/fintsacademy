@@ -8,6 +8,7 @@ export default async function middleware(req)
 {
     const { nextUrl } = req
     const cookie = cookies()?.get('__Secure-authjs.session-token');
+    // const cookie = cookies()?.get('authjs.session-token');
     
     let user = null;
     if(cookie)
@@ -50,7 +51,8 @@ export default async function middleware(req)
     
 }
 
-export const config = {
+export const config = 
+{
     matcher: ['/((?! .+\\. [\\w]+$ |_next).*)', '/', '/(api|trpc) (.*)']
 } 
 

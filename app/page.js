@@ -44,7 +44,7 @@ const Home = () =>
 
                 <Marquee pauseOnHover className="[--duration:30s] mt-16">
                     
-                <h1 className='text-center text-2xl italic text-gray-400 font-bold m-14'>Top Client</h1>
+                <h1 className='text-center text-2xl italic text-gray-500 font-bold m-14'>Top Client</h1>
                     <Link className='flex items-center justify-center' href='https://luluexchange.com/' target='_blank'>
                         <Image src={lulu} alt='client' height={150} width={150}/>
                         
@@ -54,8 +54,7 @@ const Home = () =>
                         </div>
                     </Link>
 
-                    
-                    <h1 className='text-center text-2xl italic text-gray-400 font-bold m-14'>Our Client</h1>
+                    <h1 className='text-center text-2xl italic text-gray-500 font-bold m-14'>Our Client</h1>
                     
                     <Link className='flex items-center justify-center' href='https://www.trustexchange.qa/' target='_blank'>
                        <Image src={trust} alt='client' height={150} width={150}/>

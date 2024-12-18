@@ -36,6 +36,8 @@ const Dashboard = () =>
         }
     }
 
+    console.log(data)
+
     useEffect(() => 
     {
         if(status === "authenticated")
@@ -46,16 +48,14 @@ const Dashboard = () =>
             router.push('/')            
     }, [status]);    
 
-    console.log(userData)
-
     if(status === 'loading' || isLoading)
         return <Loading/>
         
     return(
             <div className={styles.enrollments}>
-                {userData.enrollments.map((data)=>
+                {userData.enrollments.map((enrollment)=>
                 (
-                    <BatchCard data={data.batch} enrollmentId={data._id} key={data._id}/>
+                    <BatchCard data={data.batch} enrollmentId={enrollment._id} key={enrollment._id}/>
                 ))}
             </div>
     )

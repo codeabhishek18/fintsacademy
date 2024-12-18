@@ -29,11 +29,11 @@ export const adminPanelList = [
         title: 'Forum',
         navigation:'/admin/forum'
     },
-    // {
-    //     id: 6,
-    //     title: 'Queries',
-    //     navigation:'/admin/query'
-    // },
+    {
+        id: 6,
+        title: 'Simulations',
+        navigation:'/admin/simulations'
+    },
     {
         id: 7,
         title: 'Mentors',

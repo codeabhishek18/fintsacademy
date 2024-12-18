@@ -20,7 +20,7 @@ const CourseDetail = ({course}) =>
     }
 
     return (
-        <div className={scheme === 'dark' ? styles.container : `${styles.container} ${styles.light}`}>
+        <div className={styles.container}>
             <div className={styles.coverWrapper}>
                 <Image className={styles.coverImage} src={course.imageURL} alt={course.title} layout='fill'/>
             </div>

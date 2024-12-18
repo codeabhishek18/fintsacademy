@@ -13,8 +13,8 @@ const UserCertificate = ({course, batchData, divRef}) =>
     
     return(
         <div className={styles.container} ref={divRef}>
-            <p className={styles.name}>{data.user.name}</p>
-            <p className={styles.course}>{course.title}</p>
+            <p className={styles.name}>{data.user.name.toUpperCase()}</p>
+            <p className={styles.course}>{course.title.toUpperCase()}</p>
             <p className={styles.date}>{new Date().toLocaleDateString()}</p>
             <Image className={styles.certificate} src={batchData.isCorporateTraining ? corporateCertificate : certificate} alt='certificate'/>
         </div>
