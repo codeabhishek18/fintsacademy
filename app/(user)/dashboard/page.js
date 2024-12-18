@@ -21,9 +21,9 @@ const Dashboard = () =>
     {
         try
         {
-            setIsLoading(true);
             const url = `/api/user/${data.user.id}`
             const response = await axios.get(url);
+            console.log(response)
             setUserData(response.data)
         }
         catch(error)
@@ -55,7 +55,7 @@ const Dashboard = () =>
             <div className={styles.enrollments}>
                 {userData.enrollments.map((enrollment)=>
                 (
-                    <BatchCard data={data.batch} enrollmentId={enrollment._id} key={enrollment._id}/>
+                    <BatchCard data={enrollment.batch} enrollmentId={enrollment._id} key={enrollment._id}/>
                 ))}
             </div>
     )

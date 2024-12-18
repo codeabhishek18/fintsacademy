@@ -101,6 +101,7 @@ class userService
     {
         try
         {
+            
             const user = await User.findById(id)
             .populate(
             [{
