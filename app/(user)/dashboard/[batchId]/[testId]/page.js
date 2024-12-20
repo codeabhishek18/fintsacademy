@@ -99,7 +99,7 @@ const Assessment = () =>
                     (
                         <button className={assessment.status === 'Pending' ? 
                             ((answersList.list[index]?.includes(idx+1)) ? `${styles.option} ${styles.selected}` : styles.option) : 
-                            (assessment.quiz[index].answers.includes(idx+1) ? `${styles.option} ${styles.correct}` : 
+                            (assessment.quizDetails.quiz[index].answers.includes(idx+1) ? `${styles.option} ${styles.correct}` : 
                                 (assessment.answers[index]?.includes(idx+1)) ? `${styles.option} ${styles.alert}`: `${styles.option} ${styles.read}`)} 
                             key={idx} disabled={assessment.status==='Completed'} 
                             onClick={()=> checkAnswer(index, idx+1)}>{option}
@@ -110,7 +110,7 @@ const Assessment = () =>
                     (
                         <button className={assessment.status === 'Pending' ? 
                             ((answersList.list[index]?.includes(idx+1)) ? `${styles.option} ${styles.selected}` : styles.option) : 
-                            (assessment.quiz[index].answers.includes(idx+1) ? `${styles.option} ${styles.correct}` : 
+                            (assessment.quizDetails.quiz[index].answers.includes(idx+1) ? `${styles.option} ${styles.correct}` : 
                                 (assessment.answers[index]?.includes(idx+1)) ? `${styles.option} ${styles.alert}`: `${styles.option} ${styles.read}`)} 
                             key={idx} disabled={assessment.status==='Completed'} 
                             onClick={()=> checkMultipleAnswer(index, idx+1)}>{option}

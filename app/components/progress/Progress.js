@@ -27,6 +27,7 @@ const Progress = ({batchData, level, assessments}) =>
     const [ showwlink, setShowWlink ] = useState(false);
     const [ showzlink, setShowZlink ] = useState(false);
     const [ showCertificate, setShowCertificate ] = useState(false);
+    const [ userName, setUserName ] = useState(null);
     const divRef = useRef(null);
     
     const addWhatsappLink = async () =>
@@ -62,6 +63,8 @@ const Progress = ({batchData, level, assessments}) =>
     const checkProgressStatus = () =>
     {
         const isSprintCompleted = pendingSessions(batchData.sessions) === 0 ? 'Completed' : 'Pending'
+        const userName = localStorage.getItem('userName');
+        setUserName(userName)
 
         if(batchData.isAssessment)
         {
@@ -159,7 +162,7 @@ const Progress = ({batchData, level, assessments}) =>
 
             {showCertificate && 
             <div className={styles.certificateWrapper}>
-                <UserCertificate course={batchData.course} batchData={batchData} divRef={divRef} />
+                <UserCertificate course={batchData.course} userName={userName} batchData={batchData} divRef={divRef} />
                 <div className={styles.download} onClick={downloadCertification}><Image className={styles.downloadIcon} src={download} alt='certificate'/>Download certificate</div>
                 <button className={styles.close} onClick={()=> setShowCertificate(false)}>X</button>
             </div>}

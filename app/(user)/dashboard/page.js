@@ -23,7 +23,7 @@ const Dashboard = () =>
         {
             const url = `/api/user/${data.user.id}`
             const response = await axios.get(url);
-            console.log(response)
+            localStorage.setItem('userName', response.data.name)
             setUserData(response.data)
         }
         catch(error)
@@ -36,7 +36,7 @@ const Dashboard = () =>
         }
     }
 
-    console.log(data)
+    console.log(userData)
 
     useEffect(() => 
     {
